@@ -1,113 +1,139 @@
-import Image from 'next/image'
-
+'use client';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { Card, CardContent } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel';
+import { Badge } from '@/components/ui/badge';
+import { useEffect } from 'react';
+import axios from 'axios';
 export default function Home() {
+  // console.log('', process.env.NEXT_PUBLIC_API_URL);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/main/home/business_place')
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className='w-screen flex flex-col p-3 justify-between md:p-20'>
+      <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
+        <div className='z-0 flex flex-col md:items-center md:justify-center gap-4 p-1 md:flex-row-reverse'>
+          <Image
+            src={'/56692-O8P89L-432.jpg'}
+            alt='Image'
+            className='object-cover rounded-lg shadow-2xl'
+            width={400}
+            height={300}
+          />
+          <div className='md:text-3xl font-bold flex flex-col md:p-6 px-3 gap-3 '>
+            제주도의 모든 여행코스를 한눈에 보고,
+            <br />
+            나만의 여행코스를 짤 수 있는 여행 플랫폼입니다.
+            <Button size='lg' className='md:w-40 w-32'>
+              여행 코스 짜러가기
+            </Button>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className='mt-24 text-2xl md:text-3xl font-bold'>
+        지금 인기있는 상품
       </div>
+      <Carousel
+        opts={{
+          align: 'start'
+        }}
+        className='w-full  mt-5'
+      >
+        <CarouselContent>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <CarouselItem
+              key={index}
+              className='md:basis-1/2 basis-1/2 lg:basis-1/4'
+            >
+              <div className='p-1'>
+                <Card className=' w-full md:h-auto '>
+                  <CardContent className='flex  items-start justify-center p-3  group'>
+                    <Image
+                      src={'/56692-O8P89L-432.jpg'}
+                      alt='Image'
+                      className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
+                      width={400}
+                      height={300}
+                    />
+                  </CardContent>
+                  <div className='flex flex-col gap-2 items-start px-5 py-1 bg-white bg-opacity-80'>
+                    <Badge>BEST</Badge>
+                    <div className='text-2xl font-bold'>제주도</div>
+                    <div className='text-base'>제주도 서귀포구</div>
+                  </div>
+                  <div className=' flex justify-end py-5 pr-5 text-base  font-mono'>
+                    100,000원
+                  </div>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className='mt-24 text-2xl md:text-3xl font-bold'>
+        지금 인기있는 관광지
       </div>
+      <Carousel
+        opts={{
+          align: 'start'
+        }}
+        className='w-full  mt-5'
+      >
+        <CarouselContent>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/4'>
+              <div className='p-1'>
+                <Card className=' w-full md:h-auto '>
+                  <CardContent className='flex  items-start justify-center p-3  group'>
+                    <Image
+                      src={'/56692-O8P89L-432.jpg'}
+                      alt='Image'
+                      className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
+                      width={400}
+                      height={300}
+                    />
+                  </CardContent>
+                  <div className='flex flex-col gap-2 items-start px-5 py-1 bg-white bg-opacity-80'>
+                    <Badge>BEST</Badge>
+                    <div className='text-2xl font-bold'>제주도</div>
+                    <div className='text-base'>제주도 서귀포구</div>
+                    <div className='text-sm'>
+                      여기는 제주도 입니다 오후 6시여기는 제주도 입니다 오후
+                      6시여기는 제주도 입니다 오후 6시여기는 제주도 입니다 오후
+                      6시여기는 제주도 입니다 오후 6시여기는 제주도 입니다 오후
+                      6시
+                    </div>
+                  </div>
+                  <div className=' flex justify-end py-5 pr-5 text-base  font-mono'>
+                    100,000원
+                  </div>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
     </main>
-  )
+  );
 }
