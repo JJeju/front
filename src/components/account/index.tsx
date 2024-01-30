@@ -13,8 +13,7 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle
+  CardHeader
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
