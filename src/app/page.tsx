@@ -13,8 +13,6 @@ import { Badge } from '@/components/ui/badge';
 import { useEffect } from 'react';
 import axios from 'axios';
 export default function Home() {
-  // console.log('', process.env.NEXT_PUBLIC_API_URL);
-
   useEffect(() => {
     axios
       .get('http://localhost:8080/main/home/business_place')
@@ -26,7 +24,7 @@ export default function Home() {
       });
   }, []);
   return (
-    <main className='w-screen flex flex-col p-3 justify-between md:p-20'>
+    <main className='flex flex-col p-3 justify-between md:p-20 '>
       <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
         <div className='z-0 flex flex-col md:items-center md:justify-center gap-4 p-1 md:flex-row-reverse'>
           <Image
@@ -56,7 +54,7 @@ export default function Home() {
         className='w-full  mt-5'
       >
         <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {Array.from({ length: 7 }).map((_, index) => (
             <CarouselItem
               key={index}
               className='md:basis-1/2 basis-1/2 lg:basis-1/4'

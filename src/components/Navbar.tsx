@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet';
-import { Button, buttonVariants } from '../components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 import { cn } from '@/lib/utils';
 import { AiOutlineAlignRight } from 'react-icons/ai';
@@ -64,7 +64,7 @@ export default function Navbar() {
   const { setTheme } = useTheme();
   const [isTheme, setIsTheme] = useState(true);
   return (
-    <nav className=' w-full h-auto '>
+    <nav className=' w-full h-auto mb-10 '>
       <div className='flex lg:p-4 p-4 text-3xl md:justify-around justify-between md:text-3xl '>
         제주제주
         <div className='flex justify-end items-center gap-3'>
@@ -93,7 +93,6 @@ export default function Navbar() {
               <Button variant='outline' size='icon'>
                 <Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
                 <Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-                <span className='sr-only'>Toggle theme</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
