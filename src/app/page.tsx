@@ -12,7 +12,10 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 export default function Home() {
+  const router = useRouter();
+
   useEffect(() => {
     axios
       .get('http://localhost:8080/main/home/business_place')
@@ -23,6 +26,7 @@ export default function Home() {
         console.error(error);
       });
   }, []);
+
   return (
     <main className='flex flex-col p-3 justify-between md:p-20 '>
       <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
@@ -38,7 +42,11 @@ export default function Home() {
             제주도의 모든 여행코스를 한눈에 보고,
             <br />
             나만의 여행코스를 짤 수 있는 여행 플랫폼입니다.
-            <Button size='lg' className='md:w-40 w-32'>
+            <Button
+              size='lg'
+              className='md:w-40 w-32'
+              onClick={() => router.push('/trip')}
+            >
               여행 코스 짜러가기
             </Button>
           </div>

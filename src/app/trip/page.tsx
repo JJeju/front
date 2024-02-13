@@ -1,37 +1,89 @@
 import React from 'react';
 import Image from 'next/image';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Product from '@/components/trip/Product';
+import TripCourse from '@/components/trip/TripCourse';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from '@/components/ui/drawer';
+import { Button } from '@/components/ui/button';
+import Map from '@/components/map/Map';
+import { Layers3 } from 'lucide-react';
 
 export default function Trip() {
   return (
-    <div className='flex overflow-hidden  w-screen h-screen'>
-      <div className='flex flex-col h-full md:w-1/3 w-2/3  mx-3'>
+    <div className='flex overflow-hidden w-screen h-[750px] md:h-[790px] '>
+      <div className='flex-col h-full lg:w-1/3 w-1/2 mx-3 md:block hidden'>
         <Tabs defaultValue='account' className=''>
           <TabsList className='grid w-full grid-cols-3'>
-            <TabsTrigger value='account'>상품 목록</TabsTrigger>
-            <TabsTrigger value='password'>여행 코스</TabsTrigger>
+            <TabsTrigger value='ProductList'>상품 목록</TabsTrigger>
+            <TabsTrigger value='tripcourse'>여행 코스</TabsTrigger>
             <TabsTrigger value='poket'>장바구니</TabsTrigger>
           </TabsList>
-          <TabsContent value='account'>
+          <TabsContent value='ProductList'>
+            <Product />
+          </TabsContent>
+          <TabsContent value='tripcourse'>
+            <TripCourse />
+          </TabsContent>
+          <TabsContent value='poket'>
             <Product />
           </TabsContent>
         </Tabs>
       </div>
-      <div className='md:w-2/3  h-full w-full'>
-        <div className='p-4 border h-full'>여행 지도</div>
+      <div className='lg:w-2/3 h-full md:w-1/2 w-full'>
+        <div className=' border md:h-full h-full'>
+          <Map />
+          <div className='md:hidden block'>
+            <Drawer>
+              <DrawerTrigger className='absolute bottom-5 right-5 overflow-auto z-10'>
+                <Layers3
+                  color='black'
+                  className='bg-white rounded-full w-6 h-6'
+                />
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader>
+                  <Tabs defaultValue='account' className=''>
+                    <TabsList className='grid w-full grid-cols-3'>
+                      <TabsTrigger value='ProductList'>상품 목록</TabsTrigger>
+                      <TabsTrigger value='tripcourse'>여행 코스</TabsTrigger>
+                      <TabsTrigger value='poket'>장바구니</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value='ProductList'>
+                      <div className='h-[600px] '>
+                        <Product />
+                      </div>
+                    </TabsContent>
+                    <TabsContent value='tripcourse'>
+                      <div className='h-[600px] overflow-scroll'>
+                        <TripCourse />
+                      </div>
+                    </TabsContent>
+                    <TabsContent value='poket'>
+                      <div className='h-[600px] overflow-scroll'>
+                        <Product />
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </DrawerHeader>
+                {/* <DrawerFooter>
+              <Button>Submit</Button>
+              <DrawerClose>
+                <Button variant='outline'>Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter> */}
+              </DrawerContent>
+            </Drawer>
+          </div>
+        </div>
       </div>
     </div>
   );

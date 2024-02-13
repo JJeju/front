@@ -64,7 +64,7 @@ export default function Navbar() {
   const { setTheme } = useTheme();
   const [isTheme, setIsTheme] = useState(true);
   return (
-    <nav className=' w-full h-auto mb-10 '>
+    <nav className=' w-full h-auto '>
       <div className='flex lg:p-4 p-4 text-3xl md:justify-around justify-between md:text-3xl '>
         제주제주
         <div className='flex justify-end items-center gap-3'>
