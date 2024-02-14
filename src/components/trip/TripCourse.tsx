@@ -17,7 +17,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '../ui/select';
-import { ScrollArea } from '../ui/scroll-area';
 import { Label } from '../ui/label';
 export default function TripCourse() {
   return (

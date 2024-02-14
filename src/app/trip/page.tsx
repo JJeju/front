@@ -13,13 +13,12 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer';
-import { Button } from '@/components/ui/button';
 import Map from '@/components/map/Map';
 import { Layers3 } from 'lucide-react';
 
 export default function Trip() {
   return (
-    <div className='flex overflow-hidden w-screen h-[750px] md:h-[790px] '>
+    <div className='flex overflow-hidden w-screen h-screen '>
       <div className='flex-col h-full lg:w-1/3 w-1/2 mx-3 md:block hidden'>
         <Tabs defaultValue='account' className=''>
           <TabsList className='grid w-full grid-cols-3'>
