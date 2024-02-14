@@ -37,7 +37,7 @@ export default function Product() {
           레저
         </label>
       </div>
-      <ScrollArea className='h-screen overflow-hidden rounded-md border '>
+      <ScrollArea className='h-screen  rounded-md border '>
         {Array.from({ length: 50 }).map((_, index) => (
           <Card className='flex gap-2 items-center ' key={index}>
             <Image
@@ -48,12 +48,23 @@ export default function Product() {
               height={100}
             />
             <div className='flex flex-col mt-5 mb-2 mx-2 gap-1 w-full h-full '>
-              <div className='text-2xl font-bold'>00호텔</div>
-              <div className='text-base '>주소입니다</div>
-              <div className='text-sm'>세부내용입니다</div>
-              <div className='flex md:flex-row flex-col  md:justify-between md:items-end'>
-                <div className='text-base font-mono'>100,000원</div>
-                <Button>상세보기</Button>
+              <div className='flex flex-col items-start'>
+                <div className='md:text-2xl text-xl font-bold '>00호텔</div>
+                <div className='text-base '>주소입니다</div>
+                <div className='md:text-sm text-xs pt-1'>세부내용입니다</div>
+              </div>
+              <div className='flex md:flex-row flex-col md:justify-between  md:items-center '>
+                <div className='text-base font-mono py-1 md:block hidden'>
+                  100,000원
+                </div>
+                <div className='flex justify-between items-end gap-2 '>
+                  <div className='text-base font-mono py-1 md:hidden block '>
+                    100,000원
+                  </div>
+                  <Button size='sm' className=' w-22'>
+                    상세보기
+                  </Button>
+                </div>
               </div>
             </div>
           </Card>

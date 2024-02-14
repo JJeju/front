@@ -1,11 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
-import { ko } from 'date-fns/locale';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -13,28 +8,21 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover';
-import axios from 'axios';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { ko } from 'date-fns/locale';
 
-interface Props {
-  className?: string;
-}
+export default function DatePicker() {
+  const [date, setDate] = React.useState<Date>();
 
-export default function DatePicker({ className }: Props) {
-  const [date, setDate] = useState<Date>();
-  useEffect(() => {
-    fetch('http://localhost:8080/main/home/business_place')
-      .then(response => console.log(response))
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
           variant={'outline'}
           className={cn(
-            'w-[260px] justify-start text-left font-normal',
+            'w-[240px] justify-start text-left font-normal',
             !date && 'text-muted-foreground'
           )}
         >
@@ -42,17 +30,19 @@ export default function DatePicker({ className }: Props) {
           {date ? (
             format(date, 'PPP', { locale: ko })
           ) : (
-            <span>날짜를 선택 해 주세요</span>
+            <span>생년월일을 선택해주세요</span>
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-auto p-0'>
+      <PopoverContent align='start' className=' w-auto p-0'>
         <Calendar
           mode='single'
+          captionLayout='dropdown-buttons'
           selected={date}
           onSelect={setDate}
-          initialFocus
+          fromYear={1960}
           locale={ko}
+          toYear={2030}
         />
       </PopoverContent>
     </Popover>

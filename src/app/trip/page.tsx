@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/drawer';
 import Map from '@/components/map/Map';
 import { Layers3 } from 'lucide-react';
+import ShowppingCart from '@/components/trip/ShowppingCart';
 
 export default function Trip() {
   return (
@@ -33,7 +34,7 @@ export default function Trip() {
             <TripCourse />
           </TabsContent>
           <TabsContent value='poket'>
-            <Product />
+            <ShowppingCart />
           </TabsContent>
         </Tabs>
       </div>
@@ -48,7 +49,7 @@ export default function Trip() {
                   className='bg-white rounded-full w-6 h-6'
                 />
               </DrawerTrigger>
-              <DrawerContent>
+              <DrawerContent className=''>
                 <DrawerHeader>
                   <Tabs defaultValue='account' className=''>
                     <TabsList className='grid w-full grid-cols-3'>
@@ -67,8 +68,8 @@ export default function Trip() {
                       </div>
                     </TabsContent>
                     <TabsContent value='poket'>
-                      <div className='h-[600px] overflow-scroll'>
-                        <Product />
+                      <div className='h-[600px]'>
+                        <ShowppingCart />
                       </div>
                     </TabsContent>
                   </Tabs>

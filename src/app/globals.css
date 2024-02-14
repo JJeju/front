@@ -50,6 +50,9 @@
     }
   }
 }
+.rdp-vhidden {
+  @apply hidden;
+}
 .navbar {
   @apply flex justify-between items-center fixed w-full top-0 h-[52px] bg-white shadow-sm;
 }
