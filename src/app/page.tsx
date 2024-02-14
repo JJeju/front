@@ -78,7 +78,7 @@ export default function Home() {
                       height={300}
                     />
                   </CardContent>
-                  <div className='flex flex-col gap-2 items-start px-5 py-1 bg-white bg-opacity-80'>
+                  <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80'>
                     <Badge>BEST</Badge>
                     <div className='text-2xl font-bold'>제주도</div>
                     <div className='text-base'>제주도 서귀포구</div>
@@ -118,7 +118,7 @@ export default function Home() {
                       height={300}
                     />
                   </CardContent>
-                  <div className='flex flex-col gap-2 items-start px-5 py-1 bg-white bg-opacity-80'>
+                  <div className='flex flex-col gap-2 items-start px-5 py-1  bg-opacity-80'>
                     <Badge>BEST</Badge>
                     <div className='text-2xl font-bold'>제주도</div>
                     <div className='text-base'>제주도 서귀포구</div>

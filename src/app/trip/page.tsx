@@ -74,12 +74,6 @@ export default function Trip() {
                     </TabsContent>
                   </Tabs>
                 </DrawerHeader>
-                {/* <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose>
-                <Button variant='outline'>Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter> */}
               </DrawerContent>
             </Drawer>
           </div>

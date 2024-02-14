@@ -26,7 +26,6 @@
       --ring: 20 14.3% 4.1%;
       --radius: 1rem;
     }
-
     .dark {
       --background: 20 14.3% 4.1%;
       --foreground: 60 9.1% 97.8%;
@@ -53,52 +52,7 @@
 .rdp-vhidden {
   @apply hidden;
 }
-.navbar {
-  @apply flex justify-between items-center fixed w-full top-0 h-[52px] bg-white shadow-sm;
-}
 
-.navbar__logo {
-  @apply text-blue-800 text-lg font-semibold cursor-pointer px-[18px] py-0;
-}
-.navbar__list {
-  @apply flex gap-3 items-center px-[18px] py-0;
-}
-.navbar__button {
-  @apply hidden cursor-pointer;
-}
-
-.navbar__list--item {
-  @apply cursor-pointer;
-}
-.navbar__list--item:hover {
-  @apply text-gray-600;
-}
-
-.layout {
-  @apply pt-[52px];
-}
-@media screen and (max-width: 600px) {
-  .navbar--mobile {
-    @apply fixed w-full text-white h-screen top-[52px] bg-blue-800;
-  }
-
-  .navbar__list {
-    @apply hidden;
-  }
-
-  .navbar__button {
-    @apply block px-[18px] py-0;
-  }
-  .navbar__list--item--mobile {
-    @apply cursor-pointer;
-  }
-  .navbar__list--item--mobile:hover {
-    @apply text-gray-600;
-  }
-  .navbar__list--mobile {
-    @apply flex flex-col gap-4 px-[18px] py-6;
-  }
-}
 @layer base {
   * {
     @apply border-border;

@@ -30,9 +30,6 @@ export default function ShowppingCart() {
                   <Button variant='destructive' size='sm'>
                     삭제
                   </Button>
-                  <Button size='sm' variant='outline'>
-                    수정하기
-                  </Button>
                   <Button size='sm'>결제하기</Button>
                 </div>
               </div>
@@ -40,7 +37,7 @@ export default function ShowppingCart() {
           </Card>
         ))}
       </ScrollArea>
-      <div className=' h-1/6 md:h-1/4  font-mono py-4  mt-5 border-t-2'>
+      <div className=' h-1/6 md:h-1/4  font-mono py-2  mt-3 border-t-2'>
         <div className='flex justify-between gap-2 '>
           <div className='md:text-2xl text-xl font-bold'>합계</div>
           <div className='md:text-2xl text-xl font-bold'>100,000원</div>

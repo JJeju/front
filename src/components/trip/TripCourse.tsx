@@ -30,12 +30,16 @@ export default function TripCourse() {
           여정 저장
         </Button>
       </p>
-      <div className='flex items-center py-2 gap-2 w-full justify-center'>
-        <Label className='text-base'>여정</Label>
-        <DateRangePicker />
+      <div className='grid grid-cols-4 items-center gap-4'>
+        <Label htmlFor='username' className='text-right'>
+          날짜
+        </Label>
+        <DateRangePicker className='w-8' />
       </div>
-      <div className='flex items-center py-2 w-full gap-2 justify-center'>
-        <Label className='text-base'>인원</Label>
+      <div className='grid grid-cols-4 items-center gap-4'>
+        <Label htmlFor='username' className='text-right'>
+          인원
+        </Label>
         <Select>
           <SelectTrigger className='w-[300px]'>
             <SelectValue placeholder='인원수' />

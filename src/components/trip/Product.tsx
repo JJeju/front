@@ -5,6 +5,8 @@ import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Checkbox } from '@/components/ui/checkbox';
 import Image from 'next/image';
+import { Dialog, DialogTrigger } from '../ui/dialog';
+import Accommodation from '../product/Accommodation';
 export default function Product() {
   return (
     <>
@@ -61,9 +63,14 @@ export default function Product() {
                   <div className='text-base font-mono py-1 md:hidden block '>
                     100,000원
                   </div>
-                  <Button size='sm' className=' w-22'>
-                    상세보기
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger>
+                      <Button size='sm' className='w-22'>
+                        상세보기
+                      </Button>
+                    </DialogTrigger>
+                    <Accommodation />
+                  </Dialog>
                 </div>
               </div>
             </div>
