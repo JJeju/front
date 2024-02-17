@@ -41,7 +41,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
-import Account from './account';
+import Account from '../account';
 const components: { title: string; href: string }[] = [
   {
     title: '여행코스 목록',
@@ -65,8 +65,10 @@ export default function Navbar() {
   const [isTheme, setIsTheme] = useState(true);
   return (
     <nav className=' w-full h-auto '>
-      <div className='flex lg:p-4 p-4 text-3xl md:justify-around justify-between md:text-3xl '>
-        제주제주
+      <div className='flex lg:p-4 p-4  md:justify-around justify-between'>
+        <Link href='/' className='text-3xl font-semibold md:text-3xl'>
+          J E J U
+        </Link>
         <div className='flex justify-end items-center gap-3'>
           <NavigationMenu className='hidden md:block'>
             <NavigationMenuList>
@@ -110,7 +112,9 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
-                <SheetTitle>제주제주</SheetTitle>
+                <SheetTitle className='font-semibold text-2xl'>
+                  J E J U
+                </SheetTitle>
                 <SheetDescription>
                   나만의 여행코스를 만들어보세요. <br />
                   편리하게 여행코스를 관리할 수 있습니다.

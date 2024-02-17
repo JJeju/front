@@ -7,6 +7,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import Image from 'next/image';
 import { Dialog, DialogTrigger } from '../ui/dialog';
 import Accommodation from '../product/Accommodation';
+import Restaurant from '../product/Restaurant';
+import Map from '../map/Map';
 export default function Product() {
   return (
     <>
@@ -56,12 +58,12 @@ export default function Product() {
                 <div className='md:text-sm text-xs pt-1'>세부내용입니다</div>
               </div>
               <div className='flex md:flex-row flex-col md:justify-between  md:items-center '>
-                <div className='text-base font-mono py-1 md:block hidden'>
-                  100,000원
+                <div className='text-gray-500 dark:text-gray-400 text-lg font-bold py-1 md:block hidden'>
+                  ₩350,000
                 </div>
                 <div className='flex justify-between items-end gap-2 '>
-                  <div className='text-base font-mono py-1 md:hidden block '>
-                    100,000원
+                  <div className='text-gray-500 dark:text-gray-400 text-lg font-bold py-1 md:hidden block '>
+                    ₩350,000
                   </div>
                   <Dialog>
                     <DialogTrigger>
@@ -69,7 +71,14 @@ export default function Product() {
                         상세보기
                       </Button>
                     </DialogTrigger>
-                    <Accommodation />
+
+                    {index / 2 === 0 ? (
+                      <Accommodation />
+                    ) : (
+                      <>
+                        <Restaurant />
+                      </>
+                    )}
                   </Dialog>
                 </div>
               </div>

@@ -83,8 +83,8 @@ export default function Home() {
                     <div className='text-2xl font-bold'>제주도</div>
                     <div className='text-base'>제주도 서귀포구</div>
                   </div>
-                  <div className=' flex justify-end py-5 pr-5 text-base  font-mono'>
-                    100,000원
+                  <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3'>
+                    ₩350,000
                   </div>
                 </Card>
               </div>
@@ -129,8 +129,8 @@ export default function Home() {
                       6시
                     </div>
                   </div>
-                  <div className=' flex justify-end py-5 pr-5 text-base  font-mono'>
-                    100,000원
+                  <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3'>
+                    ₩350,000
                   </div>
                 </Card>
               </div>

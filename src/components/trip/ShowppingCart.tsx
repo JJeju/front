@@ -24,13 +24,15 @@ export default function ShowppingCart() {
               </div>
               <div className='flex md:flex-row flex-col md:justify-between  md:items-center '>
                 <div className='flex justify-end'>
-                  <div className='text-base font-mono py-1'>100,000원</div>
+                  <p className='text-gray-500 dark:text-gray-400 text-lg font-bold'>
+                    ₩350,000
+                  </p>
                 </div>
                 <div className='flex justify-end gap-2'>
                   <Button variant='destructive' size='sm'>
                     삭제
                   </Button>
-                  <Button size='sm'>결제하기</Button>
+                  <Button size='sm'>결제</Button>
                 </div>
               </div>
             </div>
@@ -40,12 +42,15 @@ export default function ShowppingCart() {
       <div className=' h-1/6 md:h-1/4  font-mono py-2  mt-3 border-t-2'>
         <div className='flex justify-between gap-2 '>
           <div className='md:text-2xl text-xl font-bold'>합계</div>
-          <div className='md:text-2xl text-xl font-bold'>100,000원</div>
+          <div className='md:text-2xl text-xl text-gray-500 dark:text-gray-400 font-bold'>
+            {' '}
+            ₩350,000
+          </div>
         </div>
         <div className='flex-col flex items-end py-2'>
           <div className='flex gap-2'>
-            <Button variant='destructive'>장바구니 비우기</Button>
-            <Button>전체 주문하기</Button>
+            <Button variant='destructive'>전체 삭제</Button>
+            <Button>전체 결제</Button>
           </div>
         </div>
       </div>
