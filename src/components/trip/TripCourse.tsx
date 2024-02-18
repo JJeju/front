@@ -1,3 +1,4 @@
+'use client';
 import { DateRangePicker } from '../ui/daterangepicker';
 import { Button } from '../ui/button';
 import {
@@ -18,7 +19,11 @@ import {
   SelectValue
 } from '../ui/select';
 import { Label } from '../ui/label';
+import { Reorder } from 'framer-motion';
+import { Fragment, useState } from 'react';
+import Image from 'next/image';
 export default function TripCourse() {
+  const [items, setItems] = useState([0, 1, 2, 3]);
   return (
     <div className='w-full h-full '>
       <div className='grid gap-8 mt-4'>
@@ -70,63 +75,38 @@ export default function TripCourse() {
           </form>
         </div>
       </div>
-      <Table>
-        <TableHeader>
-          <p className='text-2xl font-bold p-3 mt-4 '>1일차</p>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell className='font-medium'>INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className='text-right'>$250.00</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-      <Table>
-        <TableHeader>
-          <p className='text-2xl font-bold p-3 mt-4'>2일차</p>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell className='font-medium'>INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className='text-right'>$250.00</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className='font-medium'>INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className='text-right'>$250.00</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className='font-medium'>INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className='text-right'>$250.00</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-      <Table>
-        <TableHeader>
-          <p className='text-2xl font-bold p-3 mt-4'>3일차</p>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell className='font-medium'>INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className='text-right'>$250.00</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className='font-medium'>INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className='text-right'>$250.00</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+      <Reorder.Group axis='y' values={items} onReorder={setItems}>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className='w-[100px]'>사진</TableHead>
+              <TableHead>이름</TableHead>
+              <TableHead>장소</TableHead>
+              <TableHead className='text-right'>가격</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              {/* {items.map(item => (
+                <Reorder.Item key={item} value={item}> */}
+              <TableCell>
+                <img
+                  alt='Tour image'
+                  className='aspect-1/2 rounded-md object-cover overflow-hidden'
+                  height='36'
+                  src={'/56692-O8P89L-432.jpg'}
+                  width='64'
+                />
+              </TableCell>
+              <TableCell className='font-medium'>제주도 휴가 패키지</TableCell>
+              <TableCell>제주도</TableCell>
+              <TableCell className='text-right'>₩1,200,000</TableCell>
+              {/* </Reorder.Item>
+              ))} */}
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Reorder.Group>
     </div>
   );
 }

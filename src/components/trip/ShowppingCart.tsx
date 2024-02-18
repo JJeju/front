@@ -43,7 +43,6 @@ export default function ShowppingCart() {
         <div className='flex justify-between gap-2 '>
           <div className='md:text-2xl text-xl font-bold'>합계</div>
           <div className='md:text-2xl text-xl text-gray-500 dark:text-gray-400 font-bold'>
-            {' '}
             ₩350,000
           </div>
         </div>

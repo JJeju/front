@@ -13,6 +13,8 @@ import { Badge } from '@/components/ui/badge';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
+import Journey from '@/components/journey';
 export default function Home() {
   const router = useRouter();
 
@@ -42,13 +44,18 @@ export default function Home() {
             제주도의 모든 여행코스를 한눈에 보고,
             <br />
             나만의 여행코스를 짤 수 있는 여행 플랫폼입니다.
-            <Button
-              size='lg'
-              className='md:w-40 w-32'
-              onClick={() => router.push('/trip')}
-            >
-              여행 코스 짜러가기
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  size='lg'
+                  className='md:w-40 w-32'
+                  // onClick={() => router.push('/trip')}
+                >
+                  여행 코스 짜러가기
+                </Button>
+              </DialogTrigger>
+              <Journey />
+            </Dialog>
           </div>
         </div>
       </div>

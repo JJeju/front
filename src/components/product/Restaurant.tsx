@@ -39,8 +39,8 @@ export default function Restaurant() {
   return (
     <DialogContent className='w-full md:h-[90%] h-full overflow-scroll'>
       <div className='grid gap-6 lg:gap-12'>
-        <div className='container px-4 md:px-6 max-w-5xl mx-auto space-y-8'>
-          <div className='flex flex-col min-h-[calc(100vh_-_top)] space-y-4'>
+        <div className='container px-4 py-8 xl:py-8 max-w-5xl mx-auto space-y-8'>
+          <div className='flex flex-col  space-y-2'>
             <div className='space-y-2'>
               <h1 className='text-3xl font-semibold tracking-tighter '>
                 레스토랑
