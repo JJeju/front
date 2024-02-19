@@ -19,11 +19,24 @@ import {
   SelectValue
 } from '../ui/select';
 import { Label } from '../ui/label';
-import { Reorder } from 'framer-motion';
+import { Reorder, motion } from 'framer-motion';
 import { Fragment, useState } from 'react';
 import Image from 'next/image';
+
 export default function TripCourse() {
-  const [items, setItems] = useState([0, 1, 2, 3]);
+  const [items, setItems] = useState([[0, 1, 2, 3], [4, 5], [6], [7]]);
+  console.log('', items);
+
+  const onRemove = (item: any) => {
+    setItems(removeItem(items, item));
+  };
+
+  function removeItem<T>([...arr]: T[], item: T) {
+    const index = arr.indexOf(item);
+    index > -1 && arr.splice(index, 1);
+    return arr;
+  }
+
   return (
     <div className='w-full h-full '>
       <div className='grid gap-8 mt-4'>
@@ -77,32 +90,51 @@ export default function TripCourse() {
       </div>
       <Reorder.Group axis='y' values={items} onReorder={setItems}>
         <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className='w-[100px]'>사진</TableHead>
-              <TableHead>이름</TableHead>
-              <TableHead>장소</TableHead>
-              <TableHead className='text-right'>가격</TableHead>
-            </TableRow>
-          </TableHeader>
           <TableBody>
             <TableRow>
-              {/* {items.map(item => (
-                <Reorder.Item key={item} value={item}> */}
-              <TableCell>
-                <img
-                  alt='Tour image'
-                  className='aspect-1/2 rounded-md object-cover overflow-hidden'
-                  height='36'
-                  src={'/56692-O8P89L-432.jpg'}
-                  width='64'
-                />
-              </TableCell>
-              <TableCell className='font-medium'>제주도 휴가 패키지</TableCell>
-              <TableCell>제주도</TableCell>
-              <TableCell className='text-right'>₩1,200,000</TableCell>
-              {/* </Reorder.Item>
-              ))} */}
+              <TableHeader className='w-full'>
+                <TableRow>
+                  <TableHead className='w-[100px]'>사진</TableHead>
+                  <TableHead className='w-[140px]'>이름</TableHead>
+                  <TableHead className='w-[150px]'>장소</TableHead>
+                  {/* <TableHead className='w-[120px]'>삭제</TableHead> */}
+                </TableRow>
+              </TableHeader>
+              {items.map((list, index) => (
+                <>
+                  <h1 className='text-2xl pt-2 px-4' key={index}>
+                    {index}일차
+                  </h1>
+                  {list.map((item: any, index) => (
+                    <Reorder.Item value={item} key={index} className='w-full'>
+                      <TableCell>
+                        <Image
+                          alt='Tour image'
+                          className='aspect-1/2 rounded-md object-cover overflow-hidden'
+                          src={'/56692-O8P89L-432.jpg'}
+                          height='36'
+                          width='64'
+                        />
+                      </TableCell>
+                      <TableCell className=' text-overflow-ellipsis '>
+                        제주도 휴가 패키지
+                      </TableCell>
+                      <TableCell className=' text-overflow-ellipsis '>
+                        제주dssdsdsddssdds도
+                      </TableCell>
+                      <TableCell className='text-right'>
+                        <Button
+                          variant='destructive'
+                          size='sm'
+                          onClick={() => onRemove(item)}
+                        >
+                          삭제
+                        </Button>
+                      </TableCell>
+                    </Reorder.Item>
+                  ))}
+                </>
+              ))}
             </TableRow>
           </TableBody>
         </Table>
