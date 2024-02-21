@@ -19,27 +19,41 @@ export default function Product() {
             <Button type='submit'>검색</Button>
           </div>
         </div>
-        <div className='flex space-x-3  justify-center items-center  my-3'>
-          <Checkbox id='terms' className='w-6 h-6' />
+        <div className='flex space-x-2  justify-center items-center  my-3'>
+          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
           <label
             htmlFor='terms'
-            className='text-lg font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
           >
             숙박
           </label>
-          <Checkbox id='terms' className='w-6 h-6' />
+          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
           <label
             htmlFor='terms'
-            className='text-lg font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
           >
             식당
           </label>
-          <Checkbox id='terms' className='w-6 h-6' />
+          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
           <label
             htmlFor='terms'
-            className='text-lg font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
           >
             레저
+          </label>
+          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
+          <label
+            htmlFor='terms'
+            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+          >
+            관광지
+          </label>
+          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
+          <label
+            htmlFor='terms'
+            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+          >
+            찜한 상품
           </label>
         </div>
         <ScrollArea className='md:h-3/4 h-5/6  rounded-md border '>

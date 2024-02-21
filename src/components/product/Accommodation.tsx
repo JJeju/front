@@ -1,17 +1,10 @@
 import { Button } from '../ui/button';
 import { DateRangePicker } from '../ui/daterangepicker';
-import {
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle
-} from '../ui/dialog';
+import { DialogContent } from '../ui/dialog';
 import Image from 'next/image';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
-import { JSX, SVGProps } from 'react';
 import { Separator } from '@/components/ui/separator';
 import {
   AccessibilityIcon,
@@ -21,7 +14,8 @@ import {
   MountainSnowIcon,
   WavesIcon,
   WifiIcon,
-  WindIcon
+  WindIcon,
+  XIcon
 } from 'lucide-react';
 import {
   Select,
@@ -39,7 +33,16 @@ export default function Accommodation() {
           <h1 className='text-3xl font-semibold tracking-tight'>
             도시 전망이 멋진 디럭스 킹 룸
           </h1>
-          <p className=' text-lg '>인천 서구 000 0000</p>
+          <div className='flex items-center space-x-2 text-sm font-medium'>
+            <XIcon className='w-5 h-5' />
+            <XIcon className='w-5 h-5' />
+            <XIcon className='w-5 h-5' />
+            <XIcon className='w-5 h-5' />
+            <XIcon className='w-5 h-5' />
+            <span className='text-gray-500 dark:text-gray-400'>
+              5.0 (1,234 리뷰)
+            </span>
+          </div>
         </div>
         <div className='grid gap-4'>
           <div className='flex items-center gap-4'>
@@ -52,11 +55,22 @@ export default function Accommodation() {
             <div className='grid gap-0.5'>
               <div className='font-semibold'>캐서린이 호스팅</div>
               <div className='text-gray-500 text-sm dark:text-gray-400'>
-                2010년 가입 · 수퍼호스트
+                <p className='text-sm text-gray-500 dark:text-gray-400'>
+                  제주 석귀포시 성산읍 일출로 284-12
+                </p>
               </div>
             </div>
           </div>
           <Separator />
+          <Image
+            alt='Restaurant'
+            className='overflow-hidden rounded-xl object-bottom'
+            height='200'
+            src={'/56692-O8P89L-432.jpg'}
+            width='500'
+          />
+          <Separator />
+
           <div className='prose'>
             <p>
               우리의 고요한 산중 전원으로 오신 것을 환영합니다! 산의 평화로운

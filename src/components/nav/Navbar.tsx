@@ -44,7 +44,7 @@ import {
 import Account from '../account';
 const components: { title: string; href: string }[] = [
   {
-    title: '여행코스 목록',
+    title: '사업장 전환하기',
     href: '/docs/primitives/alert-dialog'
   },
   {
@@ -135,7 +135,7 @@ export default function Navbar() {
                 <li className=''></li>
                 <li className='border-b-2 p-3 w-full text-center'>
                   <Link href='/travel-courses' className='hover:text-amber-400'>
-                    여행코스 목록
+                    사업장 전환하기
                   </Link>
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
