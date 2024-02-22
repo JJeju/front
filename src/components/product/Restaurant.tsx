@@ -1,5 +1,5 @@
 'use client';
-import { XIcon } from 'lucide-react';
+import { MapPin, StarIcon, XIcon } from 'lucide-react';
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,7 +28,7 @@ const DEFAULT_ZOOM = 3;
 export default function Restaurant() {
   const loadKakaoMap = () => {
     window.kakao.maps.load(() => {
-      const container = document.getElementById('map');
+      const container = document.getElementById('map2');
       const options = {
         center: new window.kakao.maps.LatLng(EDFAULT_LAT, DEFAULT_LNG),
         level: 3
@@ -44,11 +44,11 @@ export default function Restaurant() {
         <div className='space-y-2'>
           <h1 className='text-3xl font-semibold tracking-tighter '>레스토랑</h1>
           <div className='flex items-center space-x-2 text-sm font-medium'>
-            <XIcon className='w-5 h-5' />
-            <XIcon className='w-5 h-5' />
-            <XIcon className='w-5 h-5' />
-            <XIcon className='w-5 h-5' />
-            <XIcon className='w-5 h-5' />
+            <StarIcon className='w-4 h-4 fill-accent' />
+            <StarIcon className='w-4 h-4 fill-accent' />
+            <StarIcon className='w-4 h-4 fill-accent' />
+            <StarIcon className='w-4 h-4 fill-accent' />
+            <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
             <span className='text-gray-500 dark:text-gray-400'>
               5.0 (1,234 리뷰)
             </span>
@@ -65,8 +65,8 @@ export default function Restaurant() {
             <div className='grid gap-0.5'>
               <div className='font-semibold'>캐서린이 호스팅</div>
               <div className='text-gray-500 text-sm dark:text-gray-400'>
-                <p className='text-sm text-gray-500 dark:text-gray-400'>
-                  제주 석귀포시 성산읍 일출로 284-12
+                <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
+                  <MapPin size={15} /> 제주 석귀포시 성산읍 일출로 284-12
                 </p>
               </div>
             </div>
@@ -104,7 +104,15 @@ export default function Restaurant() {
             </p>
           </div>
         </div>
-        <div className='h-80 w-full'>{/* <Map /> */}</div>
+        <div className='h-80 w-full'>
+          <Script
+            strategy='afterInteractive'
+            type='text/javascript'
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&autoload=false`}
+            onReady={loadKakaoMap}
+          />
+          <div id='map2' className='w-full h-full'></div>
+        </div>
         <Separator />
         <div className='grid gap-4'>
           <div className='grid gap-2'>

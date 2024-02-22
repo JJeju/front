@@ -24,7 +24,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { ChevronRightIcon, StarIcon, ChevronLeftIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Accommodation from '@/components/product/Accommodation';
-import NoticeInfo from '@/components/notice/NoticeInfo';
+import TripReview from '@/components/tripreview/TripReview';
 
 export default function Home() {
   const router = useRouter();
@@ -57,11 +57,7 @@ export default function Home() {
             나만의 여행코스를 짤 수 있는 여행 플랫폼입니다.
             <Dialog>
               <DialogTrigger asChild>
-                <Button
-                  size='lg'
-                  className='md:w-40 w-32'
-                  // onClick={() => router.push('/trip')}
-                >
+                <Button size='lg' className='md:w-40 w-32'>
                   여행 코스 짜러가기
                 </Button>
               </DialogTrigger>
@@ -188,7 +184,7 @@ export default function Home() {
             <ChevronRightIcon size={20} />
           </Badge>
         </div>
-        <div className=' grid md:grid-cols-3 grid-cols-2 gap-3'>
+        <div className=' grid md:grid-cols-3 grid-cols-1 gap-3'>
           {Array.from({ length: 4 }).map((_, index) => (
             <div className='p-1' key={index}>
               <motion.div
@@ -197,44 +193,41 @@ export default function Home() {
                 whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
               >
                 <Card>
-                  <CardHeader className='flex items-start pb-4'>
-                    <div className='flex items-center gap-1 mr-auto'>
-                      <Avatar className='w-8 h-8'>
-                        <AvatarImage
-                          alt='Avatar'
-                          src={'/56692-O8P89L-432.jpg'}
-                        />
-                      </Avatar>
-                      <div className='flex flex-col w-full'>
-                        <h3 className='md:text-base text-sm font-semibold overflow-hidden text-overflow-ellipsis whitespace-wrap'>
-                          30대 신혼 여행
-                        </h3>
-                        <p className='text-xs text-gray-500 dark:text-gray-400'>
-                          상구
+                  <Dialog>
+                    <DialogTrigger>
+                      <CardHeader className='flex items-start pb-4'>
+                        <div className='flex items-center gap-1 mr-auto'>
+                          <Avatar className='w-8 h-8'>
+                            <AvatarImage
+                              alt='Avatar'
+                              src={'/56692-O8P89L-432.jpg'}
+                            />
+                          </Avatar>
+                          <div className='flex flex-col w-full'>
+                            <h3 className='md:text-base text-sm font-semibold overflow-hidden text-overflow-ellipsis whitespace-wrap'>
+                              30대 신혼 여행
+                            </h3>
+                            <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>
+                              상구
+                            </p>
+                          </div>
+                        </div>
+                        <div className='flex items-center space-x-1 text-sm'>
+                          <StarIcon className='w-4 h-4 fill-accent' />
+                          <StarIcon className='w-4 h-4 fill-accent' />
+                          <StarIcon className='w-4 h-4 fill-accent' />
+                          <StarIcon className='w-4 h-4 fill-accent' />
+                          <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <p className='text-sm text-gray-500 dark:text-gray-400 px-5 py-2'>
+                          코스는 좋았지만, 호텔은 별로였어요.
                         </p>
-                      </div>
-                    </div>
-                    <div className='flex items-center space-x-1 text-sm'>
-                      <StarIcon className='w-4 h-4 fill-accent' />
-                      <StarIcon className='w-4 h-4 fill-accent' />
-                      <StarIcon className='w-4 h-4 fill-accent' />
-                      <StarIcon className='w-4 h-4 fill-accent' />
-                      <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className='text-sm text-gray-500 dark:text-gray-400 px-5 py-2'>
-                      코스는 좋았지만, 호텔은 별로였어요.
-                    </p>
-                    <div className='flex justify-end px-3 pb-2'>
-                      <Dialog>
-                        <DialogTrigger>
-                          <ChevronRightIcon className='' />
-                          <NoticeInfo />
-                        </DialogTrigger>
-                      </Dialog>
-                    </div>
-                  </CardContent>
+                      </CardContent>
+                    </DialogTrigger>
+                    <TripReview />
+                  </Dialog>
                 </Card>
               </motion.div>
             </div>

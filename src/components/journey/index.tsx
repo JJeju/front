@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -20,7 +22,12 @@ export default function Journey() {
   const router = useRouter();
 
   return (
-    <DialogContent className='w-full md:w-auto h-full md:h-auto '>
+    <DialogContent
+      onInteractOutside={e => {
+        e.preventDefault();
+      }}
+      className='w-full md:w-auto h-full md:h-auto '
+    >
       <DialogTitle className='font-semibold'>J E J U</DialogTitle>
       <div className='flex justify-center'>
         <Tabs defaultValue='account' className='w-[390px]'>

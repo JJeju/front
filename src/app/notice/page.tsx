@@ -17,17 +17,15 @@ export default function Notice() {
   const router = useRouter();
 
   return (
-    <div className='md:px-8 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
+    <div className='md:px-36 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
       <div className='space-y-2'>
-        <div className='flex justify-between'>
-          <div className='flex flex-col'>
-            <h1 className='md:text-3xl text-2xl font-bold tracking-tight'>
-              공지사항
-            </h1>
-            <p className='text-gray-500 dark:text-gray-400'>
-              문의사항이 있으신가요? 아래에서 찾아보세요.
-            </p>
-          </div>
+        <div className='flex flex-col'>
+          <h1 className='md:text-3xl text-2xl font-bold tracking-tight'>
+            공지사항
+          </h1>
+          <p className='text-gray-500 dark:text-gray-400'>
+            문의사항이 있으신가요? 아래에서 찾아보세요.
+          </p>
         </div>
       </div>
       <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>

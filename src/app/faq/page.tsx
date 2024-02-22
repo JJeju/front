@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator';
 
 export default function Faq() {
   return (
-    <div className='md:px-8 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
+    <div className='md:px-36 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
       <div className='space-y-2'>
         <div className='flex justify-between'>
           <div className='flex flex-col'>
