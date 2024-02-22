@@ -44,20 +44,28 @@ import {
 import Account from '../account';
 const components: { title: string; href: string }[] = [
   {
-    title: '사업장 전환하기',
-    href: '/docs/primitives/alert-dialog'
+    title: '여행 짜러가기',
+    href: '/trip'
   },
   {
-    title: '나의 여행',
-    href: '/docs/primitives/hover-card'
+    title: '이벤트',
+    href: '/event'
   },
   {
     title: '마이페이지',
-    href: '/docs/primitives/progress'
+    href: '/mypage'
   },
   {
-    title: '고객센터',
-    href: '/docs/primitives/scroll-area'
+    title: '공지사항',
+    href: '/notice'
+  },
+  {
+    title: '문의하기',
+    href: '/faq'
+  },
+  {
+    title: '사업장 전환하기',
+    href: '/business'
   }
 ];
 export default function Navbar() {
@@ -132,28 +140,34 @@ export default function Navbar() {
                 </Dialog>
               </div>
               <ul className='flex  flex-col justify-center w-full items-center '>
-                <li className=''></li>
                 <li className='border-b-2 p-3 w-full text-center'>
-                  <Link href='/travel-courses' className='hover:text-amber-400'>
-                    사업장 전환하기
+                  <Link href='/trip' className='hover:text-amber-400'>
+                    여행 짜러가기
                   </Link>
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
-                  <Link href='/signup' className='hover:text-amber-400'>
-                    나의 여행
+                  <Link href='/evnet' className='hover:text-amber-400'>
+                    이벤트
                   </Link>
                 </li>
-                <li className='border-b-2  p-3 w-full text-center'>
+                <li className='border-b-2 p-3 w-full text-center'>
                   <Link href='/mypage' className='hover:text-amber-400'>
                     마이페이지
                   </Link>
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
-                  <Link
-                    href='/customer-service'
-                    className='hover:text-amber-400'
-                  >
-                    고객센터
+                  <Link href='/notice' className='hover:text-amber-400'>
+                    공지사항
+                  </Link>
+                </li>
+                <li className='border-b-2  p-3 w-full text-center'>
+                  <Link href='/faq' className='hover:text-amber-400'>
+                    문의하기
+                  </Link>
+                </li>
+                <li className='border-b-2 p-3 w-full text-center'>
+                  <Link href='/business' className='hover:text-amber-400'>
+                    사업장 전환하기
                   </Link>
                 </li>
               </ul>

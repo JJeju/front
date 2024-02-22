@@ -104,16 +104,7 @@ export default function Restaurant() {
             </p>
           </div>
         </div>
-        <div className='h-80 w-full'>
-          {/* <Map /> */}
-          <Script
-            strategy='afterInteractive'
-            type='text/javascript'
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&autoload=false`}
-            onReady={loadKakaoMap}
-          />
-          <div id='map' className='w-full h-full'></div>
-        </div>
+        <div className='h-80 w-full'>{/* <Map /> */}</div>
         <Separator />
         <div className='grid gap-4'>
           <div className='grid gap-2'>
