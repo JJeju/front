@@ -8,6 +8,7 @@ import { cn } from '../lib/utils';
 import Navbar from '@/components/nav/Navbar';
 import { usePathname, useRouter } from 'next/navigation';
 import Footer from '@/components/nav/Footer';
+import ReactQueryProvider from './ReactQueryProvider';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -26,25 +27,28 @@ export default function RootLayout({
   const pathname = usePathname();
 
   return (
-    <html lang='ko' suppressHydrationWarning>
-      <body
-        className={cn(
-          ' bg-background font-sans antialiased',
-          fontSans.variable,
-          { 'overflow-hidden': pathname === '/trip' }
-        )}
-      >
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
+    <ReactQueryProvider>
+      <html lang='ko' suppressHydrationWarning>
+        <body
+          className={cn(
+            ' bg-background font-sans antialiased',
+            fontSans.variable,
+            { 'overflow-hidden': pathname === '/trip' }
+          )}
         >
-          <Navbar />
-          {children}
-        </ThemeProvider>
-        <Footer />
-      </body>
-    </html>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            {children}
+          </ThemeProvider>
+
+          {pathname != '/trip' && <Footer />}
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }

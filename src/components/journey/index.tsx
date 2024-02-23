@@ -22,12 +22,7 @@ export default function Journey() {
   const router = useRouter();
 
   return (
-    <DialogContent
-      onInteractOutside={e => {
-        e.preventDefault();
-      }}
-      className='w-full md:w-auto h-full md:h-auto '
-    >
+    <DialogContent className='w-full md:w-auto h-full md:h-auto '>
       <DialogTitle className='font-semibold'>J E J U</DialogTitle>
       <div className='flex justify-center'>
         <Tabs defaultValue='account' className='w-[390px]'>
@@ -114,7 +109,7 @@ export default function Journey() {
                     <div className='flex justify-end'>
                       <Button
                         className='w-24'
-                        type='submit'
+                        // type='submit'
                         onClick={() => router.push('/trip')}
                       >
                         여정 불러오기

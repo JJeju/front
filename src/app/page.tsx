@@ -173,11 +173,9 @@ export default function Home() {
       </Carousel>
       <div className='w-full grid items-start min-h-screen gap-4  md:gap-8'>
         <div className='space-y-2'>
-          <div className='mt-24 text-2xl md:text-3xl font-bold'>
-            여행코스 리뷰
-          </div>
+          <div className='mt-24 text-2xl md:text-3xl font-bold'>여행 후기</div>
           <p className='text-gray-500 dark:text-gray-400'>
-            12개의 새로운 리뷰가 있습니다.
+            12개의 새로운 후기가 있습니다.
           </p>
           <Badge className='text-sm' onClick={() => router.push('/faq')}>
             더보기
@@ -186,51 +184,49 @@ export default function Home() {
         </div>
         <div className=' grid md:grid-cols-3 grid-cols-1 gap-3'>
           {Array.from({ length: 4 }).map((_, index) => (
-            <div className='p-1' key={index}>
-              <motion.div
-                key={index}
-                className=''
-                whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
-              >
-                <Card>
-                  <Dialog>
-                    <DialogTrigger>
-                      <CardHeader className='flex items-start pb-4'>
-                        <div className='flex items-center gap-1 mr-auto'>
-                          <Avatar className='w-8 h-8'>
-                            <AvatarImage
-                              alt='Avatar'
-                              src={'/56692-O8P89L-432.jpg'}
-                            />
-                          </Avatar>
-                          <div className='flex flex-col w-full'>
-                            <h3 className='md:text-base text-sm font-semibold overflow-hidden text-overflow-ellipsis whitespace-wrap'>
-                              30대 신혼 여행
-                            </h3>
-                            <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>
-                              상구
-                            </p>
-                          </div>
+            <Dialog key={index}>
+              <DialogTrigger>
+                <motion.div
+                  key={index}
+                  className=''
+                  whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
+                >
+                  <Card>
+                    <CardHeader className='flex items-start pb-4'>
+                      <div className='flex items-center gap-1 mr-auto'>
+                        <Avatar className='w-8 h-8'>
+                          <AvatarImage
+                            alt='Avatar'
+                            src={'/56692-O8P89L-432.jpg'}
+                          />
+                        </Avatar>
+                        <div className='flex flex-col w-full'>
+                          <h3 className='md:text-base text-sm font-semibold overflow-hidden text-overflow-ellipsis whitespace-wrap'>
+                            30대 신혼 여행
+                          </h3>
+                          <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>
+                            상구
+                          </p>
                         </div>
-                        <div className='flex items-center space-x-1 text-sm'>
-                          <StarIcon className='w-4 h-4 fill-accent' />
-                          <StarIcon className='w-4 h-4 fill-accent' />
-                          <StarIcon className='w-4 h-4 fill-accent' />
-                          <StarIcon className='w-4 h-4 fill-accent' />
-                          <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className='text-sm text-gray-500 dark:text-gray-400 px-5 py-2'>
-                          코스는 좋았지만, 호텔은 별로였어요.
-                        </p>
-                      </CardContent>
-                    </DialogTrigger>
-                    <TripReview />
-                  </Dialog>
-                </Card>
-              </motion.div>
-            </div>
+                      </div>
+                      <div className='flex items-center space-x-1 text-sm'>
+                        <StarIcon className='w-4 h-4 fill-accent' />
+                        <StarIcon className='w-4 h-4 fill-accent' />
+                        <StarIcon className='w-4 h-4 fill-accent' />
+                        <StarIcon className='w-4 h-4 fill-accent' />
+                        <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className='text-sm text-gray-500 dark:text-gray-400 px-5 py-2 text-start'>
+                        코스는 좋았지만, 호텔은 별로였어요.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </DialogTrigger>
+              <TripReview />
+            </Dialog>
           ))}
         </div>
         <div className='space-y-2'>

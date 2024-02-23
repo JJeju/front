@@ -32,15 +32,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger
 } from '@/components/ui/navigation-menu';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import Account from '../account';
 import Journey from '../journey';
 const components: { title: string; href: string }[] = [
@@ -87,34 +79,14 @@ export default function Navbar() {
                 <NavigationMenuTrigger>메뉴</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className=' w-[150px] gap-3 p-4 '>
-                    {components.map(component =>
-                      component.href === '/trip' ? (
-                        <Dialog key={component.title}>
-                          <DialogTrigger>
-                            {/* <ListItem
-                              className='hover:text-amber-400'
-                              key={component.title}
-                              title={component.title}
-                            /> */}
-                            <Button
-                              variant={'ghost'}
-                              onClick={() => component.href === '/'}
-                              className=' block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground hover:text-amber-400 focus:bg-accent focus:text-accent-foreground'
-                            >
-                              여행 짜러가기
-                            </Button>
-                          </DialogTrigger>
-                          <Journey />
-                        </Dialog>
-                      ) : (
-                        <ListItem
-                          className='hover:text-amber-400'
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
-                        ></ListItem>
-                      )
-                    )}
+                    {components.map(component => (
+                      <ListItem
+                        className='hover:text-amber-400'
+                        key={component.title}
+                        title={component.title}
+                        href={component.href}
+                      ></ListItem>
+                    ))}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
