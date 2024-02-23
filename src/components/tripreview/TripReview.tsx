@@ -71,7 +71,6 @@ export default function TripReview() {
             <h2 className='text-lg font-semibold'>여행 일정</h2>
 
             {/* <h2 className='text-lg font-semibold mt-4'>1일차</h2> */}
-
             <Table>
               <TableHeader>
                 <TableRow>
@@ -81,7 +80,7 @@ export default function TripReview() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <h1 className='text-2xl pt-2 '>1일차</h1>
+                <h1 className='text-xl pt-2 font-extrabold'>1일차</h1>
                 <TableRow>
                   <TableCell className='px-0 py-2'>
                     <Image

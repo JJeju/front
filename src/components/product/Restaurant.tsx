@@ -104,15 +104,22 @@ export default function Restaurant() {
             </p>
           </div>
         </div>
-        <div className='h-80 w-full'>
-          <Script
-            strategy='afterInteractive'
-            type='text/javascript'
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&autoload=false`}
-            onReady={loadKakaoMap}
-          />
-          <div id='map2' className='w-full h-full'></div>
+        <div className='grid gap-3'>
+          <h3 className='text-xl font-semibold'>위치보기</h3>
+          <p className='text-base  dark:text-gray-400 flex items-center gap-1'>
+            <MapPin size={15} /> 제주 석귀포시 성산읍 일출로 284-12
+          </p>
+          <div className='h-80 w-full'>
+            <Script
+              strategy='afterInteractive'
+              type='text/javascript'
+              src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&autoload=false`}
+              onReady={loadKakaoMap}
+            />
+            <div id='map2' className='w-full h-full'></div>
+          </div>
         </div>
+
         <Separator />
         <div className='grid gap-4'>
           <div className='grid gap-2'>

@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '../ui/button';
 import { DateRangePicker } from '../ui/daterangepicker';
 import { DialogContent } from '../ui/dialog';
@@ -28,7 +29,33 @@ import {
 } from '../ui/select';
 import { Card } from '../ui/card';
 import Map from '../map/Map';
+import Script from 'next/script';
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
+interface MapProps {
+  lat?: string | null;
+  lng?: string | null;
+  zoom?: number | null;
+}
+const EDFAULT_LAT = 37.497625203;
+const DEFAULT_LNG = 127.03088379;
+
 export default function Accommodation() {
+  const loadKakaoMap = () => {
+    window.kakao.maps.load(() => {
+      const container = document.getElementById('map2');
+      const options = {
+        center: new window.kakao.maps.LatLng(EDFAULT_LAT, DEFAULT_LNG),
+        level: 3
+      };
+      const map = new window.kakao.maps.Map(container, options);
+      return map;
+    });
+  };
   return (
     <DialogContent className='w-screen md:h-[90%] h-full overflow-scroll'>
       <div className=' space-y-8 px-4 py-8 xl:py-8'>
@@ -217,7 +244,13 @@ export default function Accommodation() {
               <MapPin size={15} /> 제주 석귀포시 성산읍 일출로 284-12
             </p>
             <div className='h-80 w-full'>
-              <Map />
+              <Script
+                strategy='afterInteractive'
+                type='text/javascript'
+                src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&autoload=false`}
+                onReady={loadKakaoMap}
+              />
+              <div id='map2' className='w-full h-full'></div>
             </div>
           </div>
         </div>

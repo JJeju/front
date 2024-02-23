@@ -193,8 +193,8 @@ export default function Home() {
                 >
                   <Card>
                     <CardHeader className='flex items-start pb-4'>
-                      <div className='flex items-center gap-1 mr-auto'>
-                        <Avatar className='w-8 h-8'>
+                      <div className='flex items-center gap-4 mr-auto'>
+                        <Avatar className='w-12 h-12'>
                           <AvatarImage
                             alt='Avatar'
                             src={'/56692-O8P89L-432.jpg'}
@@ -209,7 +209,7 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                      <div className='flex items-center space-x-1 text-sm'>
+                      <div className='flex items-center space-x-1 pt-2  text-sm'>
                         <StarIcon className='w-4 h-4 fill-accent' />
                         <StarIcon className='w-4 h-4 fill-accent' />
                         <StarIcon className='w-4 h-4 fill-accent' />
@@ -218,7 +218,7 @@ export default function Home() {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className='text-sm text-gray-500 dark:text-gray-400 px-5 py-2 text-start'>
+                      <p className='text-sm text-gray-500 dark:text-gray-400 px-6 pb-5 text-start'>
                         코스는 좋았지만, 호텔은 별로였어요.
                       </p>
                     </CardContent>

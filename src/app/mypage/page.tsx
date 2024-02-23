@@ -1,3 +1,5 @@
+'use client';
+import AccountInfomation from '@/components/mypage/AccountInfomation';
 import Journey from '@/components/journey';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,6 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import Image from 'next/image';
+import Business from '@/components/mypage';
 export default function Mypage() {
   return (
     <div className='md:px-36 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
@@ -23,29 +26,25 @@ export default function Mypage() {
             <CardHeader className='pb-0'>
               <CardTitle>회원 정보 수정</CardTitle>
               <CardDescription>
-                이름, 이메일, 휴대폰 번호를 입력해주세요.
+                이름, 이메일, 휴대폰 번호, 비밀번호 변경 가능 합니다.
               </CardDescription>
             </CardHeader>
             <CardContent className='flex justify-end py-4 px-6'>
-              <Button className=''>수정</Button>
+              <Dialog>
+                <DialogTrigger>
+                  <Button className=''>수정</Button>
+                </DialogTrigger>
+                <AccountInfomation />
+              </Dialog>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className='pb-0'>
-              <CardTitle>비밀번호 변경</CardTitle>
-              <CardDescription>새로운 비밀번호를 입력해주세요.</CardDescription>
+              <CardTitle>구매 내역</CardTitle>
+              <CardDescription>구매하신 목록 입니다.</CardDescription>
             </CardHeader>
             <CardContent className='flex justify-end py-4 px-6'>
-              <Button>변경</Button>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className='pb-0'>
-              <CardTitle>사업 승인 여부</CardTitle>
-              <CardDescription>사업 승인을 기다리는 중입니다.</CardDescription>
-            </CardHeader>
-            <CardContent className='flex justify-end py-4 px-6'>
-              <Button variant='secondary'>대기</Button>
+              <Button>확인</Button>
             </CardContent>
           </Card>
           <Card>
@@ -59,6 +58,23 @@ export default function Mypage() {
                   <Button>불러오기</Button>
                 </DialogTrigger>
                 <Journey />
+              </Dialog>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className='pb-0'>
+              {/* <CardTitle>사업 승인 여부</CardTitle>
+              <CardDescription>사업 승인을 기다리는 중입니다.</CardDescription> */}
+              <CardTitle>사업 전환하기</CardTitle>
+              <CardDescription>사업장 전환 해 보세요.</CardDescription>
+            </CardHeader>
+            <CardContent className='flex justify-end py-4 px-6'>
+              <Dialog>
+                <DialogTrigger>
+                  {/* <Button variant='secondary'>대기</Button> */}
+                  <Button>신청</Button>
+                </DialogTrigger>
+                <Business />
               </Dialog>
             </CardContent>
           </Card>

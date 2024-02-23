@@ -132,13 +132,16 @@ export default function TripCourse() {
             </TableHeader>
             {items.map((list, index) => (
               <>
-                <h1 className='text-2xl pt-2 px-4' key={index}>
+                <h1
+                  className='text-xl pt-2 px-4 text-left font-extrabold'
+                  key={index}
+                >
                   {index}일차
                 </h1>
                 {list.map((item: any, index) => (
                   <TableRow key={index}>
                     <Reorder.Item value={item} key={index} className='w-full'>
-                      <TableCell className='  w-[150px] '>
+                      <TableCell className='w-[150px] '>
                         <Image
                           alt='Tour image'
                           className='aspect-1/2 rounded-md object-cover overflow-hidden'

@@ -53,7 +53,7 @@ export default function Product() {
             htmlFor='terms'
             className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
           >
-            찜한 상품
+            찜
           </label>
         </div>
         <ScrollArea className='md:h-3/4 h-5/6  rounded-md border '>
