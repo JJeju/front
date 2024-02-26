@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import Image from 'next/image';
-import Business from '@/components/mypage';
+import BusinessApply from '@/components/mypage/BusinessApply';
 export default function Mypage() {
   return (
     <div className='md:px-36 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
@@ -74,7 +74,7 @@ export default function Mypage() {
                   {/* <Button variant='secondary'>대기</Button> */}
                   <Button>신청</Button>
                 </DialogTrigger>
-                <Business />
+                <BusinessApply />
               </Dialog>
             </CardContent>
           </Card>

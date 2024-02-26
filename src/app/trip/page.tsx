@@ -31,7 +31,7 @@ export default function Trip() {
             <Product />
           </TabsContent>
           <TabsContent value='tripcourse'>
-            <div className='h-[870px] overflow-scroll'>
+            <div className='h-full overflow-scroll'>
               <TripCourse />
             </div>
           </TabsContent>

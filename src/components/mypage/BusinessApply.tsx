@@ -19,7 +19,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import DatePicker from '../ui/datepicker';
 
-export default function Business() {
+export default function BusinessApply() {
   return (
     <DialogContent className='w-full md:w-auto h-full md:h-auto'>
       <DialogTitle className='font-semibold'>사업자 전환하기</DialogTitle>

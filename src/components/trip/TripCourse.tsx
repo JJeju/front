@@ -64,7 +64,7 @@ export default function TripCourse() {
   };
 
   return (
-    <div className='w-full h-full '>
+    <div className='w-full h-auto '>
       <div className='grid gap-8 mt-4'>
         <div className='flex gap-2'>
           <h3 className='text-2xl font-semibold'>여행 정보</h3>
@@ -114,65 +114,62 @@ export default function TripCourse() {
           </form>
         </div>
       </div>
-      <Reorder.Group
-        axis='y'
-        values={items.flat()}
-        onReorder={handleReorder}
-        layoutScroll
-      >
-        <Table>
-          <TableBody>
-            <TableHeader className='w-full'>
-              <TableRow className='w-full'>
-                <TableHead className='w-[140px]'>사진</TableHead>
-                <TableHead className='w-[140px]'>이름</TableHead>
-                <TableHead className='w-[150px]'>장소</TableHead>
-                <TableHead className='w-[20px]'></TableHead>
-              </TableRow>
-            </TableHeader>
-            {items.map((list, index) => (
-              <>
-                <h1
-                  className='text-xl pt-2 px-4 text-left font-extrabold'
-                  key={index}
-                >
-                  {index}일차
-                </h1>
-                {list.map((item: any, index) => (
-                  <TableRow key={index}>
-                    <Reorder.Item value={item} key={index} className='w-full'>
-                      <TableCell className='w-[150px] '>
-                        <Image
-                          alt='Tour image'
-                          className='aspect-1/2 rounded-md object-cover overflow-hidden'
-                          src={'/56692-O8P89L-432.jpg'}
-                          height='36'
-                          width='64'
-                        />
-                      </TableCell>
-                      <TableCell className=' text-overflow-ellipsis w-[150px] '>
-                        제주도 휴가 패키지
-                      </TableCell>
-                      <TableCell className=' text-overflow-ellipsis w-[200px]'>
-                        {item}
-                      </TableCell>
-                      <TableCell className='text-right'>
-                        <Button
-                          variant='destructive'
-                          size='sm'
-                          onClick={() => onRemove(item)}
-                        >
-                          삭제
-                        </Button>
-                      </TableCell>
-                    </Reorder.Item>
-                  </TableRow>
-                ))}
-              </>
-            ))}
-          </TableBody>
-        </Table>
-      </Reorder.Group>
+      <div className='h-[440px]'>
+        <Reorder.Group axis='y' values={items.flat()} onReorder={handleReorder}>
+          <Table>
+            <TableBody>
+              <TableHeader className='w-full'>
+                <TableRow className='w-full'>
+                  <TableHead className='w-[140px]'>사진</TableHead>
+                  <TableHead className='w-[140px]'>이름</TableHead>
+                  <TableHead className='w-[150px]'>장소</TableHead>
+                  <TableHead className='w-[20px]'></TableHead>
+                </TableRow>
+              </TableHeader>
+              {items.map((list, index) => (
+                <>
+                  <h1
+                    className='text-xl pt-2 px-4 text-left font-extrabold'
+                    key={index}
+                  >
+                    {index}일차
+                  </h1>
+                  {list.map((item: any, index) => (
+                    <TableRow key={index}>
+                      <Reorder.Item value={item} key={index} className='w-full'>
+                        <TableCell className='w-[150px] '>
+                          <Image
+                            alt='Tour image'
+                            className='aspect-1/2 rounded-md object-cover overflow-hidden'
+                            src={'/56692-O8P89L-432.jpg'}
+                            height='36'
+                            width='64'
+                          />
+                        </TableCell>
+                        <TableCell className=' text-overflow-ellipsis w-[150px] '>
+                          제주도 휴가 패키지
+                        </TableCell>
+                        <TableCell className=' text-overflow-ellipsis w-[200px]'>
+                          {item}
+                        </TableCell>
+                        <TableCell className='text-right'>
+                          <Button
+                            variant='destructive'
+                            size='sm'
+                            onClick={() => onRemove(item)}
+                          >
+                            삭제
+                          </Button>
+                        </TableCell>
+                      </Reorder.Item>
+                    </TableRow>
+                  ))}
+                </>
+              ))}
+            </TableBody>
+          </Table>
+        </Reorder.Group>
+      </div>
     </div>
   );
 }

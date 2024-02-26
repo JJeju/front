@@ -7,6 +7,8 @@ import {
 } from '@/components/ui/accordion';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
+import FaqApply from '@/components/faq/FaqApply';
 
 export default function Faq() {
   return (
@@ -22,7 +24,12 @@ export default function Faq() {
             </p>
           </div>
           <div className=''>
-            <Button className='font-semibold '>문의하기</Button>
+            <Dialog>
+              <DialogTrigger>
+                <Button className='font-semibold '>문의하기</Button>
+              </DialogTrigger>
+              <FaqApply />
+            </Dialog>
           </div>
         </div>
       </div>

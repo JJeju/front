@@ -28,7 +28,7 @@ import {
 
 export default function TripReview() {
   return (
-    <DialogContent className='w-screen  md:h-[90%] h-full overflow-scroll'>
+    <DialogContent className=' w-[1000px]  md:h-[90%] h-full overflow-scroll'>
       <div className='space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
           <h1 className='text-3xl font-semibold tracking-tighter '>
