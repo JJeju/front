@@ -21,24 +21,32 @@ import { useRouter } from 'next/navigation';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import Journey from '@/components/journey';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { ChevronRightIcon, StarIcon, ChevronLeftIcon } from 'lucide-react';
+import {
+  ChevronRightIcon,
+  StarIcon,
+  ChevronLeftIcon,
+  MapPin
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 import Accommodation from '@/components/product/Accommodation';
 import TripReview from '@/components/tripreview/TripReview';
+import mainApi from '@/service/home';
+import MainSkeleton from '@/components/Skeleton/MainSkeleton';
 
 export default function Home() {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:8080/main/home/business_place')
-  //     .then(response => {
-  //       console.log(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  const { data: bestData, isFetching: bestFetching } = mainApi.GetMainProduct();
+  const { data: EvnetData, isFetching: eventFetching } = mainApi.GetMainEvent();
+  const { data: NoticeData, isFetching: noticeFetching } =
+    mainApi.GetMainNotice();
+
+  // if (eventFetching) {
+  //   return <MainSkeleton />;
+  // }
+  // if (bestFetching) {
+  //   return <MainSkeleton />;
+  // }
 
   return (
     <main className='flex flex-col p-3 justify-between md:p-20 '>
@@ -76,7 +84,7 @@ export default function Home() {
         className='w-full  mt-5'
       >
         <CarouselContent>
-          {Array.from({ length: 7 }).map((_, index) => (
+          {bestData?.map((data, index) => (
             <CarouselItem
               key={index}
               className='md:basis-1/2 basis-1/2 lg:basis-1/4'
@@ -87,25 +95,36 @@ export default function Home() {
                     <motion.div
                       key={index}
                       className=''
-                      whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
+                      whileTap={{ scale: 0.9 }}
                     >
-                      <Card className=' w-full md:h-auto '>
-                        <CardContent className='flex  items-start justify-center p-3  group'>
+                      <Card className='w-full h-full  '>
+                        <CardContent className='flex items-start justify-center p-3 group'>
                           <Image
                             src={'/56692-O8P89L-432.jpg'}
                             alt='Image'
                             className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                            width={400}
-                            height={300}
+                            layout='responsive'
+                            height={200}
+                            width={300}
                           />
                         </CardContent>
                         <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80'>
-                          <Badge>BEST</Badge>
-                          <div className='text-2xl font-bold'>제주도</div>
-                          <div className='text-base'>제주도 서귀포구</div>
+                          <div className='flex gap-1'>
+                            <Badge>BEST</Badge>
+                            <Badge variant={'outline'}>{data.c_category}</Badge>
+                          </div>
+                          <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                            {data.c_name}
+                          </div>
+                          <div className='flex gap-1 items-center'>
+                            <MapPin size={14} />
+                            <div className=' md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                              {data.c_addr}
+                            </div>
+                          </div>
                         </div>
-                        <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3'>
-                          ₩350,000
+                        <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3 h-[52px] '>
+                          {index % 2 === 0 ? '₩350,000' : null}
                         </div>
                       </Card>
                     </motion.div>
@@ -130,36 +149,43 @@ export default function Home() {
         className='w-full  mt-5'
       >
         <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {EvnetData?.map((data: any, index) => (
             <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/4'>
               <div className='p-1'>
-                <motion.div
-                  key={index}
-                  className=''
-                  whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
-                >
-                  <Card className=' w-full md:h-auto '>
+                <motion.div key={index} className='' whileTap={{ scale: 0.9 }}>
+                  <Card className='w-full h-full  '>
                     <CardContent className='flex  items-start justify-center p-3  group'>
                       <Image
                         src={'/56692-O8P89L-432.jpg'}
                         alt='Image'
                         className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                        width={400}
-                        height={300}
+                        width={300}
+                        height={200}
                       />
                     </CardContent>
                     <div className='flex flex-col gap-2 items-start px-5 py-1  bg-opacity-80'>
-                      <Badge>BEST</Badge>
-                      <div className='text-2xl font-bold'>제주도</div>
-                      <div className='text-base'>제주도 서귀포구</div>
-                      <div className='text-sm'>
-                        여기는 제주도 입니다 오후 6시여기는 제주도 입니다 오후
-                        6시여기는 제주도 입니다 오후 6시여기는 제주도 입니다
-                        오후 6시여기는 제주도 입니다 오후 6시여기는 제주도
-                        입니다 오후 6시
+                      <div className='flex gap-1'>
+                        <Badge>BEST</Badge>
+
+                        <Badge variant={'outline'}>
+                          {data.e_pk_enum ? '이벤트' : '레저'}
+                        </Badge>
+                      </div>
+
+                      <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                        {data.e_title ?? data.s_tittle}
+                      </div>
+                      <div className='flex gap-1 items-center'>
+                        <MapPin size={14} />
+                        <div className=' md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                          {data.e_addr ?? data.s_addr}
+                        </div>
+                      </div>
+                      <div className='text-xs h-[48px] overflow-hidden overflow-ellipsis'>
+                        {data.e_info ?? data.s_info}
                       </div>
                     </div>
-                    <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3'>
+                    <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3 '>
                       ₩350,000
                     </div>
                   </Card>
@@ -240,16 +266,14 @@ export default function Home() {
           </Badge>
         </div>
         <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>
-          {Array.from({ length: 3 }).map((_, index) => (
+          {NoticeData?.map((data: any, index: number) => (
             <Card className='p-5' key={index}>
               <CardContent className='flex flex-col'>
-                <h3 className='text-xl font-semibold'>
-                  3월 15일 유지보수 예정
-                </h3>
+                <h3 className='text-xl font-semibold'>{data.n_title}</h3>
 
                 <div className='text-xs'>
                   <p className='text-gray-500 dark:text-gray-400 flex py-2'>
-                    2일전
+                    {data.n_date}
                     <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
                   </p>
                 </div>
