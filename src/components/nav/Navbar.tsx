@@ -35,6 +35,9 @@ import {
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import Account from '../account';
 import Journey from '../journey';
+import authApi from '@/service/auth';
+import useUserIdStore from '@/store/auth';
+import { useIsLoggedIn } from '@/utility/hooks/useIsLogin';
 const components: { title: string; href: string }[] = [
   {
     title: '여행 짜러가기',
@@ -65,6 +68,20 @@ export default function Navbar() {
   const { setTheme } = useTheme();
   const [isTheme, setIsTheme] = useState(true);
   const [open, setOpen] = useState(false);
+
+  const { isLogin, setUserId } = useUserIdStore();
+  const isLoggedIn = useIsLoggedIn();
+
+  const mutateLogout = authApi.GetLogout();
+  const { isError, error, mutate } = mutateLogout;
+
+  console.log('>>>>', isLoggedIn);
+
+  const handleLogout = () => {
+    mutate();
+    setUserId(false);
+    // clearUserIdStorage();
+  };
 
   return (
     <nav className=' w-full h-auto '>
@@ -123,17 +140,28 @@ export default function Navbar() {
                   편리하게 여행코스를 관리할 수 있습니다.
                 </SheetDescription>
               </SheetHeader>
-              <div className='my-8 gap-3 flex flex-col font-bold text-sm '>
-                로그인이 필요합니다.
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button size='lg' className=''>
-                      로그인
-                    </Button>
-                  </DialogTrigger>
-                  <Account />
-                </Dialog>
-              </div>
+              {isLogin ? (
+                <Button
+                  size='lg'
+                  className='w-full my-4'
+                  onClick={() => handleLogout()}
+                >
+                  로그아웃
+                </Button>
+              ) : (
+                <div className='my-8 gap-3 flex flex-col font-bold text-sm '>
+                  로그인이 필요합니다.
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button size='lg' className=''>
+                        로그인
+                      </Button>
+                    </DialogTrigger>
+                    <Account />
+                  </Dialog>
+                </div>
+              )}
+
               <ul className='flex  flex-col justify-center w-full items-center '>
                 <li className='border-b-2 p-3 w-full text-center'>
                   <Dialog>
@@ -176,12 +204,18 @@ export default function Navbar() {
               </SheetFooter>
             </SheetContent>
           </Sheet>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className='hidden md:block'>로그인</Button>
-            </DialogTrigger>
-            <Account />
-          </Dialog>
+          {isLogin ? (
+            <Button className='hidden md:block' onClick={() => handleLogout()}>
+              로그아웃
+            </Button>
+          ) : (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className='hidden md:block'>로그인</Button>
+              </DialogTrigger>
+              <Account />
+            </Dialog>
+          )}
         </div>
       </div>
     </nav>

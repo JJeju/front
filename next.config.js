@@ -18,7 +18,6 @@ module.exports = {
   //   }
   //   ];
   // }
-  reactStricMode: true,
   swcMinify: true,
   async rewrites() {
     return [

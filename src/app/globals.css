@@ -49,6 +49,7 @@
     }
   }
 }
+
 .rdp-vhidden {
   @apply hidden;
 }

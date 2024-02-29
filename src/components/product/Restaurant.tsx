@@ -39,7 +39,7 @@ export default function Restaurant() {
   };
 
   return (
-    <DialogContent className='w-full md:h-[90%] h-full overflow-scroll'>
+    <DialogContent className=' md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
       <div className='max-w-5xl mx-auto space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
           <h1 className='text-3xl font-semibold tracking-tighter '>레스토랑</h1>

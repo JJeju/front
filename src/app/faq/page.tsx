@@ -25,7 +25,7 @@ export default function Faq() {
           </div>
           <div className=''>
             <Dialog>
-              <DialogTrigger>
+              <DialogTrigger asChild>
                 <Button className='font-semibold '>문의하기</Button>
               </DialogTrigger>
               <FaqApply />

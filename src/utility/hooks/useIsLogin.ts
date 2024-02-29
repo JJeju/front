@@ -1,22 +1,12 @@
-// import { useState, useEffect } from 'react';
-// import { cookieStorage } from '../cookie';
+import { useState } from 'react';
+import { CookieStorage } from '../cookie';
+import { COOKIE_ACCESS_TOKEN } from '@/config/constants';
 
-// export function useIsLogin() {
-//   // useState의 초기 상태를 설정할 때 쿠키를 확인
-//   const cookie = cookieStorage.getCookie('jeju_accs');
-//   const [isLogin, setIsLogin] = useState(!!cookie);
+// 로그인 상태를 확인하는 커스텀 훅
+export function useIsLoggedIn() {
+  // 쿠키에서 토큰 값을 가져와서 로그인 상태를 확인
+  const token = CookieStorage.getCookie(COOKIE_ACCESS_TOKEN);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
-//   useEffect(() => {
-//     // 토큰값을 가져오는 로직
-//     const cookie = cookieStorage.getCookie('jeju_accs');
-
-//     // 토큰값이 존재하면 로그인 상태로 설정
-//     if (cookie) {
-//       setIsLogin(true);
-//     } else {
-//       setIsLogin(false);
-//     }
-//   }, [cookie]);
-
-//   return isLogin;
-// }
+  return isLoggedIn;
+}

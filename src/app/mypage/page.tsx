@@ -31,7 +31,7 @@ export default function Mypage() {
             </CardHeader>
             <CardContent className='flex justify-end py-4 px-6'>
               <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                   <Button className=''>수정</Button>
                 </DialogTrigger>
                 <AccountInfomation />
@@ -70,7 +70,7 @@ export default function Mypage() {
             </CardHeader>
             <CardContent className='flex justify-end py-4 px-6'>
               <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                   {/* <Button variant='secondary'>대기</Button> */}
                   <Button>신청</Button>
                 </DialogTrigger>

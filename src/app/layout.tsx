@@ -1,14 +1,14 @@
 'use client';
 import type { Metadata } from 'next';
-import '../globals.css';
+import './globals.css';
 import { Inter as FontSans } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 
-import { cn } from '../../lib/utils';
+import { cn } from '../lib/utils';
 import Navbar from '@/components/nav/Navbar';
 import { usePathname, useRouter } from 'next/navigation';
 import Footer from '@/components/nav/Footer';
-import ReactQueryProvider from '../ReactQueryProvider';
+import ReactQueryProvider from './ReactQueryProvider';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -31,7 +31,7 @@ export default function RootLayout({
       <html lang='ko' suppressHydrationWarning>
         <body
           className={cn(
-            'overflow-hidden bg-background font-sans antialiased',
+            'bg-background font-sans antialiased',
             fontSans.variable
           )}
         >
@@ -44,6 +44,7 @@ export default function RootLayout({
             <Navbar />
             {children}
           </ThemeProvider>
+          <Footer />
         </body>
       </html>
     </ReactQueryProvider>

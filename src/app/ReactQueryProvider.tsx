@@ -6,6 +6,8 @@ import {
   HydrationBoundary,
   dehydrate
 } from '@tanstack/react-query';
+import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
+
 import { useState } from 'react';
 
 export default function ReactQueryProvider({
@@ -27,9 +29,7 @@ export default function ReactQueryProvider({
   );
   return (
     <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        {children}
-      </HydrationBoundary>
+      <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
     </QueryClientProvider>
   );
 }

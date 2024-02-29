@@ -1,6 +1,7 @@
+'use client';
 import axios, { AxiosInstance } from 'axios';
 import { API_URL, COOKIE_ACCESS_TOKEN } from '../config/constants';
-// import { cookieStorage } from './cookie';
+import { CookieStorage } from './cookie';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: API_URL
@@ -9,15 +10,15 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async config => {
     config.headers['Accept-Language'] = 'ko_KR';
-    config.headers['Cache-Control'] = 'no-cache';
+    // config.headers['Cache-Control'] = 'no-cache';
     // config.headers['Content-Type'] = 'application/json';
 
     const type = 'Bearer';
-    // const accessToken = cookieStorage.getCookie(COOKIE_ACCESS_TOKEN);
+    const accessToken = CookieStorage.getCookie(COOKIE_ACCESS_TOKEN);
 
-    // if (accessToken) {
-    // config.headers['Authorization'] = `${type} ${accessToken}`;
-    // }
+    if (accessToken) {
+      config.headers['Authorization'] = `${type} ${accessToken}`;
+    }
 
     return config;
   },
