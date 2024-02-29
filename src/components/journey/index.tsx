@@ -110,7 +110,7 @@ export default function Journey() {
                       <Button
                         className='w-24'
                         // type='submit'
-                        onClick={() => router.push('/trip')}
+                        onClick={() => router.push('/trippage')}
                       >
                         여정 불러오기
                       </Button>

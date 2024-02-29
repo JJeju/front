@@ -2,9 +2,9 @@ import { get } from 'http';
 import axiosInstance from '../utility/axiosInterceptor';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { cookieStorage } from '../utility/cookie';
 import { COOKIE_ACCESS_TOKEN, COOKIE_REFRESH_TOKEN } from '../config/constants';
 import { BestRs, EventRs } from '../type/home';
+import { cache } from 'react';
 
 // 메인 페이지 Best 항목 API
 const GET_MAIN_PAGE_DATA = 'main/home/business_place';
@@ -18,7 +18,6 @@ const mainApi = {
   getmainproductKey: GET_MAIN_PAGE_DATA,
   mainproductFn: async (): Promise<BestRs> => {
     const res = await axiosInstance.get(`/${GET_MAIN_PAGE_DATA}`);
-
     return res.data.body;
   },
   GetMainProduct: function () {
@@ -28,16 +27,16 @@ const mainApi = {
       select: data => {
         const res = [...data.leisure, ...data.lodgment, ...data.restaurant];
         return res;
-      },
-      refetchOnWindowFocus: false,
-      staleTime: 50000
+      }
+      // refetchOnWindowFocus: false,
+      // staleTime: 50000
     });
   },
   getmaineventKey: GET_MAIN_EVENT_DATA,
-  maineventFn: async (): Promise<EventRs> => {
+  maineventFn: cache(async (): Promise<EventRs> => {
     const res = await axiosInstance.get(`/${GET_MAIN_EVENT_DATA}`);
     return res.data.body;
-  },
+  }),
   GetMainEvent: function () {
     return useQuery({
       queryKey: [this.getmaineventKey],
@@ -45,9 +44,9 @@ const mainApi = {
       select: data => {
         const res = [...data.event, ...data.spot];
         return res;
-      },
-      refetchOnWindowFocus: false,
-      staleTime: 50000
+      }
+      // refetchOnWindowFocus: false,
+      // staleTime: 50000
     });
   },
   getmainnoticeKey: GET_MAIN_NOTICE_DATA,

@@ -32,6 +32,9 @@ import Accommodation from '@/components/product/Accommodation';
 import TripReview from '@/components/tripreview/TripReview';
 import mainApi from '@/service/home';
 import MainSkeleton from '@/components/Skeleton/MainSkeleton';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import Restaurant from '@/components/product/Restaurant';
+import { formatDate } from '@/utility/hooks/comnHook';
 
 export default function Home() {
   const router = useRouter();
@@ -56,8 +59,8 @@ export default function Home() {
             src={'/56692-O8P89L-432.jpg'}
             alt='Image'
             className='object-cover rounded-lg shadow-2xl'
-            width={400}
-            height={300}
+            width={300}
+            height={200}
           />
           <div className='md:text-3xl font-bold flex flex-col md:p-6 px-3 gap-3 '>
             제주도의 모든 여행코스를 한눈에 보고,
@@ -150,47 +153,60 @@ export default function Home() {
       >
         <CarouselContent>
           {EvnetData?.map((data: any, index) => (
-            <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/4'>
-              <div className='p-1'>
-                <motion.div key={index} className='' whileTap={{ scale: 0.9 }}>
-                  <Card className='w-full h-full  '>
-                    <CardContent className='flex  items-start justify-center p-3  group'>
-                      <Image
-                        src={'/56692-O8P89L-432.jpg'}
-                        alt='Image'
-                        className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                        width={300}
-                        height={200}
-                      />
-                    </CardContent>
-                    <div className='flex flex-col gap-2 items-start px-5 py-1  bg-opacity-80'>
-                      <div className='flex gap-1'>
-                        <Badge>BEST</Badge>
+            <CarouselItem
+              key={index}
+              className='md:basis-1/2 basis-1/2 lg:basis-1/4'
+            >
+              <Dialog>
+                <DialogTrigger>
+                  <div className='p-1'>
+                    <motion.div
+                      key={index}
+                      className=''
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Card className='w-full h-full  '>
+                        <CardContent className='flex  items-start justify-center p-3  group'>
+                          <Image
+                            src={'/56692-O8P89L-432.jpg'}
+                            alt='Image'
+                            className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
+                            layout='responsive'
+                            width={300}
+                            height={200}
+                          />
+                        </CardContent>
+                        <div className='flex flex-col gap-2 items-start px-5 py-1  bg-opacity-80'>
+                          <div className='flex gap-1'>
+                            <Badge>BEST</Badge>
 
-                        <Badge variant={'outline'}>
-                          {data.e_pk_enum ? '이벤트' : '레저'}
-                        </Badge>
-                      </div>
+                            <Badge variant={'outline'}>
+                              {data.e_pk_enum ? '이벤트' : '레저'}
+                            </Badge>
+                          </div>
 
-                      <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                        {data.e_title ?? data.s_tittle}
-                      </div>
-                      <div className='flex gap-1 items-center'>
-                        <MapPin size={14} />
-                        <div className=' md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                          {data.e_addr ?? data.s_addr}
+                          <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                            {data.e_title ?? data.s_tittle}
+                          </div>
+                          <div className='flex gap-1 items-center'>
+                            <MapPin size={14} />
+                            <div className='text-left md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                              {data.e_addr ?? data.s_addr}
+                            </div>
+                          </div>
+                          <div className='text-xs h-[48px] overflow-hidden overflow-ellipsis'>
+                            {data.e_info ?? data.s_info}
+                          </div>
                         </div>
-                      </div>
-                      <div className='text-xs h-[48px] overflow-hidden overflow-ellipsis'>
-                        {data.e_info ?? data.s_info}
-                      </div>
-                    </div>
-                    <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3 '>
-                      ₩350,000
-                    </div>
-                  </Card>
-                </motion.div>
-              </div>
+                        <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3 '>
+                          ₩350,000
+                        </div>
+                      </Card>
+                    </motion.div>
+                  </div>
+                </DialogTrigger>
+                <Restaurant />
+              </Dialog>
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -273,7 +289,7 @@ export default function Home() {
 
                 <div className='text-xs'>
                   <p className='text-gray-500 dark:text-gray-400 flex py-2'>
-                    {data.n_date}
+                    {formatDate(data.n_date)}
                     <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
                   </p>
                 </div>

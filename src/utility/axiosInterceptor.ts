@@ -1,39 +1,40 @@
 import axios, { AxiosInstance } from 'axios';
 import { API_URL, COOKIE_ACCESS_TOKEN } from '../config/constants';
-import { cookieStorage } from './cookie';
+// import { cookieStorage } from './cookie';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: API_URL
 });
 
 axiosInstance.interceptors.request.use(
-  async (config) => {
+  async config => {
     config.headers['Accept-Language'] = 'ko_KR';
+    config.headers['Cache-Control'] = 'no-cache';
     // config.headers['Content-Type'] = 'application/json';
 
     const type = 'Bearer';
-    const accessToken = cookieStorage.getCookie(COOKIE_ACCESS_TOKEN);
+    // const accessToken = cookieStorage.getCookie(COOKIE_ACCESS_TOKEN);
 
-    if (accessToken) {
-      config.headers['Authorization'] = `${type} ${accessToken}`;
-    }
+    // if (accessToken) {
+    // config.headers['Authorization'] = `${type} ${accessToken}`;
+    // }
 
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
-  },
+  }
 );
 
 axiosInstance.interceptors.response.use(
-  (response) => {
+  response => {
     console.log('res>>', response);
     return response;
   },
-  (error) => {
+  error => {
     console.log('error>>', error);
     return Promise.reject(error);
-  },
+  }
 );
 
 export default axiosInstance;

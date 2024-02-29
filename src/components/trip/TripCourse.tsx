@@ -49,7 +49,7 @@ export default function TripCourse() {
       return group.map(item => {
         // Find the item in the newOrder array that matches the current item
         const newItem = newOrder.find(
-          (newOrderItem: { id: any }) => newOrderItem.id === item.id
+          (newOrderItem: { id: any }) => newOrderItem.id === item
         );
         if (newItem && isSameGroup(item, newItem)) {
           // If the item is in the same group, update its position

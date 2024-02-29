@@ -1,7 +1,7 @@
 import { get } from 'http';
 import axiosInstance from '../utility/axiosInterceptor';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { loginRq, loginRs } from '../type/auth';
+import { JoinRq, loginRq, loginRs } from '../type/auth';
 import axios from 'axios';
 // import { cookieStorage } from '../utility/cookie';
 // import { COOKIE_ACCESS_TOKEN, COOKIE_REFRESH_TOKEN } from '../config/constants';
@@ -42,9 +42,8 @@ const authApi = {
   //     refreshTokenFn: async (data: string): Promise<[]> => {
   //         const res = await axiosInstance.post('/member/refresh_token', data);
   //         return res.data;
-  joinFn: async (data: loginRq): Promise<loginRs> => {
+  joinFn: async (data: JoinRq): Promise<string> => {
     const res = await axiosInstance.post(`/${POST_JOIN}`, data);
-
     return res.data;
   },
   PostJoin: function () {

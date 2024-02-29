@@ -23,4 +23,4 @@ interface JoinRq {
   m_addr: string;
   m_email: string;
 }
-export type { loginRq, loginRs };
+export type { loginRq, loginRs, JoinRq };
