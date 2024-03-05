@@ -23,4 +23,10 @@ interface JoinRq {
   m_addr: string;
   m_email: string;
 }
-export type { loginRq, loginRs, JoinRq };
+
+interface authCheckRq {
+  phone_num: string;
+  cert_num: string;
+}
+
+export type { loginRq, loginRs, JoinRq, authCheckRq };
