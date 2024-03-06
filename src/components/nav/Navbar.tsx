@@ -36,9 +36,12 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import Account from '../account';
 import Journey from '../journey';
 import authApi from '@/service/auth';
-import useUserIdStore from '@/store/auth';
+import useUserIdStore from '@/stores/auth';
 import { useIsLoggedIn } from '@/utility/hooks/useIsLogin';
-const components: { title: string; href: string }[] = [
+import { ToastAction } from '@/components/ui/toast';
+import { useToast } from '@/components/ui/use-toast';
+
+const logincomponents: { title: string; href: string }[] = [
   {
     title: '여행 짜러가기',
     href: '/trip'
@@ -64,23 +67,53 @@ const components: { title: string; href: string }[] = [
     href: '/business'
   }
 ];
+
+const components: { title: string; href?: string; toast?: boolean }[] = [
+  {
+    title: '여행 짜러가기',
+    toast: true
+  },
+  {
+    title: '이벤트',
+    href: '/event'
+  },
+  {
+    title: '마이페이지',
+    toast: true
+  },
+  {
+    title: '공지사항',
+    href: '/notice'
+  },
+  {
+    title: '문의하기',
+    href: '/faq'
+  },
+  {
+    title: '사업장 전환하기',
+    toast: true
+  }
+];
+
 export default function Navbar() {
   const { setTheme } = useTheme();
   const [isTheme, setIsTheme] = useState(true);
   const [open, setOpen] = useState(false);
 
-  const { isLogin, setUserId } = useUserIdStore();
+  // const isLogin = useStore(useUserIdStore, state => state.isLogin);
+  const clearUserIdStorage = useUserIdStore.persist.clearStorage;
+
+  const { isLogin, setIsLogin } = useUserIdStore();
   const isLoggedIn = useIsLoggedIn();
 
   const mutateLogout = authApi.GetLogout();
   const { isError, error, mutate } = mutateLogout;
-
-  console.log('>>>>', isLoggedIn);
+  const { toast } = useToast();
 
   const handleLogout = () => {
     mutate();
-    setUserId(false);
-    // clearUserIdStorage();
+    setIsLogin(false);
+    clearUserIdStorage();
   };
 
   return (
@@ -96,14 +129,35 @@ export default function Navbar() {
                 <NavigationMenuTrigger>메뉴</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className=' w-[150px] gap-3 p-4 '>
-                    {components.map(component => (
-                      <ListItem
-                        className='hover:text-amber-400'
-                        key={component.title}
-                        title={component.title}
-                        href={component.href}
-                      ></ListItem>
-                    ))}
+                    {isLogin
+                      ? logincomponents.map(component => (
+                          <ListItem
+                            className='hover:text-amber-400'
+                            key={component.title}
+                            title={component.title}
+                            href={component.href}
+                          ></ListItem>
+                        ))
+                      : components.map(component => (
+                          <ListItem
+                            className='hover:text-amber-400'
+                            key={component.title}
+                            title={component.title}
+                            href={component.href}
+                            onClick={() =>
+                              component.toast &&
+                              toast({
+                                title: '로그인이 필요합니다.',
+                                description: '로그인 후 이용해주세요.',
+                                action: (
+                                  <ToastAction altText='Try again'>
+                                    확인
+                                  </ToastAction>
+                                )
+                              })
+                            }
+                          ></ListItem>
+                        ))}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -164,14 +218,31 @@ export default function Navbar() {
 
               <ul className='flex  flex-col justify-center w-full items-center '>
                 <li className='border-b-2 p-3 w-full text-center'>
-                  <Dialog>
-                    <DialogTrigger>
-                      <button className='hover:text-amber-400'>
-                        여행 짜러가기
-                      </button>
-                    </DialogTrigger>
-                    <Journey />
-                  </Dialog>
+                  {isLogin ? (
+                    <Dialog>
+                      <DialogTrigger>
+                        <button className='hover:text-amber-400'>
+                          여행 짜러가기
+                        </button>
+                      </DialogTrigger>
+                      <Journey />
+                    </Dialog>
+                  ) : (
+                    <button
+                      className='hover:text-amber-400'
+                      onClick={() => {
+                        toast({
+                          title: '로그인이 필요합니다.',
+                          description: '로그인 후 이용해주세요.',
+                          action: (
+                            <ToastAction altText='Try again'>확인</ToastAction>
+                          )
+                        });
+                      }}
+                    >
+                      여행 짜러가기
+                    </button>
+                  )}
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
                   <Link href='/evnet' className='hover:text-amber-400'>
@@ -179,9 +250,27 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
-                  <Link href='/mypage' className='hover:text-amber-400'>
-                    마이페이지
-                  </Link>
+                  {isLogin ? (
+                    <Link href='/mypage' className='hover:text-amber-400'>
+                      마이페이지
+                    </Link>
+                  ) : (
+                    <Link
+                      className='hover:text-amber-400'
+                      href=''
+                      onClick={() => {
+                        toast({
+                          title: '로그인이 필요합니다.',
+                          description: '로그인 후 이용해주세요.',
+                          action: (
+                            <ToastAction altText='Try again'>확인</ToastAction>
+                          )
+                        });
+                      }}
+                    >
+                      마이페이지
+                    </Link>
+                  )}
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
                   <Link href='/notice' className='hover:text-amber-400'>
@@ -190,13 +279,31 @@ export default function Navbar() {
                 </li>
                 <li className='border-b-2  p-3 w-full text-center'>
                   <Link href='/faq' className='hover:text-amber-400'>
-                    문의하기
+                    사업장 전환하기
                   </Link>
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
-                  <Link href='/business' className='hover:text-amber-400'>
-                    사업장 전환하기
-                  </Link>
+                  {isLogin ? (
+                    <Link href='/business' className='hover:text-amber-400'>
+                      사업장 전환하기
+                    </Link>
+                  ) : (
+                    <Link
+                      className='hover:text-amber-400'
+                      href=''
+                      onClick={() => {
+                        toast({
+                          title: '로그인이 필요합니다.',
+                          description: '로그인 후 이용해주세요.',
+                          action: (
+                            <ToastAction altText='Try again'>확인</ToastAction>
+                          )
+                        });
+                      }}
+                    >
+                      마이페이지
+                    </Link>
+                  )}
                 </li>
               </ul>
               <SheetFooter>

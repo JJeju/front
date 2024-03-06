@@ -8,15 +8,19 @@ import { CookieStorage } from '@/utility/cookie';
 import { COOKIE_ACCESS_TOKEN, COOKIE_REFRESH_TOKEN } from '@/config/constants';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
-import useUserIdStore from '@/store/auth';
+import useUserIdStore from '@/stores/auth';
 import { useRouter } from 'next/navigation';
 import { useIsLoggedIn } from '@/utility/hooks/useIsLogin';
+import { ToastAction } from '@/components/ui/toast';
+import { useToast } from '@/components/ui/use-toast';
+
 export default function Login() {
   const [form, setForm] = useState({ username: 'lkd9125', password: '1234' });
   const [errorType, setErrorType] = useState(false);
   const isLoggedIn = useIsLoggedIn();
+  const { toast } = useToast();
 
-  const { isLogin, setUserId } = useUserIdStore();
+  const { isLogin, setIsLogin } = useUserIdStore();
 
   const router = useRouter();
 
@@ -39,10 +43,16 @@ export default function Login() {
           data.desc === 'User Not Found' ||
           data.desc === 'PassWord Not Match'
         ) {
-          setErrorType(true);
-          setTimeout(() => {
-            setErrorType(false);
-          }, 3000);
+          return (
+            <>
+              {toast({
+                variant: 'destructive',
+                title: '오류',
+                description: '아이디 혹은 비밀번호를 확인해주세요.',
+                action: <ToastAction altText='Try again'>확인</ToastAction>
+              })}
+            </>
+          );
         }
         if (data.token) {
           CookieStorage.setCookie(COOKIE_ACCESS_TOKEN, data.token.accessToken);
@@ -50,8 +60,18 @@ export default function Login() {
             COOKIE_REFRESH_TOKEN,
             data.token.refreshToken
           );
-          setUserId(true);
+          setIsLogin(true);
           dialogClose();
+          return (
+            <>
+              {toast({
+                title: '성공',
+                description: '환영합니다! 로그인이 완료되었습니다',
+
+                action: <ToastAction altText='Try again'>확인</ToastAction>
+              })}
+            </>
+          );
         }
       }
     });
@@ -91,12 +111,7 @@ export default function Login() {
           type='password'
         />
       </div>
-      {errorType ? (
-        <Alert variant='destructive' className='animate-fadeInOut'>
-          <AlertCircle className='h-4 w-4' />
-          <AlertTitle>아이디 혹은 비밀번호를 확인해주세요.</AlertTitle>
-        </Alert>
-      ) : null}
+
       <div className='flex justify-end'>
         <Button className='w-24' type='submit' onClick={() => onSubmit()}>
           로그인

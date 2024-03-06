@@ -9,6 +9,7 @@ import Navbar from '@/components/nav/Navbar';
 import { usePathname, useRouter } from 'next/navigation';
 import Footer from '@/components/nav/Footer';
 import ReactQueryProvider from './ReactQueryProvider';
+import { Toaster } from '@/components/ui/toaster';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -43,6 +44,7 @@ export default function RootLayout({
           >
             <Navbar />
             {children}
+            <Toaster />
           </ThemeProvider>
           <Footer />
         </body>

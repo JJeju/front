@@ -31,14 +31,17 @@ import { motion } from 'framer-motion';
 import Accommodation from '@/components/product/Accommodation';
 import TripReview from '@/components/tripreview/TripReview';
 import mainApi from '@/service/home';
-import MainSkeleton from '@/components/Skeleton/MainSkeleton';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import Restaurant from '@/components/product/Restaurant';
 import { formatDate } from '@/utility/hooks/comnHook';
+import useUserIdStore from '@/stores/auth';
+import { ToastAction } from '@/components/ui/toast';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function Home() {
   const router = useRouter();
 
+  const { isLogin, setIsLogin } = useUserIdStore();
+  const { toast } = useToast();
   const { data: bestData, isFetching: bestFetching } = mainApi.GetMainProduct();
   const { data: EvnetData, isFetching: eventFetching } = mainApi.GetMainEvent();
   const { data: NoticeData, isFetching: noticeFetching } =
@@ -66,14 +69,30 @@ export default function Home() {
             제주도의 모든 여행코스를 한눈에 보고,
             <br />
             나만의 여행코스를 짤 수 있는 여행 플랫폼입니다.
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button size='lg' className='md:w-40 w-32'>
-                  여행 코스 짜러가기
-                </Button>
-              </DialogTrigger>
-              <Journey />
-            </Dialog>
+            {isLogin ? (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size='lg' className='md:w-40 w-32'>
+                    여행 코스 짜러가기
+                  </Button>
+                </DialogTrigger>
+                <Journey />
+              </Dialog>
+            ) : (
+              <Button
+                size='lg'
+                className='md:w-40 w-32'
+                onClick={() => {
+                  toast({
+                    title: '로그인이 필요합니다.',
+                    description: '로그인 후 이용해주세요.',
+                    action: <ToastAction altText='Try again'>확인</ToastAction>
+                  });
+                }}
+              >
+                여행 코스 짜러가기
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -274,7 +293,7 @@ export default function Home() {
         <div className='space-y-2'>
           <div className='mt-24 text-2xl md:text-3xl font-bold'>공지사항</div>
           <p className='text-gray-500 dark:text-gray-400'>
-            3개의 새로운 공지사항이 있습니다.
+            {NoticeData?.length}개의 새로운 공지사항이 있습니다.
           </p>
           <Badge className='text-sm' onClick={() => router.push('/notice')}>
             더보기
@@ -283,23 +302,28 @@ export default function Home() {
         </div>
         <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>
           {NoticeData?.map((data: any, index: number) => (
-            <Card className='p-5' key={index}>
-              <CardContent className='flex flex-col'>
-                <h3 className='text-xl font-semibold'>{data.n_title}</h3>
+            <motion.div
+              key={index}
+              className=''
+              whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
+            >
+              <Card className='p-5' key={index}>
+                <CardContent className='flex flex-col'>
+                  <h3 className='text-xl font-semibold'>{data.n_title}</h3>
 
-                <div className='text-xs'>
-                  <p className='text-gray-500 dark:text-gray-400 flex py-2'>
-                    {formatDate(data.n_date)}
-                    <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
+                  <div className='text-xs'>
+                    <p className='text-gray-500 dark:text-gray-400 flex py-2'>
+                      {formatDate(data.n_date)}
+                      <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
+                    </p>
+                  </div>
+
+                  <p className='text-sm text-gray-500 dark:text-gray-400'>
+                    {data.n_contents}
                   </p>
-                </div>
-
-                <p className='text-sm text-gray-500 dark:text-gray-400'>
-                  우리는 서버에서 예정된 유지보수를 수행할 것입니다. 그 플랫폼은
-                  오전 10시부터 12시까지 일시적으로 사용할 수 없습니다
-                </p>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>

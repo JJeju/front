@@ -1,4 +1,3 @@
-import { get } from 'http';
 import axiosInstance from '../utility/axiosInterceptor';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';

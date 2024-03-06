@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/components/ui/button';
 import {
   Accordion,
@@ -9,8 +10,17 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import FaqApply from '@/components/faq/FaqApply';
+import { motion } from 'framer-motion';
+import { formatDate } from '@/utility/hooks/comnHook';
+import { Card, CardContent } from '@/components/ui/card';
+import { ChevronLeftIcon } from 'lucide-react';
+import faqApi from '@/service/faq';
+import useUserIdStore from '@/stores/auth';
 
 export default function Faq() {
+  const { data } = faqApi.GetFaq();
+  const { isLogin, setIsLogin } = useUserIdStore();
+
   return (
     <div className='md:px-36 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
       <div className='space-y-2'>
@@ -80,7 +90,6 @@ export default function Faq() {
       </div>
 
       <div className=' border-gray-200 ' />
-
       <div className='space-y-2'>
         <h1 className='md:text-3xl text-2xl font-bold tracking-tight'>
           문의 내역
@@ -88,9 +97,47 @@ export default function Faq() {
         <p className='text-gray-500 dark:text-gray-400'>
           문의 내역을 확인하고 싶으신가요? 아래에서 확인하세요.
         </p>
-        <div className='h-24 flex justify-center items-center'>
-          문의 내역 확인은 로그인 후에 확인 가능합니다.
+        <div className='pt-4 grid md:grid-cols-2 grid-cols-1 gap-3'>
+          {data?.map((item, index) => (
+            <motion.div
+              key={index}
+              className=''
+              whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
+            >
+              <Card className='p-5' key={index}>
+                <CardContent className='flex flex-col'>
+                  <h3 className='text-xl font-semibold'>{item.co_title}</h3>
+
+                  <div className='text-xs'>
+                    <p className='text-gray-500 dark:text-gray-400 flex py-2'>
+                      {formatDate(item.co_create_dt)}
+                      <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
+                    </p>
+                  </div>
+
+                  <p className='text-sm text-gray-500 dark:text-gray-400'>
+                    {item.co_contents}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
+      </div>
+      <div className=' border-gray-200 ' />
+      <div className='space-y-2'>
+        <h1 className='md:text-3xl text-2xl font-bold tracking-tight'>
+          내 문의 내역
+        </h1>
+        <p className='text-gray-500 dark:text-gray-400'>
+          문의 했던 내역을 확인 가능 합니다.
+        </p>
+        {!isLogin ? null : (
+          <div className='h-24 flex justify-center items-center'>
+            문의 내역 확인은 로그인 후에 확인 가능합니다.
+          </div>
+        )}
+
         {/* <div className='space-y-4'>
           <div className='space-y-2'>
             <Accordion className='prose' type='single' collapsible>

@@ -13,13 +13,26 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ko } from 'date-fns/locale';
 
 export function DateRangePicker({
-  className
-}: React.HTMLAttributes<HTMLDivElement>) {
+  className,
+  disabled,
+  start,
+  end,
+  onDateChange
+}: React.HTMLAttributes<HTMLDivElement> & { start?: any } & { end?: any } & {
+  disabled?: boolean;
+  onDateChange?: (range: DateRange) => void;
+}) {
   const [date, setDate] = useState<DateRange | undefined>();
+
+  useEffect(() => {
+    if (onDateChange && date) {
+      onDateChange(date);
+    }
+  }, [date?.from, date?.to]);
 
   return (
     <div className={cn('grid gap-2', className)}>
@@ -28,6 +41,7 @@ export function DateRangePicker({
           <Button
             id='date'
             variant={'outline'}
+            disabled={disabled}
             className={cn(
               'w-[300px] justify-start text-left font-normal',
               className,
@@ -35,10 +49,15 @@ export function DateRangePicker({
             )}
           >
             <CalendarIcon className='mr-2 h-4 w-4' />
-            {date?.from ? (
+            {disabled ? (
+              <>
+                {format(start, 'PPP', { locale: ko })} -
+                {format(end, 'PPP', { locale: ko })}
+              </>
+            ) : date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, 'PPP', { locale: ko })} -{' '}
+                  {format(date.from, 'PPP', { locale: ko })} -
                   {format(date.to, 'PPP', { locale: ko })}
                 </>
               ) : (

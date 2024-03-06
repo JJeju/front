@@ -57,7 +57,7 @@ export default function Mypage() {
                 <DialogTrigger asChild>
                   <Button>불러오기</Button>
                 </DialogTrigger>
-                <Journey />
+                <Journey isTab={'save'} />
               </Dialog>
             </CardContent>
           </Card>

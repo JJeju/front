@@ -13,9 +13,17 @@ import { useRouter } from 'next/navigation';
 
 import { ChevronRightIcon, StarIcon, ChevronLeftIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import noticeApi from '@/service/notice';
+import { formatDate } from '@/utility/hooks/comnHook';
+import useUserIdStore from '@/stores/auth';
 export default function Notice() {
   const router = useRouter();
+  const { isLogin, setIsLogin } = useUserIdStore();
 
+  const { data: NoticeData, isFetching: noticeFetching } =
+    noticeApi.GetNotice();
+
+  console.log('>>', NoticeData);
   return (
     <div className='md:px-36 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
       <div className='space-y-2'>
@@ -24,12 +32,12 @@ export default function Notice() {
             공지사항
           </h1>
           <p className='text-gray-500 dark:text-gray-400'>
-            문의사항이 있으신가요? 아래에서 찾아보세요.
+            공지사항을 아래에서 찾아보세요.
           </p>
         </div>
       </div>
       <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>
-        {Array.from({ length: 3 }).map((_, index) => (
+        {NoticeData?.map((item, index) => (
           <motion.div
             key={index}
             className=''
@@ -37,20 +45,17 @@ export default function Notice() {
           >
             <Card className='p-5' key={index}>
               <CardContent className='flex flex-col'>
-                <h3 className='text-xl font-semibold'>
-                  3월 15일 유지보수 예정
-                </h3>
+                <h3 className='text-xl font-semibold'>{item.n_title}</h3>
 
                 <div className='text-xs'>
                   <p className='text-gray-500 dark:text-gray-400 flex py-2'>
-                    2일전
+                    {formatDate(item.n_date)}
                     <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
                   </p>
                 </div>
 
                 <p className='text-sm text-gray-500 dark:text-gray-400'>
-                  우리는 서버에서 예정된 유지보수를 수행할 것입니다. 그 플랫폼은
-                  오전 10시부터 12시까지 일시적으로 사용할 수 없습니다
+                  {item.n_contents}
                 </p>
               </CardContent>
             </Card>
