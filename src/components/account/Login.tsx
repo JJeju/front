@@ -16,7 +16,6 @@ import { useToast } from '@/components/ui/use-toast';
 
 export default function Login() {
   const [form, setForm] = useState({ username: 'lkd9125', password: '1234' });
-  const [errorType, setErrorType] = useState(false);
   const isLoggedIn = useIsLoggedIn();
   const { toast } = useToast();
 

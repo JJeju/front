@@ -102,13 +102,13 @@ export default function NewJourney() {
           }
         >
           <SelectTrigger className='col-span-3'>
-            <SelectValue placeholder='인원수' />
+            <SelectValue placeholder='인원' />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='혼자'>혼자</SelectItem>
             <SelectItem value='커플'>커플</SelectItem>
             <SelectItem value='가족'>가족</SelectItem>
-            <SelectItem value='신혼'>신혼</SelectItem>
+            <SelectItem value='다인'>다인</SelectItem>
           </SelectContent>
         </Select>
       </div>

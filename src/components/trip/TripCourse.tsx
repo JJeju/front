@@ -87,13 +87,13 @@ export default function TripCourse() {
                 </Label>
                 <Select>
                   <SelectTrigger className=''>
-                    <SelectValue placeholder='인원수' />
+                    <SelectValue placeholder='인원' />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value='1'>1</SelectItem>
-                    <SelectItem value='2'>2</SelectItem>
-                    <SelectItem value='3'>3</SelectItem>
-                    <SelectItem value='4'>4</SelectItem>
+                    <SelectItem value='혼자'>혼자</SelectItem>
+                    <SelectItem value='커플'>커플</SelectItem>
+                    <SelectItem value='가족'>가족</SelectItem>
+                    <SelectItem value='다인'>다인</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

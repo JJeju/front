@@ -41,15 +41,15 @@ const mypageApi = {
   },
   //여행 후기 조회
   getTravelReviewKey: 'mypage/travel-review',
-  travelReviewFn: async (data: TravelReviewRq): Promise<TravelReviewRs> => {
+  travelReviewFn: async (data?: TravelReviewRq): Promise<TravelReviewRs[]> => {
     const res = await axiosInstance.get(`/mypage/blog`, {
       params: {
         data
       }
     });
-    return res.data.body;
+    return res.data.body.blog;
   },
-  GetTravelReview: function (data: TravelReviewRq) {
+  GetTravelReview: function (data?: TravelReviewRq) {
     return useQuery({
       queryKey: [this.getTravelReviewKey],
       queryFn: () => this.travelReviewFn(data),
@@ -60,11 +60,13 @@ const mypageApi = {
   },
   // 여행 후기 상세보기
   getTravelReviewDetailKey: 'mypage/travel-review-detail',
-  travelReviewDetailFn: async (data: number): Promise<TravelReviewDetailRs> => {
+  travelReviewDetailFn: async (
+    data?: number
+  ): Promise<TravelReviewDetailRs> => {
     const res = await axiosInstance.get(`/mypage/blog/1?b_pk_num=${data}`);
     return res.data.body;
   },
-  GetTravelReviewDetail: function (data: number) {
+  GetTravelReviewDetail: function (data?: number) {
     return useQuery({
       queryKey: [this.getTravelReviewDetailKey],
       queryFn: () => this.travelReviewDetailFn(data),

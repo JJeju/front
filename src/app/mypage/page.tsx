@@ -80,7 +80,6 @@ export default function Mypage() {
           </Card>
         </div>
       </div>
-      <div className='flex items-center justify-center lg:gap-4'></div>
     </div>
   );
 }

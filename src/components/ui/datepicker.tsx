@@ -12,9 +12,21 @@ import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { ko } from 'date-fns/locale';
+import { useEffect } from 'react';
+import { DateRange } from 'react-day-picker';
 
-export default function DatePicker() {
+export default function DatePicker({
+  onDateChange
+}: {
+  onDateChange?: (range: Date) => void;
+}) {
   const [date, setDate] = React.useState<Date>();
+
+  useEffect(() => {
+    if (onDateChange && date) {
+      onDateChange(date);
+    }
+  }, [date]);
 
   return (
     <Popover>
@@ -40,7 +52,7 @@ export default function DatePicker() {
           captionLayout='dropdown-buttons'
           selected={date}
           onSelect={setDate}
-          fromYear={1960}
+          fromYear={1940}
           locale={ko}
           toYear={2030}
         />

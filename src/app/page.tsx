@@ -36,6 +36,7 @@ import { formatDate } from '@/utility/hooks/comnHook';
 import useUserIdStore from '@/stores/auth';
 import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
+import mypageApi from '@/service/mypage';
 
 export default function Home() {
   const router = useRouter();
@@ -47,6 +48,26 @@ export default function Home() {
   const { data: NoticeData, isFetching: noticeFetching } =
     mainApi.GetMainNotice();
 
+  // useEffect(() => {
+  //   axios
+  //     .get('https://dapi.kakao.com/v2/local/search/address.json', {
+  //       params: {
+  //         query: '제주 제주시 애월읍 애월로 33',
+  //         page: 1,
+  //         size: 10
+  //       },
+  //       headers: {
+  //         Authorization: 'KakaoAK cf6d2026face7a19e0a4d818ce63abca',
+  //         KA: 'sdk/4.4.14 os/javascript lang/ko device/MacIntel origin/https%3A%2F%2Fdeveapp.com '
+  //       }
+  //     })
+  //     .then(res => {
+  //       console.log(res);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, []);
   // if (eventFetching) {
   //   return <MainSkeleton />;
   // }

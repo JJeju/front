@@ -27,12 +27,12 @@ const authApi = {
     return useMutation({ mutationFn: this.logoutFn });
   },
   // 회원가입
-  joinFn: async (data: JoinRq): Promise<string> => {
+  joinFn: async (data: JoinRq): Promise<boolean> => {
     const res = await axiosInstance.post(`/member/insert`, data);
-    return res.data;
+    return res.data.body;
   },
   PostJoin: function () {
-    return useMutation({ mutationFn: this.loginFn });
+    return useMutation({ mutationFn: this.joinFn });
   },
   // 리프래쉬 토큰
   refreshTokenFn: async (data: string): Promise<string> => {

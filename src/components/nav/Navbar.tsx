@@ -65,6 +65,10 @@ const logincomponents: { title: string; href: string }[] = [
   {
     title: '사업장 전환하기',
     href: '/business'
+  },
+  {
+    title: '여행 리뷰',
+    href: '/travelreview'
   }
 ];
 
@@ -91,6 +95,10 @@ const components: { title: string; href?: string; toast?: boolean }[] = [
   },
   {
     title: '사업장 전환하기',
+    toast: true
+  },
+  {
+    title: '여행 리뷰',
     toast: true
   }
 ];
@@ -277,6 +285,31 @@ export default function Navbar() {
                     공지사항
                   </Link>
                 </li>
+                {isLogin ? (
+                  <li className='border-b-2 p-3 w-full text-center'>
+                    <Link href='/travelreview' className='hover:text-amber-400'>
+                      여행 리뷰
+                    </Link>
+                  </li>
+                ) : (
+                  <li className='border-b-2 p-3 w-full text-center'>
+                    <Link
+                      className='hover:text-amber-400'
+                      href=''
+                      onClick={() => {
+                        toast({
+                          title: '로그인이 필요합니다.',
+                          description: '로그인 후 이용해주세요.',
+                          action: (
+                            <ToastAction altText='Try again'>확인</ToastAction>
+                          )
+                        });
+                      }}
+                    >
+                      여행 리뷰
+                    </Link>
+                  </li>
+                )}
                 <li className='border-b-2  p-3 w-full text-center'>
                   <Link href='/faq' className='hover:text-amber-400'>
                     사업장 전환하기
