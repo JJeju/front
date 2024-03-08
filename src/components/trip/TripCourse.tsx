@@ -115,28 +115,35 @@ export default function TripCourse() {
         </div>
       </div>
       <div className='h-[440px]'>
-        <Reorder.Group axis='y' values={items.flat()} onReorder={handleReorder}>
-          <Table>
-            <TableBody>
-              <TableHeader className='w-full'>
-                <TableRow className='w-full'>
-                  <TableHead className='w-[140px]'>사진</TableHead>
-                  <TableHead className='w-[140px]'>이름</TableHead>
-                  <TableHead className='w-[150px]'>장소</TableHead>
-                  <TableHead className='w-[20px]'></TableHead>
-                </TableRow>
-              </TableHeader>
-              {items.map((list, index) => (
-                <>
-                  <h1
-                    className='text-xl pt-2 px-4 text-left font-extrabold'
-                    key={index}
-                  >
-                    {index}일차
-                  </h1>
-                  {list.map((item: any, index) => (
-                    <TableRow key={index}>
-                      <Reorder.Item value={item} key={index} className='w-full'>
+        <Table>
+          <TableBody>
+            <TableRow className='w-full'>
+              <TableHead className='w-[140px]'>사진</TableHead>
+              <TableHead className='w-[140px]'>이름</TableHead>
+              <TableHead className='w-[150px]'>장소</TableHead>
+              <TableHead className='w-[20px]'></TableHead>
+            </TableRow>
+          </TableBody>
+        </Table>
+        {items.map((list, index) => (
+          <Fragment key={index}>
+            <div
+              className='text-xl pt-2 px-4 text-left font-extrabold'
+              key={index}
+            >
+              {index}일차
+            </div>
+            {list.map((item: any, xindex) => (
+              <Reorder.Group
+                axis='y'
+                values={items.flat()}
+                onReorder={handleReorder}
+                key={xindex}
+              >
+                <Reorder.Item value={item} className='w-full'>
+                  <Table>
+                    <TableBody>
+                      <TableRow>
                         <TableCell className='w-[150px] '>
                           <Image
                             alt='Tour image'
@@ -161,14 +168,14 @@ export default function TripCourse() {
                             삭제
                           </Button>
                         </TableCell>
-                      </Reorder.Item>
-                    </TableRow>
-                  ))}
-                </>
-              ))}
-            </TableBody>
-          </Table>
-        </Reorder.Group>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </Reorder.Item>
+              </Reorder.Group>
+            ))}
+          </Fragment>
+        ))}
       </div>
     </div>
   );

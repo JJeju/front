@@ -109,7 +109,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   // const isLogin = useStore(useUserIdStore, state => state.isLogin);
-  const clearUserIdStorage = useUserIdStore.persist.clearStorage;
+  // const clearUserIdStorage = useUserIdStore.persist.clearStorage;
 
   const { isLogin, setIsLogin } = useUserIdStore();
   const isLoggedIn = useIsLoggedIn();
@@ -121,7 +121,7 @@ export default function Navbar() {
   const handleLogout = () => {
     mutate();
     setIsLogin(false);
-    clearUserIdStorage();
+    // clearUserIdStorage();
   };
 
   return (

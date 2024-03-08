@@ -24,6 +24,7 @@ import { on } from 'events';
 import journeyApi from '@/service/journey';
 import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
+import tripStore from '@/stores/trip';
 
 export default function NewJourney() {
   const [tripValue, setTripValue] = useState<TravelCreateRq>({
@@ -33,9 +34,11 @@ export default function NewJourney() {
     tr_out: ''
   });
   const { toast } = useToast();
+  const router = useRouter();
 
   const mutateJourney = journeyApi.PostCreateJourney();
   const { isError, error, mutate } = mutateJourney;
+  const { setCreateTravelPK } = tripStore();
 
   const handleDateChange = (newDateRange: any) => {
     setTripValue({
@@ -70,7 +73,8 @@ export default function NewJourney() {
     } else {
       mutate(tripValue, {
         onSuccess: data => {
-          console.log('>', data);
+          setCreateTravelPK(data.createTravelPK);
+          router.push(`/trip`);
         }
       });
     }

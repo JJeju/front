@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Product from '@/components/trip/Product';
@@ -16,12 +17,22 @@ import {
 import Map from '@/components/map/Map';
 import { Layers3 } from 'lucide-react';
 import ShowppingCart from '@/components/trip/ShowppingCart';
+import tripStore from '@/stores/trip';
 
 export default function Trip() {
+  const { createTravelPK } = tripStore();
+  const [tabValue, setTabValue] = useState('ProductList');
+  console.log('>>', createTravelPK);
+
   return (
     <div className='flex overflow-hidden w-screen h-screen '>
       <div className='flex-col h-full lg:w-1/3 w-1/2 mx-3 md:block hidden'>
-        <Tabs defaultValue='account' className=''>
+        <Tabs
+          defaultValue='account'
+          className=''
+          value={tabValue}
+          onValueChange={val => setTabValue(val)}
+        >
           <TabsList className='grid w-full grid-cols-3'>
             <TabsTrigger value='ProductList'>상품 목록</TabsTrigger>
             <TabsTrigger value='tripcourse'>여행 코스</TabsTrigger>

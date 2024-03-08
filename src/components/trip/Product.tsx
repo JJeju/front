@@ -81,7 +81,7 @@ export default function Product() {
                       ₩350,000
                     </div>
                     <Dialog>
-                      <DialogTrigger>
+                      <DialogTrigger asChild>
                         <Button size='sm' className='w-22'>
                           상세보기
                         </Button>

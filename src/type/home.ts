@@ -72,4 +72,14 @@ interface NoticeRs {
     n_date: string;
   }[];
 }
-export type { BestRs, EventRs, NoticeRs };
+interface ReviewRs {
+  b_pk_num: number;
+  b_fk_tnum: number;
+  b_fk_id: string;
+  b_title: string;
+  b_cost: number;
+  b_contents: string;
+  file_group_no: number;
+  b_public_check: boolean;
+}
+export type { BestRs, EventRs, NoticeRs, ReviewRs };

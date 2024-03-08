@@ -4,9 +4,9 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 const journeyApi = {
   // 여정 생성
-  createJourneyFn: async (data: TravelCreateRq): Promise<boolean> => {
+  createJourneyFn: async (data: TravelCreateRq): Promise<any> => {
     const res = await axiosInstance.post('/travel/insert', data);
-    return res.data;
+    return res.data.body;
   },
   PostCreateJourney: function () {
     return useMutation({ mutationFn: this.createJourneyFn });

@@ -47,6 +47,7 @@ export default function Home() {
   const { data: EvnetData, isFetching: eventFetching } = mainApi.GetMainEvent();
   const { data: NoticeData, isFetching: noticeFetching } =
     mainApi.GetMainNotice();
+  const { data: ReviewData, isFetching: reviewFetching } = mainApi.GetReview();
 
   // useEffect(() => {
   //   axios
@@ -257,7 +258,7 @@ export default function Home() {
         <div className='space-y-2'>
           <div className='mt-24 text-2xl md:text-3xl font-bold'>여행 후기</div>
           <p className='text-gray-500 dark:text-gray-400'>
-            12개의 새로운 후기가 있습니다.
+            {ReviewData?.length}개의 새로운 후기가 있습니다.
           </p>
           <Badge className='text-sm' onClick={() => router.push('/faq')}>
             더보기
@@ -265,7 +266,7 @@ export default function Home() {
           </Badge>
         </div>
         <div className=' grid md:grid-cols-3 grid-cols-1 gap-3'>
-          {Array.from({ length: 4 }).map((_, index) => (
+          {ReviewData?.map((item, index) => (
             <Dialog key={index}>
               <DialogTrigger>
                 <motion.div
@@ -284,10 +285,10 @@ export default function Home() {
                         </Avatar>
                         <div className='flex flex-col w-full'>
                           <h3 className='md:text-base text-sm font-semibold overflow-hidden text-overflow-ellipsis whitespace-wrap'>
-                            30대 신혼 여행
+                            {item.b_title}
                           </h3>
                           <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>
-                            상구
+                            {item.b_fk_id}
                           </p>
                         </div>
                       </div>
@@ -301,7 +302,7 @@ export default function Home() {
                     </CardHeader>
                     <CardContent>
                       <p className='text-sm text-gray-500 dark:text-gray-400 px-6 pb-5 text-start'>
-                        코스는 좋았지만, 호텔은 별로였어요.
+                        {item.b_contents}
                       </p>
                     </CardContent>
                   </Card>

@@ -2,7 +2,7 @@ import axiosInstance from '../utility/axiosInterceptor';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { COOKIE_ACCESS_TOKEN, COOKIE_REFRESH_TOKEN } from '../config/constants';
-import { BestRs, EventRs } from '../type/home';
+import { BestRs, EventRs, ReviewRs } from '../type/home';
 import { cache } from 'react';
 
 // 메인 페이지 Best 항목 API
@@ -57,6 +57,20 @@ const mainApi = {
     return useQuery({
       queryKey: [this.getmainnoticeKey],
       queryFn: () => this.mainnoticeFn(),
+      refetchOnWindowFocus: false,
+      staleTime: 50000
+    });
+  },
+  // 후기글 조회
+  getReviewKey: 'main/public_blog',
+  reviewFn: async (): Promise<ReviewRs[]> => {
+    const res = await axiosInstance.get(`/main/public_blog`);
+    return res.data.body.publicBlogList;
+  },
+  GetReview: function () {
+    return useQuery({
+      queryKey: [this.getReviewKey],
+      queryFn: () => this.reviewFn(),
       refetchOnWindowFocus: false,
       staleTime: 50000
     });

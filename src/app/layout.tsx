@@ -10,6 +10,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Footer from '@/components/nav/Footer';
 import ReactQueryProvider from './ReactQueryProvider';
 import { Toaster } from '@/components/ui/toaster';
+import { useEffect } from 'react';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -27,12 +28,20 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
 
+  useEffect(() => {
+    if (pathname == '/trip') {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
+
   return (
     <ReactQueryProvider>
       <html lang='ko' suppressHydrationWarning>
         <body
           className={cn(
-            'bg-background font-sans antialiased',
+            pathname != '/trip'
+              ? 'bg-background font-sans antialiased'
+              : 'overflow-hidden bg-background font-sans antialiased',
             fontSans.variable
           )}
         >
@@ -46,7 +55,7 @@ export default function RootLayout({
             {children}
             <Toaster />
           </ThemeProvider>
-          <Footer />
+          {pathname != '/trip' && <Footer />}
         </body>
       </html>
     </ReactQueryProvider>
