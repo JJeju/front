@@ -18,11 +18,17 @@ import Map from '@/components/map/Map';
 import { Layers3 } from 'lucide-react';
 import ShowppingCart from '@/components/trip/ShowppingCart';
 import tripStore from '@/stores/trip';
+import tripApi from '@/service/trip';
+import Markers from '@/components/map/Markers';
 
 export default function Trip() {
   const { createTravelPK } = tripStore();
   const [tabValue, setTabValue] = useState('ProductList');
-  console.log('>>', createTravelPK);
+  const [map, setMap] = useState(null);
+  const [currentStore, setCurrentStore] = useState(null);
+  const { data } = tripApi.GetTrip();
+
+  console.log('>>', map);
 
   return (
     <div className='flex overflow-hidden w-screen h-screen '>
@@ -39,7 +45,7 @@ export default function Trip() {
             <TabsTrigger value='poket'>장바구니</TabsTrigger>
           </TabsList>
           <TabsContent value='ProductList'>
-            <Product />
+            <Product data={data} />
           </TabsContent>
           <TabsContent value='tripcourse'>
             <div className='h-full overflow-scroll'>
@@ -53,7 +59,8 @@ export default function Trip() {
       </div>
       <div className='lg:w-2/3 h-full md:w-1/2 w-full'>
         <div className=' border md:h-full h-full'>
-          <Map />
+          <Map setMap={setMap} data={data} />
+          <Markers data={data} map={map} setCurrentStore={setCurrentStore} />
           <div className='md:hidden block'>
             <Drawer>
               <DrawerTrigger className='absolute bottom-5 right-5 overflow-auto z-10'>
@@ -72,7 +79,7 @@ export default function Trip() {
                     </TabsList>
                     <TabsContent value='ProductList'>
                       <div className='h-[600px] '>
-                        <Product />
+                        <Product data={data} />
                       </div>
                     </TabsContent>
                     <TabsContent value='tripcourse'>

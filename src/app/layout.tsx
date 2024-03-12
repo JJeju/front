@@ -10,7 +10,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import Footer from '@/components/nav/Footer';
 import ReactQueryProvider from './ReactQueryProvider';
 import { Toaster } from '@/components/ui/toaster';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Hydration from './hydration';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -45,6 +46,7 @@ export default function RootLayout({
             fontSans.variable
           )}
         >
+          <Hydration />
           <ThemeProvider
             attribute='class'
             defaultTheme='system'

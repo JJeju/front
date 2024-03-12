@@ -3,8 +3,8 @@ import axiosInstance from '../utility/axiosInterceptor';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { JoinRq, authCheckRq, loginRq, loginRs } from '../type/auth';
 import axios from 'axios';
-// import { cookieStorage } from '../utility/cookie';
-// import { COOKIE_ACCESS_TOKEN, COOKIE_REFRESH_TOKEN } from '../config/constants';
+import { CookieStorage } from '../utility/cookie';
+import { COOKIE_ACCESS_TOKEN, COOKIE_REFRESH_TOKEN } from '../config/constants';
 
 const authApi = {
   // 로그인
@@ -19,8 +19,8 @@ const authApi = {
   // 로그아웃
   logoutFn: async (): Promise<boolean> => {
     const res = await axiosInstance.get(`/member/logout`, {});
-    // cookieStorage.removeCookie(COOKIE_ACCESS_TOKEN);
-    // cookieStorage.removeCookie(COOKIE_REFRESH_TOKEN);
+    CookieStorage.removeCookie(COOKIE_ACCESS_TOKEN);
+    CookieStorage.removeCookie(COOKIE_REFRESH_TOKEN);
     return res.data;
   },
   GetLogout: function () {
@@ -36,11 +36,15 @@ const authApi = {
   },
   // 리프래쉬 토큰
   refreshTokenFn: async (data: string): Promise<string> => {
+    console.log('>>sdsd>>>', data);
     const res = await axiosInstance.post('/member/refresh_token', data);
     return res.data;
   },
-  PostRefreshToken: function () {
-    return useMutation({ mutationFn: this.refreshTokenFn });
+  PostRefreshToken: function (data: string) {
+    return useQuery({
+      queryKey: ['/member/refresh_token'],
+      queryFn: () => this.refreshTokenFn(data)
+    });
   },
   // 아이디 중복확인
   idCheckFn: async (data: string): Promise<boolean> => {

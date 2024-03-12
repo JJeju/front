@@ -17,7 +17,7 @@ import { cn } from '@/lib/utils';
 import { AiOutlineAlignRight } from 'react-icons/ai';
 import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,6 +40,7 @@ import useUserIdStore from '@/stores/auth';
 import { useIsLoggedIn } from '@/utility/hooks/useIsLogin';
 import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
+import { useStore } from 'zustand';
 
 const logincomponents: { title: string; href: string }[] = [
   {
@@ -105,24 +106,25 @@ const components: { title: string; href?: string; toast?: boolean }[] = [
 
 export default function Navbar() {
   const { setTheme } = useTheme();
-  const [isTheme, setIsTheme] = useState(true);
-  const [open, setOpen] = useState(false);
+  const isLogin = useUserIdStore(state => state.isLogin);
+  const setIsLogin = useUserIdStore(state => state.setIsLogin);
 
-  // const isLogin = useStore(useUserIdStore, state => state.isLogin);
-  // const clearUserIdStorage = useUserIdStore.persist.clearStorage;
-
-  const { isLogin, setIsLogin } = useUserIdStore();
   const isLoggedIn = useIsLoggedIn();
 
   const mutateLogout = authApi.GetLogout();
   const { isError, error, mutate } = mutateLogout;
   const { toast } = useToast();
-
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
   const handleLogout = () => {
     mutate();
     setIsLogin(false);
     // clearUserIdStorage();
   };
+
+  console.log('isLogin>>>>', isLogin);
 
   return (
     <nav className=' w-full h-auto '>

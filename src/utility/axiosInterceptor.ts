@@ -1,7 +1,12 @@
 'use client';
 import axios, { AxiosInstance } from 'axios';
-import { API_URL, COOKIE_ACCESS_TOKEN } from '../config/constants';
+import {
+  API_URL,
+  COOKIE_ACCESS_TOKEN,
+  COOKIE_REFRESH_TOKEN
+} from '../config/constants';
 import { CookieStorage } from './cookie';
+import authApi from '@/service/auth';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: API_URL
@@ -29,7 +34,10 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   response => {
-    console.log('res>>', response);
+    // const { data } = authApi.PostRefreshToken(
+    //   CookieStorage.getCookie(COOKIE_REFRESH_TOKEN)
+    // );
+    // console.log('>>', data);
     return response;
   },
   error => {

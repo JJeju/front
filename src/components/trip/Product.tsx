@@ -9,7 +9,9 @@ import { Dialog, DialogTrigger } from '../ui/dialog';
 import Accommodation from '../product/Accommodation';
 import Restaurant from '../product/Restaurant';
 import Map from '../map/Map';
-export default function Product() {
+import tripApi from '@/service/trip';
+export default function Product({ data }: any) {
+  console.log('>>', data);
   return (
     <>
       <div className='h-full md:h-screen'>
@@ -57,7 +59,7 @@ export default function Product() {
           </label>
         </div>
         <ScrollArea className='md:h-3/4 h-5/6  rounded-md border '>
-          {Array.from({ length: 50 }).map((_, index) => (
+          {data?.map((item: any, index: number) => (
             <Card className='flex gap-2 items-center ' key={index}>
               <Image
                 src={'/56692-O8P89L-432.jpg'}
@@ -68,18 +70,16 @@ export default function Product() {
               />
               <div className='flex flex-col mt-5 mb-2 mx-2 gap-1 w-full h-full '>
                 <div className='flex flex-col items-start'>
-                  <div className='md:text-2xl text-xl font-bold '>00호텔</div>
-                  <div className='text-base '>주소입니다</div>
-                  <div className='md:text-sm text-xs pt-1'>세부내용입니다</div>
-                </div>
-                <div className='flex md:flex-row flex-col md:justify-between  md:items-center '>
-                  <div className='text-gray-500 dark:text-gray-400 text-lg font-bold py-1 md:block hidden'>
-                    ₩350,000
+                  <div className='md:text-2xl text-xl font-bold '>
+                    {item.c_name}
                   </div>
-                  <div className='flex justify-between items-end gap-2 '>
-                    <div className='text-gray-500 dark:text-gray-400 text-lg font-bold py-1 md:hidden block '>
-                      ₩350,000
-                    </div>
+                  <div className='pt-1'>
+                    <Badge variant={'secondary'}>{item.c_category}</Badge>
+                  </div>
+                  <div className='text-sm text-left'>{item.c_addr}</div>
+                </div>
+                <div className='flex md:flex-row flex-col md:justify-end  md:items-center '>
+                  <div className='flex justify-end items-end gap-2 '>
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button size='sm' className='w-22'>
@@ -87,7 +87,7 @@ export default function Product() {
                         </Button>
                       </DialogTrigger>
 
-                      {index / 2 === 0 ? (
+                      {item.c_category === '숙박' ? (
                         <Accommodation />
                       ) : (
                         <>

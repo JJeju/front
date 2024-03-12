@@ -1,21 +1,22 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-interface IUseUserIdStore {
+export type State = {
   isLogin: boolean;
+};
+
+export type Actions = {
   setIsLogin: (isLogin: boolean) => void;
-}
+};
 
-export type { IUseUserIdStore };
-
-const useUserIdStore = create(
-  persist<IUseUserIdStore>(
+const useUserIdStore = create<Actions & State>()(
+  persist(
     (set, get) => ({
       isLogin: false,
-      setIsLogin: (isLogin: boolean) => set({ isLogin: isLogin })
+      setIsLogin: () => set(state => ({ isLogin: state.isLogin }))
     }),
     {
-      name: 'userIdStorage'
+      name: 'userLogin'
     }
   )
 );
