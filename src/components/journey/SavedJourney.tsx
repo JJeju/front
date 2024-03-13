@@ -25,7 +25,7 @@ export default function SavedJourney() {
   const { data } = journeyApi.GetJourney(false);
 
   return (
-    <ScrollArea className='md:h-[260px] h-[600px] rounded-md border'>
+    <ScrollArea className=' md:h-[260px] h-[600px] rounded-md border'>
       {data?.map((item, index) => (
         <Card className='p-2 ' key={index}>
           <div className='grid gap-4 py-4 pr-6'>

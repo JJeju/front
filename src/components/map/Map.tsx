@@ -14,7 +14,7 @@ interface MapProps {
   lat?: string | null;
   lng?: string | null;
   zoom?: number | null;
-  data: any;
+  data?: any;
 }
 const EDFAULT_LAT = 33.450701;
 const DEFAULT_LNG = 126.570222;

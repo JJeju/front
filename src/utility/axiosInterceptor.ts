@@ -1,5 +1,4 @@
-'use client';
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import {
   API_URL,
   COOKIE_ACCESS_TOKEN,
@@ -7,6 +6,9 @@ import {
 } from '../config/constants';
 import { CookieStorage } from './cookie';
 import authApi from '@/service/auth';
+import { on } from 'events';
+import useUserIdStore from '@/stores/auth';
+import { useRouter } from 'next/router';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: API_URL
@@ -37,11 +39,36 @@ axiosInstance.interceptors.response.use(
     // const { data } = authApi.PostRefreshToken(
     //   CookieStorage.getCookie(COOKIE_REFRESH_TOKEN)
     // );
-    // console.log('>>', data);
+    console.log('response>>', response);
+
     return response;
   },
-  error => {
-    console.log('error>>', error);
+  async error => {
+    const router = useRouter();
+    const { status } = error.response as AxiosResponse;
+    if (status === 401) {
+      console.log('401410>>>>');
+
+      try {
+        const res = await axios.post(
+          `${API_URL}/member/refresh_token`, // token refresh api
+          { refresh_token: CookieStorage.getCookie(COOKIE_REFRESH_TOKEN) }
+        );
+
+        console.log('res>>>', res);
+      } catch (error) {
+        const { setIsLogin } = useUserIdStore();
+
+        CookieStorage.removeCookie(COOKIE_ACCESS_TOKEN);
+        CookieStorage.removeCookie(COOKIE_REFRESH_TOKEN);
+
+        setIsLogin(false);
+        router.push('/');
+
+        console.log('e>>>', error);
+      }
+    }
+
     return Promise.reject(error);
   }
 );

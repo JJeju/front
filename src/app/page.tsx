@@ -131,7 +131,7 @@ export default function Home() {
           {bestData?.map((data, index) => (
             <CarouselItem
               key={index}
-              className='md:basis-1/2 basis-1/2 lg:basis-1/4'
+              className='md:basis-1/3 basis-1/2 lg:basis-1/4'
             >
               <Dialog>
                 <DialogTrigger>
@@ -143,14 +143,17 @@ export default function Home() {
                     >
                       <Card className='w-full h-full  '>
                         <CardContent className='flex items-start justify-center p-3 group'>
-                          <Image
-                            src={'/56692-O8P89L-432.jpg'}
-                            alt='Image'
-                            className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                            layout='responsive'
-                            height={200}
-                            width={300}
-                          />
+                          <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
+                            <Image
+                              src={`http://14.6.54.241:8080/download/${data.c_img}`}
+                              alt='Image'
+                              className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
+                              layout='fill'
+                              objectFit='cover'
+                              // height={200}
+                              // width={300}
+                            />
+                          </div>
                         </CardContent>
                         <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80'>
                           <div className='flex gap-1'>
@@ -196,7 +199,7 @@ export default function Home() {
           {EvnetData?.map((data: any, index) => (
             <CarouselItem
               key={index}
-              className='md:basis-1/2 basis-1/2 lg:basis-1/4'
+              className='md:basis-1/3 basis-1/2 lg:basis-1/4'
             >
               <Dialog>
                 <DialogTrigger>
@@ -208,14 +211,15 @@ export default function Home() {
                     >
                       <Card className='w-full h-full  '>
                         <CardContent className='flex  items-start justify-center p-3  group'>
-                          <Image
-                            src={'/56692-O8P89L-432.jpg'}
-                            alt='Image'
-                            className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                            layout='responsive'
-                            width={300}
-                            height={200}
-                          />
+                          <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
+                            <Image
+                              src={`http://14.6.54.241:8080/download/${data.e_img}`}
+                              alt='Image'
+                              className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
+                              layout='fill'
+                              objectFit='cover'
+                            />
+                          </div>
                         </CardContent>
                         <div className='flex flex-col gap-2 items-start px-5 py-1  bg-opacity-80'>
                           <div className='flex gap-1'>

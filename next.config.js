@@ -2,6 +2,16 @@
 const nextConfig = {};
 
 module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '14.6.54.241',
+        port: '8080',
+        pathname: '/**'
+      }
+    ]
+  },
   // async redirects() {
   //   return [
   // Basic redirect

@@ -1,22 +1,45 @@
-import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState
+} from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import Accommodation from '../product/Accommodation';
+import { Dialog, DialogTrigger } from '../ui/dialog';
+import Restaurant from '../product/Restaurant';
 
 interface MarkerProps {
   map: any;
   data: any;
   setCurrentStore: Dispatch<SetStateAction<any>>;
+  currentStore: any;
 }
-export default function Markers({ map, data, setCurrentStore }: MarkerProps) {
+export default function Markers({
+  map,
+  data,
+  setCurrentStore,
+  currentStore
+}: MarkerProps) {
+  const [open, setOpen] = useState(false);
+
   const loadKakaMarkers = useCallback(() => {
     if (map) {
       data?.map((store: any) => {
-        // const imageSrc = store?.c_img,
-        //   imageSize = new window.kakao.maps.Size(40, 40),
-        //   imageOption = { offset: new window.kakao.maps.Point(27, 69) };
+        // const imageSrc =
+        //   store.c_category === '식당'
+        //     ? '/Restaurant Icon.png'
+        //     : store.c_category === '숙박'
+        //     ? '/Store Icon .png'
+        //     : '/Airport Map Pin.png';
+        // const imageSize = new window.kakao.maps.Size(40, 40);
+        // imageOption = { offset: new window.kakao.maps.Point(27, 69) };
 
         // const markerImage = new window.kakao.maps.MarkerImage(
-        //   imageSrc,
-        //   imageSize,
-        //   imageOption
+        // imageSrc,
+        // imageSize
+        // imageOption
         // );
 
         const markerPosition = new window.kakao.maps.LatLng(
@@ -30,15 +53,27 @@ export default function Markers({ map, data, setCurrentStore }: MarkerProps) {
         });
         marker.setMap(map);
 
-        const content = `<div class="infowindow">${store?.c_name}</div>`;
+        marker.setMap(map);
+
+        const content = `<div class="max-w-48 w-36  overflow-hidden shadow-lg bg-white rounded-2xl">
+        <img class="w-full h-28" src=http://14.6.54.241:8080/download/${store.c_img} alt="상품 이미지">
+        <div class="px-2 py-4">
+           <div class="font-bold text-sm mb-2 whitespace-nowrap overflow-hidden overflow-ellipsis">${store.c_name}</div>
+           <p class="text-gray-700 text-xs whitespace-normal overflow-auto">
+           ${store.c_addr}
+           </p>
+        </div>
+       </div>
+       `;
 
         // 마커 클릭시 인포윈도우
         const customOverlay = new window.kakao.maps.CustomOverlay({
           position: markerPosition,
           content: content,
-          xAnchor: 0.6,
-          yAnchor: 0.91
+          xAnchor: 0.3,
+          yAnchor: 1.2
         });
+
         // 마우스 오버시 인포윈도우
         window.kakao.maps.event.addListener(marker, 'mouseover', function () {
           customOverlay.setMap(map);
@@ -51,14 +86,25 @@ export default function Markers({ map, data, setCurrentStore }: MarkerProps) {
         // 선택된 가게 저장
         window.kakao.maps.event.addListener(marker, 'click', function () {
           setCurrentStore(store);
+          setOpen(true);
         });
       });
     }
-  }, [map, setCurrentStore, data]);
+  }, [map, data]);
 
   useEffect(() => {
     loadKakaMarkers();
   }, [map, loadKakaMarkers]);
 
-  return <></>;
+  return (
+    <>
+      <Dialog open={open} onOpenChange={() => setOpen(!open)}>
+        {currentStore?.c_category === '숙박' ? (
+          <Accommodation />
+        ) : (
+          <Restaurant />
+        )}
+      </Dialog>
+    </>
+  );
 }

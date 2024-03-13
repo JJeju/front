@@ -13,8 +13,7 @@ import { Separator } from '../ui/separator';
 import Image from 'next/image';
 import { ChevronRightIcon, StarIcon, ChevronLeftIcon } from 'lucide-react';
 import { MapPin, XIcon } from 'lucide-react';
-import { Avatar } from '@radix-ui/react-avatar';
-import { AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import Map from '../map/Map';
 import {
   Table,

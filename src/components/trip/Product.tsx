@@ -58,45 +58,52 @@ export default function Product({ data }: any) {
             찜
           </label>
         </div>
-        <ScrollArea className='md:h-3/4 h-5/6  rounded-md border '>
+        <ScrollArea
+          id='scrollarea'
+          className='md:h-3/4 h-5/6  rounded-md border '
+        >
           {data?.map((item: any, index: number) => (
-            <Card className='flex gap-2 items-center ' key={index}>
-              <Image
-                src={'/56692-O8P89L-432.jpg'}
-                alt='Image'
-                className='p-2 rounded-lg shadow-2xl'
-                width={150}
-                height={100}
-              />
-              <div className='flex flex-col mt-5 mb-2 mx-2 gap-1 w-full h-full '>
+            <Card className='flex gap-2 items-center w-auto' key={index}>
+              <div className='relative  md:w-[200px] w-[170px] h-[150px]'>
+                <Image
+                  src={`http://14.6.54.241:8080/download/${item.c_img}`}
+                  alt='사진 없음'
+                  className='p-2 rounded-lg shadow-2xl'
+                  layout='fill'
+                  objectFit='cover'
+                  // width={100}
+                  // height={200}
+                />
+              </div>
+              <div className='flex flex-col mt-5 mb-2 mx-2 gap-1  h-full w-[200px] lg:w-[250px] md:w-[250px] '>
                 <div className='flex flex-col items-start'>
-                  <div className='md:text-2xl text-xl font-bold '>
+                  <div className='text-left md:text-2xl text-xl font-bold  whitespace-nowrap overflow-hidden overflow-ellipsis w-[200px] lg:w-[250px] md:w-[250px]'>
                     {item.c_name}
                   </div>
                   <div className='pt-1'>
                     <Badge variant={'secondary'}>{item.c_category}</Badge>
                   </div>
-                  <div className='text-sm text-left'>{item.c_addr}</div>
-                </div>
-                <div className='flex md:flex-row flex-col md:justify-end  md:items-center '>
-                  <div className='flex justify-end items-end gap-2 '>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button size='sm' className='w-22'>
-                          상세보기
-                        </Button>
-                      </DialogTrigger>
-
-                      {item.c_category === '숙박' ? (
-                        <Accommodation />
-                      ) : (
-                        <>
-                          <Restaurant />
-                        </>
-                      )}
-                    </Dialog>
+                  <div className='text-sm text-left whitespace-nowrap overflow-hidden overflow-ellipsis w-[200px] lg:w-[250px] md:w-[250px]'>
+                    {item.c_addr}
                   </div>
                 </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className='flex items-center gap-2'>
+                      <Button size='sm' className='w-22'>
+                        상세보기
+                      </Button>
+                    </div>
+                  </DialogTrigger>
+
+                  {item.c_category === '숙박' ? (
+                    <Accommodation />
+                  ) : (
+                    <>
+                      <Restaurant />
+                    </>
+                  )}
+                </Dialog>
               </div>
             </Card>
           ))}

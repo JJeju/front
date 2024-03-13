@@ -32,7 +32,7 @@ export default function Trip() {
 
   return (
     <div className='flex overflow-hidden w-screen h-screen '>
-      <div className='flex-col h-full lg:w-1/3 w-1/2 mx-3 md:block hidden'>
+      <div className='flex-col h-full md:w-1/2 lg:w-1/3 w-1/3 mx-3 md:block hidden'>
         <Tabs
           defaultValue='account'
           className=''
@@ -57,10 +57,15 @@ export default function Trip() {
           </TabsContent>
         </Tabs>
       </div>
-      <div className='lg:w-2/3 h-full md:w-1/2 w-full'>
+      <div className=' h-full md:w-2/3  w-full'>
         <div className=' border md:h-full h-full'>
           <Map setMap={setMap} data={data} />
-          <Markers data={data} map={map} setCurrentStore={setCurrentStore} />
+          <Markers
+            data={data}
+            map={map}
+            setCurrentStore={setCurrentStore}
+            currentStore={currentStore}
+          />
           <div className='md:hidden block'>
             <Drawer>
               <DrawerTrigger className='absolute bottom-5 right-5 overflow-auto z-10'>
@@ -78,7 +83,7 @@ export default function Trip() {
                       <TabsTrigger value='poket'>장바구니</TabsTrigger>
                     </TabsList>
                     <TabsContent value='ProductList'>
-                      <div className='h-[600px] '>
+                      <div className='h-[600px]'>
                         <Product data={data} />
                       </div>
                     </TabsContent>

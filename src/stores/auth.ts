@@ -13,7 +13,7 @@ const useUserIdStore = create<Actions & State>()(
   persist(
     (set, get) => ({
       isLogin: false,
-      setIsLogin: () => set(state => ({ isLogin: state.isLogin }))
+      setIsLogin: (isLogin: boolean) => set({ isLogin: isLogin })
     }),
     {
       name: 'userLogin'

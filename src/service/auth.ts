@@ -35,15 +35,14 @@ const authApi = {
     return useMutation({ mutationFn: this.joinFn });
   },
   // 리프래쉬 토큰
-  refreshTokenFn: async (data: string): Promise<string> => {
-    console.log('>>sdsd>>>', data);
+  refreshTokenFn: async (data: any): Promise<string> => {
     const res = await axiosInstance.post('/member/refresh_token', data);
+    CookieStorage.setCookie(COOKIE_ACCESS_TOKEN, res.data.body.access_token);
     return res.data;
   },
-  PostRefreshToken: function (data: string) {
-    return useQuery({
-      queryKey: ['/member/refresh_token'],
-      queryFn: () => this.refreshTokenFn(data)
+  PostRefreshToken: function (data: any) {
+    return useMutation({
+      mutationFn: this.refreshTokenFn
     });
   },
   // 아이디 중복확인
