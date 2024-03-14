@@ -1,36 +1,24 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Build Next.js Application
-
-
 name: Package
 
 on:
- push:
-    tags: [ "releases-**" ]
+  push:
+    tags: ['releases-**']
 
 jobs:
- build:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
+      - name: Checkout source code.
+        uses: actions/checkout@master
         with:
           ref: main
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.11.0'
 
       - name: Install Dependencies
         run: |
           npm install
-
-      - name: Build Next.js Application
-        run: |
-          npm run build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -48,4 +36,3 @@ jobs:
   #       with:
   #         name: JejuFront
   #         path: out # 배포에 활용할 경로
-          
