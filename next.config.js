@@ -3,15 +3,10 @@ const nextConfig = {};
 
 module.exports = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: '14.6.54.241',
-        port: '8080',
-        pathname: '/**'
-      }
-    ]
+    domains: ['14.6.54.241'],
+    unoptimized: true
   },
+
   // async redirects() {
   //   return [
   // Basic redirect

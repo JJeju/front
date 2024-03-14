@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Product from '@/components/trip/Product';
@@ -20,16 +20,27 @@ import ShowppingCart from '@/components/trip/ShowppingCart';
 import tripStore from '@/stores/trip';
 import tripApi from '@/service/trip';
 import Markers from '@/components/map/Markers';
+import { getTripRs } from '@/type/trip';
 
 export default function Trip() {
+  const [tripList, setTripList] = useState<getTripRs[]>([]);
+  const [category, setCategory] = useState<string>('');
   const { createTravelPK } = tripStore();
   const [tabValue, setTabValue] = useState('ProductList');
   const [map, setMap] = useState(null);
   const [currentStore, setCurrentStore] = useState(null);
-  const { data } = tripApi.GetTrip();
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await tripApi.GetTrip(category);
+      if (data) setTripList(data);
+    };
 
-  console.log('>>', map);
+    fetchData();
+  }, [category]);
 
+  const handlerCategory = (newCategory: string) => {
+    setCategory(newCategory);
+  };
   return (
     <div className='flex overflow-hidden w-screen h-screen '>
       <div className='flex-col h-full md:w-1/2 lg:w-1/3 w-1/3 mx-3 md:block hidden'>
@@ -45,7 +56,7 @@ export default function Trip() {
             <TabsTrigger value='poket'>장바구니</TabsTrigger>
           </TabsList>
           <TabsContent value='ProductList'>
-            <Product data={data} />
+            <Product data={tripList} />
           </TabsContent>
           <TabsContent value='tripcourse'>
             <div className='h-full overflow-scroll'>
@@ -59,9 +70,9 @@ export default function Trip() {
       </div>
       <div className=' h-full md:w-2/3  w-full'>
         <div className=' border md:h-full h-full'>
-          <Map setMap={setMap} data={data} />
+          <Map setMap={setMap} data={tripList} />
           <Markers
-            data={data}
+            data={tripList}
             map={map}
             setCurrentStore={setCurrentStore}
             currentStore={currentStore}
@@ -84,7 +95,7 @@ export default function Trip() {
                     </TabsList>
                     <TabsContent value='ProductList'>
                       <div className='h-[600px]'>
-                        <Product data={data} />
+                        <Product data={tripList} />
                       </div>
                     </TabsContent>
                     <TabsContent value='tripcourse'>

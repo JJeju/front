@@ -12,6 +12,7 @@ import Map from '../map/Map';
 import tripApi from '@/service/trip';
 export default function Product({ data }: any) {
   console.log('>>', data);
+
   return (
     <>
       <div className='h-full md:h-screen'>

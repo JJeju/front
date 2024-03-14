@@ -62,9 +62,7 @@ export default function TripReview() {
             </div>
           </div>
           <Separator />
-          <div className='h-[500px] w-full'>
-            <Map />
-          </div>
+          <div className='h-[500px] w-full'>{/* <Map /> */}</div>
           <Separator />
           <div className='grid gap-1'>
             <h2 className='text-lg font-semibold'>여행 일정</h2>
