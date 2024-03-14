@@ -1,12 +1,20 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  output: 'export'
+};
+module.exports = nextConfig;
 
 module.exports = {
   images: {
-    domains: ['14.6.54.241'],
-    unoptimized: true
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '14.6.54.241',
+        port: '8080',
+        pathname: '/**'
+      }
+    ]
   },
-
   // async redirects() {
   //   return [
   // Basic redirect
