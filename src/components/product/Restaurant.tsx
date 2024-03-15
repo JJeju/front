@@ -1,13 +1,14 @@
 'use client';
 import { MapPin, StarIcon, XIcon } from 'lucide-react';
 import { Button } from '../ui/button';
-import Image from 'next/image';
+import Image, { ImageLoaderProps } from 'next/image';
 import Link from 'next/link';
 import { DialogContent } from '../ui/dialog';
 import Map from '../map/Map';
 import Script from 'next/script';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Separator } from '../ui/separator';
+import { imgLoader } from '@/utility/utils/imgLoader';
 
 declare global {
   interface Window {
@@ -73,6 +74,9 @@ export default function Restaurant() {
           </div>
           <Separator />
           <Image
+            loader={({ src, width, quality }: ImageLoaderProps) =>
+              imgLoader({ src, width, quality })
+            }
             alt='Restaurant'
             className='overflow-hidden rounded-xl object-bottom'
             height='200'

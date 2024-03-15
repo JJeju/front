@@ -166,7 +166,7 @@ export default function Home() {
                             />
                           </div>
                         </CardContent>
-                        <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80'>
+                        <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80 h-36'>
                           <div className='flex gap-1'>
                             <Badge>BEST</Badge>
                             <Badge variant={'outline'}>{data.c_category}</Badge>
@@ -180,9 +180,6 @@ export default function Home() {
                               {data.c_addr}
                             </div>
                           </div>
-                        </div>
-                        <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3 h-[52px] '>
-                          {index % 2 === 0 ? '₩350,000' : null}
                         </div>
                       </Card>
                     </motion.div>
@@ -260,9 +257,6 @@ export default function Home() {
                           <div className='text-xs h-[48px] overflow-hidden overflow-ellipsis'>
                             {data.e_info ?? data.s_info}
                           </div>
-                        </div>
-                        <div className='flex justify-end text-gray-500 dark:text-gray-400 text-lg font-bold p-3 '>
-                          ₩350,000
                         </div>
                       </Card>
                     </motion.div>

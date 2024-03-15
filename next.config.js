@@ -2,7 +2,8 @@
 
 const nextConfig = {
   output: 'export',
-  swcMinify: true
+  swcMinify: true,
+  trailingSlash: true
 
   // async rewrites() {
   //   return [

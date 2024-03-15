@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '../ui/button';
 import { DialogContent } from '../ui/dialog';
-import Image from 'next/image';
+import Image, { ImageLoaderProps } from 'next/image';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
@@ -30,6 +30,7 @@ import { Card } from '../ui/card';
 import Map from '../map/Map';
 import Script from 'next/script';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
+import { imgLoader } from '@/utility/utils/imgLoader';
 declare global {
   interface Window {
     kakao: any;
@@ -93,6 +94,9 @@ export default function Accommodation() {
           </div>
           <Separator />
           <Image
+            loader={({ src, width, quality }: ImageLoaderProps) =>
+              imgLoader({ src, width, quality })
+            }
             alt='Restaurant'
             className='overflow-hidden rounded-xl object-bottom'
             height='200'
@@ -215,6 +219,9 @@ export default function Accommodation() {
               {Array.from({ length: 2 }).map((_, index) => (
                 <Card className='' key={index}>
                   <Image
+                    loader={({ src, width, quality }: ImageLoaderProps) =>
+                      imgLoader({ src, width, quality })
+                    }
                     alt='Room 1'
                     className='object-cover rounded-lg'
                     height={400}
