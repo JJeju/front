@@ -1,5 +1,4 @@
 'use client';
-import { DateRangePicker } from '../ui/daterangepicker';
 import { Button } from '../ui/button';
 import {
   Table,
@@ -22,6 +21,7 @@ import { Label } from '../ui/label';
 import { Reorder, motion } from 'framer-motion';
 import { Fragment, useState } from 'react';
 import Image from 'next/image';
+import { DateRangePicker } from '../ui/daterangepicker';
 
 export default function TripCourse() {
   const [items, setItems] = useState([[0, 1, 2, 3], [4, 5], [6], [7], [8]]);

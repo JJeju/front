@@ -1,6 +1,5 @@
 'use client';
 import { Button } from '../ui/button';
-import { DateRangePicker } from '../ui/daterangepicker';
 import { DialogContent } from '../ui/dialog';
 import Image from 'next/image';
 import { Label } from '../ui/label';
@@ -30,6 +29,7 @@ import {
 import { Card } from '../ui/card';
 import Map from '../map/Map';
 import Script from 'next/script';
+import { DateRangePicker } from '../ui/daterangepicker';
 declare global {
   interface Window {
     kakao: any;
