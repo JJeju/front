@@ -29,14 +29,26 @@ jobs:
         with:
           name: JejuFront
           path: out
+  deploy:
+    needs: build # 배포를 위해 필요한 과정
+    runs-on: ubuntu-latest # 배포시 사용 환경
 
-  # deploy:
-  #   needs: build # 배포를 위해 필요한 과정
-  #   runs-on: ubuntu-latest # 배포시 사용 환경
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: JejuFront
+        path: out # 배포에 활용할 경로
 
-  #   steps:
-  #     - name: Download artifact
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: JejuFront
-  #         path: out # 배포에 활용할 경로
+    - name: SCP transfer
+      uses: appleboy/scp-action@master
+      with:
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASS }}
+        host: ${{ secrets.SSH_SERVER_IP }}
+        port: ${{ secrets.SSH_PORT }}
+        rm: true
+        source: out
+        target: ./jeju_front/
+        ## 작업에 사용했던 dist 디렉토리를 경로상에서 제거
+        strip_components: 1
