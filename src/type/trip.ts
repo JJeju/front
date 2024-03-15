@@ -12,6 +12,18 @@ interface getTripRs {
   c_type: string;
   c_lat: number;
   c_lon: number;
+  fileData: {
+    idx: number;
+    file_group_no: number;
+    url: string;
+    file_ori_nm: string;
+    file_sys_nm: string;
+    extension: string;
+    description: string;
+    file_size: number;
+    file_size_unit: string;
+    create_dt: string;
+  };
 }
 
 export type { getTripRs };

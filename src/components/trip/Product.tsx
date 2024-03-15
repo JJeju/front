@@ -12,8 +12,7 @@ import Map from '../map/Map';
 import tripApi from '@/service/trip';
 import { imgLoader } from '@/utility/utils/imgLoader';
 export default function Product({ data }: any) {
-  console.log('>>', data);
-
+  console.log('>', data);
   return (
     <>
       <div className='h-full md:h-screen'>
@@ -66,12 +65,12 @@ export default function Product({ data }: any) {
         >
           {data?.map((item: any, index: number) => (
             <Card className='flex gap-2 items-center w-auto' key={index}>
-              <div className='relative  md:w-[200px] w-[170px] h-[150px]'>
+              <div className='relative  md:w-[180px] w-[170px] h-[150px]'>
                 <Image
                   loader={({ src, width, quality }: ImageLoaderProps) =>
                     imgLoader({ src, width, quality })
                   }
-                  src={`http://14.6.54.241:8080/download/${item.c_img}`}
+                  src={`http://14.6.54.241:8080/download/${item.fileData.url}`}
                   alt='사진 없음'
                   className='p-2 rounded-lg shadow-2xl'
                   layout='fill'

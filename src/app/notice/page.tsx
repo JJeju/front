@@ -23,7 +23,6 @@ export default function Notice() {
   const { data: NoticeData, isFetching: noticeFetching } =
     noticeApi.GetNotice();
 
-  console.log('>>', NoticeData);
   return (
     <div className='md:px-36 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
       <div className='space-y-2'>

@@ -12,6 +12,7 @@ import ReactQueryProvider from './ReactQueryProvider';
 import { Toaster } from '@/components/ui/toaster';
 import { useEffect, useState } from 'react';
 import Hydration from './hydration';
+import useUserIdStore from '@/stores/auth';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -28,9 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const getIsLogin = useUserIdStore.getState().isLogin;
 
   useEffect(() => {
-    if (pathname == '/trip') {
+    if (pathname == '/trip/') {
       window.scrollTo(0, 0);
     }
   }, [pathname]);
@@ -57,7 +59,7 @@ export default function RootLayout({
         </head>
         <body
           className={cn(
-            pathname != '/trip'
+            pathname != '/trip/'
               ? 'bg-background font-sans antialiased'
               : 'overflow-hidden bg-background font-sans antialiased',
             fontSans.variable
@@ -70,11 +72,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
+            <Navbar getIsLogin={getIsLogin} />
+
             {children}
             <Toaster />
           </ThemeProvider>
-          {pathname != '/trip' && <Footer />}
+          {pathname != '/trip/' && <Footer />}
         </body>
       </html>
     </ReactQueryProvider>

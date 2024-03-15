@@ -104,27 +104,27 @@ const components: { title: string; href?: string; toast?: boolean }[] = [
   }
 ];
 
-export default function Navbar() {
+export default function Navbar({ getIsLogin }: any) {
   const { setTheme } = useTheme();
   const isLogin = useUserIdStore(state => state.isLogin);
   const setIsLogin = useUserIdStore(state => state.setIsLogin);
-
-  const isLoggedIn = useIsLoggedIn();
 
   const mutateLogout = authApi.GetLogout();
   const { isError, error, mutate } = mutateLogout;
   const { toast } = useToast();
   const [hydrated, setHydrated] = useState(false);
+
   useEffect(() => {
     setHydrated(true);
   }, []);
+
   const handleLogout = () => {
     mutate();
     setIsLogin(false);
     // clearUserIdStorage();
   };
 
-  console.log('isLogin>>>>', isLogin);
+  console.log('isLogin>>>>', setIsLogin);
 
   return (
     <nav className=' w-full h-auto '>
@@ -261,7 +261,11 @@ export default function Navbar() {
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
                   {isLogin ? (
-                    <Link href='/mypage' className='hover:text-amber-400'>
+                    <Link
+                      href='/mypage'
+                      prefetch={false}
+                      className='hover:text-amber-400'
+                    >
                       마이페이지
                     </Link>
                   ) : (

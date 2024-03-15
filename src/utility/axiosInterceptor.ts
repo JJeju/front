@@ -39,7 +39,6 @@ axiosInstance.interceptors.response.use(
     // const { data } = authApi.PostRefreshToken(
     //   CookieStorage.getCookie(COOKIE_REFRESH_TOKEN)
     // );
-    console.log('response>>', response);
 
     return response;
   },
@@ -47,15 +46,11 @@ axiosInstance.interceptors.response.use(
     const router = useRouter();
     const { status } = error.response as AxiosResponse;
     if (status === 401) {
-      console.log('401410>>>>');
-
       try {
         const res = await axios.post(
           `${API_URL}/member/refresh_token`, // token refresh api
           { refresh_token: CookieStorage.getCookie(COOKIE_REFRESH_TOKEN) }
         );
-
-        console.log('res>>>', res);
       } catch (error) {
         const { setIsLogin } = useUserIdStore();
 
@@ -64,8 +59,6 @@ axiosInstance.interceptors.response.use(
 
         setIsLogin(false);
         router.push('/');
-
-        console.log('e>>>', error);
       }
     }
 

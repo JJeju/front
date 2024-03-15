@@ -38,6 +38,7 @@ import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
 import mypageApi from '@/service/mypage';
 import { imgLoader } from '@/utility/utils/imgLoader';
+import MainLoading from '@/components/loading/MainLoading';
 
 export default function Home() {
   const router = useRouter();
@@ -125,151 +126,164 @@ export default function Home() {
       <div className='mt-24 text-2xl md:text-3xl font-bold'>
         지금 인기있는 상품
       </div>
-      <Carousel
-        opts={{
-          align: 'start'
-        }}
-        className='w-full  mt-5'
-      >
-        <CarouselContent>
-          {bestData?.map((data, index) => (
-            <CarouselItem
-              key={index}
-              className='md:basis-1/3 basis-1/2 lg:basis-1/4'
-            >
-              <Dialog>
-                <DialogTrigger>
-                  <div className='p-1'>
-                    <motion.div
-                      key={index}
-                      className=''
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Card className='w-full h-full  '>
-                        <CardContent className='flex items-start justify-center p-3 group'>
-                          <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
-                            <Image
-                              loader={({
-                                src,
-                                width,
-                                quality
-                              }: ImageLoaderProps) =>
-                                imgLoader({ src, width, quality })
-                              }
-                              src={`http://14.6.54.241:8080/download/${data.c_img}`}
-                              alt='Image'
-                              className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                              layout='fill'
-                              objectFit='cover'
-                              // height={200}
-                              // width={300}
-                            />
-                          </div>
-                        </CardContent>
-                        <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80 h-36'>
-                          <div className='flex gap-1'>
-                            <Badge>BEST</Badge>
-                            <Badge variant={'outline'}>{data.c_category}</Badge>
-                          </div>
-                          <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                            {data.c_name}
-                          </div>
-                          <div className='flex gap-1 items-center'>
-                            <MapPin size={14} />
-                            <div className=' md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                              {data.c_addr}
+      {bestFetching ? (
+        <MainLoading />
+      ) : (
+        <Carousel
+          opts={{
+            align: 'start'
+          }}
+          className='w-full  mt-5'
+        >
+          <CarouselContent>
+            {bestData?.map((data, index) => (
+              <CarouselItem
+                key={index}
+                className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+              >
+                <Dialog>
+                  <DialogTrigger>
+                    <div className='p-1'>
+                      <motion.div
+                        key={index}
+                        className=''
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <Card className='w-full h-full  '>
+                          <CardContent className='flex items-start justify-center p-3 group'>
+                            <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
+                              <Image
+                                loader={({
+                                  src,
+                                  width,
+                                  quality
+                                }: ImageLoaderProps) =>
+                                  imgLoader({ src, width, quality })
+                                }
+                                src={`http://14.6.54.241:8080/download/${data.c_img}`}
+                                alt='Image'
+                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
+                                layout='fill'
+                                objectFit='cover'
+                                // height={200}
+                                // width={300}
+                              />
+                            </div>
+                          </CardContent>
+                          <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80 h-36'>
+                            <div className='flex gap-1'>
+                              <Badge>BEST</Badge>
+                              <Badge variant={'outline'}>
+                                {data.c_category}
+                              </Badge>
+                            </div>
+                            <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                              {data.c_name}
+                            </div>
+                            <div className='flex gap-1 items-center'>
+                              <MapPin size={14} />
+                              <div className=' md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                                {data.c_addr}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Card>
-                    </motion.div>
-                  </div>
-                </DialogTrigger>
-                <Accommodation />
-              </Dialog>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-
+                        </Card>
+                      </motion.div>
+                    </div>
+                  </DialogTrigger>
+                  <Accommodation />
+                </Dialog>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      )}
       <div className='mt-24 text-2xl md:text-3xl font-bold'>
         지금 인기있는 관광지
       </div>
-      <Carousel
-        opts={{
-          align: 'start'
-        }}
-        className='w-full  mt-5'
-      >
-        <CarouselContent>
-          {EvnetData?.map((data: any, index) => (
-            <CarouselItem
-              key={index}
-              className='md:basis-1/3 basis-1/2 lg:basis-1/4'
-            >
-              <Dialog>
-                <DialogTrigger>
-                  <div className='p-1'>
-                    <motion.div
-                      key={index}
-                      className=''
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Card className='w-full h-full  '>
-                        <CardContent className='flex  items-start justify-center p-3  group'>
-                          <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
-                            <Image
-                              loader={({
-                                src,
-                                width,
-                                quality
-                              }: ImageLoaderProps) =>
-                                imgLoader({ src, width, quality })
-                              }
-                              src={`http://14.6.54.241:8080/download/${data.e_img}`}
-                              alt='Image'
-                              className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                              layout='fill'
-                              objectFit='cover'
-                            />
-                          </div>
-                        </CardContent>
-                        <div className='flex flex-col gap-2 items-start px-5 py-1  bg-opacity-80'>
-                          <div className='flex gap-1'>
-                            <Badge>BEST</Badge>
+      {eventFetching ? (
+        <MainLoading />
+      ) : (
+        <Carousel
+          opts={{
+            align: 'start'
+          }}
+          className='w-full  mt-5'
+        >
+          <CarouselContent>
+            {EvnetData?.map((data: any, index) => (
+              <CarouselItem
+                key={index}
+                className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+              >
+                <Dialog>
+                  <DialogTrigger>
+                    <div className='p-1'>
+                      <motion.div
+                        key={index}
+                        className=''
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <Card className='w-full h-full  '>
+                          <CardContent className='flex  items-start justify-center p-3  group'>
+                            <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
+                              <Image
+                                loader={({
+                                  src,
+                                  width,
+                                  quality
+                                }: ImageLoaderProps) =>
+                                  imgLoader({ src, width, quality })
+                                }
+                                src={
+                                  data.e_img
+                                    ? `http://14.6.54.241:8080/download/${data.e_img}`
+                                    : `http://14.6.54.241:8080/download/${data.s_img}`
+                                }
+                                alt='Image'
+                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
+                                layout='fill'
+                                objectFit='cover'
+                              />
+                            </div>
+                          </CardContent>
+                          <div className='flex flex-col gap-2 items-start px-5 py-1  bg-opacity-80'>
+                            <div className='flex gap-1'>
+                              <Badge>BEST</Badge>
 
-                            <Badge variant={'outline'}>
-                              {data.e_pk_enum ? '이벤트' : '레저'}
-                            </Badge>
-                          </div>
+                              <Badge variant={'outline'}>
+                                {data.e_pk_enum ? '이벤트' : '레저'}
+                              </Badge>
+                            </div>
 
-                          <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                            {data.e_title ?? data.s_tittle}
-                          </div>
-                          <div className='flex gap-1 items-center'>
-                            <MapPin size={14} />
-                            <div className='text-left md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                              {data.e_addr ?? data.s_addr}
+                            <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                              {data.e_title ?? data.s_tittle}
+                            </div>
+                            <div className='flex gap-1 items-center'>
+                              <MapPin size={14} />
+                              <div className='text-left md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                                {data.e_addr ?? data.s_addr}
+                              </div>
+                            </div>
+                            <div className='text-xs h-[48px] overflow-hidden overflow-ellipsis'>
+                              {data.e_info ?? data.s_info}
                             </div>
                           </div>
-                          <div className='text-xs h-[48px] overflow-hidden overflow-ellipsis'>
-                            {data.e_info ?? data.s_info}
-                          </div>
-                        </div>
-                      </Card>
-                    </motion.div>
-                  </div>
-                </DialogTrigger>
-                <Restaurant />
-              </Dialog>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+                        </Card>
+                      </motion.div>
+                    </div>
+                  </DialogTrigger>
+                  <Restaurant />
+                </Dialog>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      )}
       <div className='w-full grid items-start min-h-screen gap-4  md:gap-8'>
         <div className='space-y-2'>
           <div className='mt-24 text-2xl md:text-3xl font-bold'>여행 후기</div>

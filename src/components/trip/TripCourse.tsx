@@ -26,7 +26,6 @@ import { imgLoader } from '@/utility/utils/imgLoader';
 
 export default function TripCourse() {
   const [items, setItems] = useState([[0, 1, 2, 3], [4, 5], [6], [7], [8]]);
-  console.log('', items);
 
   const onRemove = (item: any) => {
     setItems(removeItem(items, item));

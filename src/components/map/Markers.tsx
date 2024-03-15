@@ -109,7 +109,6 @@ export default function Markers({
               customOverlay.setMap(null);
             } else customOverlay.setMap(map);
           }
-          console.log('currentStore>>');
 
           // }
           setCurrentStore(store);
