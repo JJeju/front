@@ -1,7 +1,8 @@
+import { imgLoader } from '@/utility/utils/imgLoader';
 import { Button } from '../ui/button';
 import { Card } from '../ui/card';
 import { ScrollArea } from '../ui/scroll-area';
-import Image from 'next/image';
+import Image, { ImageLoaderProps } from 'next/image';
 
 export default function ShowppingCart() {
   return (
@@ -10,6 +11,9 @@ export default function ShowppingCart() {
         {Array.from({ length: 50 }).map((_, index) => (
           <Card className='flex gap-2 items-center ' key={index}>
             <Image
+              loader={({ src, width, quality }: ImageLoaderProps) =>
+                imgLoader({ src, width, quality })
+              }
               src={'/56692-O8P89L-432.jpg'}
               alt='Image'
               className='p-2 rounded-lg shadow-2xl'

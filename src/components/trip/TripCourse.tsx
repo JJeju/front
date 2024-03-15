@@ -20,8 +20,9 @@ import {
 import { Label } from '../ui/label';
 import { Reorder, motion } from 'framer-motion';
 import { Fragment, useState } from 'react';
-import Image from 'next/image';
+import Image, { ImageLoaderProps } from 'next/image';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
+import { imgLoader } from '@/utility/utils/imgLoader';
 
 export default function TripCourse() {
   const [items, setItems] = useState([[0, 1, 2, 3], [4, 5], [6], [7], [8]]);
@@ -146,6 +147,13 @@ export default function TripCourse() {
                       <TableRow>
                         <TableCell className='w-[150px] '>
                           <Image
+                            loader={({
+                              src,
+                              width,
+                              quality
+                            }: ImageLoaderProps) =>
+                              imgLoader({ src, width, quality })
+                            }
                             alt='Tour image'
                             className='aspect-1/2 rounded-md object-cover overflow-hidden'
                             src={'/56692-O8P89L-432.jpg'}

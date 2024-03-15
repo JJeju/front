@@ -29,14 +29,11 @@ export default function Trip() {
   const [tabValue, setTabValue] = useState('ProductList');
   const [map, setMap] = useState(null);
   const [currentStore, setCurrentStore] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await tripApi.GetTrip(category);
-      if (data) setTripList(data);
-    };
+  const { data } = tripApi.GetTrip();
 
-    fetchData();
-  }, [category]);
+  // useEffect(() => {
+  //   if (data) setTripList(data);
+  // }, [category]);
 
   const handlerCategory = (newCategory: string) => {
     setCategory(newCategory);
@@ -56,7 +53,7 @@ export default function Trip() {
             <TabsTrigger value='poket'>장바구니</TabsTrigger>
           </TabsList>
           <TabsContent value='ProductList'>
-            <Product data={tripList} />
+            <Product data={data} />
           </TabsContent>
           <TabsContent value='tripcourse'>
             <div className='h-full overflow-scroll'>
@@ -70,9 +67,9 @@ export default function Trip() {
       </div>
       <div className=' h-full md:w-2/3  w-full'>
         <div className=' border md:h-full h-full'>
-          <Map setMap={setMap} data={tripList} />
+          <Map setMap={setMap} data={data} />
           <Markers
-            data={tripList}
+            data={data}
             map={map}
             setCurrentStore={setCurrentStore}
             currentStore={currentStore}
@@ -95,7 +92,7 @@ export default function Trip() {
                     </TabsList>
                     <TabsContent value='ProductList'>
                       <div className='h-[600px]'>
-                        <Product data={tripList} />
+                        <Product data={data} />
                       </div>
                     </TabsContent>
                     <TabsContent value='tripcourse'>

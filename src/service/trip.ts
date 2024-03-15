@@ -6,20 +6,19 @@ import { getTripRs } from '@/type/trip';
 const tripApi = {
   // 여행 상품 조회
   getTripFn: async (data?: string): Promise<getTripRs[]> => {
-    if (data) {
-      const res = await axiosInstance.get(
-        `/api/main/business_place?category=${data}`
-      );
-      return res.data.body.companyRandomList;
-    } else {
-      const res = await axiosInstance.get(`/api/main/business_place`);
-      return res.data.body.companyRandomList;
-    }
+    const res = await axiosInstance.get(
+      data
+        ? `/api/main/business_place?category=${data}`
+        : `/api/main/business_place`
+    );
+    return res.data.body.companyRandomList;
   },
   GetTrip: function (data?: string) {
     return useQuery({
-      queryKey: ['main/business_place'],
-      queryFn: () => this.getTripFn(data)
+      queryKey: ['trip'],
+      queryFn: () => this.getTripFn(data),
+      refetchOnWindowFocus: false,
+      staleTime: 50000
     });
   }
 };

@@ -4,12 +4,13 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Checkbox } from '@/components/ui/checkbox';
-import Image from 'next/image';
+import Image, { ImageLoaderProps } from 'next/image';
 import { Dialog, DialogTrigger } from '../ui/dialog';
 import Accommodation from '../product/Accommodation';
 import Restaurant from '../product/Restaurant';
 import Map from '../map/Map';
 import tripApi from '@/service/trip';
+import { imgLoader } from '@/utility/utils/imgLoader';
 export default function Product({ data }: any) {
   console.log('>>', data);
 
@@ -67,6 +68,9 @@ export default function Product({ data }: any) {
             <Card className='flex gap-2 items-center w-auto' key={index}>
               <div className='relative  md:w-[200px] w-[170px] h-[150px]'>
                 <Image
+                  loader={({ src, width, quality }: ImageLoaderProps) =>
+                    imgLoader({ src, width, quality })
+                  }
                   src={`http://14.6.54.241:8080/download/${item.c_img}`}
                   alt='사진 없음'
                   className='p-2 rounded-lg shadow-2xl'
@@ -78,7 +82,7 @@ export default function Product({ data }: any) {
               </div>
               <div className='flex flex-col mt-5 mb-2 mx-2 gap-1  h-full w-[200px] lg:w-[250px] md:w-[250px] '>
                 <div className='flex flex-col items-start'>
-                  <div className='text-left md:text-2xl text-xl font-bold  whitespace-nowrap overflow-hidden overflow-ellipsis w-[200px] lg:w-[250px] md:w-[250px]'>
+                  <div className='text-left md:text-xl text-lg font-bold  whitespace-nowrap overflow-hidden overflow-ellipsis w-[200px] lg:w-[250px] md:w-[250px]'>
                     {item.c_name}
                   </div>
                   <div className='pt-1'>
