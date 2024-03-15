@@ -20,15 +20,15 @@ jobs:
         run: |
           yarn
 
+      - name: Build
+        run: |
+          yarn build
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: JejuFront
           path: out
-
-      - name: Build
-        run: |
-          yarn build
 
   # deploy:
   #   needs: build # 배포를 위해 필요한 과정
