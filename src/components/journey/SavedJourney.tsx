@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
 import { Card } from '../ui/card';
 import { ScrollArea } from '../ui/scroll-area';
 import journeyApi from '@/service/journey';
-import { DateRangePicker } from '../ui/daterangepicker';
+import DateRangePicker from '../ui/daterangepicker';
 
 export default function SavedJourney() {
   const router = useRouter();

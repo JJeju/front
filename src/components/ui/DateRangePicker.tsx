@@ -16,7 +16,7 @@ import {
 import { useState, useEffect } from 'react';
 import { ko } from 'date-fns/locale';
 
-export function DateRangePicker({
+export default function DateRangePicker({
   className,
   disabled,
   start,

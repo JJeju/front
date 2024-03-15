@@ -29,7 +29,7 @@ import {
 import { Card } from '../ui/card';
 import Map from '../map/Map';
 import Script from 'next/script';
-import { DateRangePicker } from '../ui/daterangepicker';
+import DateRangePicker from '../ui/daterangepicker';
 declare global {
   interface Window {
     kakao: any;

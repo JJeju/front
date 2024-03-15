@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import DatePicker from '../ui/datepicker';
-import { DateRangePicker } from '../ui/daterangepicker';
 import {
   Select,
   SelectContent,
@@ -25,6 +24,7 @@ import journeyApi from '@/service/journey';
 import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
 import tripStore from '@/stores/trip';
+import DateRangePicker from '../ui/daterangepicker';
 
 export default function NewJourney() {
   const [tripValue, setTripValue] = useState<TravelCreateRq>({
