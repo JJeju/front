@@ -1,5 +1,5 @@
 'use client';
-import { DateRangePicker } from '@/daterangepicker';
+import { DateRangePicker } from '../ui/daterangepicker';
 import { Button } from '../ui/button';
 import {
   Table,

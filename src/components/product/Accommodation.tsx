@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '../ui/button';
-import { DateRangePicker } from '@/daterangepicker';
+import { DateRangePicker } from '../ui/daterangepicker';
 import { DialogContent } from '../ui/dialog';
 import Image from 'next/image';
 import { Label } from '../ui/label';
