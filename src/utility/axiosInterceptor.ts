@@ -11,7 +11,7 @@ import useUserIdStore from '@/stores/auth';
 import { useRouter } from 'next/router';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: API_URL
+  baseURL: API_URL + '/api'
 });
 
 axiosInstance.interceptors.request.use(

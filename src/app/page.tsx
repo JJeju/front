@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
+import Image, { ImageLoaderProps } from 'next/image';
 import {
   Card,
   CardContent,
@@ -37,6 +37,7 @@ import useUserIdStore from '@/stores/auth';
 import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
 import mypageApi from '@/service/mypage';
+import { imgLoader } from '@/utility/utils/imgLoader';
 
 export default function Home() {
   const router = useRouter();
@@ -81,6 +82,9 @@ export default function Home() {
       <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
         <div className='z-0 flex flex-col md:items-center md:justify-center gap-4 p-1 md:flex-row-reverse'>
           <Image
+            loader={({ src, width, quality }: ImageLoaderProps) =>
+              imgLoader({ src, width, quality })
+            }
             src={'/56692-O8P89L-432.jpg'}
             alt='Image'
             className='object-cover rounded-lg shadow-2xl'
@@ -145,6 +149,13 @@ export default function Home() {
                         <CardContent className='flex items-start justify-center p-3 group'>
                           <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
                             <Image
+                              loader={({
+                                src,
+                                width,
+                                quality
+                              }: ImageLoaderProps) =>
+                                imgLoader({ src, width, quality })
+                              }
                               src={`http://14.6.54.241:8080/download/${data.c_img}`}
                               alt='Image'
                               className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
@@ -213,6 +224,13 @@ export default function Home() {
                         <CardContent className='flex  items-start justify-center p-3  group'>
                           <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
                             <Image
+                              loader={({
+                                src,
+                                width,
+                                quality
+                              }: ImageLoaderProps) =>
+                                imgLoader({ src, width, quality })
+                              }
                               src={`http://14.6.54.241:8080/download/${data.e_img}`}
                               alt='Image'
                               className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
