@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
 import { Card } from '../ui/card';
 import { ScrollArea } from '../ui/scroll-area';
 import journeyApi from '@/service/journey';
-import DateRangePicker from '../ui/daterangepicker';
+import { DatePickerWithRange } from '../ui/datepickerwithrange';
 
 export default function SavedJourney() {
   const router = useRouter();
@@ -55,7 +55,7 @@ export default function SavedJourney() {
               <Label htmlFor='username' className='text-right'>
                 날짜
               </Label>
-              <DateRangePicker
+              <DatePickerWithRange
                 className='col-span-3 w-full'
                 disabled
                 start={item.tr_in}

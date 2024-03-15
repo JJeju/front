@@ -24,7 +24,7 @@ import journeyApi from '@/service/journey';
 import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
 import tripStore from '@/stores/trip';
-import DateRangePicker from '../ui/daterangepicker';
+import { DatePickerWithRange } from '../ui/datepickerwithrange';
 
 export default function NewJourney() {
   const [tripValue, setTripValue] = useState<TravelCreateRq>({
@@ -121,7 +121,7 @@ export default function NewJourney() {
         <Label htmlFor='username' className='text-right'>
           날짜
         </Label>
-        <DateRangePicker
+        <DatePickerWithRange
           className='col-span-3 w-full'
           onDateChange={handleDateChange}
         />

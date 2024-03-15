@@ -21,7 +21,7 @@ import { Label } from '../ui/label';
 import { Reorder, motion } from 'framer-motion';
 import { Fragment, useState } from 'react';
 import Image from 'next/image';
-import DateRangePicker from '../ui/daterangepicker';
+import { DatePickerWithRange } from '../ui/datepickerwithrange';
 
 export default function TripCourse() {
   const [items, setItems] = useState([[0, 1, 2, 3], [4, 5], [6], [7], [8]]);
@@ -103,7 +103,7 @@ export default function TripCourse() {
                 <Label className='text-sm flex justify-start' htmlFor='email-1'>
                   날짜
                 </Label>
-                <DateRangePicker className='w-full' />
+                <DatePickerWithRange className='w-full' />
               </div>
             </div>
             <div className='flex justify-end mt-4'>

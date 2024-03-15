@@ -29,7 +29,7 @@ import {
 import { Card } from '../ui/card';
 import Map from '../map/Map';
 import Script from 'next/script';
-import DateRangePicker from '../ui/daterangepicker';
+import { DatePickerWithRange } from '../ui/datepickerwithrange';
 declare global {
   interface Window {
     kakao: any;
@@ -198,7 +198,7 @@ export default function Accommodation() {
                     <Label className='text-sm' htmlFor='email-1'>
                       날짜
                     </Label>
-                    <DateRangePicker className='w-full' />
+                    <DatePickerWithRange className='w-full' />
                   </div>
                 </div>
                 <div className='relative h-14'>
