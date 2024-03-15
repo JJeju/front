@@ -33,7 +33,7 @@ const mypageApi = {
   },
   // 회원 정보 수정
   updateMemberInfoFn: async (data: UpdateMemberRq): Promise<boolean> => {
-    const res = await axiosInstance.put(`/mypage/member`, data);
+    const res = await axiosInstance.put(`/api/mypage/member`, data);
     return res.data;
   },
   PutUpdateMemberInfo: function () {
@@ -42,7 +42,7 @@ const mypageApi = {
   //여행 후기 조회
   getTravelReviewKey: 'mypage/travel-review',
   travelReviewFn: async (data?: TravelReviewRq): Promise<TravelReviewRs[]> => {
-    const res = await axiosInstance.get(`/mypage/blog`, {
+    const res = await axiosInstance.get(`/api/mypage/blog`, {
       params: {
         data
       }
@@ -63,7 +63,7 @@ const mypageApi = {
   travelReviewDetailFn: async (
     data?: number
   ): Promise<TravelReviewDetailRs> => {
-    const res = await axiosInstance.get(`/mypage/blog/1?b_pk_num=${data}`);
+    const res = await axiosInstance.get(`/api/mypage/blog/1?b_pk_num=${data}`);
     return res.data.body;
   },
   GetTravelReviewDetail: function (data?: number) {

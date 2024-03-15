@@ -38,6 +38,23 @@ export default function RootLayout({
   return (
     <ReactQueryProvider>
       <html lang='ko' suppressHydrationWarning>
+        <head>
+          <link rel='icon' href='/favicon.ico' sizes='any' />
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+
+          {/* <link
+            rel='icon'
+            href='/icon?<generated>'
+            type='image/<generated>'
+            sizes='<generated>'
+          />
+          <link
+            rel='apple-touch-icon'
+            href='/apple-icon?<generated>'
+            type='image/<generated>'
+            sizes='<generated>'
+          /> */}
+        </head>
         <body
           className={cn(
             pathname != '/trip'

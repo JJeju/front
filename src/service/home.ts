@@ -16,7 +16,7 @@ const GET_MAIN_NOTICE_DATA = 'main/home/notice';
 const mainApi = {
   getmainproductKey: GET_MAIN_PAGE_DATA,
   mainproductFn: async (): Promise<BestRs> => {
-    const res = await axiosInstance.get(`/${GET_MAIN_PAGE_DATA}`);
+    const res = await axiosInstance.get(`/api/${GET_MAIN_PAGE_DATA}`);
     return res.data.body;
   },
   GetMainProduct: function () {
@@ -33,7 +33,7 @@ const mainApi = {
   },
   getmaineventKey: GET_MAIN_EVENT_DATA,
   maineventFn: cache(async (): Promise<EventRs> => {
-    const res = await axiosInstance.get(`/${GET_MAIN_EVENT_DATA}`);
+    const res = await axiosInstance.get(`/api/${GET_MAIN_EVENT_DATA}`);
     return res.data.body;
   }),
   GetMainEvent: function () {
@@ -50,7 +50,7 @@ const mainApi = {
   },
   getmainnoticeKey: GET_MAIN_NOTICE_DATA,
   mainnoticeFn: async (): Promise<any> => {
-    const res = await axiosInstance.get(`/${GET_MAIN_NOTICE_DATA}`);
+    const res = await axiosInstance.get(`/api/${GET_MAIN_NOTICE_DATA}`);
     return res.data.body.notice;
   },
   GetMainNotice: function () {
@@ -64,7 +64,7 @@ const mainApi = {
   // 후기글 조회
   getReviewKey: 'main/public_blog',
   reviewFn: async (): Promise<ReviewRs[]> => {
-    const res = await axiosInstance.get(`/main/public_blog`);
+    const res = await axiosInstance.get(`/api/main/public_blog`);
     return res.data.body.publicBlogList;
   },
   GetReview: function () {

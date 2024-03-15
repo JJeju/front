@@ -6,7 +6,7 @@ const noticeApi = {
   // 공지사항 조회
   getNoticeKey: 'main/home/notice',
   noticeFn: async (): Promise<NoticeRs[]> => {
-    const res = await axiosInstance.get(`/service-center/notice`);
+    const res = await axiosInstance.get(`/api/service-center/notice`);
     return res.data.body.notice;
   },
   GetNotice: function () {

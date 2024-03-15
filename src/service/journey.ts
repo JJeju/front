@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 const journeyApi = {
   // 여정 생성
   createJourneyFn: async (data: TravelCreateRq): Promise<any> => {
-    const res = await axiosInstance.post('/travel/insert', data);
+    const res = await axiosInstance.post('/api/travel/insert', data);
     return res.data.body;
   },
   PostCreateJourney: function () {
@@ -13,7 +13,7 @@ const journeyApi = {
   },
   // 여정 조회
   getJourneyFn: async (data?: boolean): Promise<TravelCreateRs[]> => {
-    const res = await axiosInstance.get(`/mypage/travel?tr_tf=${data}`);
+    const res = await axiosInstance.get(`/api/mypage/travel?tr_tf=${data}`);
     return res.data.body.travel;
   },
   GetJourney: function (data?: boolean) {

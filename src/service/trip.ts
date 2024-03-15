@@ -8,11 +8,11 @@ const tripApi = {
   getTripFn: async (data?: string): Promise<getTripRs[]> => {
     if (data) {
       const res = await axiosInstance.get(
-        `/main/business_place?category=${data}`
+        `/api/main/business_place?category=${data}`
       );
       return res.data.body.companyRandomList;
     } else {
-      const res = await axiosInstance.get(`/main/business_place`);
+      const res = await axiosInstance.get(`/api/main/business_place`);
       return res.data.body.companyRandomList;
     }
   },

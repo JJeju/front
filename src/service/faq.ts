@@ -6,7 +6,7 @@ const faqApi = {
   // FAQ 조회
   getFaqKey: 'service-center/qa',
   faqFn: async (): Promise<FaqRs[]> => {
-    const res = await axiosInstance.get(`/service-center/qa`);
+    const res = await axiosInstance.get(`/api/service-center/qa`);
     return res.data.body.complaint;
   },
   GetFaq: function () {
