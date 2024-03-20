@@ -108,7 +108,7 @@ export default function Navbar({ getIsLogin }: any) {
   const { setTheme } = useTheme();
   const isLogin = useUserIdStore(state => state.isLogin);
   const setIsLogin = useUserIdStore(state => state.setIsLogin);
-
+  const isLoggedIn = useIsLoggedIn();
   const mutateLogout = authApi.GetLogout();
   const { isError, error, mutate } = mutateLogout;
   const { toast } = useToast();
@@ -204,7 +204,7 @@ export default function Navbar({ getIsLogin }: any) {
                   편리하게 여행코스를 관리할 수 있습니다.
                 </SheetDescription>
               </SheetHeader>
-              {isLogin ? (
+              {isLogin && isLoggedIn ? (
                 <Button
                   size='lg'
                   className='w-full my-4'
@@ -350,7 +350,7 @@ export default function Navbar({ getIsLogin }: any) {
               </SheetFooter>
             </SheetContent>
           </Sheet>
-          {isLogin ? (
+          {isLogin && isLoggedIn ? (
             <Button className='hidden md:block' onClick={() => handleLogout()}>
               로그아웃
             </Button>

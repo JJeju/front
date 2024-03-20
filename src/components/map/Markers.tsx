@@ -56,7 +56,7 @@ export default function Markers({
         marker.setMap(map);
 
         const content = `<div class="max-w-48 w-36 overflow-hidden shadow-lg bg-white rounded-2xl">
-        <img class="w-full h-28" src=http://14.6.54.241:8080/download/${store.c_img} alt="상품 이미지">
+        <img class="w-full h-28" src=http://14.6.54.241:8080/download/${store.fileData.url} alt="상품 이미지">
         <div class="px-2 py-4">
           <div class="font-bold text-sm mb-2 whitespace-nowrap overflow-hidden overflow-ellipsis">${store.c_name}</div>
           <p class="text-gray-700 text-xs whitespace-normal overflow-auto">

@@ -11,8 +11,16 @@ import Restaurant from '../product/Restaurant';
 import Map from '../map/Map';
 import tripApi from '@/service/trip';
 import { imgLoader } from '@/utility/utils/imgLoader';
+import { useState } from 'react';
 export default function Product({ data }: any) {
   console.log('>', data);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [pkValue, setPkValue] = useState(0);
+  const handleDialogOpen = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
       <div className='h-full md:h-screen'>
@@ -94,17 +102,21 @@ export default function Product({ data }: any) {
                 <Dialog>
                   <DialogTrigger asChild>
                     <div className='flex items-center gap-2'>
-                      <Button size='sm' className='w-22'>
+                      <Button
+                        size='sm'
+                        className='w-22'
+                        onClick={() => setPkValue(item.c_pk_num)}
+                      >
                         상세보기
                       </Button>
                     </div>
                   </DialogTrigger>
 
                   {item.c_category === '숙박' ? (
-                    <Accommodation />
+                    <Accommodation pkValue={pkValue} />
                   ) : (
                     <>
-                      <Restaurant />
+                      <Restaurant pkValue={pkValue} />
                     </>
                   )}
                 </Dialog>

@@ -31,6 +31,8 @@ import Map from '../map/Map';
 import Script from 'next/script';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
 import { imgLoader } from '@/utility/utils/imgLoader';
+import { useEffect } from 'react';
+import tripApi from '@/service/trip';
 declare global {
   interface Window {
     kakao: any;
@@ -45,7 +47,13 @@ interface MapProps {
 const EDFAULT_LAT = 37.497625203;
 const DEFAULT_LNG = 127.03088379;
 
-export default function Accommodation() {
+export default function Accommodation({ pkValue }: any) {
+  const { data, refetch } = tripApi.GetTripDetail(pkValue);
+
+  useEffect(() => {
+    if (pkValue) refetch();
+  }, [pkValue]);
+
   const loadKakaoMap = () => {
     window.kakao.maps.load(() => {
       const container = document.getElementById('map2');

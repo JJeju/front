@@ -9,6 +9,8 @@ import Script from 'next/script';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Separator } from '../ui/separator';
 import { imgLoader } from '@/utility/utils/imgLoader';
+import tripApi from '@/service/trip';
+import { useEffect } from 'react';
 
 declare global {
   interface Window {
@@ -26,7 +28,14 @@ const DEFAULT_LNG = 127.03088379;
 
 const DEFAULT_ZOOM = 3;
 
-export default function Restaurant() {
+export default function Restaurant({ pkValue }: any) {
+  const { data, refetch } = tripApi.GetTripDetail(pkValue);
+
+  console.log('<>>>>', data);
+  useEffect(() => {
+    if (pkValue) refetch();
+  }, [pkValue]);
+
   const loadKakaoMap = () => {
     window.kakao.maps.load(() => {
       const container = document.getElementById('map2');

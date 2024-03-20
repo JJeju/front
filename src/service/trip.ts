@@ -20,6 +20,21 @@ const tripApi = {
       refetchOnWindowFocus: false,
       staleTime: 50000
     });
+  },
+  // 여정 상세 보기
+  getTripDetailFn: async (data: number) => {
+    const res = await axiosInstance.get(`/api/api/mypage/travel/${data}`);
+    return res.data.body;
+  },
+  GetTripDetail: function (data: number) {
+    return useQuery({
+      queryKey: ['tripDetail'],
+      queryFn: () => this.getTripDetailFn(data),
+      enabled: false,
+      refetchOnWindowFocus: false,
+      staleTime: 50000,
+      retry: 1
+    });
   }
 };
 
