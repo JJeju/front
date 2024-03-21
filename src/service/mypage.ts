@@ -111,6 +111,21 @@ const mypageApi = {
   },
   PostChangePassword: function () {
     return useMutation({ mutationFn: this.changePasswordFn });
+  },
+  // 여행 후기 상세보기
+  getTripReviewDetailFn: async (data: number) => {
+    const res = await axiosInstance.get(`/api/mypage/blog/${data}`);
+    return res.data.body;
+  },
+  GetTripReviewDetail: function (data: number) {
+    return useQuery({
+      queryKey: ['tripReviewDetail'],
+      queryFn: () => this.getTripReviewDetailFn(data),
+      enabled: !!data,
+      refetchOnWindowFocus: false,
+      staleTime: 50000,
+      retry: 1
+    });
   }
 };
 

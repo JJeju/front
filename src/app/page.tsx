@@ -15,7 +15,7 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel';
 import { Badge } from '@/components/ui/badge';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
@@ -39,6 +39,7 @@ import { useToast } from '@/components/ui/use-toast';
 import mypageApi from '@/service/mypage';
 import { imgLoader } from '@/utility/utils/imgLoader';
 import MainLoading from '@/components/loading/MainLoading';
+import FaqDetail from '@/components/faq/FaqDetail';
 
 export default function Home() {
   const router = useRouter();
@@ -50,7 +51,9 @@ export default function Home() {
   const { data: NoticeData, isFetching: noticeFetching } =
     mainApi.GetMainNotice();
   const { data: ReviewData, isFetching: reviewFetching } = mainApi.GetReview();
+  const [isFaqId, setIsFaqId] = useState(0);
 
+  const [isId, setIsId] = useState(0);
   // useEffect(() => {
   //   axios
   //     .get('https://dapi.kakao.com/v2/local/search/address.json', {
@@ -300,6 +303,7 @@ export default function Home() {
             <Dialog key={index}>
               <DialogTrigger>
                 <motion.div
+                  onClick={() => setIsId(item.b_pk_num)}
                   key={index}
                   className=''
                   whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
@@ -323,11 +327,16 @@ export default function Home() {
                         </div>
                       </div>
                       <div className='flex items-center space-x-1 pt-2  text-sm'>
-                        <StarIcon className='w-4 h-4 fill-accent' />
-                        <StarIcon className='w-4 h-4 fill-accent' />
-                        <StarIcon className='w-4 h-4 fill-accent' />
-                        <StarIcon className='w-4 h-4 fill-accent' />
-                        <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <StarIcon
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < item?.b_star
+                                ? 'fill-accent text-yellow-500'
+                                : 'fill-accent stroke-muted-foreground '
+                            }`}
+                          />
+                        ))}
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -338,7 +347,7 @@ export default function Home() {
                   </Card>
                 </motion.div>
               </DialogTrigger>
-              <TripReview />
+              <TripReview id={isId} />
             </Dialog>
           ))}
         </div>
@@ -354,28 +363,38 @@ export default function Home() {
         </div>
         <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>
           {NoticeData?.map((data: any, index: number) => (
-            <motion.div
-              key={index}
-              className=''
-              whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
-            >
-              <Card className='p-5' key={index}>
-                <CardContent className='flex flex-col'>
-                  <h3 className='text-xl font-semibold'>{data.n_title}</h3>
+            <>
+              <Dialog>
+                <DialogTrigger>
+                  <motion.div
+                    key={index}
+                    onClick={() => setIsFaqId(data.n_pk_num)}
+                    className=''
+                    whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
+                  >
+                    <Card className='p-5' key={index}>
+                      <CardContent className='flex flex-col'>
+                        <h3 className='text-xl font-semibold text-left'>
+                          {data.n_title}
+                        </h3>
 
-                  <div className='text-xs'>
-                    <p className='text-gray-500 dark:text-gray-400 flex py-2'>
-                      {formatDate(data.n_date)}
-                      <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
-                    </p>
-                  </div>
+                        <div className='text-xs'>
+                          <p className='text-gray-500 text-left dark:text-gray-400 flex py-2'>
+                            {formatDate(data.n_date)}
+                            <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
+                          </p>
+                        </div>
 
-                  <p className='text-sm text-gray-500 dark:text-gray-400'>
-                    {data.n_contents}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
+                        <p className='text-sm text-gray-500 text-left dark:text-gray-400'>
+                          {data.n_contents}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </DialogTrigger>
+                <FaqDetail id={isId} />
+              </Dialog>
+            </>
           ))}
         </div>
       </div>

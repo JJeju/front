@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 
 import { Separator } from '../ui/separator';
-import Image from 'next/image';
+import Image, { ImageLoaderProps } from 'next/image';
 import { ChevronRightIcon, StarIcon, ChevronLeftIcon } from 'lucide-react';
 import { MapPin, XIcon } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -24,23 +24,35 @@ import {
   TableHeader,
   TableRow
 } from '../ui/table';
+import { imgLoader } from '@/utility/utils/imgLoader';
+import mypageApi from '@/service/mypage';
+import { formatDate } from '@/utility/hooks/comnHook';
+import { useState } from 'react';
 
-export default function TripReview() {
+export default function TripReview({ id }: any) {
+  const { data } = mypageApi.GetTripReviewDetail(id);
+  const [map, setMap] = useState(null);
+  console.log('>>', data);
   return (
     <DialogContent className=' md:w-[1000px] w-full  md:h-[90%] h-full overflow-scroll'>
       <div className='space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
           <h1 className='text-3xl font-semibold tracking-tighter '>
-            20대 추천
+            {data?.blog?.b_title}
           </h1>
           <div className='flex items-center space-x-2 text-sm font-medium'>
-            <StarIcon className='w-4 h-4 fill-accent' />
-            <StarIcon className='w-4 h-4 fill-accent' />
-            <StarIcon className='w-4 h-4 fill-accent' />
-            <StarIcon className='w-4 h-4 fill-accent' />
-            <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
+            {Array.from({ length: 5 }, (_, i) => (
+              <StarIcon
+                key={i}
+                className={`w-4 h-4 ${
+                  i < data?.blog?.b_star
+                    ? 'fill-accent text-yellow-500'
+                    : 'fill-accent stroke-muted-foreground '
+                }`}
+              />
+            ))}
             <span className='text-gray-500 dark:text-gray-400'>
-              5.0 (1,234 리뷰)
+              ({data?.blog?.b_star})
             </span>
           </div>
         </div>
@@ -49,20 +61,36 @@ export default function TripReview() {
             <div className='w-12 h-12 flex items-center justify-center'>
               <Avatar className='w-10 h-10 border'>
                 <AvatarImage alt='@username' src='/placeholder-user.jpg' />
-                <AvatarFallback>상구</AvatarFallback>
+                <AvatarFallback>
+                  {data?.blog.b_fk_id.slice(0, 2)}
+                </AvatarFallback>
               </Avatar>
             </div>
             <div className='grid gap-0.5'>
-              <div className='font-semibold'>상구</div>
+              <div className='font-semibold'>{data?.blog.b_fk_id}</div>
               <div className='text-gray-500 text-sm dark:text-gray-400'>
                 <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
-                  <MapPin size={15} /> 제주 석귀포시 성산읍 일출로 284-12
+                  {formatDate(data?.blog?.b_create_dt)}
                 </p>
               </div>
             </div>
           </div>
           <Separator />
-          <div className='h-[500px] w-full'>{/* <Map /> */}</div>
+          <Image
+            loader={({ src, width, quality }: ImageLoaderProps) =>
+              imgLoader({ src, width, quality })
+            }
+            alt='Restaurant'
+            className='overflow-hidden rounded-xl object-bottom'
+            height='200'
+            src={`http://14.6.54.241:8080/download/${data?.mainFile?.url}`}
+            width='500'
+          />
+
+          <Separator />
+          <div className='h-[500px] w-full'>
+            <Map setMap={setMap} />
+          </div>
           <Separator />
           <div className='grid gap-1'>
             <h2 className='text-lg font-semibold'>여행 일정</h2>
@@ -86,6 +114,9 @@ export default function TripReview() {
                       src={'/56692-O8P89L-432.jpg'}
                       height='36'
                       width='64'
+                      loader={({ src, width, quality }: ImageLoaderProps) =>
+                        imgLoader({ src, width, quality })
+                      }
                     />
                   </TableCell>
                   <TableCell className=' text-overflow-ellipsis px-0 py-2'>
@@ -103,6 +134,9 @@ export default function TripReview() {
                       src={'/56692-O8P89L-432.jpg'}
                       height='36'
                       width='64'
+                      loader={({ src, width, quality }: ImageLoaderProps) =>
+                        imgLoader({ src, width, quality })
+                      }
                     />
                   </TableCell>
                   <TableCell className=' text-overflow-ellipsis px-0 py-2'>
@@ -116,6 +150,10 @@ export default function TripReview() {
             </Table>
           </div>
 
+          <h2 className=' text-lg font-semibold'>
+            총 비용: {data?.blog?.b_cost}
+          </h2>
+          <Separator />
           <div className='grid gap-2'>
             <div className='grid gap-1'>
               <h2 className='text-lg font-semibold'>후기</h2>

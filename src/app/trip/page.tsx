@@ -30,7 +30,6 @@ export default function Trip() {
   const [map, setMap] = useState(null);
   const [currentStore, setCurrentStore] = useState(null);
   const { data } = tripApi.GetTrip();
-
   // useEffect(() => {
   //   if (data) setTripList(data);
   // }, [category]);

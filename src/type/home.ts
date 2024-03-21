@@ -78,6 +78,7 @@ interface ReviewRs {
   b_fk_id: string;
   b_title: string;
   b_cost: number;
+  b_star: number;
   b_contents: string;
   file_group_no: number;
   b_public_check: boolean;
