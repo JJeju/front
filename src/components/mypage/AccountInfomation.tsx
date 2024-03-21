@@ -209,7 +209,7 @@ export default function AccountInfomation() {
             <Input
               id='username'
               defaultValue=''
-              value={data.phone}
+              value={data?.phone}
               disabled
               className='col-span-3'
             />
@@ -223,7 +223,7 @@ export default function AccountInfomation() {
               type='password'
               name='m_password'
               className='col-span-2'
-              value={form.m_password}
+              value={form?.m_password}
               onChange={onChange}
             />
             <Button className='w-20' onClick={() => handlePasswordCheck()}>
@@ -240,7 +240,7 @@ export default function AccountInfomation() {
               className='col-span-3'
               type='password'
               disabled={isPasswordDisabled}
-              value={form.new_password}
+              value={form?.new_password}
               onChange={onChange}
             />
           </div>
@@ -254,7 +254,7 @@ export default function AccountInfomation() {
               className='col-span-3'
               type='password'
               disabled={isPasswordDisabled}
-              value={form.password}
+              value={form?.password}
               onChange={onChange}
             />
           </div>
