@@ -19,12 +19,18 @@ import { ScrollArea } from '../ui/scroll-area';
 import journeyApi from '@/service/journey';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
 import JourneyLoading from '../loading/JourneyLoading';
+import tripStore from '@/stores/trip';
 
 export default function SavedJourney() {
   const router = useRouter();
 
   const { data, isFetching } = journeyApi.GetJourney(false);
+  const setCreateTravelPK = tripStore(state => state.setCreateTravelPK);
 
+  const handleSubmit = (id: number) => {
+    setCreateTravelPK(id);
+    router.push('/trip');
+  };
   return (
     <ScrollArea className=' md:h-[260px] h-[600px] rounded-md border'>
       {isFetching ? (
@@ -68,7 +74,10 @@ export default function SavedJourney() {
                   />
                 </div>
                 <div className='flex justify-end'>
-                  <Button className='w-24' onClick={() => router.push('/trip')}>
+                  <Button
+                    className='w-24'
+                    onClick={() => handleSubmit(item.tr_pk_num)}
+                  >
                     여정 불러오기
                   </Button>
                 </div>

@@ -42,8 +42,14 @@ export default function RootLayout({
       <html lang='ko' suppressHydrationWarning>
         <head>
           <link rel='icon' href='/favicon.ico' sizes='any' />
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
-
+          <meta
+            name='google-adsense-account'
+            content='ca-pub-9925174283422185'
+          />
+          <meta
+            name='JEJU 제주여행 여행계획'
+            content='제주 여행 코스를 짤 수 있는 사이트 입니다.'
+          />
           {/* <link
             rel='icon'
             href='/icon?<generated>'

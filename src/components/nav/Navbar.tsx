@@ -124,8 +124,6 @@ export default function Navbar({ getIsLogin }: any) {
     // clearUserIdStorage();
   };
 
-  console.log('isLogin>>>>', setIsLogin);
-
   return (
     <nav className=' w-full h-auto '>
       <div className='flex lg:p-4 p-4  md:justify-around justify-between'>

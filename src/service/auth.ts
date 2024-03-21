@@ -50,7 +50,7 @@ const authApi = {
     const res = await axiosInstance.get(
       `/api/member/id_check?m_username=${data}`
     );
-    return res.data;
+    return res.data.body;
   },
   GetIdCheck: function () {
     return useMutation({ mutationFn: this.idCheckFn });
@@ -60,7 +60,7 @@ const authApi = {
     const res = await axiosInstance.get(
       `/api/member/nick_check?m_nickname=${data}`
     );
-    return res.data;
+    return res.data.body;
   },
   GetNickNameCheck: function () {
     return useMutation({ mutationFn: this.nickNameCheckFn });

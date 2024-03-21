@@ -31,7 +31,6 @@ const DEFAULT_ZOOM = 3;
 export default function Restaurant({ pkValue }: any) {
   const { data, refetch } = tripApi.GetTripDetail(pkValue);
 
-  console.log('<>>>>', data);
   useEffect(() => {
     if (pkValue) refetch();
   }, [pkValue]);

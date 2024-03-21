@@ -26,6 +26,10 @@ export default function Join() {
   const mutateJoin = authApi.PostJoin();
   const { isError, error, mutate } = mutateJoin;
 
+  const muateIdCheck = authApi.GetIdCheck();
+
+  const mutateNickCheck = authApi.GetNickNameCheck();
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
@@ -36,6 +40,46 @@ export default function Join() {
       ...formValue,
       m_birth: formatDate(newDateRange)
     });
+  };
+
+  const handleIdCheck = () => {
+    if (formValue.m_username === '') {
+      return (
+        <>
+          {toast({
+            variant: 'destructive',
+            title: '오류',
+            description: '아이디를 입력해주세요.',
+            action: <ToastAction altText='Try again'>확인</ToastAction>
+          })}
+        </>
+      );
+    } else {
+      muateIdCheck.mutate(formValue.m_username, {
+        onSuccess: data => {
+          if (!data) {
+            return (
+              <>
+                {toast({
+                  variant: 'destructive',
+                  title: '오류',
+                  description: '아이디가 중복됩니다.',
+                  action: <ToastAction altText='Try again'>확인</ToastAction>
+                })}
+              </>
+            );
+          } else if (data) {
+            <>
+              {toast({
+                title: '성공',
+                description: '사용가능한 아이디입니다',
+                action: <ToastAction altText='Try again'>확인</ToastAction>
+              })}
+            </>;
+          }
+        }
+      });
+    }
   };
 
   const onSubmit = () => {
@@ -72,6 +116,46 @@ export default function Join() {
     }
   };
 
+  const handleNickCheck = () => {
+    if (formValue.m_nickname === '') {
+      return (
+        <>
+          {toast({
+            variant: 'destructive',
+            title: '오류',
+            description: '닉네임을 입력해주세요.',
+            action: <ToastAction altText='Try again'>확인</ToastAction>
+          })}
+        </>
+      );
+    } else {
+      mutateNickCheck.mutate(formValue.m_nickname, {
+        onSuccess: data => {
+          if (!data) {
+            return (
+              <>
+                {toast({
+                  variant: 'destructive',
+                  title: '오류',
+                  description: '닉네임이 중복됩니다.',
+                  action: <ToastAction altText='Try again'>확인</ToastAction>
+                })}
+              </>
+            );
+          } else if (data) {
+            <>
+              {toast({
+                title: '성공',
+                description: '사용가능한 닉네임 입니다',
+                action: <ToastAction altText='Try again'>확인</ToastAction>
+              })}
+            </>;
+          }
+        }
+      });
+    }
+  };
+
   return (
     <div className='grid gap-4 py-4'>
       <div className='grid grid-cols-4 items-center gap-4'>
@@ -85,7 +169,9 @@ export default function Join() {
           onChange={onChange}
           className='col-span-2'
         />
-        <Button className='w-20'>중복체크</Button>
+        <Button className='w-20' onClick={() => handleIdCheck()}>
+          중복체크
+        </Button>
       </div>
       <div className='grid grid-cols-4 items-center gap-4'>
         <Label htmlFor='name' className='text-right'>
@@ -109,8 +195,11 @@ export default function Join() {
           defaultValue=''
           name='m_nickname'
           onChange={onChange}
-          className='col-span-3'
+          className='col-span-2'
         />
+        <Button className='w-20' onClick={() => handleNickCheck()}>
+          중복체크
+        </Button>
       </div>
       <div className='grid grid-cols-4 items-center gap-4'>
         <Label htmlFor='m_birth' className='text-right'>

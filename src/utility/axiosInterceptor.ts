@@ -45,24 +45,21 @@ axiosInstance.interceptors.response.use(
   async error => {
     const router = useRouter();
     const { status } = error.response as AxiosResponse;
-    if (status === 401) {
-      try {
-        const res = await axios.post(
-          `${API_URL}/member/refresh_token`, // token refresh api
-          { refresh_token: CookieStorage.getCookie(COOKIE_REFRESH_TOKEN) }
-        );
-      } catch (error) {
-        const { setIsLogin } = useUserIdStore();
+    console.log('여기타니>>>');
+    try {
+      const res = await axios.post(
+        `${API_URL}/member/refresh_token`, // token refresh api
+        { refresh_token: CookieStorage.getCookie(COOKIE_REFRESH_TOKEN) }
+      );
+    } catch (error) {
+      const { setIsLogin } = useUserIdStore();
 
-        CookieStorage.removeCookie(COOKIE_ACCESS_TOKEN);
-        CookieStorage.removeCookie(COOKIE_REFRESH_TOKEN);
+      CookieStorage.removeCookie(COOKIE_ACCESS_TOKEN);
+      CookieStorage.removeCookie(COOKIE_REFRESH_TOKEN);
 
-        setIsLogin(false);
-        router.push('/');
-      }
+      setIsLogin(false);
+      router.push('/');
     }
-
-    return Promise.reject(error);
   }
 );
 

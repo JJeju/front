@@ -83,8 +83,6 @@ export default function Product({ data }: any) {
                   className='p-2 rounded-lg shadow-2xl'
                   layout='fill'
                   objectFit='cover'
-                  // width={100}
-                  // height={200}
                 />
               </div>
               <div className='flex flex-col mt-5 mb-2 mx-2 gap-1  h-full w-[200px] lg:w-[250px] md:w-[250px] '>

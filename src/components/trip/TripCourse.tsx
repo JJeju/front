@@ -23,9 +23,22 @@ import { Fragment, useState } from 'react';
 import Image, { ImageLoaderProps } from 'next/image';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
 import { imgLoader } from '@/utility/utils/imgLoader';
+import tripApi from '@/service/trip';
+import tripStore from '@/stores/trip';
+import { formatDate } from '@/utility/hooks/comnHook';
 
 export default function TripCourse() {
+  const createTravelPK = tripStore(state => state.createTravelPK);
+  const { data, isFetching } = tripApi.GetTripDetail(createTravelPK);
+  const [form, setForm] = useState({
+    tr_title: '',
+    tr_relationship: '',
+    tr_in: '',
+    tr_out: ''
+  });
+
   const [items, setItems] = useState([[0, 1, 2, 3], [4, 5], [6], [7], [8]]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const onRemove = (item: any) => {
     setItems(removeItem(items, item));
@@ -63,6 +76,26 @@ export default function TripCourse() {
     setItems(updatedItems);
   };
 
+  const onChange = (e: any) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleUpdate = () => {
+    setIsDisabled(true);
+  };
+
+  const handleDateChange = (newDateRange: any) => {
+    setForm({
+      ...form,
+      tr_in: formatDate(newDateRange.from),
+      tr_out: formatDate(newDateRange.to)
+    });
+  };
+
+  if (isFetching) {
+    return <div>loading...</div>;
+  }
   return (
     <div className='w-full h-auto '>
       <div className='grid gap-8 mt-4'>
@@ -73,45 +106,71 @@ export default function TripCourse() {
           </Button>
         </div>
         <div className='border p-4 rounded-lg'>
-          <form>
-            <div className='grid gap-4 sm:grid-cols-2 sm:gap-8'>
-              <div className='grid gap-2 '>
-                <Label className='text-sm flex justify-start' htmlFor='phone-1'>
-                  여정이름
-                </Label>
-                <Input id='phone-1' required type='tel' />
-              </div>
-              <div className='grid gap-2'>
-                <Label className='text-sm flex justify-start' htmlFor='email-1'>
-                  인원
-                </Label>
-                <Select>
-                  <SelectTrigger className=''>
-                    <SelectValue placeholder='인원' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='혼자'>혼자</SelectItem>
-                    <SelectItem value='커플'>커플</SelectItem>
-                    <SelectItem value='가족'>가족</SelectItem>
-                    <SelectItem value='다인'>다인</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+          <div className='grid gap-4 sm:grid-cols-2 sm:gap-8'>
+            <div className='grid gap-2 '>
+              <Label className='text-sm flex justify-start' htmlFor='phone-1'>
+                여정이름
+              </Label>
+              <Input
+                id='phone-1'
+                required
+                type='tel'
+                value={isDisabled ? data?.tr_title : form.tr_title}
+                disabled={isDisabled}
+                onChange={onChange}
+                name='tr_title'
+              />
             </div>
-            <div className='grid-cols-1 grid gap-4 mt-8'>
-              <div className='grid gap-2 '>
-                <Label className='text-sm flex justify-start' htmlFor='email-1'>
-                  날짜
-                </Label>
-                <DatePickerWithRange className='w-full' />
-              </div>
+            <div className='grid gap-2'>
+              <Label className='text-sm flex justify-start' htmlFor='email-1'>
+                인원
+              </Label>
+              <Select
+                value={
+                  isDisabled ? data?.tr_relationship : form.tr_relationship
+                }
+                onValueChange={value => {
+                  setForm({ ...form, tr_relationship: value });
+                }}
+                disabled={isDisabled}
+              >
+                <SelectTrigger className=''>
+                  <SelectValue placeholder='인원' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='혼자'>혼자</SelectItem>
+                  <SelectItem value='커플'>커플</SelectItem>
+                  <SelectItem value='가족'>가족</SelectItem>
+                  <SelectItem value='다인'>다인</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <div className='flex justify-end mt-4'>
-              <Button className='ml-2' size='sm' variant='secondary'>
-                여정 수정
-              </Button>
+          </div>
+          <div className='grid-cols-1 grid gap-4 mt-8'>
+            <div className='grid gap-2 '>
+              <Label className='text-sm flex justify-start' htmlFor='email-1'>
+                날짜
+              </Label>
+
+              <DatePickerWithRange
+                className='w-full'
+                disabled={isDisabled}
+                onDateChange={handleDateChange}
+                start={data?.tr_in}
+                end={data?.tr_out}
+              />
             </div>
-          </form>
+          </div>
+          <div className='flex justify-end mt-4'>
+            <Button
+              className='ml-2'
+              size='sm'
+              variant='secondary'
+              onClick={() => setIsDisabled(false)}
+            >
+              여정 수정
+            </Button>
+          </div>
         </div>
       </div>
       <div className='h-[440px]'>

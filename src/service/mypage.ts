@@ -33,7 +33,7 @@ const mypageApi = {
   },
   // 회원 정보 수정
   updateMemberInfoFn: async (data: UpdateMemberRq): Promise<boolean> => {
-    const res = await axiosInstance.put(`/api/mypage/member`, data);
+    const res = await axiosInstance.put(`/api/mypage/member/update`, data);
     return res.data;
   },
   PutUpdateMemberInfo: function () {
@@ -74,6 +74,43 @@ const mypageApi = {
         return data;
       }
     });
+  },
+  // 회원 프로필 조회
+  getProfileKey: 'mypage/profile',
+  profileFn: async (): Promise<any> => {
+    const res = await axiosInstance.get(`/api/member/profile`);
+    return res.data.body.memberProfile;
+  },
+  GetProfile: function () {
+    return useQuery({
+      queryKey: [this.getProfileKey],
+      queryFn: () => this.profileFn(),
+      select: data => {
+        return data;
+      }
+    });
+  },
+  // 비밀번호 체크
+  checkPasswordFn: async (data: { m_password: string }): Promise<boolean> => {
+    const res = await axiosInstance.post(
+      `/api/mypage/member/password/check`,
+      data
+    );
+    return res.data.body;
+  },
+  PostCheckPassword: function () {
+    return useMutation({ mutationFn: this.checkPasswordFn });
+  },
+  // 비밀번호 변경
+  changePasswordFn: async (data: any): Promise<boolean> => {
+    const res = await axiosInstance.put(
+      `/api/mypage/member/password/update`,
+      data
+    );
+    return res.data.body;
+  },
+  PostChangePassword: function () {
+    return useMutation({ mutationFn: this.changePasswordFn });
   }
 };
 
