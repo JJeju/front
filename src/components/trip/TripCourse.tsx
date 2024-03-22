@@ -30,8 +30,7 @@ import { BiGridAlt } from 'react-icons/bi';
 
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
-  const { data, isFetching } = tripApi.GetTripDetail(createTravelPK);
-  const { data: courseData } = tripApi.GetTravelCourse(1);
+  const { data: courseData, isFetching } = tripApi.GetTravelCourse(1);
   const [form, setForm] = useState({
     tr_title: '',
     tr_relationship: '',
@@ -120,7 +119,9 @@ export default function TripCourse() {
                 id='phone-1'
                 required
                 type='tel'
-                value={isDisabled ? data?.tr_title : form.tr_title}
+                value={
+                  isDisabled ? courseData.travelroute?.tr_title : form.tr_title
+                }
                 disabled={isDisabled}
                 onChange={onChange}
                 name='tr_title'
@@ -132,7 +133,9 @@ export default function TripCourse() {
               </Label>
               <Select
                 value={
-                  isDisabled ? data?.tr_relationship : form.tr_relationship
+                  isDisabled
+                    ? courseData.travelroute?.tr_relationship
+                    : form.tr_relationship
                 }
                 onValueChange={value => {
                   setForm({ ...form, tr_relationship: value });
@@ -161,8 +164,8 @@ export default function TripCourse() {
                 className='w-full'
                 disabled={isDisabled}
                 onDateChange={handleDateChange}
-                start={data?.tr_in}
-                end={data?.tr_out}
+                start={courseData.travelroute?.tr_in}
+                end={courseData.travelroute?.tr_out}
               />
             </div>
           </div>
