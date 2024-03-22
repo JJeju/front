@@ -59,6 +59,7 @@ export default function Home() {
     pk: 0,
     category: ''
   });
+  //dssd
   return (
     <main className='flex flex-col p-3 justify-between md:p-20 '>
       <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
