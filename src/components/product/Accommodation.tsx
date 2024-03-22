@@ -48,11 +48,7 @@ const EDFAULT_LAT = 37.497625203;
 const DEFAULT_LNG = 127.03088379;
 
 export default function Accommodation({ pkValue }: any) {
-  const { data, refetch } = tripApi.GetTripDetail(pkValue);
-
-  useEffect(() => {
-    if (pkValue) refetch();
-  }, [pkValue]);
+  const { data, refetch } = tripApi.GetProductDetail(pkValue);
 
   const loadKakaoMap = () => {
     window.kakao.maps.load(() => {

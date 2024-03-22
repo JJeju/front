@@ -41,7 +41,8 @@ const faqApi = {
     return useQuery({
       queryKey: [this.getFaqDetailKey, data],
       queryFn: () => this.faqDetailFn(data),
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      enabled: !!data
     });
   }
 };

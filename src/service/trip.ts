@@ -1,7 +1,7 @@
 import { TravelCreateRq, TravelCreateRs } from '@/type/journey';
 import axiosInstance from '../utility/axiosInterceptor';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getTripRs } from '@/type/trip';
+import { getTripRs, getTripDetailRs } from '@/type/trip';
 
 const tripApi = {
   // 여행 상품 조회
@@ -15,7 +15,7 @@ const tripApi = {
   },
   GetTrip: function (data?: string) {
     return useQuery({
-      queryKey: ['trip'],
+      queryKey: ['trip', data],
       queryFn: () => this.getTripFn(data),
       refetchOnWindowFocus: false,
       staleTime: 50000
@@ -34,6 +34,39 @@ const tripApi = {
       refetchOnWindowFocus: false,
       staleTime: 50000,
       retry: 1
+    });
+  },
+  // 상품 상세보기
+  getProductDetailFn: async (data: {
+    pk: number;
+    category: string;
+  }): Promise<getTripDetailRs> => {
+    const res = await axiosInstance.get(
+      `/api/main/item_infomation?rnum=${data.pk}&category=${data.category}`
+    );
+    return res.data.body;
+  },
+  GetProductDetail: function (data: { pk: number; category: string }) {
+    return useQuery({
+      queryKey: ['productDetail', data.pk, data.category],
+      queryFn: () => this.getProductDetailFn(data),
+      enabled: !!data.category && !!data.pk,
+      refetchOnWindowFocus: false
+      // staleTime: 50000,
+      // retry: 1
+    });
+  },
+  // 여행 코스 조회
+  getTravelCourseFn: async (data: number) => {
+    const res = await axiosInstance.get(`/api/travel/plan/select/${data}`);
+    return res.data.body;
+  },
+  GetTravelCourse: function (data: number) {
+    return useQuery({
+      queryKey: ['travelCourse', data],
+      queryFn: () => this.getTravelCourseFn(data),
+      enabled: !!data,
+      refetchOnWindowFocus: false
     });
   }
 };

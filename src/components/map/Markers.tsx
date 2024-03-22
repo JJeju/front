@@ -1,6 +1,7 @@
 import {
   Dispatch,
   SetStateAction,
+  use,
   useCallback,
   useEffect,
   useState
@@ -15,34 +16,37 @@ interface MarkerProps {
   data: any;
   setCurrentStore: Dispatch<SetStateAction<any>>;
   currentStore: any;
+  category?: string;
 }
 export default function Markers({
   map,
   data,
   setCurrentStore,
-  currentStore
+  currentStore,
+  category
 }: MarkerProps) {
   const [open, setOpen] = useState(false);
+
+  const [markers, setMarkers] = useState<any>([]);
 
   const loadKakaMarkers = useCallback(() => {
     if (map) {
       data?.map((store: any) => {
-        // const imageSrc =
-        //   store.c_category === '식당'
-        //     ? '/Restaurant Icon.png'
-        //     : store.c_category === '숙박'
-        //     ? '/Store Icon .png'
-        //     : '/Airport Map Pin.png';
-        // const imageSize = new window.kakao.maps.Size(40, 40);
-        // imageOption = { offset: new window.kakao.maps.Point(27, 69) };
-
-        // const markerImage = new window.kakao.maps.MarkerImage(
-        // imageSrc,
-        // imageSize
-        // imageOption
-        // );
-
         const markerPosition = new window.kakao.maps.LatLng(
+          // const imageSrc =
+          //   store.c_category === '식당'
+          //     ? '/Restaurant Icon.png'
+          //     : store.c_category === '숙박'
+          //     ? '/Store Icon .png'
+          //     : '/Airport Map Pin.png';
+          // const imageSize = new window.kakao.maps.Size(40, 40);
+          // imageOption = { offset: new window.kakao.maps.Point(27, 69) };
+
+          // const markerImage = new window.kakao.maps.MarkerImage(
+          // imageSrc,
+          // imageSize
+          // imageOption
+          // );
           store?.c_lat,
           store?.c_lon
         );
@@ -52,13 +56,12 @@ export default function Markers({
           // image: markerImage
         });
         marker.setMap(map);
+        markers.push(marker);
 
-        marker.setMap(map);
-
-        const content = `<div class="max-w-48 w-36 overflow-hidden shadow-lg bg-white rounded-2xl">
-        <img class="w-full h-28" src=http://14.6.54.241:8080/download/${store.fileData.url} alt="상품 이미지">
+        const content = `<div class="max-w-48 w-36  shadow-lg bg-white rounded-2xl">
+        <img class="w-full h-28 rounded-2xl" src=http://14.6.54.241:8080/download/${store.fileData.url} alt="상품 이미지">
         <div class="px-2 py-4">
-          <div class="font-bold text-sm mb-2 whitespace-nowrap overflow-hidden overflow-ellipsis">${store.c_name}</div>
+          <div class="font-bold text-sm mb-2 whitespace-normal overflow-auto text-black">${store.c_name}</div>
           <p class="text-gray-700 text-xs whitespace-normal overflow-auto">
           ${store.c_addr}
           </p>
@@ -123,6 +126,13 @@ export default function Markers({
   useEffect(() => {
     loadKakaMarkers();
   }, [map, loadKakaMarkers]);
+
+  useEffect(() => {
+    markers.forEach((marker: any) => {
+      marker.setMap(null);
+    });
+    loadKakaMarkers();
+  }, [data]);
 
   return (
     <>

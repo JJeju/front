@@ -41,6 +41,7 @@ import { useIsLoggedIn } from '@/utility/hooks/useIsLogin';
 import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
 import { useStore } from 'zustand';
+import { useRouter } from 'next/navigation';
 
 const logincomponents: { title: string; href: string }[] = [
   {
@@ -114,6 +115,7 @@ export default function Navbar({ getIsLogin }: any) {
   const { toast } = useToast();
   const [hydrated, setHydrated] = useState(false);
 
+  const router = useRouter();
   useEffect(() => {
     setHydrated(true);
   }, []);
@@ -121,6 +123,8 @@ export default function Navbar({ getIsLogin }: any) {
   const handleLogout = () => {
     mutate();
     setIsLogin(false);
+    router.replace('/');
+
     // clearUserIdStorage();
   };
 

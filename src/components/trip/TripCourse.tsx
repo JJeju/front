@@ -18,7 +18,7 @@ import {
   SelectValue
 } from '../ui/select';
 import { Label } from '../ui/label';
-import { Reorder, motion } from 'framer-motion';
+import { Reorder, useDragControls } from 'framer-motion';
 import { Fragment, useState } from 'react';
 import Image, { ImageLoaderProps } from 'next/image';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
@@ -26,10 +26,12 @@ import { imgLoader } from '@/utility/utils/imgLoader';
 import tripApi from '@/service/trip';
 import tripStore from '@/stores/trip';
 import { formatDate } from '@/utility/hooks/comnHook';
+import { BiGridAlt } from 'react-icons/bi';
 
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
   const { data, isFetching } = tripApi.GetTripDetail(createTravelPK);
+  const { data: courseData } = tripApi.GetTravelCourse(1);
   const [form, setForm] = useState({
     tr_title: '',
     tr_relationship: '',
@@ -37,6 +39,7 @@ export default function TripCourse() {
     tr_out: ''
   });
 
+  console.log('>>', courseData);
   const [items, setItems] = useState([[0, 1, 2, 3], [4, 5], [6], [7], [8]]);
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -75,6 +78,8 @@ export default function TripCourse() {
 
     setItems(updatedItems);
   };
+
+  const controls = useDragControls();
 
   const onChange = (e: any) => {
     const { name, value } = e.target;
@@ -184,22 +189,24 @@ export default function TripCourse() {
             </TableRow>
           </TableBody>
         </Table>
-        {items.map((list, index) => (
-          <Fragment key={index}>
-            <div
-              className='text-xl pt-2 px-4 text-left font-extrabold'
-              key={index}
-            >
-              {index}일차
+        {courseData?.planList?.map((list: any, index: number) => (
+          <Fragment key={list.day}>
+            <div className='text-xl pt-2 px-4 text-left font-extrabold'>
+              {index}일차-({list.day})
             </div>
-            {list.map((item: any, xindex) => (
+            {list.dayPlanList.map((item: any) => (
               <Reorder.Group
                 axis='y'
                 values={items.flat()}
                 onReorder={handleReorder}
-                key={xindex}
+                key={item.tp_pk_num}
               >
-                <Reorder.Item value={item} className='w-full'>
+                <Reorder.Item
+                  value={item}
+                  className='w-full'
+                  dragListener={false}
+                  dragControls={controls}
+                >
                   <Table>
                     <TableBody>
                       <TableRow>
@@ -223,16 +230,22 @@ export default function TripCourse() {
                           제주도 휴가 패키지
                         </TableCell>
                         <TableCell className=' text-overflow-ellipsis w-[200px]'>
-                          {item}
+                          {/* {item} */}
                         </TableCell>
                         <TableCell className='text-right'>
                           <Button
                             variant='destructive'
                             size='sm'
-                            onClick={() => onRemove(item)}
+                            // onClick={() => onRemove(item)}
                           >
                             삭제
                           </Button>
+                        </TableCell>
+                        <TableCell>
+                          <BiGridAlt
+                            className='w-6 h-6 cursor-pointer'
+                            onPointerDown={e => controls.start(e)}
+                          />
                         </TableCell>
                       </TableRow>
                     </TableBody>

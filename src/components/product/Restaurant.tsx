@@ -29,11 +29,7 @@ const DEFAULT_LNG = 127.03088379;
 const DEFAULT_ZOOM = 3;
 
 export default function Restaurant({ pkValue }: any) {
-  const { data, refetch } = tripApi.GetTripDetail(pkValue);
-
-  useEffect(() => {
-    if (pkValue) refetch();
-  }, [pkValue]);
+  const { data } = tripApi.GetProductDetail(pkValue);
 
   const loadKakaoMap = () => {
     window.kakao.maps.load(() => {

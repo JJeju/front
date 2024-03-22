@@ -40,6 +40,7 @@ import mypageApi from '@/service/mypage';
 import { imgLoader } from '@/utility/utils/imgLoader';
 import MainLoading from '@/components/loading/MainLoading';
 import FaqDetail from '@/components/faq/FaqDetail';
+import { set } from 'date-fns';
 
 export default function Home() {
   const router = useRouter();
@@ -54,33 +55,10 @@ export default function Home() {
   const [isFaqId, setIsFaqId] = useState(0);
 
   const [isId, setIsId] = useState(0);
-  // useEffect(() => {
-  //   axios
-  //     .get('https://dapi.kakao.com/v2/local/search/address.json', {
-  //       params: {
-  //         query: '제주 제주시 애월읍 애월로 33',
-  //         page: 1,
-  //         size: 10
-  //       },
-  //       headers: {
-  //         Authorization: 'KakaoAK cf6d2026face7a19e0a4d818ce63abca',
-  //         KA: 'sdk/4.4.14 os/javascript lang/ko device/MacIntel origin/https%3A%2F%2Fdeveapp.com '
-  //       }
-  //     })
-  //     .then(res => {
-  //       console.log(res);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
-  // if (eventFetching) {
-  //   return <MainSkeleton />;
-  // }
-  // if (bestFetching) {
-  //   return <MainSkeleton />;
-  // }
-
+  const [productValue, setProductValue] = useState({
+    pk: 0,
+    category: ''
+  });
   return (
     <main className='flex flex-col p-3 justify-between md:p-20 '>
       <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
@@ -150,6 +128,12 @@ export default function Home() {
                       <motion.div
                         key={index}
                         className=''
+                        onClick={() =>
+                          setProductValue({
+                            pk: data.c_pk_cnum as any,
+                            category: data.c_category
+                          })
+                        }
                         whileTap={{ scale: 0.9 }}
                       >
                         <Card className='w-full h-full  '>
@@ -194,7 +178,7 @@ export default function Home() {
                       </motion.div>
                     </div>
                   </DialogTrigger>
-                  <Accommodation />
+                  <Accommodation pkValue={productValue} />
                 </Dialog>
               </CarouselItem>
             ))}
@@ -278,7 +262,7 @@ export default function Home() {
                       </motion.div>
                     </div>
                   </DialogTrigger>
-                  <Restaurant />
+                  <Restaurant pkValue={productValue} />
                 </Dialog>
               </CarouselItem>
             ))}
@@ -392,7 +376,7 @@ export default function Home() {
                     </Card>
                   </motion.div>
                 </DialogTrigger>
-                <FaqDetail id={isId} />
+                <FaqDetail id={isFaqId} />
               </Dialog>
             </>
           ))}

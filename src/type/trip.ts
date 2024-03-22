@@ -25,5 +25,26 @@ interface getTripRs {
     create_dt: string;
   };
 }
+interface getTripDetailRs {
+  atdto: {
+    at_pk_num: number;
+    at_fk_cnum: number;
+    at_name: string;
+    at_img: string;
+    at_contents: string;
+    at_price: number;
+    at_rtch: string;
+    at_hidden: string;
+  };
+  strArr: [string];
+  aiList: [
+    {
+      ai_pk_num: number;
+      ai_fk_num: number;
+      ai_oriname: string;
+      ai_sysname: string;
+    }
+  ];
+}
 
-export type { getTripRs };
+export type { getTripRs, getTripDetailRs };

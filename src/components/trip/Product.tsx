@@ -12,13 +12,46 @@ import Map from '../map/Map';
 import tripApi from '@/service/trip';
 import { imgLoader } from '@/utility/utils/imgLoader';
 import { useState } from 'react';
-export default function Product({ data }: any) {
-  console.log('>', data);
 
+const items = [
+  {
+    id: '숙박',
+    label: '숙박'
+  },
+
+  {
+    id: '식당',
+    label: '식당'
+  },
+  {
+    id: '레저',
+    label: '레저'
+  },
+  {
+    id: '관광지',
+    label: '관광지'
+  },
+  {
+    id: '찜',
+    label: '찜'
+  }
+] as const;
+
+export default function Product({ data, handlerCategory }: any) {
   const [isOpen, setIsOpen] = useState(false);
-  const [pkValue, setPkValue] = useState(0);
+  const [pkValue, setPkValue] = useState({
+    pk: 0,
+    category: ''
+  });
+  const [checkboxValue, setCheckboxValue] = useState('');
+
   const handleDialogOpen = () => {
     setIsOpen(true);
+  };
+
+  const handleCheckboxChange = (value: string) => {
+    setCheckboxValue(value);
+    handlerCategory(value);
   };
 
   return (
@@ -31,41 +64,27 @@ export default function Product({ data }: any) {
           </div>
         </div>
         <div className='flex space-x-2  justify-center items-center  my-3'>
-          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
-          <label
-            htmlFor='terms'
-            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-          >
-            숙박
-          </label>
-          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
-          <label
-            htmlFor='terms'
-            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-          >
-            식당
-          </label>
-          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
-          <label
-            htmlFor='terms'
-            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-          >
-            레저
-          </label>
-          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
-          <label
-            htmlFor='terms'
-            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-          >
-            관광지
-          </label>
-          <Checkbox id='terms' className='md:w-6 md:h-6 w-5 h-5' />
-          <label
-            htmlFor='terms'
-            className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-          >
-            찜
-          </label>
+          {items.map((item, index) => (
+            <>
+              <Checkbox
+                id={item.id}
+                className='md:w-6 md:h-6 w-5 h-5'
+                value={checkboxValue}
+                checked={checkboxValue?.includes(item.id)}
+                onCheckedChange={checkd => {
+                  !checkd
+                    ? handleCheckboxChange('')
+                    : handleCheckboxChange(item.id);
+                }}
+              />
+              <label
+                htmlFor={item.id}
+                className='md:text-lg text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+              >
+                {item.label}
+              </label>
+            </>
+          ))}
         </div>
         <ScrollArea
           id='scrollarea'
@@ -103,7 +122,12 @@ export default function Product({ data }: any) {
                       <Button
                         size='sm'
                         className='w-22'
-                        onClick={() => setPkValue(item.c_pk_num)}
+                        onClick={() =>
+                          setPkValue({
+                            pk: item.c_pk_num,
+                            category: item.c_category
+                          })
+                        }
                       >
                         상세보기
                       </Button>

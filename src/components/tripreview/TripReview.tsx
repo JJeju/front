@@ -28,11 +28,11 @@ import { imgLoader } from '@/utility/utils/imgLoader';
 import mypageApi from '@/service/mypage';
 import { formatDate } from '@/utility/hooks/comnHook';
 import { useState } from 'react';
+import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 
 export default function TripReview({ id }: any) {
   const { data } = mypageApi.GetTripReviewDetail(id);
   const [map, setMap] = useState(null);
-  console.log('>>', data);
   return (
     <DialogContent className=' md:w-[1000px] w-full  md:h-[90%] h-full overflow-scroll'>
       <div className='space-y-8 px-4 py-8 xl:py-8'>
@@ -86,16 +86,42 @@ export default function TripReview({ id }: any) {
             src={`http://14.6.54.241:8080/download/${data?.mainFile?.url}`}
             width='500'
           />
+          <Separator />
+          <Carousel
+            opts={{
+              align: 'start'
+            }}
+            className='w-full  mt-5'
+          >
+            <CarouselContent>
+              {data?.files?.map((data: any, index: number) => (
+                <CarouselItem
+                  key={index}
+                  className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+                >
+                  <Image
+                    loader={({ src, width, quality }: ImageLoaderProps) =>
+                      imgLoader({ src, width, quality })
+                    }
+                    alt='Restaurant'
+                    className='overflow-hidden rounded-xl object-bottom'
+                    height='200'
+                    src={`http://14.6.54.241:8080/download/${data?.url}`}
+                    width='500'
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
 
           <Separator />
+          <h2 className='text-lg font-semibold'>여행 코스</h2>
           <div className='h-[500px] w-full'>
             <Map setMap={setMap} />
           </div>
           <Separator />
           <div className='grid gap-1'>
             <h2 className='text-lg font-semibold'>여행 일정</h2>
-
-            {/* <h2 className='text-lg font-semibold mt-4'>1일차</h2> */}
             <Table>
               <TableHeader>
                 <TableRow>
