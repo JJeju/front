@@ -83,7 +83,7 @@ export default function TripReview({ id }: any) {
             alt='Restaurant'
             className='overflow-hidden rounded-xl object-bottom'
             height='200'
-            src={`http://14.6.54.241:8080/download/${data.mainFile.url}`}
+            src={`http://14.6.54.241:8080/download/${data?.mainFile.url}`}
             width='500'
           />
           <Separator />
