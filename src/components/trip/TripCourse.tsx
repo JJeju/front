@@ -19,14 +19,14 @@ import {
 } from '../ui/select';
 import { Label } from '../ui/label';
 import { Reorder, useDragControls } from 'framer-motion';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Image, { ImageLoaderProps } from 'next/image';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
 import { imgLoader } from '@/utility/utils/imgLoader';
 import tripApi from '@/service/trip';
 import tripStore from '@/stores/trip';
 import { formatDate } from '@/utility/hooks/comnHook';
-import { BiGridAlt } from 'react-icons/bi';
+import { set } from 'date-fns';
 
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
@@ -38,47 +38,38 @@ export default function TripCourse() {
     tr_out: ''
   });
 
-  console.log('>>', courseData);
-  const [items, setItems] = useState([[0, 1, 2, 3], [4, 5], [6], [7], [8]]);
+  const [items, setItems] = useState([]);
+  const [currentItem, setCurrentItem] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
+  console.log('>>', items);
 
-  const onRemove = (item: any) => {
-    setItems(removeItem(items, item));
+  useEffect(() => {
+    if (courseData)
+      // setItems(courseData.planList.dayPlanList.Flat());
+      setItems(courseData.planList);
+    setCurrentItem(
+      courseData?.planList.flatMap((list: any) => list.dayPlanList)
+    );
+  }, [courseData]);
+
+  // const onRemove = (item: any) => {
+  //   setItems(removeItem(items, item));
+  // };
+
+  const handleReorder = (newValue: any) => {
+    console.log('newValue>>', newValue);
+    // setItems(newValue);
+    setCurrentItem(newValue);
+    // const updatedItems = items.map(group => {
+    //   return group.map(item => {
+    //     const newItem = newOrder.find(
+    //       (newOrderItem: { id: any }) => newOrderItem.id === item.id
+    //     );
+    // console.log('newOrder>>', newOrder);
+    // setItems(newOrder);
+    // };
+    // });
   };
-
-  function removeItem<T>([...arr]: T[], item: T) {
-    const index = arr.indexOf(item);
-    index > -1 && arr.splice(index, 1);
-    return arr;
-  }
-
-  const handleReorder = (newOrder: any[]) => {
-    // This is a simplified example. You might need to adjust the logic based on your exact data structure.
-    const isSameGroup = (draggedItem: any, targetItem: { group: any }) => {
-      // Assuming each item has a group property that can be used to identify the group
-      return draggedItem.group === targetItem.group;
-    };
-
-    // Assuming newOrder is an array of items with their new positions
-    const updatedItems = items.map(group => {
-      return group.map(item => {
-        // Find the item in the newOrder array that matches the current item
-        const newItem = newOrder.find(
-          (newOrderItem: { id: any }) => newOrderItem.id === item
-        );
-        if (newItem && isSameGroup(item, newItem)) {
-          // If the item is in the same group, update its position
-          return newItem;
-        }
-        // If the item is not in the same group or not found, keep the original item
-        return item;
-      });
-    });
-
-    setItems(updatedItems);
-  };
-
-  const controls = useDragControls();
 
   const onChange = (e: any) => {
     const { name, value } = e.target;
@@ -101,8 +92,8 @@ export default function TripCourse() {
     return <div>loading...</div>;
   }
   return (
-    <div className='w-full h-auto '>
-      <div className='grid gap-8 mt-4'>
+    <div className='w-full  '>
+      <div className='grid gap-8 mt-4 '>
         <div className='flex gap-2'>
           <h3 className='text-2xl font-semibold'>여행 정보</h3>
           <Button className='ml-2' size='sm'>
@@ -120,7 +111,7 @@ export default function TripCourse() {
                 required
                 type='tel'
                 value={
-                  isDisabled ? courseData.travelroute?.tr_title : form.tr_title
+                  isDisabled ? courseData?.travelroute?.tr_title : form.tr_title
                 }
                 disabled={isDisabled}
                 onChange={onChange}
@@ -192,24 +183,18 @@ export default function TripCourse() {
             </TableRow>
           </TableBody>
         </Table>
-        {courseData?.planList?.map((list: any, index: number) => (
-          <Fragment key={list.day}>
-            <div className='text-xl pt-2 px-4 text-left font-extrabold'>
-              {index}일차-({list.day})
-            </div>
-            {list.dayPlanList.map((item: any) => (
-              <Reorder.Group
-                axis='y'
-                values={items.flat()}
-                onReorder={handleReorder}
-                key={item.tp_pk_num}
-              >
-                <Reorder.Item
-                  value={item}
-                  className='w-full'
-                  dragListener={false}
-                  dragControls={controls}
-                >
+        <Reorder.Group
+          axis='y'
+          values={items} // Use the entire flattened data for reordering across days
+          onReorder={handleReorder}
+        >
+          {courseData?.planList.map((list: any, index: number) => (
+            <Fragment key={list.day}>
+              <div className='text-xl pt-2 px-4 text-left font-extrabold'>
+                {index}일차 - ({list.day})
+              </div>
+              {list.dayPlanList.map((item: any) => (
+                <Reorder.Item value={currentItem} key={item} className='w-full'>
                   <Table>
                     <TableBody>
                       <TableRow>
@@ -230,7 +215,7 @@ export default function TripCourse() {
                           />
                         </TableCell>
                         <TableCell className=' text-overflow-ellipsis w-[150px] '>
-                          제주도 휴가 패키지
+                          {item.tp_pk_num}
                         </TableCell>
                         <TableCell className=' text-overflow-ellipsis w-[200px]'>
                           {/* {item} */}
@@ -244,20 +229,14 @@ export default function TripCourse() {
                             삭제
                           </Button>
                         </TableCell>
-                        <TableCell>
-                          <BiGridAlt
-                            className='w-6 h-6 cursor-pointer'
-                            onPointerDown={e => controls.start(e)}
-                          />
-                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
                 </Reorder.Item>
-              </Reorder.Group>
-            ))}
-          </Fragment>
-        ))}
+              ))}
+            </Fragment>
+          ))}
+        </Reorder.Group>
       </div>
     </div>
   );

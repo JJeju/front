@@ -18,7 +18,7 @@ interface MarkerProps {
   currentStore: any;
   category?: string;
 }
-export default function Markers({
+export default function CourseMarker({
   map,
   data,
   setCurrentStore,
@@ -32,20 +32,19 @@ export default function Markers({
   const loadKakaMarkers = useCallback(() => {
     if (map) {
       data?.map((store: any) => {
-        // const imageSrc =
-        //   store.c_category === '식당'
-        //     ? '/Restaurant Icon.png'
-        //     : store.c_category === '숙박'
-        //     ? '/Store Icon .png'
-        //     : '/Airport Map Pin.png';
-        // const imageSize = new window.kakao.maps.Size(40, 40);
-        // imageOption = { offset: new window.kakao.maps.Point(27, 69) };
-
-        // const markerImage = new window.kakao.maps.MarkerImage(
-        // imageSrc,
-        // imageSize
-        // imageOption
-        // );
+        const imageSrc =
+          'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png';
+        const imageSize = new window.kakao.maps.Size(40, 40);
+        const imageOption = {
+          spriteSize: new window.kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+          spriteOrigin: new window.kakao.maps.Point(0, 2 * 46 + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+          offset: new window.kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        };
+        const markerImage = new window.kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        );
 
         const markerPosition = new window.kakao.maps.LatLng(
           store?.c_lat,
@@ -53,21 +52,21 @@ export default function Markers({
         );
 
         const marker = new window.kakao.maps.Marker({
-          position: markerPosition
-          // image: markerImage
+          position: markerPosition,
+          image: markerImage
         });
         marker.setMap(map);
         markers.push(marker);
 
         const content = `<div class="max-w-48 w-36  shadow-lg bg-white rounded-2xl">
-        <img class="w-full h-28 rounded-2xl" src=http://14.6.54.241:8080/download/${store.fileData.url} alt="상품 이미지">
-        <div class="px-2 py-4">
-          <div class="font-bold text-sm mb-2 whitespace-normal overflow-auto text-black">${store.c_name}</div>
-          <p class="text-gray-700 text-xs whitespace-normal overflow-auto">
-          ${store.c_addr}
-          </p>
-        </div>
-     </div>`;
+          <img class="w-full h-28 rounded-2xl" src=http://14.6.54.241:8080/download/${store.fileData.url} alt="상품 이미지">
+          <div class="px-2 py-4">
+            <div class="font-bold text-sm mb-2 whitespace-normal overflow-auto text-black">${store.c_name}</div>
+            <p class="text-gray-700 text-xs whitespace-normal overflow-auto">
+            ${store.c_addr}
+            </p>
+          </div>
+       </div>`;
 
         // 마커 클릭시 인포윈도우
         const customOverlay = new window.kakao.maps.CustomOverlay({
@@ -138,12 +137,12 @@ export default function Markers({
   return (
     <>
       {/* <Dialog open={open} onOpenChange={() => setOpen(!open)}>
-        {currentStore?.c_category === '숙박' ? (
-          <Accommodation />
-        ) : (
-          <Restaurant />
-        )}
-      </Dialog> */}
+          {currentStore?.c_category === '숙박' ? (
+            <Accommodation />
+          ) : (
+            <Restaurant />
+          )}
+        </Dialog> */}
     </>
   );
 }

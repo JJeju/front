@@ -56,7 +56,7 @@ export default function Trip() {
             <Product data={data} handlerCategory={handlerCategory} />
           </TabsContent>
           <TabsContent value='tripcourse'>
-            <div className='h-full overflow-scroll'>
+            <div className=' overflow-scroll  h-[85vh]'>
               <TripCourse />
             </div>
           </TabsContent>
