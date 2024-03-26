@@ -21,6 +21,14 @@ const journeyApi = {
       queryKey: ['getjourney'],
       queryFn: () => this.getJourneyFn(data)
     });
+  },
+  // 여정 삭제
+  deleteJourneyFn: async (data: number) => {
+    const res = await axiosInstance.delete(`/api/mypage/travel/delete/${data}`);
+    return res.data.body;
+  },
+  DeleteJourney: function () {
+    return useMutation({ mutationFn: this.deleteJourneyFn });
   }
 };
 

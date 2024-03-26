@@ -20,16 +20,47 @@ import journeyApi from '@/service/journey';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
 import JourneyLoading from '../loading/JourneyLoading';
 import tripStore from '@/stores/trip';
+import { toast, useToast } from '../ui/use-toast';
+import { ToastAction } from '../ui/toast';
 
 export default function SavedJourney() {
   const router = useRouter();
 
-  const { data, isFetching } = journeyApi.GetJourney(false);
-  const setCreateTravelPK = tripStore(state => state.setCreateTravelPK);
+  const { data, isFetching, refetch } = journeyApi.GetJourney(false);
+  const mutateDeleteJourney = journeyApi.DeleteJourney();
 
+  const setCreateTravelPK = tripStore(state => state.setCreateTravelPK);
+  const { toast } = useToast();
   const handleSubmit = (id: number) => {
     setCreateTravelPK(id);
     router.push('/trip');
+  };
+  const handleDelete = (id: number) => {
+    mutateDeleteJourney.mutate(id, {
+      onSuccess: data => {
+        if (data) {
+          refetch();
+          return (
+            <>
+              {toast({
+                title: '성공',
+                description: '여정이 삭제 되었습니다.',
+                action: <ToastAction altText='Try again'>확인</ToastAction>
+              })}
+            </>
+          );
+        } else {
+          <>
+            {toast({
+              variant: 'destructive',
+              title: '오류',
+              description: '여정 삭제에 실패했습니다.',
+              action: <ToastAction altText='Try again'>확인</ToastAction>
+            })}
+          </>;
+        }
+      }
+    });
   };
   return (
     <ScrollArea className=' md:h-[260px] h-[600px] rounded-md border'>
@@ -73,7 +104,14 @@ export default function SavedJourney() {
                     end={item.tr_out}
                   />
                 </div>
-                <div className='flex justify-end'>
+                <div className='flex justify-end gap-4'>
+                  <Button
+                    variant={'destructive'}
+                    className='w-24'
+                    onClick={() => handleDelete(item.tr_pk_num)}
+                  >
+                    여정 삭제하기
+                  </Button>
                   <Button
                     className='w-24'
                     onClick={() => handleSubmit(item.tr_pk_num)}

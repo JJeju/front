@@ -45,10 +45,6 @@ import { useRouter } from 'next/navigation';
 
 const logincomponents: { title: string; href: string }[] = [
   {
-    title: '여행 짜러가기',
-    href: '/trip'
-  },
-  {
     title: '이벤트',
     href: '/event'
   },
@@ -75,10 +71,6 @@ const logincomponents: { title: string; href: string }[] = [
 ];
 
 const components: { title: string; href?: string; toast?: boolean }[] = [
-  {
-    title: '여행 짜러가기',
-    toast: true
-  },
   {
     title: '이벤트',
     href: '/event'
@@ -116,6 +108,7 @@ export default function Navbar({ getIsLogin }: any) {
   const [hydrated, setHydrated] = useState(false);
 
   const router = useRouter();
+
   useEffect(() => {
     setHydrated(true);
   }, []);
@@ -134,7 +127,7 @@ export default function Navbar({ getIsLogin }: any) {
         <Link href='/' className='text-3xl font-semibold md:text-3xl'>
           J E J U
         </Link>
-        <div className='flex justify-end items-center gap-3'>
+        <div className='flex ju00stify-end items-center gap-3'>
           <NavigationMenu className='hidden md:block'>
             <NavigationMenuList>
               <NavigationMenuItem>

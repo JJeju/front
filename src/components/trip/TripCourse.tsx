@@ -19,14 +19,14 @@ import {
 } from '../ui/select';
 import { Label } from '../ui/label';
 import { Reorder, useDragControls } from 'framer-motion';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import Image, { ImageLoaderProps } from 'next/image';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
 import { imgLoader } from '@/utility/utils/imgLoader';
 import tripApi from '@/service/trip';
 import tripStore from '@/stores/trip';
 import { formatDate } from '@/utility/hooks/comnHook';
-import { set } from 'date-fns';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
@@ -52,9 +52,37 @@ export default function TripCourse() {
     );
   }, [courseData]);
 
-  // const onRemove = (item: any) => {
-  //   setItems(removeItem(items, item));
-  // };
+  const onDragEnd = useCallback(
+    (result: any) => {
+      const { destination, source, draggableId, type } = result;
+      if (!destination) return;
+      if (
+        destination.droppableId === source.droppableId &&
+        source.index === destination.index
+      )
+        return;
+
+      const newItems = [...items];
+      const startListIndex = Number(source.droppableId);
+      const finishListIndex = Number(destination.droppableId);
+      const startList: any = newItems[startListIndex];
+      const finishList: any = newItems[finishListIndex];
+      const draggedItem = startList.dayPlanList[source.index];
+
+      // Moving within the same list
+      if (startListIndex === finishListIndex) {
+        startList.dayPlanList.splice(source.index, 1);
+        startList.dayPlanList.splice(destination.index, 0, draggedItem);
+      } else {
+        // Moving to a different list
+        startList.dayPlanList.splice(source.index, 1);
+        finishList.dayPlanList.splice(destination.index, 0, draggedItem);
+      }
+
+      setItems(newItems);
+    },
+    [items]
+  );
 
   const handleReorder = (newValue: any) => {
     console.log('newValue>>', newValue);
@@ -183,60 +211,78 @@ export default function TripCourse() {
             </TableRow>
           </TableBody>
         </Table>
-        <Reorder.Group
-          axis='y'
-          values={items} // Use the entire flattened data for reordering across days
-          onReorder={handleReorder}
-        >
-          {courseData?.planList.map((list: any, index: number) => (
+        <DragDropContext onDragEnd={onDragEnd}>
+          {items.map((list: any, index: any) => (
             <Fragment key={list.day}>
               <div className='text-xl pt-2 px-4 text-left font-extrabold'>
                 {index}일차 - ({list.day})
               </div>
-              {list.dayPlanList.map((item: any) => (
-                <Reorder.Item value={currentItem} key={item} className='w-full'>
-                  <Table>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell className='w-[150px] '>
-                          <Image
-                            loader={({
-                              src,
-                              width,
-                              quality
-                            }: ImageLoaderProps) =>
-                              imgLoader({ src, width, quality })
-                            }
-                            alt='Tour image'
-                            className='aspect-1/2 rounded-md object-cover overflow-hidden'
-                            src={'/56692-O8P89L-432.jpg'}
-                            height='36'
-                            width='64'
-                          />
-                        </TableCell>
-                        <TableCell className=' text-overflow-ellipsis w-[150px] '>
-                          {item.tp_pk_num}
-                        </TableCell>
-                        <TableCell className=' text-overflow-ellipsis w-[200px]'>
-                          {/* {item} */}
-                        </TableCell>
-                        <TableCell className='text-right'>
-                          <Button
-                            variant='destructive'
-                            size='sm'
-                            // onClick={() => onRemove(item)}
+              <Droppable key={index} droppableId={`draggable-${index}`}>
+                {provided => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className='cardlists'
+                  >
+                    {list.dayPlanList.map((item: any, innerIndex: any) => (
+                      <Draggable
+                        key={`draggable-${innerIndex}`}
+                        draggableId={`draggable-${innerIndex}`}
+                        index={innerIndex}
+                      >
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
                           >
-                            삭제
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </Reorder.Item>
-              ))}
+                            <Table>
+                              <TableBody>
+                                <TableRow>
+                                  <TableCell className='w-[150px] '>
+                                    <Image
+                                      loader={({
+                                        src,
+                                        width,
+                                        quality
+                                      }: ImageLoaderProps) =>
+                                        imgLoader({ src, width, quality })
+                                      }
+                                      alt='Tour image'
+                                      className='aspect-1/2 rounded-md object-cover overflow-hidden'
+                                      src={'/56692-O8P89L-432.jpg'}
+                                      height='36'
+                                      width='64'
+                                    />
+                                  </TableCell>
+                                  <TableCell className=' text-overflow-ellipsis w-[150px] '>
+                                    {item.tp_pk_num}
+                                  </TableCell>
+                                  <TableCell className=' text-overflow-ellipsis w-[200px]'>
+                                    {/* {item} */}
+                                  </TableCell>
+                                  <TableCell className='text-right'>
+                                    <Button
+                                      variant='destructive'
+                                      size='sm'
+                                      // onClick={() => onRemove(item)}
+                                    >
+                                      삭제
+                                    </Button>
+                                  </TableCell>
+                                </TableRow>
+                              </TableBody>
+                            </Table>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                  </div>
+                )}
+              </Droppable>
             </Fragment>
           ))}
-        </Reorder.Group>
+        </DragDropContext>
       </div>
     </div>
   );
