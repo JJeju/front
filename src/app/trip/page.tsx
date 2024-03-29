@@ -78,21 +78,28 @@ export default function Trip() {
           <div className='md:hidden block'>
             <Drawer>
               <DrawerTrigger className='absolute bottom-5 right-5 overflow-auto z-10'>
-                <Layers3
-                  color='black'
-                  className='bg-white rounded-full w-6 h-6'
-                />
+                <div className='rounded-sm bg-yellow-300 w-8 h-8 resize'>
+                  <Layers3
+                    color='black'
+                    className='bg-white rounded-full w-6 h-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+                  />
+                </div>
               </DrawerTrigger>
               <DrawerContent className=''>
                 <DrawerHeader>
-                  <Tabs defaultValue='account' className=''>
+                  <Tabs
+                    defaultValue='account'
+                    className=''
+                    value={tabValue}
+                    onValueChange={val => setTabValue(val)}
+                  >
                     <TabsList className='grid w-full grid-cols-3'>
                       <TabsTrigger value='ProductList'>상품 목록</TabsTrigger>
                       <TabsTrigger value='tripcourse'>여행 코스</TabsTrigger>
                       <TabsTrigger value='poket'>장바구니</TabsTrigger>
                     </TabsList>
                     <TabsContent value='ProductList'>
-                      <div className='h-[600px]'>
+                      <div className='h-[500px]'>
                         <Product
                           data={data}
                           handlerCategory={handlerCategory}
@@ -100,12 +107,12 @@ export default function Trip() {
                       </div>
                     </TabsContent>
                     <TabsContent value='tripcourse'>
-                      <div className='h-[600px] overflow-scroll'>
+                      <div className='h-[500px] overflow-scroll'>
                         <TripCourse />
                       </div>
                     </TabsContent>
                     <TabsContent value='poket'>
-                      <div className='h-[600px]'>
+                      <div className='h-[500px]'>
                         <ShowppingCart />
                       </div>
                     </TabsContent>

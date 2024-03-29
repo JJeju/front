@@ -16,9 +16,14 @@ import { motion } from 'framer-motion';
 import noticeApi from '@/service/notice';
 import { formatDate } from '@/utility/hooks/comnHook';
 import useUserIdStore from '@/stores/auth';
+import FaqDetail from '@/components/faq/FaqDetail';
+import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
+import { useState } from 'react';
+import { NoticeRs } from '@/type/notice';
 export default function Notice() {
   const router = useRouter();
   const { isLogin, setIsLogin } = useUserIdStore();
+  const [isFaqId, setIsFaqId] = useState(0);
 
   const { data: NoticeData, isFetching: noticeFetching } =
     noticeApi.GetNotice();
@@ -36,29 +41,38 @@ export default function Notice() {
         </div>
       </div>
       <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>
-        {NoticeData?.map((item, index) => (
-          <motion.div
-            key={index}
-            className=''
-            whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
-          >
-            <Card className='p-5' key={index}>
-              <CardContent className='flex flex-col'>
-                <h3 className='text-xl font-semibold'>{item.n_title}</h3>
+        {NoticeData?.map((item: NoticeRs, index: number) => (
+          <>
+            <Dialog>
+              <DialogTrigger>
+                <motion.div
+                  key={index}
+                  onClick={() => setIsFaqId(item.n_pk_num)}
+                  className=''
+                  whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
+                >
+                  <Card className='p-5' key={index}>
+                    <CardContent className='flex flex-col'>
+                      <h3 className='text-xl font-semibold text-left'>
+                        {item.n_title}
+                      </h3>
+                      <div className='text-xs'>
+                        <p className='text-gray-500 text-left dark:text-gray-400 flex py-2'>
+                          {formatDate(item.n_date)}
+                          <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
+                        </p>
+                      </div>
 
-                <div className='text-xs'>
-                  <p className='text-gray-500 dark:text-gray-400 flex py-2'>
-                    {formatDate(item.n_date)}
-                    <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
-                  </p>
-                </div>
-
-                <p className='text-sm text-gray-500 dark:text-gray-400'>
-                  {item.n_contents}
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+                      <p className='text-sm text-left text-gray-500 dark:text-gray-400'>
+                        {item.n_contents}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </DialogTrigger>
+              <FaqDetail id={isFaqId} />
+            </Dialog>
+          </>
         ))}
       </div>
     </div>

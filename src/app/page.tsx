@@ -41,6 +41,7 @@ import { imgLoader } from '@/utility/utils/imgLoader';
 import MainLoading from '@/components/loading/MainLoading';
 import FaqDetail from '@/components/faq/FaqDetail';
 import { set } from 'date-fns';
+import { ReviewRs } from '@/type/home';
 
 export default function Home() {
   const router = useRouter();
@@ -60,7 +61,7 @@ export default function Home() {
     category: ''
   });
   return (
-    <main className='flex flex-col p-3 justify-between md:p-20 '>
+    <main className='flex flex-col px-3 justify-between md:px-20 '>
       <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
         <div className='z-0 flex flex-col md:items-center md:justify-center gap-4 p-1 md:flex-row-reverse'>
           <Image
@@ -114,7 +115,7 @@ export default function Home() {
           opts={{
             align: 'start'
           }}
-          className='w-full  mt-5'
+          className='w-full mt-5 '
         >
           <CarouselContent>
             {bestData?.map((data, index) => (
@@ -138,7 +139,7 @@ export default function Home() {
                       >
                         <Card className='w-full h-full  '>
                           <CardContent className='flex items-start justify-center p-3 group'>
-                            <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
+                            <div className='relative w-full md:w-[100%] md:h-[258px] lg:w-[250px] lg:h-[257px] h-[173px]'>
                               <Image
                                 loader={({
                                   src,
@@ -152,8 +153,6 @@ export default function Home() {
                                 className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
                                 layout='fill'
                                 objectFit='cover'
-                                // height={200}
-                                // width={300}
                               />
                             </div>
                           </CardContent>
@@ -200,7 +199,7 @@ export default function Home() {
           className='w-full  mt-5'
         >
           <CarouselContent>
-            {EvnetData?.map((data: any, index) => (
+            {EvnetData?.map((data: any, index: number) => (
               <CarouselItem
                 key={index}
                 className='md:basis-1/3 basis-1/2 lg:basis-1/4'
@@ -215,7 +214,7 @@ export default function Home() {
                       >
                         <Card className='w-full h-full  '>
                           <CardContent className='flex  items-start justify-center p-3  group'>
-                            <div className='relative md:w-[100%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
+                            <div className='relative w-full md:w-[100%] md:h-[258px] lg:w-[250px] lg:h-[257px] h-[173px]'>
                               <Image
                                 loader={({
                                   src,
@@ -283,7 +282,7 @@ export default function Home() {
           </Badge>
         </div>
         <div className=' grid md:grid-cols-3 grid-cols-1 gap-3'>
-          {ReviewData?.map((item, index) => (
+          {ReviewData?.map((item: ReviewRs, index: number) => (
             <Dialog key={index}>
               <DialogTrigger>
                 <motion.div

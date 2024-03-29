@@ -29,9 +29,10 @@ import mypageApi from '@/service/mypage';
 import { formatDate } from '@/utility/hooks/comnHook';
 import { useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
+import { Skeleton } from '../ui/skeleton';
 
 export default function TripReview({ id }: any) {
-  const { data } = mypageApi.GetTripReviewDetail(id);
+  const { data, isFetching } = mypageApi.GetTripReviewDetail(id);
   const [map, setMap] = useState(null);
   return (
     <DialogContent className=' md:w-[1000px] w-full  md:h-[90%] h-full overflow-scroll'>
@@ -76,16 +77,20 @@ export default function TripReview({ id }: any) {
             </div>
           </div>
           <Separator />
-          <Image
-            loader={({ src, width, quality }: ImageLoaderProps) =>
-              imgLoader({ src, width, quality })
-            }
-            alt='Restaurant'
-            className='overflow-hidden rounded-xl object-bottom'
-            height='200'
-            src={`http://14.6.54.241:8080/download/${data?.mainFile.url}`}
-            width='500'
-          />
+          {isFetching ? (
+            <Skeleton className='h-[400px] w-[500px]  rounded-xl ' />
+          ) : (
+            <Image
+              loader={({ src, width, quality }: ImageLoaderProps) =>
+                imgLoader({ src, width, quality })
+              }
+              alt='Restaurant'
+              className='overflow-hidden rounded-xl object-bottom'
+              height='200'
+              src={`http://14.6.54.241:8080/download/${data?.mainFile.url}`}
+              width='500'
+            />
+          )}
           <Separator />
           <Carousel
             opts={{

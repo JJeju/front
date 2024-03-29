@@ -18,9 +18,9 @@ export default function FaqDetail({ id }: any) {
   const { data, refetch } = faqApi.GetFaqDetail(id);
   return (
     <DialogContent className=' md:w-[1000px] w-full md:h-[80%] h-full overflow-scroll'>
-      <div className='max-w-5xl space-y-8 px-12 py-8 xl:py-8'>
-        <div className='space-y-2'>
-          <h1 className='text-3xl font-semibold tracking-tighter '>
+      <div className='max-w-5xl md:space-y-8 md:px-12 px-2 py-8  xl:py-8'>
+        <div className='space-y-2 w-[350px] whitespace-nowrap overflow-hidden overflow-ellipsis mb-10'>
+          <h1 className='md:text-3xl text-2xl font-semibold tracking-tighter '>
             {data?.co_title}
           </h1>
         </div>
@@ -44,7 +44,7 @@ export default function FaqDetail({ id }: any) {
           <div className='grid gap-2'>
             <div className='grid gap-1'>
               <h2 className='text-2xl font-semibold mt-8'>문의 내용</h2>
-              <p className='text-lg text-gray-500 pt-4 dark:text-gray-400'>
+              <p className='text-lg text-gray-500 pt-4 dark:text-gray-400 py-6'>
                 {data?.co_contents}
               </p>
             </div>
@@ -53,13 +53,13 @@ export default function FaqDetail({ id }: any) {
         <Separator />
         <div className='grid gap-4'>
           <div className='grid gap-2'>
-            <h2 className='text-xl font-semibold'>답변</h2>
+            <h2 className='text-2xl font-semibold mt-8'>답변</h2>
             {data?.co_check ? (
               <p className='text-lg text-gray-500 dark:text-gray-400'>
                 {data?.co_check}
               </p>
             ) : (
-              <p className='text-lg text-gray-500 dark:text-gray-400'>
+              <p className='text-lg text-gray-500 pt-4 py-6 dark:text-gray-400'>
                 답변이 대기중입니다.
               </p>
             )}

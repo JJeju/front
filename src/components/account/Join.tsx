@@ -299,18 +299,7 @@ export default function Join() {
           <AuthPhone />
         </Dialog>
       </div>
-      <div className='grid grid-cols-4 items-center gap-4'>
-        <Label htmlFor='username' className='text-right'>
-          성별
-        </Label>
-        <Input
-          id='m_gender'
-          defaultValue=''
-          name='m_gender'
-          onChange={onChange}
-          className='col-span-3'
-        />
-      </div>
+
       <div className='flex justify-end'>
         <Button className='w-24' type='submit' onClick={() => onSubmit()}>
           회원가입
