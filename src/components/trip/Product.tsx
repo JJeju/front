@@ -122,12 +122,7 @@ export default function Product({ data, handlerCategory }: any) {
                       <Button
                         size='sm'
                         className='w-22'
-                        onClick={() =>
-                          setPkValue({
-                            pk: item.c_pk_num,
-                            category: item.c_category
-                          })
-                        }
+                        onClick={() => setPkValue(item.c_pk_num)}
                       >
                         상세보기
                       </Button>
