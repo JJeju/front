@@ -124,7 +124,7 @@ export default function Navbar({ getIsLogin }: any) {
   return (
     <nav className=' w-full h-auto '>
       <div className='flex lg:p-4 p-4  md:justify-around justify-between'>
-        <Link href='/' className='text-3xl font-semibold md:text-3xl'>
+        <Link href='/' replace className='text-3xl font-semibold md:text-3xl'>
           J E J U
         </Link>
         <div className='flex ju00stify-end items-center gap-3'>
@@ -371,7 +371,7 @@ const ListItem = React.forwardRef<
     <li>
       <NavigationMenuLink asChild>
         <Link
-          href={props.href as string}
+          href={props?.href as string}
           ref={ref}
           className={cn(
             'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',

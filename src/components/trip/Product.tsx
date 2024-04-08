@@ -40,7 +40,7 @@ const items = [
 export default function Product({ data, handlerCategory }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [pkValue, setPkValue] = useState({
-    pk: 0,
+    pk: '',
     category: ''
   });
   const [checkboxValue, setCheckboxValue] = useState('');
@@ -52,6 +52,18 @@ export default function Product({ data, handlerCategory }: any) {
   const handleCheckboxChange = (value: string) => {
     setCheckboxValue(value);
     handlerCategory(value);
+  };
+
+  const handleDialog = () => {
+    switch (pkValue.category) {
+      case '숙박':
+        return <Accommodation pkValue={pkValue.pk} />;
+      case '식당':
+        return <Restaurant pkValue={pkValue.pk} />;
+      case '레저':
+        return <Restaurant pkValue={pkValue.pk} />;
+      default:
+    }
   };
 
   return (
@@ -122,20 +134,18 @@ export default function Product({ data, handlerCategory }: any) {
                       <Button
                         size='sm'
                         className='w-22'
-                        onClick={() => setPkValue(item.c_pk_num)}
+                        onClick={() =>
+                          setPkValue({
+                            pk: item.c_pk_num as string,
+                            category: item.c_category as string
+                          })
+                        }
                       >
                         상세보기
                       </Button>
                     </div>
                   </DialogTrigger>
-
-                  {item.c_category === '숙박' ? (
-                    <Accommodation pkValue={pkValue} />
-                  ) : (
-                    <>
-                      <Restaurant pkValue={pkValue} />
-                    </>
-                  )}
+                  {handleDialog()}
                 </Dialog>
               </div>
             </Card>

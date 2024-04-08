@@ -5,10 +5,9 @@ import {
   COOKIE_REFRESH_TOKEN
 } from '../config/constants';
 import { CookieStorage } from './cookie';
-import authApi from '@/service/auth';
-import { on } from 'events';
+
 import useUserIdStore from '@/stores/auth';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: API_URL
@@ -58,7 +57,7 @@ axiosInstance.interceptors.response.use(
       CookieStorage.removeCookie(COOKIE_REFRESH_TOKEN);
 
       setIsLogin(false);
-      router.push('/');
+      router.replace('/');
     }
   }
 );

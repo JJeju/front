@@ -27,10 +27,11 @@ import tripApi from '@/service/trip';
 import tripStore from '@/stores/trip';
 import { formatDate } from '@/utility/hooks/comnHook';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { Skeleton } from '../ui/skeleton';
 
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
-  const { data: courseData, isFetching } = tripApi.GetTravelCourse(1);
+  const { data: courseData, isLoading } = tripApi.GetTravelCourse(1);
   const [form, setForm] = useState({
     tr_title: '',
     tr_relationship: '',
@@ -116,9 +117,6 @@ export default function TripCourse() {
     });
   };
 
-  if (isFetching) {
-    return <div>loading...</div>;
-  }
   return (
     <div className='w-full  '>
       <div className='grid gap-8 mt-4 '>
@@ -129,75 +127,92 @@ export default function TripCourse() {
           </Button>
         </div>
         <div className='border p-4 rounded-lg'>
-          <div className='grid gap-4 sm:grid-cols-2 sm:gap-8'>
-            <div className='grid gap-2 '>
-              <Label className='text-sm flex justify-start' htmlFor='phone-1'>
-                여정이름
-              </Label>
-              <Input
-                id='phone-1'
-                required
-                type='tel'
-                value={
-                  isDisabled ? courseData?.travelroute?.tr_title : form.tr_title
-                }
-                disabled={isDisabled}
-                onChange={onChange}
-                name='tr_title'
-              />
-            </div>
-            <div className='grid gap-2'>
-              <Label className='text-sm flex justify-start' htmlFor='email-1'>
-                인원
-              </Label>
-              <Select
-                value={
-                  isDisabled
-                    ? courseData.travelroute?.tr_relationship
-                    : form.tr_relationship
-                }
-                onValueChange={value => {
-                  setForm({ ...form, tr_relationship: value });
-                }}
-                disabled={isDisabled}
-              >
-                <SelectTrigger className=''>
-                  <SelectValue placeholder='인원' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value='혼자'>혼자</SelectItem>
-                  <SelectItem value='커플'>커플</SelectItem>
-                  <SelectItem value='가족'>가족</SelectItem>
-                  <SelectItem value='다인'>다인</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div className='grid-cols-1 grid gap-4 mt-8'>
-            <div className='grid gap-2 '>
-              <Label className='text-sm flex justify-start' htmlFor='email-1'>
-                날짜
-              </Label>
+          {!isLoading ? (
+            <>
+              <div className='grid gap-4 sm:grid-cols-2 sm:gap-8'>
+                <div className='grid gap-2 '>
+                  <Label
+                    className='text-sm flex justify-start'
+                    htmlFor='phone-1'
+                  >
+                    여정이름
+                  </Label>
+                  <Input
+                    id='phone-1'
+                    required
+                    type='tel'
+                    value={
+                      isDisabled
+                        ? courseData?.travelroute?.tr_title
+                        : form.tr_title
+                    }
+                    disabled={isDisabled}
+                    onChange={onChange}
+                    name='tr_title'
+                  />
+                </div>
+                <div className='grid gap-2'>
+                  <Label
+                    className='text-sm flex justify-start'
+                    htmlFor='email-1'
+                  >
+                    인원
+                  </Label>
+                  <Select
+                    value={
+                      isDisabled
+                        ? courseData.travelroute?.tr_relationship
+                        : form.tr_relationship
+                    }
+                    onValueChange={value => {
+                      setForm({ ...form, tr_relationship: value });
+                    }}
+                    disabled={isDisabled}
+                  >
+                    <SelectTrigger className=''>
+                      <SelectValue placeholder='인원' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value='혼자'>혼자</SelectItem>
+                      <SelectItem value='커플'>커플</SelectItem>
+                      <SelectItem value='가족'>가족</SelectItem>
+                      <SelectItem value='다인'>다인</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className='grid-cols-1 grid gap-4 mt-8'>
+                <div className='grid gap-2 '>
+                  <Label
+                    className='text-sm flex justify-start'
+                    htmlFor='email-1'
+                  >
+                    날짜
+                  </Label>
 
-              <DatePickerWithRange
-                className='w-full'
-                disabled={isDisabled}
-                onDateChange={handleDateChange}
-                start={courseData.travelroute?.tr_in}
-                end={courseData.travelroute?.tr_out}
-              />
-            </div>
-          </div>
-          <div className='flex justify-end mt-4'>
-            <Button
-              className='ml-2'
-              size='sm'
-              variant='secondary'
-              onClick={() => setIsDisabled(false)}
-            >
-              여정 수정
-            </Button>
-          </div>
+                  <DatePickerWithRange
+                    className='w-full'
+                    disabled={isDisabled}
+                    onDateChange={handleDateChange}
+                    start={courseData.travelroute?.tr_in}
+                    end={courseData.travelroute?.tr_out}
+                  />
+                </div>
+              </div>
+              <div className='flex justify-end mt-4'>
+                <Button
+                  className='ml-2'
+                  size='sm'
+                  variant='secondary'
+                  onClick={() => setIsDisabled(false)}
+                >
+                  여정 수정
+                </Button>
+              </div>
+            </>
+          ) : (
+            <Skeleton className='w-full h-56' />
+          )}
         </div>
       </div>
       <div className='h-[440px]'>

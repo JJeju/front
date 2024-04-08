@@ -74,7 +74,7 @@ export default function NewJourney() {
       mutate(tripValue, {
         onSuccess: data => {
           setCreateTravelPK(data.createTravelPK);
-          router.push(`/trip`);
+          router.replace(`/trip`);
         }
       });
     }

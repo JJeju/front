@@ -13,6 +13,7 @@ import {
   ChefHatIcon,
   MapPin,
   MountainSnowIcon,
+  Phone,
   StarIcon,
   WavesIcon,
   WifiIcon,
@@ -27,46 +28,28 @@ import {
   SelectValue
 } from '../ui/select';
 import { Card } from '../ui/card';
-import Map from '../map/Map';
-import Script from 'next/script';
+
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
 import { imgLoader } from '@/utility/utils/imgLoader';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import tripApi from '@/service/trip';
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
-interface MapProps {
-  lat?: string | null;
-  lng?: string | null;
-  zoom?: number | null;
-}
-const EDFAULT_LAT = 37.497625203;
-const DEFAULT_LNG = 127.03088379;
+import FixMap from '../map/FixMap';
 
 export default function Accommodation({ pkValue }: any) {
   const { data, refetch } = tripApi.GetProductDetail(pkValue);
+  const [map, setMap] = useState(null);
+  useEffect(() => {
+    if (!data) {
+      refetch();
+    }
+  }, [pkValue]);
 
-  const loadKakaoMap = () => {
-    window.kakao.maps.load(() => {
-      const container = document.getElementById('map2');
-      const options = {
-        center: new window.kakao.maps.LatLng(EDFAULT_LAT, DEFAULT_LNG),
-        level: 3
-      };
-      const map = new window.kakao.maps.Map(container, options);
-      return map;
-    });
-  };
   return (
     <DialogContent className=' md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
       <div className=' space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
           <h1 className='text-3xl font-semibold tracking-tight'>
-            도시 전망이 멋진 디럭스 킹 룸
+            {data?.company.c_name}
           </h1>
           <div className='flex items-center space-x-2 text-sm font-medium'>
             <StarIcon className='w-4 h-4 fill-accent' />
@@ -88,10 +71,12 @@ export default function Accommodation({ pkValue }: any) {
               </Avatar>
             </div>
             <div className='grid gap-0.5'>
-              <div className='font-semibold'>캐서린이 호스팅</div>
               <div className='text-gray-500 text-sm dark:text-gray-400'>
                 <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
-                  <MapPin size={15} /> 제주 석귀포시 성산읍 일출로 284-12
+                  <Phone size={15} /> {data?.company.c_phone}
+                </p>
+                <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
+                  <MapPin size={15} /> {data?.company.c_addr}
                 </p>
               </div>
             </div>
@@ -104,7 +89,7 @@ export default function Accommodation({ pkValue }: any) {
             alt='Restaurant'
             className='overflow-hidden rounded-xl object-bottom'
             height='200'
-            src={'/56692-O8P89L-432.jpg'}
+            src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
             width='500'
           />
           <Separator />
@@ -252,16 +237,14 @@ export default function Accommodation({ pkValue }: any) {
           <div className='grid gap-3'>
             <h3 className='text-xl font-semibold'>위치보기</h3>
             <p className='text-base  dark:text-gray-400 flex items-center gap-1'>
-              <MapPin size={15} /> 제주 석귀포시 성산읍 일출로 284-12
+              <MapPin size={15} /> {data?.company.c_addr}
             </p>
             <div className='h-80 w-full'>
-              <Script
-                strategy='afterInteractive'
-                type='text/javascript'
-                src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&autoload=false`}
-                onReady={loadKakaoMap}
+              <FixMap
+                lat={data?.company.c_lat}
+                lng={data?.company.c_lon}
+                setMap={setMap}
               />
-              <div id='map2' className='w-full h-full'></div>
             </div>
           </div>
         </div>

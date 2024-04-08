@@ -26,25 +26,31 @@ interface getTripRs {
   };
 }
 interface getTripDetailRs {
-  atdto: {
-    at_pk_num: number;
-    at_fk_cnum: number;
-    at_name: string;
-    at_img: string;
-    at_contents: string;
-    at_price: number;
-    at_rtch: string;
-    at_hidden: string;
+  company: {
+    c_addr: string;
+    c_category: string;
+    c_cnum: string;
+    c_lat: number;
+    c_lon: number;
+    c_name: string;
+    c_phone: string;
+    c_pk_num: number;
+    c_type: string;
+    fileData: {
+      create_dt: string;
+      description: string;
+      extension: string;
+      file_group_no: number;
+      file_ori_nm: string;
+      file_size: number;
+      file_size_unit: string;
+      file_sys_nm: string;
+      idx: number;
+      url: string;
+    };
   };
-  strArr: [string];
-  aiList: [
-    {
-      ai_pk_num: number;
-      ai_fk_num: number;
-      ai_oriname: string;
-      ai_sysname: string;
-    }
-  ];
+  companyFileList: [];
+  companyItemList: [];
 }
 
 export type { getTripRs, getTripDetailRs };

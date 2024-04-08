@@ -4,24 +4,28 @@ interface BestRs {
     c_fk_id: string;
     c_name: string;
     c_phone: string;
+    c_cnum: number;
     c_category: string;
     c_addr: string;
     c_contents: string;
     c_condition: string;
     c_check: string;
     c_img: string;
+    c_pk_num: string;
     c_type: string;
     c_price: string;
   }[];
   leisure: {
     c_pk_cnum: string;
     c_fk_id: string;
+    c_cnum: number;
     c_name: string;
     c_phone: string;
     c_category: string;
     c_addr: string;
     c_contents: string;
     c_condition: string;
+    c_pk_num: string;
     c_check: string;
     c_img: string;
     c_type: string;
@@ -31,7 +35,9 @@ interface BestRs {
     c_pk_cnum: string;
     c_fk_id: string;
     c_name: string;
+    c_pk_num: string;
     c_phone: string;
+    c_cnum: number;
     c_category: string;
     c_addr: string;
     c_contents: string;
