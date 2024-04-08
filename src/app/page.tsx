@@ -25,22 +25,22 @@ import {
   ChevronRightIcon,
   StarIcon,
   ChevronLeftIcon,
-  MapPin
+  MapPin,
+  Phone
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Accommodation from '@/components/product/Accommodation';
 import TripReview from '@/components/tripreview/TripReview';
 import mainApi from '@/service/home';
 import Restaurant from '@/components/product/Restaurant';
+import Spot from '@/components/product/Spot';
 import { formatDate } from '@/utility/hooks/comnHook';
 import useUserIdStore from '@/stores/auth';
 import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
-import mypageApi from '@/service/mypage';
 import { imgLoader } from '@/utility/utils/imgLoader';
 import MainLoading from '@/components/loading/MainLoading';
 import FaqDetail from '@/components/faq/FaqDetail';
-import { set } from 'date-fns';
 import { ReviewRs } from '@/type/home';
 
 export default function Home() {
@@ -48,18 +48,32 @@ export default function Home() {
 
   const { isLogin, setIsLogin } = useUserIdStore();
   const { toast } = useToast();
-  const { data: bestData, isFetching: bestFetching } = mainApi.GetMainProduct();
-  const { data: EvnetData, isFetching: eventFetching } = mainApi.GetMainEvent();
-  const { data: NoticeData, isFetching: noticeFetching } =
+  const { data: bestData, isLoading: bestisLoading } = mainApi.GetMainProduct();
+  const { data: EvnetData, isLoading: eventisLoading } = mainApi.GetMainEvent();
+  const { data: NoticeData, isLoading: noticeisLoading } =
     mainApi.GetMainNotice();
-  const { data: ReviewData, isFetching: reviewFetching } = mainApi.GetReview();
+  const { data: ReviewData, isLoading: reviewisLoading } = mainApi.GetReview();
   const [isFaqId, setIsFaqId] = useState(0);
 
   const [isId, setIsId] = useState(0);
   const [productValue, setProductValue] = useState({
-    pk: 0,
+    pk: '',
     category: ''
   });
+
+  const handleDialog = () => {
+    switch (productValue.category) {
+      case '숙박':
+        return <Accommodation pkValue={productValue.pk} />;
+      case '식당':
+        return <Restaurant pkValue={productValue.pk} />;
+      case '레저':
+        return <Restaurant pkValue={productValue.pk} />;
+      case '관광지':
+        return <Spot pkValue={productValue.pk} />;
+      default:
+    }
+  };
   return (
     <main className='flex flex-col px-3 justify-between md:px-20 '>
       <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
@@ -108,7 +122,7 @@ export default function Home() {
       <div className='mt-24 text-2xl md:text-3xl font-bold'>
         지금 인기있는 상품
       </div>
-      {bestFetching ? (
+      {bestisLoading ? (
         <MainLoading />
       ) : (
         <Carousel
@@ -131,8 +145,8 @@ export default function Home() {
                         className=''
                         onClick={() =>
                           setProductValue({
-                            pk: data.c_pk_cnum as any,
-                            category: data.c_category
+                            pk: data.c_pk_num as string,
+                            category: data.c_category as string
                           })
                         }
                         whileTap={{ scale: 0.9 }}
@@ -177,7 +191,7 @@ export default function Home() {
                       </motion.div>
                     </div>
                   </DialogTrigger>
-                  <Accommodation pkValue={productValue} />
+                  {handleDialog()}
                 </Dialog>
               </CarouselItem>
             ))}
@@ -189,7 +203,7 @@ export default function Home() {
       <div className='mt-24 text-2xl md:text-3xl font-bold'>
         지금 인기있는 관광지
       </div>
-      {eventFetching ? (
+      {eventisLoading ? (
         <MainLoading />
       ) : (
         <Carousel
@@ -211,6 +225,12 @@ export default function Home() {
                         key={index}
                         className=''
                         whileTap={{ scale: 0.9 }}
+                        onClick={() =>
+                          setProductValue({
+                            pk: data.s_pk_num as string,
+                            category: data.s_category as string
+                          })
+                        }
                       >
                         <Card className='w-full h-full  '>
                           <CardContent className='flex  items-start justify-center p-3  group'>
@@ -240,7 +260,7 @@ export default function Home() {
                               <Badge>BEST</Badge>
 
                               <Badge variant={'outline'}>
-                                {data.e_pk_enum ? '이벤트' : '레저'}
+                                {data.e_pk_enum ? '이벤트' : '관광지'}
                               </Badge>
                             </div>
 
@@ -261,7 +281,7 @@ export default function Home() {
                       </motion.div>
                     </div>
                   </DialogTrigger>
-                  <Restaurant pkValue={productValue} />
+                  {handleDialog()}
                 </Dialog>
               </CarouselItem>
             ))}

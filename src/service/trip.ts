@@ -30,20 +30,21 @@ const tripApi = {
       queryKey: ['tripDetail'],
       queryFn: () => this.getTripDetailFn(data),
       enabled: !!data,
-      staleTime: 50000,
+      staleTime: 50000
     });
   },
   // 상품 상세보기
-  getProductDetailFn: async (data: number): Promise<getTripDetailRs> => {
+  getProductDetailFn: async (data?: number): Promise<getTripDetailRs> => {
     const res = await axiosInstance.get(`/api/main/business_item?cnum=${data}`);
     return res.data.body;
   },
-  GetProductDetail: function (data: number) {
+  GetProductDetail: function (data?: number) {
     return useQuery({
-      queryKey: ['productDetail'],
+      queryKey: ['productDetail', data],
       queryFn: () => this.getProductDetailFn(data),
+      enabled: false,
       // staleTime: 50000,
-      // retry: 1
+      retry: false
     });
   },
   // 상품 아이템 상세보기
@@ -60,7 +61,7 @@ const tripApi = {
     return useQuery({
       queryKey: ['productItem', data.pk, data.category],
       queryFn: () => this.getProductItemFn(data),
-      enabled: !!data.category && !!data.pk,
+      enabled: !!data.category && !!data.pk
       // staleTime: 50000,
     });
   },
@@ -73,7 +74,7 @@ const tripApi = {
     return useQuery({
       queryKey: ['travelCourse', data],
       queryFn: () => this.getTravelCourseFn(data),
-      enabled: !!data,
+      enabled: !!data
     });
   }
 };

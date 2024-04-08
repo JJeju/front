@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import Hydration from './hydration';
 import useUserIdStore from '@/stores/auth';
 import dynamic from 'next/dynamic';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -86,6 +87,9 @@ export default function RootLayout({
             <Navbar getIsLogin={getIsLogin} />
 
             {children}
+            <ReactQueryDevtools
+              initialIsOpen={process.env.NEXT_PUBLIC_MODE === 'local'}
+            />
             <Toaster />
           </ThemeProvider>
           {pathname != '/trip/' && <Footer />}

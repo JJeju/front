@@ -218,6 +218,20 @@ export default function Join() {
         </Button>
       </div>
       <div className='grid grid-cols-4 items-center gap-4'>
+        <Label htmlFor='username' className='text-right'>
+          비밀번호
+        </Label>
+        <Input
+          id='username'
+          type='password'
+          defaultValue=''
+          name='m_password'
+          onChange={onChange}
+          className='col-span-3'
+        />
+      </div>
+
+      <div className='grid grid-cols-4 items-center gap-4'>
         <Label htmlFor='name' className='text-right'>
           이름
         </Label>
@@ -241,6 +255,7 @@ export default function Join() {
           onChange={onChange}
           className='col-span-2'
         />
+
         <Button className='w-20' onClick={() => handleNickCheck()}>
           중복체크
         </Button>
@@ -250,32 +265,6 @@ export default function Join() {
           생년월일
         </Label>
         <DatePicker onDateChange={handleDateChange} />
-      </div>
-      <div className='grid grid-cols-4 items-center gap-4'>
-        <Label htmlFor='username' className='text-right'>
-          이메일
-        </Label>
-        <Input
-          id='email'
-          type='email'
-          defaultValue=''
-          name='m_email'
-          onChange={onChange}
-          className='col-span-3'
-        />
-      </div>
-      <div className='grid grid-cols-4 items-center gap-4'>
-        <Label htmlFor='username' className='text-right'>
-          비밀번호
-        </Label>
-        <Input
-          id='username'
-          type='password'
-          defaultValue=''
-          name='m_password'
-          onChange={onChange}
-          className='col-span-3'
-        />
       </div>
       <div className='grid grid-cols-4 items-center gap-4'>
         <Label htmlFor='username' className='text-right'>
@@ -298,6 +287,19 @@ export default function Join() {
           </DialogTrigger>
           <AuthPhone />
         </Dialog>
+      </div>
+      <div className='grid grid-cols-4 items-center gap-4'>
+        <Label htmlFor='username' className='text-right'>
+          이메일
+        </Label>
+        <Input
+          id='email'
+          type='email'
+          defaultValue=''
+          name='m_email'
+          onChange={onChange}
+          className='col-span-3'
+        />
       </div>
 
       <div className='flex justify-end'>

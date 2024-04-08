@@ -2,7 +2,6 @@
 import { MapPin, Phone, StarIcon, XIcon } from 'lucide-react';
 import Image, { ImageLoaderProps } from 'next/image';
 import { DialogContent } from '../ui/dialog';
-
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Separator } from '../ui/separator';
 import { imgLoader } from '@/utility/utils/imgLoader';
@@ -10,7 +9,7 @@ import tripApi from '@/service/trip';
 import { useEffect, useState } from 'react';
 import FixMap from '../map/FixMap';
 
-export default function Restaurant({ pkValue }: any) {
+export default function Spot({ pkValue }: any) {
   const { data, refetch } = tripApi.GetProductDetail(pkValue);
   const [map, setMap] = useState(null);
   useEffect(() => {
