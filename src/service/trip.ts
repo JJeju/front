@@ -17,7 +17,6 @@ const tripApi = {
     return useQuery({
       queryKey: ['trip', data],
       queryFn: () => this.getTripFn(data),
-      refetchOnWindowFocus: false,
       staleTime: 50000
     });
   },
@@ -31,9 +30,7 @@ const tripApi = {
       queryKey: ['tripDetail'],
       queryFn: () => this.getTripDetailFn(data),
       enabled: !!data,
-      refetchOnWindowFocus: false,
       staleTime: 50000,
-      retry: 1
     });
   },
   // 상품 상세보기
@@ -45,7 +42,6 @@ const tripApi = {
     return useQuery({
       queryKey: ['productDetail'],
       queryFn: () => this.getProductDetailFn(data),
-      refetchOnWindowFocus: false
       // staleTime: 50000,
       // retry: 1
     });
@@ -65,9 +61,7 @@ const tripApi = {
       queryKey: ['productItem', data.pk, data.category],
       queryFn: () => this.getProductItemFn(data),
       enabled: !!data.category && !!data.pk,
-      refetchOnWindowFocus: false
       // staleTime: 50000,
-      // retry: 1
     });
   },
   // 여행 코스 조회
@@ -80,7 +74,6 @@ const tripApi = {
       queryKey: ['travelCourse', data],
       queryFn: () => this.getTravelCourseFn(data),
       enabled: !!data,
-      refetchOnWindowFocus: false
     });
   }
 };
