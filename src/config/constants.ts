@@ -6,3 +6,5 @@ const COOKIE_BASE_NAME = 'jeju';
 
 export const COOKIE_ACCESS_TOKEN = `${COOKIE_BASE_NAME}_accs`;
 export const COOKIE_REFRESH_TOKEN = `${COOKIE_BASE_NAME}_rfrs`;
+
+export const KAKAO_MAP = process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT;

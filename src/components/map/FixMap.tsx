@@ -8,7 +8,7 @@ import {
   useLayoutEffect,
   useState
 } from 'react';
-
+import { KAKAO_MAP } from '@/config/constants';
 declare global {
   interface Window {
     kakao: any;
@@ -64,7 +64,7 @@ export default function Map({ lat, lng, zoom, setMap, data }: MapProps) {
       <Script
         strategy='afterInteractive'
         type='text/javascript'
-        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&autoload=false`}
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP}&autoload=false`}
         onReady={loadKakaoMap}
       />
       <div id='map2' className='w-full h-full'></div>
