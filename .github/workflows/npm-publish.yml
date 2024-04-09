@@ -14,7 +14,17 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@master
         with:
-          ref: main
+          ref:
+            main
+
+            # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "NEXT_PUBLIC_KAKAO_MAP_CLIENT=$NEXT_PUBLIC_KAKAO_MAP_CLIENT" >> .env.production
+          echo "NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL" >> .env.production
+        env:
+          NEXT_PUBLIC_KAKAO_MAP_CLIENT: ${{ secrets.NEXT_PUBLIC_KAKAO_MAP_CLIENT }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
 
       - name: Install Dependencies
         run: |
@@ -34,21 +44,21 @@ jobs:
     runs-on: ubuntu-latest # 배포시 사용 환경
 
     steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: JejuFront
-        path: out # 배포에 활용할 경로
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: JejuFront
+          path: out # 배포에 활용할 경로
 
-    - name: SCP transfer
-      uses: appleboy/scp-action@master
-      with:
-        username: ${{ secrets.SSH_USER }}
-        password: ${{ secrets.SSH_PASS }}
-        host: ${{ secrets.SSH_SERVER_IP }}
-        port: ${{ secrets.SSH_PORT }}
-        rm: true
-        source: out
-        target: ./jeju_front/
-        ## 작업에 사용했던 dist 디렉토리를 경로상에서 제거
-        strip_components: 1
+      - name: SCP transfer
+        uses: appleboy/scp-action@master
+        with:
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASS }}
+          host: ${{ secrets.SSH_SERVER_IP }}
+          port: ${{ secrets.SSH_PORT }}
+          rm: true
+          source: out
+          target: ./jeju_front/
+          ## 작업에 사용했던 dist 디렉토리를 경로상에서 제거
+          strip_components: 1
