@@ -35,6 +35,7 @@ export default function Markers({
     pk: '',
     category: ''
   });
+  const [currentCustomOverlay, setCurrentCustomOverlay] = useState<any>(null);
 
   // 모바일 디바이스 체크
   useEffect(() => {
@@ -69,14 +70,14 @@ export default function Markers({
 
         const marker = new window.kakao.maps.Marker({
           position: markerPosition
+
           // image: markerImage
         });
         marker.setMap(map);
         markers.push(marker);
         var content = document.createElement('div');
-
         var maxDiv = document.createElement('div');
-        maxDiv.className = 'max-w-48 w-36 shadow-lg bg-white rounded-2xl';
+        maxDiv.className = 'max-w-48 w-36 shadow-lg bg-white rounded-2xl z-20';
 
         var img = document.createElement('img');
         img.className = 'w-full h-28 rounded-2xl';
@@ -102,6 +103,7 @@ export default function Markers({
         button.className = 'bg-[#FACC15] text-black text-sm w-16 h-7 mt-2';
         button.appendChild(document.createTextNode('상세보기'));
         button.onclick = function () {
+          setOpen(true);
           handleDialog();
         };
         div.appendChild(button);
@@ -113,37 +115,45 @@ export default function Markers({
           position: markerPosition,
           content: content,
           xAnchor: 0.3,
-          yAnchor: 1.2
+          yAnchor: 1.2,
+          zIndex: 1
         });
 
-        // // 마우스 오버시 인포윈도우
-        // window.kakao.maps.event.addListener(marker, 'mouseover', function () {
-        //   customOverlay.setMap(map);
-        // });
-
-        // window.kakao.maps.event.addListener(marker, 'mouseout', function () {
-        //   customOverlay.setMap(null);
-        // });
-
         // 선택된 가게 저장
+        window.kakao.maps.event.addListener(map, 'dragstart', () => {
+          // 이동 시작 시 CustomOverlay 숨기기
+          if (currentCustomOverlay) {
+            currentCustomOverlay.setMap(null);
+          }
+        });
+
         window.kakao.maps.event.addListener(marker, 'click', function () {
           setPkValue({
             pk: store.c_pk_num,
             category: store.c_category
           });
+          // 이전 CustomOverlay가 있으면 제거
+          if (currentCustomOverlay) {
+            currentCustomOverlay.setMap(null);
+          }
+
           if (customOverlay.getMap() !== null) {
             customOverlay.setMap(null);
           } else {
             customOverlay.setMap(map);
           }
-          // }
 
+          setCurrentCustomOverlay(customOverlay);
           setCurrentStore(store);
-          // customOverlay.setMap(map);
         });
       });
+      return () => {
+        markers.forEach((marker: any) => {
+          marker.setMap(null);
+        });
+      };
     }
-  }, [map, data]);
+  }, [map, data, currentCustomOverlay, setCurrentStore]);
 
   // 다이얼로그 핸들러
   function handleDialog() {
