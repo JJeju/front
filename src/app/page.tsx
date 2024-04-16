@@ -290,9 +290,11 @@ export default function Home() {
           <CarouselNext />
         </Carousel>
       )}
-      <div className='w-full grid items-start min-h-screen gap-4  md:gap-8'>
+      <div className='w-full grid items-start  gap-4 md:gap-8'>
         <div className='space-y-2'>
-          <div className='mt-24 text-2xl md:text-3xl font-bold'>여행 후기</div>
+          <div className='md:mt-24 mt-20  text-2xl md:text-3xl font-bold'>
+            여행 후기
+          </div>
           <p className='text-gray-500 dark:text-gray-400'>
             {ReviewData?.length}개의 새로운 후기가 있습니다.
           </p>
@@ -355,7 +357,9 @@ export default function Home() {
           ))}
         </div>
         <div className='space-y-2'>
-          <div className='mt-24 text-2xl md:text-3xl font-bold'>공지사항</div>
+          <div className='md:mt-24 mt-20 text-2xl md:text-3xl font-bold'>
+            공지사항
+          </div>
           <p className='text-gray-500 dark:text-gray-400'>
             {NoticeData?.length}개의 새로운 공지사항이 있습니다.
           </p>
@@ -364,7 +368,7 @@ export default function Home() {
             <ChevronRightIcon size={20} />
           </Badge>
         </div>
-        <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>
+        <div className=' grid md:grid-cols-2 grid-cols-1 gap-3 mb-20'>
           {NoticeData?.map((data: any, index: number) => (
             <>
               <Dialog>
