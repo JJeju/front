@@ -31,9 +31,11 @@ import { Fragment, useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 import { Skeleton } from '../ui/skeleton';
 import { Badge } from '../ui/badge';
+import CourseMarker from '../map/CourseMarker';
 
 export default function TripReview({ id }: any) {
   const { data, isFetching, refetch } = mypageApi.GetTripReviewDetail(id);
+  const [markerInfo, setMarkerInfo] = useState<any>(null);
   useEffect(() => {
     if (!data) {
       refetch();
@@ -131,12 +133,16 @@ export default function TripReview({ id }: any) {
           <div className='h-[580px] w-full'>
             <div className='h-[500px] w-full'>
               <Map setMap={setMap} />
+              <CourseMarker data={markerInfo} map={map} />
               {data?.planList.map((list: any, index: any) => (
                 <Button
                   key={index}
                   className='m-1 text-sm'
                   size='sm'
-                  onClick={() => setIsDay(index + 1)}
+                  onClick={() => {
+                    setIsDay(index + 1);
+                    setMarkerInfo(list.dayPlanList);
+                  }}
                   variant={isDay === index + 1 ? 'default' : 'secondary'}
                 >
                   Day{index + 1}
@@ -177,10 +183,10 @@ export default function TripReview({ id }: any) {
                               imgLoader({ src, width, quality })
                             }
                             alt='Tour image'
-                            className='rounded-md'
+                            className='rounded-md min-w-[64px] min-h-[64px]'
                             src={`http://14.6.54.241:8080/download/${item.tp_fk_company_info.c_img}`}
-                            height='36'
-                            width='64'
+                            height={64}
+                            width={64}
                           />
                         </TableCell>
                         <TableCell className='text-overflow-ellipsis w-[150px]'>

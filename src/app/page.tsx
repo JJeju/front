@@ -135,7 +135,7 @@ export default function Home() {
             {bestData?.map((data, index) => (
               <CarouselItem
                 key={index}
-                className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+                className='md:basis-1/3 basis-1/2 lg:basis-1/5'
               >
                 <Dialog>
                   <DialogTrigger>
@@ -153,7 +153,7 @@ export default function Home() {
                       >
                         <Card className='w-full h-full  '>
                           <CardContent className='flex items-start justify-center p-3 group'>
-                            <div className='relative w-full md:w-[100%] md:h-[258px] lg:w-[250px] lg:h-[257px] h-[173px]'>
+                            <div className='relative w-full '>
                               <Image
                                 loader={({
                                   src,
@@ -164,9 +164,12 @@ export default function Home() {
                                 }
                                 src={`http://14.6.54.241:8080/download/${data.c_img}`}
                                 alt='Image'
-                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                                layout='fill'
+                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 md:min-h-[250px] max-h-[170px] md:max-h-[250px] min-h-[170px] md:min-w-[170px] min-w-[170px] md:max-w-[170px] max-w-[170px]'
+                                layout='responsive'
+                                width={200}
+                                height={250}
                                 objectFit='cover'
+                                objectPosition='center'
                               />
                             </div>
                           </CardContent>
@@ -216,7 +219,7 @@ export default function Home() {
             {EvnetData?.map((data: any, index: number) => (
               <CarouselItem
                 key={index}
-                className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+                className='md:basis-1/3 basis-1/2 lg:basis-1/5'
               >
                 <Dialog>
                   <DialogTrigger>
@@ -234,7 +237,7 @@ export default function Home() {
                       >
                         <Card className='w-full h-full  '>
                           <CardContent className='flex  items-start justify-center p-3  group'>
-                            <div className='relative w-full md:w-[100%] md:h-[258px] lg:w-[250px] lg:h-[257px] h-[173px]'>
+                            <div className='w-full'>
                               <Image
                                 loader={({
                                   src,
@@ -249,9 +252,12 @@ export default function Home() {
                                     : `http://14.6.54.241:8080/download/${data.s_img}`
                                 }
                                 alt='Image'
-                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                                layout='fill'
+                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 md:min-h-[250px] max-h-[170px] md:max-h-[250px] min-h-[170px] md:min-w-[170px] min-w-[170px] md:max-w-[170px] max-w-[170px]'
+                                layout='responsive'
+                                width={200}
+                                height={250}
                                 objectFit='cover'
+                                objectPosition='center'
                               />
                             </div>
                           </CardContent>
@@ -384,14 +390,12 @@ export default function Home() {
                         <h3 className='text-xl font-semibold text-left'>
                           {data.n_title}
                         </h3>
-
                         <div className='text-xs'>
                           <p className='text-gray-500 text-left dark:text-gray-400 flex py-2'>
                             {formatDate(data.n_date)}
                             <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
                           </p>
                         </div>
-
                         <p className='text-sm text-gray-500 text-left dark:text-gray-400'>
                           {data.n_contents}
                         </p>
