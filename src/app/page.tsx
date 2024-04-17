@@ -313,7 +313,7 @@ export default function Home() {
                   className=''
                   whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
                 >
-                  <Card>
+                  <Card className='min-w-[255px]'>
                     <CardHeader className='flex items-start pb-4'>
                       <div className='flex items-center gap-4 mr-auto'>
                         <Avatar className='w-12 h-12'>
@@ -323,7 +323,7 @@ export default function Home() {
                           />
                         </Avatar>
                         <div className='flex flex-col w-full'>
-                          <h3 className='md:text-base text-sm font-semibold overflow-hidden text-overflow-ellipsis whitespace-wrap'>
+                          <h3 className='md:text-base text-sm text-left font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis md:w-[130px] w-[240px]'>
                             {item.b_title}
                           </h3>
                           <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>

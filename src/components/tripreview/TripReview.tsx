@@ -27,18 +27,25 @@ import {
 import { imgLoader } from '@/utility/utils/imgLoader';
 import mypageApi from '@/service/mypage';
 import { formatDate } from '@/utility/hooks/comnHook';
-import { useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 import { Skeleton } from '../ui/skeleton';
+import { Badge } from '../ui/badge';
 
 export default function TripReview({ id }: any) {
-  const { data, isFetching } = mypageApi.GetTripReviewDetail(id);
+  const { data, isFetching, refetch } = mypageApi.GetTripReviewDetail(id);
+  useEffect(() => {
+    if (!data) {
+      refetch();
+    }
+  }, [id]);
+  const [isDay, setIsDay] = useState('');
   const [map, setMap] = useState(null);
   return (
-    <DialogContent className=' md:w-[1000px] w-full  md:h-[90%] h-full overflow-scroll'>
+    <DialogContent className='md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
       <div className='space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
-          <h1 className='text-3xl font-semibold tracking-tighter '>
+          <h1 className='text-3xl font-semibold tracking-tighter'>
             {data?.blog?.b_title}
           </h1>
           <div className='flex items-center space-x-2 text-sm font-medium'>
@@ -78,7 +85,7 @@ export default function TripReview({ id }: any) {
           </div>
           <Separator />
           {isFetching ? (
-            <Skeleton className='h-[400px] w-[500px]  rounded-xl ' />
+            <Skeleton className='h-[400px] w-[500px] rounded-xl' />
           ) : (
             <Image
               loader={({ src, width, quality }: ImageLoaderProps) =>
@@ -96,7 +103,7 @@ export default function TripReview({ id }: any) {
             opts={{
               align: 'start'
             }}
-            className='w-full  mt-5'
+            className='w-full mt-5'
           >
             <CarouselContent>
               {data?.files?.map((data: any, index: number) => (
@@ -121,8 +128,21 @@ export default function TripReview({ id }: any) {
 
           <Separator />
           <h2 className='text-lg font-semibold'>여행 코스</h2>
-          <div className='h-[500px] w-full'>
-            <Map setMap={setMap} />
+          <div className='h-[580px] w-full'>
+            <div className='h-[500px] w-full'>
+              <Map setMap={setMap} />
+              {data?.planList.map((list: any, index: any) => (
+                <Button
+                  key={index}
+                  className='m-1 text-sm'
+                  size='sm'
+                  onClick={() => setIsDay(index + 1)}
+                  variant={isDay === index + 1 ? 'default' : 'secondary'}
+                >
+                  Day{index + 1}
+                </Button>
+              ))}
+            </div>
           </div>
           <Separator />
           <div className='grid gap-1'>
@@ -136,60 +156,56 @@ export default function TripReview({ id }: any) {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <h1 className='text-xl pt-2 font-extrabold'>1일차</h1>
-                <TableRow>
-                  <TableCell className='px-0 py-2'>
-                    <Image
-                      alt='Tour image'
-                      className='aspect-1/2 rounded-md object-cover overflow-hidden'
-                      src={'/56692-O8P89L-432.jpg'}
-                      height='36'
-                      width='64'
-                      loader={({ src, width, quality }: ImageLoaderProps) =>
-                        imgLoader({ src, width, quality })
-                      }
-                    />
-                  </TableCell>
-                  <TableCell className=' text-overflow-ellipsis px-0 py-2'>
-                    제주도 휴가 패키지
-                  </TableCell>
-                  <TableCell className=' text-overflow-ellipsis px-0 py-2'>
-                    제주 석귀포시 성산읍 일출로 284-12
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className='px-0 py-2'>
-                    <Image
-                      alt='Tour image'
-                      className='aspect-1/2 rounded-md object-cover overflow-hidden'
-                      src={'/56692-O8P89L-432.jpg'}
-                      height='36'
-                      width='64'
-                      loader={({ src, width, quality }: ImageLoaderProps) =>
-                        imgLoader({ src, width, quality })
-                      }
-                    />
-                  </TableCell>
-                  <TableCell className=' text-overflow-ellipsis px-0 py-2'>
-                    제주도 휴가 패키지
-                  </TableCell>
-                  <TableCell className=' text-overflow-ellipsis px-0 py-2'>
-                    제주 석귀포시 성산읍 일출로 284-12
-                  </TableCell>
-                </TableRow>
+                {data?.planList.map((list: any, index: any) => (
+                  <Fragment key={list.day}>
+                    <Badge className='mt-2 ml-3'>Day {index + 1}</Badge>
+
+                    {list?.dayPlanList.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={3}>일정 없음</TableCell>
+                      </TableRow>
+                    )}
+                    {list?.dayPlanList.map((item: any, innerIndex: any) => (
+                      <TableRow key={innerIndex}>
+                        <TableCell className='w-[150px] '>
+                          <Image
+                            loader={({
+                              src,
+                              width,
+                              quality
+                            }: ImageLoaderProps) =>
+                              imgLoader({ src, width, quality })
+                            }
+                            alt='Tour image'
+                            className='rounded-md'
+                            src={`http://14.6.54.241:8080/download/${item.tp_fk_company_info.c_img}`}
+                            height='36'
+                            width='64'
+                          />
+                        </TableCell>
+                        <TableCell className='text-overflow-ellipsis w-[150px]'>
+                          {item.tp_fk_company_info.c_name}
+                        </TableCell>
+                        <TableCell className='text-overflow-ellipsis w-[200px]'>
+                          {item.tp_fk_company_info.c_addr}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </Fragment>
+                ))}
               </TableBody>
             </Table>
           </div>
 
-          <h2 className=' text-lg font-semibold'>
-            총 비용: {data?.blog?.b_cost}
+          <h2 className='text-lg font-semibold'>
+            총 비용: ₩{data?.blog?.b_cost}
           </h2>
           <Separator />
           <div className='grid gap-2'>
             <div className='grid gap-1'>
               <h2 className='text-lg font-semibold'>후기</h2>
               <p className='text-sm text-gray-500 dark:text-gray-400'>
-                우아한 장식, 유명인 출연, 맛있는 요리로 유명합니다.
+                {data?.blog?.b_contents}
               </p>
             </div>
           </div>

@@ -23,6 +23,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 export default function TravelReview() {
   const { data } = mypageApi.GetTravelReview();
 
+  console.log('>>>', data);
   return (
     <div className='md:px-36 px-4 md:py-20 py-14 space-y-6 md:space-y-8'>
       <div className='space-y-2'>
@@ -64,11 +65,16 @@ export default function TravelReview() {
                         </div>
                       </div>
                       <div className='flex items-center space-x-1 pt-2  text-sm'>
-                        <StarIcon className='w-4 h-4 fill-accent' />
-                        <StarIcon className='w-4 h-4 fill-accent' />
-                        <StarIcon className='w-4 h-4 fill-accent' />
-                        <StarIcon className='w-4 h-4 fill-accent' />
-                        <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <StarIcon
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < item?.b_star
+                                ? 'fill-accent text-yellow-500'
+                                : 'fill-accent stroke-muted-foreground '
+                            }`}
+                          />
+                        ))}
                       </div>
                     </CardHeader>
                     <CardContent>
