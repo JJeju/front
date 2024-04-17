@@ -16,7 +16,7 @@ export default function MainLoading() {
           {[0, 1, 2, 3, 4].map(index => (
             <CarouselItem
               key={index}
-              className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+              className='md:basis-1/3 basis-1/2 lg:basis-1/5'
             >
               <Card className='w-full h-full ' key={index}>
                 <CardContent className='flex items-start justify-center p-3 group '>

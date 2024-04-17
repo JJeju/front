@@ -29,6 +29,22 @@ export default function Markers({
 
   const [markers, setMarkers] = useState<any>([]);
 
+  const [isWindow, setIsWindow] = useState(false);
+
+  const [pkValue, setPkValue] = useState({
+    pk: '',
+    category: ''
+  });
+  const [currentCustomOverlay, setCurrentCustomOverlay] = useState<any>(null);
+
+  // 모바일 디바이스 체크
+  useEffect(() => {
+    if (!isMobileDevice()) {
+      setIsWindow(true);
+    }
+  }, []);
+
+  // 마커 로드
   const loadKakaMarkers = useCallback(() => {
     if (map) {
       data?.map((store: any) => {
@@ -54,80 +70,110 @@ export default function Markers({
 
         const marker = new window.kakao.maps.Marker({
           position: markerPosition
+
           // image: markerImage
         });
         marker.setMap(map);
         markers.push(marker);
+        var content = document.createElement('div');
+        var maxDiv = document.createElement('div');
+        maxDiv.className = 'max-w-48 w-36 shadow-lg bg-white rounded-2xl z-20';
 
-        const content = `<div class="max-w-48 w-36  shadow-lg bg-white rounded-2xl">
-        <img class="w-full h-28 rounded-2xl" src=http://14.6.54.241:8080/download/${store.fileData.url} alt="상품 이미지">
-        <div class="px-2 py-4">
-          <div class="font-bold text-sm mb-2 whitespace-normal overflow-auto text-black">${store.c_name}</div>
-          <p class="text-gray-700 text-xs whitespace-normal overflow-auto">
-          ${store.c_addr}
-          </p>
-        </div>
-     </div>`;
+        var img = document.createElement('img');
+        img.className = 'w-full h-28 rounded-2xl';
+        img.src = 'http://14.6.54.241:8080/download/' + store.fileData.url;
+        img.alt = '상품 이미지';
+        maxDiv.appendChild(img);
 
+        var div = document.createElement('div');
+        div.className = 'px-2 py-4';
+
+        var boldDiv = document.createElement('div');
+        boldDiv.className =
+          'font-bold text-sm mb-2 whitespace-normal overflow-auto text-black';
+        boldDiv.appendChild(document.createTextNode(store.c_name));
+        div.appendChild(boldDiv);
+
+        var p = document.createElement('p');
+        p.className = 'text-gray-700 text-xs whitespace-normal overflow-auto';
+        p.appendChild(document.createTextNode(store.c_addr));
+        div.appendChild(p);
+
+        var button = document.createElement('button');
+        button.className = 'bg-[#FACC15] text-black text-sm w-16 h-7 mt-2';
+        button.appendChild(document.createTextNode('상세보기'));
+        button.onclick = function () {
+          setOpen(true);
+          handleDialog();
+        };
+        div.appendChild(button);
+
+        maxDiv.appendChild(div);
+        content.appendChild(maxDiv);
         // 마커 클릭시 인포윈도우
         const customOverlay = new window.kakao.maps.CustomOverlay({
           position: markerPosition,
           content: content,
           xAnchor: 0.3,
-          yAnchor: 1.2
+          yAnchor: 1.2,
+          zIndex: 1
         });
-
-        // const tempDiv = document.createElement('div');
-        // tempDiv.innerHTML = content;
-
-        // const closeBtn = tempDiv.querySelector('.close');
-        // console.log('>>>', closeBtn);
-        // closeBtn?.addEventListener('click', () => {
-        //   customOverlay.setMap(null);
-        // });
-
-        // JavaScript function to close the overlay
-        const closeOverlay = () => {
-          customOverlay.setMap(null);
-        };
-
-        // // 마우스 오버시 인포윈도우
-        window.kakao.maps.event.addListener(marker, 'mouseover', function () {
-          customOverlay.setMap(map);
-        });
-
-        window.kakao.maps.event.addListener(marker, 'mouseout', function () {
-          customOverlay.setMap(null);
-        });
-
-        function isMobileDevice() {
-          return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          );
-        }
 
         // 선택된 가게 저장
+        window.kakao.maps.event.addListener(map, 'dragstart', () => {
+          // 이동 시작 시 CustomOverlay 숨기기
+          if (currentCustomOverlay) {
+            currentCustomOverlay.setMap(null);
+          }
+        });
+
         window.kakao.maps.event.addListener(marker, 'click', function () {
-          if (isMobileDevice()) {
-            if (currentStore?.c_pk_num === store.c_pk_num) {
-              customOverlay.setMap(null);
-            } else customOverlay.setMap(map);
+          setPkValue({
+            pk: store.c_pk_num,
+            category: store.c_category
+          });
+          // 이전 CustomOverlay가 있으면 제거
+          if (currentCustomOverlay) {
+            currentCustomOverlay.setMap(null);
           }
 
-          // }
-          setCurrentStore(store);
+          if (customOverlay.getMap() !== null) {
+            customOverlay.setMap(null);
+          } else {
+            customOverlay.setMap(map);
+          }
 
-          // customOverlay.setMap(map);
-          setOpen(true);
+          setCurrentCustomOverlay(customOverlay);
+          setCurrentStore(store);
         });
       });
+      return () => {
+        markers.forEach((marker: any) => {
+          marker.setMap(null);
+        });
+      };
     }
-  }, [map, data]);
+  }, [map, data, currentCustomOverlay, setCurrentStore]);
 
+  // 다이얼로그 핸들러
+  function handleDialog() {
+    switch (pkValue.category) {
+      case '숙박':
+        return <Accommodation pkValue={pkValue.pk} />;
+      case '식당':
+        return <Restaurant pkValue={pkValue.pk} />;
+      case '레저':
+        return <Restaurant pkValue={pkValue.pk} />;
+      default:
+    }
+  }
+
+  // 마커 로드
   useEffect(() => {
     loadKakaMarkers();
   }, [map, loadKakaMarkers]);
 
+  // 마커 초기화
   useEffect(() => {
     markers.forEach((marker: any) => {
       marker.setMap(null);
@@ -135,15 +181,23 @@ export default function Markers({
     loadKakaMarkers();
   }, [data]);
 
+  // 모바일 디바이스 체크
+  const isMobileDevice = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  };
+
   return (
     <>
-      {/* <Dialog open={open} onOpenChange={() => setOpen(!open)}>
-        {currentStore?.c_category === '숙박' ? (
-          <Accommodation />
-        ) : (
-          <Restaurant />
-        )}
-      </Dialog> */}
+      <Dialog
+        open={open}
+        onOpenChange={() => {
+          setOpen(!open);
+        }}
+      >
+        {handleDialog()}
+      </Dialog>
     </>
   );
 }

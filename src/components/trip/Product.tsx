@@ -44,6 +44,7 @@ export default function Product({ data, handlerCategory }: any) {
     category: ''
   });
   const [checkboxValue, setCheckboxValue] = useState('');
+  const [search, setSearch] = useState('');
 
   const handleDialogOpen = () => {
     setIsOpen(true);
@@ -71,7 +72,12 @@ export default function Product({ data, handlerCategory }: any) {
       <div className='h-full md:h-screen'>
         <div className='flex justify-center'>
           <div className='flex space-x-2 py-2 w-[80%]'>
-            <Input type='email' placeholder='검색하세요' />
+            <Input
+              type='email'
+              placeholder='검색하세요'
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
             <Button type='submit'>검색</Button>
           </div>
         </div>

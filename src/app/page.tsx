@@ -135,7 +135,7 @@ export default function Home() {
             {bestData?.map((data, index) => (
               <CarouselItem
                 key={index}
-                className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+                className='md:basis-1/3 basis-1/2 lg:basis-1/5'
               >
                 <Dialog>
                   <DialogTrigger>
@@ -153,7 +153,7 @@ export default function Home() {
                       >
                         <Card className='w-full h-full  '>
                           <CardContent className='flex items-start justify-center p-3 group'>
-                            <div className='relative w-full md:w-[100%] md:h-[258px] lg:w-[250px] lg:h-[257px] h-[173px]'>
+                            <div className='relative w-full '>
                               <Image
                                 loader={({
                                   src,
@@ -164,9 +164,12 @@ export default function Home() {
                                 }
                                 src={`http://14.6.54.241:8080/download/${data.c_img}`}
                                 alt='Image'
-                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                                layout='fill'
+                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 md:min-h-[250px] max-h-[170px] md:max-h-[250px] min-h-[170px] md:min-w-[170px] min-w-[170px] md:max-w-[170px] max-w-[170px]'
+                                layout='responsive'
+                                width={200}
+                                height={250}
                                 objectFit='cover'
+                                objectPosition='center'
                               />
                             </div>
                           </CardContent>
@@ -216,7 +219,7 @@ export default function Home() {
             {EvnetData?.map((data: any, index: number) => (
               <CarouselItem
                 key={index}
-                className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+                className='md:basis-1/3 basis-1/2 lg:basis-1/5'
               >
                 <Dialog>
                   <DialogTrigger>
@@ -234,7 +237,7 @@ export default function Home() {
                       >
                         <Card className='w-full h-full  '>
                           <CardContent className='flex  items-start justify-center p-3  group'>
-                            <div className='relative w-full md:w-[100%] md:h-[258px] lg:w-[250px] lg:h-[257px] h-[173px]'>
+                            <div className='w-full'>
                               <Image
                                 loader={({
                                   src,
@@ -249,9 +252,12 @@ export default function Home() {
                                     : `http://14.6.54.241:8080/download/${data.s_img}`
                                 }
                                 alt='Image'
-                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500'
-                                layout='fill'
+                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 md:min-h-[250px] max-h-[170px] md:max-h-[250px] min-h-[170px] md:min-w-[170px] min-w-[170px] md:max-w-[170px] max-w-[170px]'
+                                layout='responsive'
+                                width={200}
+                                height={250}
                                 objectFit='cover'
+                                objectPosition='center'
                               />
                             </div>
                           </CardContent>
@@ -290,9 +296,11 @@ export default function Home() {
           <CarouselNext />
         </Carousel>
       )}
-      <div className='w-full grid items-start min-h-screen gap-4  md:gap-8'>
+      <div className='w-full grid items-start  gap-4 md:gap-8'>
         <div className='space-y-2'>
-          <div className='mt-24 text-2xl md:text-3xl font-bold'>여행 후기</div>
+          <div className='md:mt-24 mt-20  text-2xl md:text-3xl font-bold'>
+            여행 후기
+          </div>
           <p className='text-gray-500 dark:text-gray-400'>
             {ReviewData?.length}개의 새로운 후기가 있습니다.
           </p>
@@ -311,7 +319,7 @@ export default function Home() {
                   className=''
                   whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
                 >
-                  <Card>
+                  <Card className='min-w-[255px]'>
                     <CardHeader className='flex items-start pb-4'>
                       <div className='flex items-center gap-4 mr-auto'>
                         <Avatar className='w-12 h-12'>
@@ -321,7 +329,7 @@ export default function Home() {
                           />
                         </Avatar>
                         <div className='flex flex-col w-full'>
-                          <h3 className='md:text-base text-sm font-semibold overflow-hidden text-overflow-ellipsis whitespace-wrap'>
+                          <h3 className='md:text-base text-sm text-left font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis md:w-[130px] w-[240px]'>
                             {item.b_title}
                           </h3>
                           <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>
@@ -355,7 +363,9 @@ export default function Home() {
           ))}
         </div>
         <div className='space-y-2'>
-          <div className='mt-24 text-2xl md:text-3xl font-bold'>공지사항</div>
+          <div className='md:mt-24 mt-20 text-2xl md:text-3xl font-bold'>
+            공지사항
+          </div>
           <p className='text-gray-500 dark:text-gray-400'>
             {NoticeData?.length}개의 새로운 공지사항이 있습니다.
           </p>
@@ -364,7 +374,7 @@ export default function Home() {
             <ChevronRightIcon size={20} />
           </Badge>
         </div>
-        <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>
+        <div className=' grid md:grid-cols-2 grid-cols-1 gap-3 mb-20'>
           {NoticeData?.map((data: any, index: number) => (
             <>
               <Dialog>
@@ -380,14 +390,12 @@ export default function Home() {
                         <h3 className='text-xl font-semibold text-left'>
                           {data.n_title}
                         </h3>
-
                         <div className='text-xs'>
                           <p className='text-gray-500 text-left dark:text-gray-400 flex py-2'>
                             {formatDate(data.n_date)}
                             <ChevronLeftIcon className='w-4 h-4 transform rotate-180' />
                           </p>
                         </div>
-
                         <p className='text-sm text-gray-500 text-left dark:text-gray-400'>
                           {data.n_contents}
                         </p>

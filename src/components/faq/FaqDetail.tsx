@@ -16,6 +16,11 @@ import { formatDate } from '@/utility/hooks/comnHook';
 
 export default function FaqDetail({ id }: any) {
   const { data, refetch } = faqApi.GetFaqDetail(id);
+  useEffect(() => {
+    if (!data) {
+      refetch();
+    }
+  }, [id]);
   return (
     <DialogContent className=' md:w-[1000px] w-full md:h-[80%] h-full overflow-scroll'>
       <div className='max-w-5xl md:space-y-8 md:px-12 px-2 py-8  xl:py-8'>

@@ -87,9 +87,9 @@ export default function RootLayout({
             <Navbar getIsLogin={getIsLogin} />
 
             {children}
-            <ReactQueryDevtools
+            {/* <ReactQueryDevtools
               initialIsOpen={process.env.NEXT_PUBLIC_MODE === 'local'}
-            />
+            /> */}
             <Toaster />
           </ThemeProvider>
           {pathname != '/trip/' && <Footer />}
