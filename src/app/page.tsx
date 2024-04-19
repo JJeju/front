@@ -139,60 +139,56 @@ export default function Home() {
               >
                 <Dialog>
                   <DialogTrigger>
-                    <div className='p-1'>
-                      <motion.div
-                        key={index}
-                        className=''
-                        onClick={() =>
-                          setProductValue({
-                            pk: data.c_pk_num as string,
-                            category: data.c_category as string
-                          })
-                        }
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <Card className='w-full h-full  '>
-                          <CardContent className='flex items-start justify-center p-3 group'>
-                            <div className='relative w-full '>
-                              <Image
-                                loader={({
-                                  src,
-                                  width,
-                                  quality
-                                }: ImageLoaderProps) =>
-                                  imgLoader({ src, width, quality })
-                                }
-                                src={`http://14.6.54.241:8080/download/${data.c_img}`}
-                                alt='Image'
-                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 md:min-h-[250px] max-h-[170px] md:max-h-[250px] min-h-[170px] md:min-w-[170px] min-w-[170px] md:max-w-[170px] max-w-[170px]'
-                                layout='responsive'
-                                width={200}
-                                height={250}
-                                objectFit='cover'
-                                objectPosition='center'
-                              />
-                            </div>
-                          </CardContent>
-                          <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80 h-36'>
-                            <div className='flex gap-1'>
-                              <Badge>BEST</Badge>
-                              <Badge variant={'outline'}>
-                                {data.c_category}
-                              </Badge>
-                            </div>
-                            <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                              {data.c_name}
-                            </div>
-                            <div className='flex gap-1 items-center'>
-                              <MapPin size={14} />
-                              <div className=' md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                                {data.c_addr}
-                              </div>
+                    <motion.div
+                      key={index}
+                      className=''
+                      onClick={() =>
+                        setProductValue({
+                          pk: data.c_pk_num as string,
+                          category: data.c_category as string
+                        })
+                      }
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Card className='max-h-[300px] md:max-h-[340px] max-w-[180px] md:max-w-[260px]'>
+                        <CardContent className='flex items-start justify-center p-3 '>
+                          <div className='w-full'>
+                            <Image
+                              loader={({
+                                src,
+                                width,
+                                quality
+                              }: ImageLoaderProps) =>
+                                imgLoader({ src, width, quality })
+                              }
+                              src={`http://14.6.54.241:8080/download/${data.c_img}`}
+                              alt='Image'
+                              className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 max-h-[200px] md:max-h-[200px] md:min-h-[200px] min-h-[150px] '
+                              layout='responsive'
+                              width={200}
+                              height={250}
+                              objectFit='cover'
+                              objectPosition='center'
+                            />
+                          </div>
+                        </CardContent>
+                        <div className='flex flex-col gap-1 items-start px-3 md:px-5 bg-opacity-80 h-36'>
+                          <div className='flex gap-1'>
+                            <Badge>BEST</Badge>
+                            <Badge variant={'outline'}>{data.c_category}</Badge>
+                          </div>
+                          <div className='text-left md:w-[180px] w-[140px] md:text-xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                            {data.c_name}
+                          </div>
+                          <div className='flex  items-center'>
+                            <MapPin size={14} />
+                            <div className=' text-sm  md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                              {data.c_addr}
                             </div>
                           </div>
-                        </Card>
-                      </motion.div>
-                    </div>
+                        </div>
+                      </Card>
+                    </motion.div>
                   </DialogTrigger>
                   {handleDialog()}
                 </Dialog>
@@ -223,7 +219,7 @@ export default function Home() {
               >
                 <Dialog>
                   <DialogTrigger>
-                    <div className='p-1'>
+                    <div className=''>
                       <motion.div
                         key={index}
                         className=''
@@ -235,7 +231,7 @@ export default function Home() {
                           })
                         }
                       >
-                        <Card className='w-full h-full  '>
+                        <Card className='max-h-[340px] md:max-h-[480px] max-w-[180px] md:max-w-[260px]'>
                           <CardContent className='flex  items-start justify-center p-3  group'>
                             <div className='w-full'>
                               <Image
@@ -252,7 +248,7 @@ export default function Home() {
                                     : `http://14.6.54.241:8080/download/${data.s_img}`
                                 }
                                 alt='Image'
-                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 md:min-h-[250px] max-h-[170px] md:max-h-[250px] min-h-[170px] md:min-w-[170px] min-w-[170px] md:max-w-[170px] max-w-[170px]'
+                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 max-h-[200px] md:max-h-[200px]  md:min-h-[200px] min-h-[150px] '
                                 layout='responsive'
                                 width={200}
                                 height={250}
@@ -261,7 +257,7 @@ export default function Home() {
                               />
                             </div>
                           </CardContent>
-                          <div className='flex flex-col gap-2 items-start px-5 py-1  bg-opacity-80'>
+                          <div className='flex flex-col gap-1 items-start px-3 md:px-5  bg-opacity-80 h-36'>
                             <div className='flex gap-1'>
                               <Badge>BEST</Badge>
 
@@ -270,16 +266,16 @@ export default function Home() {
                               </Badge>
                             </div>
 
-                            <div className='text-left md:w-[180px] w-[140px] md:text-2xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                            <div className='text-left md:w-[180px] w-[140px] md:text-xl text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
                               {data.e_title ?? data.s_tittle}
                             </div>
-                            <div className='flex gap-1 items-center'>
+                            <div className='flex items-center'>
                               <MapPin size={14} />
-                              <div className='text-left md:text-base text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                              <div className='text-left text-sm md:w-[180px] w-[140px] whitespace-nowrap overflow-hidden overflow-ellipsis'>
                                 {data.e_addr ?? data.s_addr}
                               </div>
                             </div>
-                            <div className='text-xs h-[48px] overflow-hidden overflow-ellipsis'>
+                            <div className='text-left text-xs  h-[48px] overflow-hidden overflow-ellipsis'>
                               {data.e_info ?? data.s_info}
                             </div>
                           </div>
@@ -319,7 +315,7 @@ export default function Home() {
                   className=''
                   whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
                 >
-                  <Card className='min-w-[255px]'>
+                  <Card className='min-w-[220px]'>
                     <CardHeader className='flex items-start pb-4'>
                       <div className='flex items-center gap-4 mr-auto'>
                         <Avatar className='w-12 h-12'>
@@ -329,7 +325,7 @@ export default function Home() {
                           />
                         </Avatar>
                         <div className='flex flex-col w-full'>
-                          <h3 className='md:text-base text-sm text-left font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis md:w-[130px] w-[240px]'>
+                          <h3 className='md:text-base text-sm text-left font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis md:w-[130px] lg:w-[230px] w-[240px]'>
                             {item.b_title}
                           </h3>
                           <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>

@@ -36,13 +36,29 @@ import CourseMarker from '../map/CourseMarker';
 export default function TripReview({ id }: any) {
   const { data, isFetching, refetch } = mypageApi.GetTripReviewDetail(id);
   const [markerInfo, setMarkerInfo] = useState<any>(null);
+
+  const [isDay, setIsDay] = useState('');
+  const [map, setMap] = useState(null);
+
+  const [lat, setLat] = useState(0);
+
+  const [lng, setLng] = useState(0);
+
+  useEffect(() => {
+    return () => {
+      console.log('Component has been unmounted');
+
+      setIsDay('');
+      setMarkerInfo(null);
+    };
+  }, []);
+
   useEffect(() => {
     if (!data) {
       refetch();
     }
   }, [id]);
-  const [isDay, setIsDay] = useState('');
-  const [map, setMap] = useState(null);
+
   return (
     <DialogContent className='md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
       <div className='space-y-8 px-4 py-8 xl:py-8'>
@@ -133,7 +149,7 @@ export default function TripReview({ id }: any) {
           <div className='h-[580px] w-full'>
             <div className='h-[500px] w-full'>
               <Map setMap={setMap} />
-              <CourseMarker data={markerInfo} map={map} />
+              <CourseMarker data={markerInfo} map={map} lat={lat} lng={lng} />
               {data?.planList.map((list: any, index: any) => (
                 <Button
                   key={index}
