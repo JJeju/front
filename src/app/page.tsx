@@ -15,7 +15,7 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel';
 import { Badge } from '@/components/ui/badge';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
@@ -354,7 +354,7 @@ export default function Home() {
                   </Card>
                 </motion.div>
               </DialogTrigger>
-              <TripReview id={isId} />
+              {isId != 0 && <TripReview id={isId} />}
             </Dialog>
           ))}
         </div>
@@ -372,9 +372,9 @@ export default function Home() {
         </div>
         <div className=' grid md:grid-cols-2 grid-cols-1 gap-3 mb-20'>
           {NoticeData?.map((data: any, index: number) => (
-            <>
+            <Fragment key={index}>
               <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                   <motion.div
                     key={index}
                     onClick={() => setIsFaqId(data.n_pk_num)}
@@ -399,9 +399,9 @@ export default function Home() {
                     </Card>
                   </motion.div>
                 </DialogTrigger>
-                <FaqDetail id={isFaqId} />
+                {isFaqId != 0 && <FaqDetail id={isFaqId} />}
               </Dialog>
-            </>
+            </Fragment>
           ))}
         </div>
       </div>

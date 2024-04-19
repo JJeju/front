@@ -88,7 +88,6 @@ export default function NewJourney() {
         <Input
           id='name'
           name='tr_title'
-          defaultValue=''
           className='col-span-3'
           value={tripValue.tr_title}
           onChange={onChange}

@@ -150,38 +150,31 @@ export default function TripReview({ id }: any) {
             <div className='h-[500px] w-full'>
               <Map setMap={setMap} />
               <CourseMarker data={markerInfo} map={map} lat={lat} lng={lng} />
-              {data?.planList.map((list: any, index: any) => (
-                <Button
-                  key={index}
-                  className='m-1 text-sm'
-                  size='sm'
-                  onClick={() => {
-                    setIsDay(index + 1);
-                    setMarkerInfo(list.dayPlanList);
-                  }}
-                  variant={isDay === index + 1 ? 'default' : 'secondary'}
-                >
-                  Day{index + 1}
-                </Button>
-              ))}
+              <div className='flex flex-wrap justify-center'>
+                {data?.planList.map((list: any, index: any) => (
+                  <Button
+                    className='m-1 text-center text-sm key={index}'
+                    size='sm'
+                    onClick={() => {
+                      setIsDay(index + 1);
+                      setMarkerInfo(list.dayPlanList);
+                    }}
+                    variant={isDay === index + 1 ? 'default' : 'secondary'}
+                  >
+                    Day {index + 1}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
           <Separator />
           <div className='grid gap-1'>
             <h2 className='text-lg font-semibold'>여행 일정</h2>
             <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className='w-[100px]'>사진</TableHead>
-                  <TableHead className='w-[140px]'>이름</TableHead>
-                  <TableHead className='w-[150px]'>장소</TableHead>
-                </TableRow>
-              </TableHeader>
               <TableBody>
                 {data?.planList.map((list: any, index: any) => (
                   <Fragment key={list.day}>
                     <Badge className='mt-2 ml-3'>Day {index + 1}</Badge>
-
                     {list?.dayPlanList.length === 0 && (
                       <TableRow>
                         <TableCell colSpan={3}>일정 없음</TableCell>
@@ -189,7 +182,7 @@ export default function TripReview({ id }: any) {
                     )}
                     {list?.dayPlanList.map((item: any, innerIndex: any) => (
                       <TableRow key={innerIndex}>
-                        <TableCell className='w-[150px] '>
+                        <TableCell className='w-[90px] '>
                           <Image
                             loader={({
                               src,
