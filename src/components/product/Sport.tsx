@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import FixMap from '../map/FixMap';
 import { Skeleton } from '../ui/skeleton';
 
-export default function Restaurant({ pkValue }: any) {
+export default function Sport({ pkValue }: any) {
   const { data, refetch, isFetching } = tripApi.GetProductDetail(pkValue);
   const [map, setMap] = useState(null);
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Restaurant({ pkValue }: any) {
           )}
           <div className='flex items-center space-x-2 text-sm font-medium'>
             {isFetching ? (
-              <Skeleton className='h-[20px] md:w-[200px] w-full' />
+              <Skeleton className='h-[20px] w-[200px]' />
             ) : (
               <>
                 <StarIcon className='w-4 h-4 fill-accent' />
@@ -58,7 +58,7 @@ export default function Restaurant({ pkValue }: any) {
             <div className='grid gap-0.5'>
               <div className='text-gray-500 text-sm dark:text-gray-400'>
                 {isFetching ? (
-                  <Skeleton className='h-[40px] md:w-[300px] w-full' />
+                  <Skeleton className='h-[40px] w-[300px]' />
                 ) : (
                   <>
                     <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
@@ -74,7 +74,7 @@ export default function Restaurant({ pkValue }: any) {
           </div>
           <Separator />
           {isFetching ? (
-            <Skeleton className='h-[400px] w-full rounded-xl' />
+            <Skeleton className='h-[400px] w-[500px] rounded-xl' />
           ) : (
             <Image
               loader={({ src, width, quality }: ImageLoaderProps) =>

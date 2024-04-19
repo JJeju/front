@@ -63,23 +63,33 @@ export default function TripReview({ id }: any) {
     <DialogContent className='md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
       <div className='space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
-          <h1 className='text-3xl font-semibold tracking-tighter'>
-            {data?.blog?.b_title}
-          </h1>
+          {isFetching ? (
+            <Skeleton className='h-[36px] w-full' />
+          ) : (
+            <h1 className='text-3xl font-semibold tracking-tighter'>
+              {data?.blog?.b_title}
+            </h1>
+          )}
           <div className='flex items-center space-x-2 text-sm font-medium'>
-            {Array.from({ length: 5 }, (_, i) => (
-              <StarIcon
-                key={i}
-                className={`w-4 h-4 ${
-                  i < data?.blog?.b_star
-                    ? 'fill-accent text-yellow-500'
-                    : 'fill-accent stroke-muted-foreground '
-                }`}
-              />
-            ))}
-            <span className='text-gray-500 dark:text-gray-400'>
-              ({data?.blog?.b_star})
-            </span>
+            {isFetching ? (
+              <Skeleton className='h-[20px] w-[200px]' />
+            ) : (
+              <>
+                {Array.from({ length: 5 }, (_, i) => (
+                  <StarIcon
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < data?.blog?.b_star
+                        ? 'fill-accent text-yellow-500'
+                        : 'fill-accent stroke-muted-foreground '
+                    }`}
+                  />
+                ))}
+                <span className='text-gray-500 dark:text-gray-400'>
+                  ({data?.blog?.b_star})
+                </span>
+              </>
+            )}
           </div>
         </div>
         <div className='grid gap-4'>
@@ -93,17 +103,23 @@ export default function TripReview({ id }: any) {
               </Avatar>
             </div>
             <div className='grid gap-0.5'>
-              <div className='font-semibold'>{data?.blog.b_fk_id}</div>
-              <div className='text-gray-500 text-sm dark:text-gray-400'>
-                <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
-                  {formatDate(data?.blog?.b_create_dt)}
-                </p>
-              </div>
+              {isFetching ? (
+                <Skeleton className='h-[40px] w-[300px]' />
+              ) : (
+                <>
+                  <div className='font-semibold'>{data?.blog.b_fk_id}</div>
+                  <div className='text-gray-500 text-sm dark:text-gray-400'>
+                    <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
+                      {formatDate(data?.blog?.b_create_dt)}
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <Separator />
           {isFetching ? (
-            <Skeleton className='h-[400px] w-[500px] rounded-xl' />
+            <Skeleton className='h-[400px] w-full rounded-xl' />
           ) : (
             <Image
               loader={({ src, width, quality }: ImageLoaderProps) =>
@@ -123,25 +139,33 @@ export default function TripReview({ id }: any) {
             }}
             className='w-full mt-5'
           >
-            <CarouselContent>
-              {data?.files?.map((data: any, index: number) => (
-                <CarouselItem
-                  key={index}
-                  className='md:basis-1/3 basis-1/2 lg:basis-1/4'
-                >
-                  <Image
-                    loader={({ src, width, quality }: ImageLoaderProps) =>
-                      imgLoader({ src, width, quality })
-                    }
-                    alt='Restaurant'
-                    className='overflow-hidden rounded-xl object-bottom'
-                    height='200'
-                    src={`http://14.6.54.241:8080/download/${data.url}`}
-                    width='500'
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
+            {isFetching ? (
+              <div className='flex gap-3 justify-center'>
+                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
+                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
+                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
+              </div>
+            ) : (
+              <CarouselContent>
+                {data?.files?.map((data: any, index: number) => (
+                  <CarouselItem
+                    key={index}
+                    className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+                  >
+                    <Image
+                      loader={({ src, width, quality }: ImageLoaderProps) =>
+                        imgLoader({ src, width, quality })
+                      }
+                      alt='Restaurant'
+                      className='overflow-hidden rounded-xl object-bottom'
+                      height='200'
+                      src={`http://14.6.54.241:8080/download/${data.url}`}
+                      width='500'
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            )}
           </Carousel>
 
           <Separator />

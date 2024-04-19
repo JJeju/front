@@ -34,9 +34,10 @@ import { imgLoader } from '@/utility/utils/imgLoader';
 import { useEffect, useState } from 'react';
 import tripApi from '@/service/trip';
 import FixMap from '../map/FixMap';
+import { Skeleton } from '../ui/skeleton';
 
 export default function Accommodation({ pkValue }: any) {
-  const { data, refetch } = tripApi.GetProductDetail(pkValue);
+  const { data, refetch, isFetching } = tripApi.GetProductDetail(pkValue);
   const [map, setMap] = useState(null);
   useEffect(() => {
     if (!data) {
@@ -48,18 +49,28 @@ export default function Accommodation({ pkValue }: any) {
     <DialogContent className=' md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
       <div className=' space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
-          <h1 className='text-3xl font-semibold tracking-tight'>
-            {data?.company.c_name}
-          </h1>
+          {isFetching ? (
+            <Skeleton className='h-[36px] w-full' />
+          ) : (
+            <h1 className='text-3xl font-semibold tracking-tight'>
+              {data?.company.c_name}
+            </h1>
+          )}
           <div className='flex items-center space-x-2 text-sm font-medium'>
-            <StarIcon className='w-4 h-4 fill-accent' />
-            <StarIcon className='w-4 h-4 fill-accent' />
-            <StarIcon className='w-4 h-4 fill-accent' />
-            <StarIcon className='w-4 h-4 fill-accent' />
-            <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
-            <span className='text-gray-500 dark:text-gray-400'>
-              5.0 (1,234 리뷰)
-            </span>
+            {isFetching ? (
+              <Skeleton className='h-[20px] w-[200px]' />
+            ) : (
+              <>
+                <StarIcon className='w-4 h-4 fill-accent' />
+                <StarIcon className='w-4 h-4 fill-accent' />
+                <StarIcon className='w-4 h-4 fill-accent' />
+                <StarIcon className='w-4 h-4 fill-accent' />
+                <StarIcon className='w-4 h-4 fill-muted stroke-muted-foreground' />
+                <span className='text-gray-500 dark:text-gray-400'>
+                  5.0 (1,234 리뷰)
+                </span>
+              </>
+            )}
           </div>
         </div>
         <div className='grid gap-4'>
@@ -72,26 +83,36 @@ export default function Accommodation({ pkValue }: any) {
             </div>
             <div className='grid gap-0.5'>
               <div className='text-gray-500 text-sm dark:text-gray-400'>
-                <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
-                  <Phone size={15} /> {data?.company.c_phone}
-                </p>
-                <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
-                  <MapPin size={15} /> {data?.company.c_addr}
-                </p>
+                {isFetching ? (
+                  <Skeleton className='h-[40px] w-[300px]' />
+                ) : (
+                  <>
+                    <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
+                      <Phone size={15} /> {data?.company.c_phone}
+                    </p>
+                    <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
+                      <MapPin size={15} /> {data?.company.c_addr}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
           <Separator />
-          <Image
-            loader={({ src, width, quality }: ImageLoaderProps) =>
-              imgLoader({ src, width, quality })
-            }
-            alt='Restaurant'
-            className='overflow-hidden rounded-xl object-bottom'
-            height='200'
-            src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
-            width='500'
-          />
+          {isFetching ? (
+            <Skeleton className='h-[400px] w-[500px] rounded-xl' />
+          ) : (
+            <Image
+              loader={({ src, width, quality }: ImageLoaderProps) =>
+                imgLoader({ src, width, quality })
+              }
+              alt='Restaurant'
+              className='overflow-hidden rounded-xl object-bottom'
+              height='200'
+              src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
+              width='500'
+            />
+          )}
           <Separator />
 
           <div className='prose'>

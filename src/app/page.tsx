@@ -42,6 +42,7 @@ import { imgLoader } from '@/utility/utils/imgLoader';
 import MainLoading from '@/components/loading/MainLoading';
 import FaqDetail from '@/components/faq/FaqDetail';
 import { ReviewRs } from '@/type/home';
+import Sport from '@/components/product/Sport';
 
 export default function Home() {
   const router = useRouter();
@@ -68,7 +69,7 @@ export default function Home() {
       case '식당':
         return <Restaurant pkValue={productValue.pk} />;
       case '레저':
-        return <Restaurant pkValue={productValue.pk} />;
+        return <Sport pkValue={productValue.pk} />;
       case '관광지':
         return <Spot pkValue={productValue.pk} />;
       default:

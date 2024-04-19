@@ -20,7 +20,7 @@ export default function MainLoading() {
             >
               <Card className='w-full h-full ' key={index}>
                 <CardContent className='flex items-start justify-center p-3 group '>
-                  <div className='relative md:w-[80%] md:h-[258px] lg:w-[100%] lg:h-[257px] w-[100%] h-[173px]'>
+                  <div className='relative md:w-[200px] md:h-[220px] w-[154px] h-[154px]'>
                     <Skeleton className='w-full h-full' />
                   </div>
                 </CardContent>
