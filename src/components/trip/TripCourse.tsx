@@ -28,6 +28,7 @@ import tripStore from '@/stores/trip';
 import { formatDate } from '@/utility/hooks/comnHook';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { Skeleton } from '../ui/skeleton';
+import { Badge } from '../ui/badge';
 
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
@@ -118,10 +119,10 @@ export default function TripCourse() {
   };
 
   return (
-    <div className='w-full  '>
-      <div className='grid gap-8 mt-4 '>
-        <div className='flex gap-2'>
-          <h3 className='text-2xl font-semibold'>여행 정보</h3>
+    <div className='w-full'>
+      <div className='grid gap-4 mt-3 '>
+        <div className='flex'>
+          <h3 className='text-xl font-semibold'>여행 정보</h3>
           <Button className='ml-2' size='sm'>
             여정 저장
           </Button>
@@ -216,88 +217,56 @@ export default function TripCourse() {
         </div>
       </div>
       <div className='h-[440px]'>
+        <h2 className='text-xl font-semibold mt-3 text-left'>여행 일정</h2>
         <Table>
-          <TableBody>
-            <TableRow className='w-full'>
-              <TableHead className='w-[140px]'>사진</TableHead>
-              <TableHead className='w-[140px]'>이름</TableHead>
-              <TableHead className='w-[150px]'>장소</TableHead>
-              <TableHead className='w-[20px]'></TableHead>
-            </TableRow>
+          <TableBody className='p-0'>
+            {items.map((list: any, index: any) => (
+              <Fragment key={list.day}>
+                <Badge className='w-[140px] flex justify-center mt-3 '>
+                  Day {index + 1} - {list.day}
+                </Badge>
+                {list?.dayPlanList.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={3} className='text-left'>
+                      일정 없음
+                    </TableCell>
+                  </TableRow>
+                )}
+                {list.dayPlanList.map((item: any, innerIndex: any) => (
+                  <TableRow key={innerIndex}>
+                    <TableCell className='w-[10px]'>
+                      <Image
+                        loader={({ src, width, quality }: ImageLoaderProps) =>
+                          imgLoader({ src, width, quality })
+                        }
+                        alt='Tour image'
+                        className='rounded-md min-w-[84px] min-h-[84px] '
+                        src={`http://14.6.54.241:8080/download/${item.tp_fk_company_info.c_img}`}
+                        height={84}
+                        width={84}
+                      />
+                    </TableCell>
+                    <TableCell className=' text-overflow-ellipsis w-[150px] text-xs font-bold text-left'>
+                      {item.tp_fk_company_info.c_name}
+                    </TableCell>
+                    <TableCell className=' text-overflow-ellipsis w-[200px] text-xs text-left'>
+                      {item.tp_fk_company_info.c_addr}
+                    </TableCell>
+                    <TableCell className='text-right'>
+                      <Button
+                        variant='destructive'
+                        size='sm'
+                        // onClick={() => onRemove(item)}
+                      >
+                        삭제
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </Fragment>
+            ))}
           </TableBody>
         </Table>
-        <DragDropContext onDragEnd={onDragEnd}>
-          {items.map((list: any, index: any) => (
-            <Fragment key={list.day}>
-              <div className='text-xl pt-2 px-4 text-left font-extrabold'>
-                {index}일차 - ({list.day})
-              </div>
-              <Droppable key={index} droppableId={`draggable-${index}`}>
-                {provided => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    className='cardlists'
-                  >
-                    {list.dayPlanList.map((item: any, innerIndex: any) => (
-                      <Draggable
-                        key={`draggable-${innerIndex}`}
-                        draggableId={`draggable-${innerIndex}`}
-                        index={innerIndex}
-                      >
-                        {provided => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            <Table>
-                              <TableBody>
-                                <TableRow>
-                                  <TableCell className='w-[150px] '>
-                                    <Image
-                                      loader={({
-                                        src,
-                                        width,
-                                        quality
-                                      }: ImageLoaderProps) =>
-                                        imgLoader({ src, width, quality })
-                                      }
-                                      alt='Tour image'
-                                      className='aspect-1/2 rounded-md object-cover overflow-hidden'
-                                      src={'/56692-O8P89L-432.jpg'}
-                                      height='36'
-                                      width='64'
-                                    />
-                                  </TableCell>
-                                  <TableCell className=' text-overflow-ellipsis w-[150px] '>
-                                    {item.tp_pk_num}
-                                  </TableCell>
-                                  <TableCell className=' text-overflow-ellipsis w-[200px]'>
-                                    {/* {item} */}
-                                  </TableCell>
-                                  <TableCell className='text-right'>
-                                    <Button
-                                      variant='destructive'
-                                      size='sm'
-                                      // onClick={() => onRemove(item)}
-                                    >
-                                      삭제
-                                    </Button>
-                                  </TableCell>
-                                </TableRow>
-                              </TableBody>
-                            </Table>
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                  </div>
-                )}
-              </Droppable>
-            </Fragment>
-          ))}
-        </DragDropContext>
       </div>
     </div>
   );
