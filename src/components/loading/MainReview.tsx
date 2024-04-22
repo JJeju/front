@@ -6,7 +6,7 @@ export default function MainReview() {
   return (
     <>
       {Array.from({ length: 3 }).map((_, index) => (
-        <Card className='min-w-[220px]'>
+        <Card className='w-full'>
           <CardHeader className='flex items-start pb-4'>
             <div className='flex items-center gap-4 mr-auto'>
               <Skeleton className='w-12 h-12'>
@@ -24,7 +24,7 @@ export default function MainReview() {
             </div>
           </CardHeader>
           <CardContent>
-            <Skeleton className='h-[64px] w-[140px] p-5' />
+            <Skeleton className='h-[20px] w-[80%] mb-5' />
           </CardContent>
         </Card>
       ))}

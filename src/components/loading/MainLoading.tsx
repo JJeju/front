@@ -20,9 +20,7 @@ export default function MainLoading() {
             >
               <Card className='w-full h-full ' key={index}>
                 <CardContent className='flex items-start justify-center p-3 group '>
-                  <div className='relative md:w-[200px] md:h-[220px] w-[154px] h-[154px]'>
-                    <Skeleton className='w-full h-full' />
-                  </div>
+                  <Skeleton className='h-[150px] md:h-[200px] w-[150px] md:w-[200px] ' />
                 </CardContent>
                 <div className='flex flex-col gap-2 items-start px-5 py-1 bg-opacity-80 h-36'>
                   <Skeleton className='w-full h-4' />

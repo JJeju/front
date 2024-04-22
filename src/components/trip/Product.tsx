@@ -127,7 +127,7 @@ export default function Product({ data, handlerCategory }: any) {
               </div>
               <div className='flex flex-col mt-5 mb-2 mx-2 gap-1  h-full w-[200px] lg:w-[250px] md:w-[250px] '>
                 <div className='flex flex-col items-start'>
-                  <div className='text-left md:text-lg text-lg font-bold  whitespace-nowrap overflow-hidden overflow-ellipsis w-[200px] lg:w-[250px] md:w-[250px]'>
+                  <div className='text-left md:text-lg text-base font-bold  whitespace-nowrap overflow-hidden overflow-ellipsis w-[200px] lg:w-[250px] md:w-[250px]'>
                     {item.c_name}
                   </div>
                   <div className='pt-1'>

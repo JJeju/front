@@ -24,7 +24,7 @@ export default function Spot({ pkValue }: any) {
       <div className='max-w-5xl mx-auto space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
           {isFetching ? (
-            <Skeleton className='h-[36px] w-full' />
+            <Skeleton className='h-[36px]  w-[200px]' />
           ) : (
             <h1 className='text-3xl font-semibold tracking-tighter '>
               {data?.company.c_name}

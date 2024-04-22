@@ -37,7 +37,7 @@ export const KakaoDirectionsApi = async (params: directionsApiProps) => {
           destination: destination
         },
         headers: {
-          Authorization: `KakaoAK ${REST_API_KEY}`
+          Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_REST_API_KEY}`
         }
       }
     );
@@ -58,7 +58,7 @@ export const KakaoWaypointApi = async (params: directionsApiProps) => {
       params,
       {
         headers: {
-          Authorization: `KakaoAK ${REST_API_KEY}`
+          Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_REST_API_KEY}`
         }
       }
     );

@@ -141,7 +141,7 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
       clickline.setMap(null);
       setClickline(null);
     }
-    console.log('distanceOverlay>>>', distanceOverlay);
+
     if (distanceOverlay.length > 0) {
       distanceOverlay.map((di: any) => {
         di.setMap(null);
@@ -198,14 +198,6 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
           strokeOpacity: 1,
           strokeStyle: 'solid'
         });
-
-        var carTimes = calculateTravelTime(line.road);
-
-        let distance = line.road.map(
-          (data: { distance: any }) => data.distance
-        );
-
-        console.log('>>', distance);
 
         line.road.map((data: any, index: number) => {
           let content = getTimeHTML(data.distance, data.duration);
