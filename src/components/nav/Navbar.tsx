@@ -110,7 +110,11 @@ export default function Navbar({ getIsLogin }: any) {
   const router = useRouter();
 
   useEffect(() => {
-    setHydrated(true);
+    // 모바일인지 pc인지 검사하는 코드
+
+    if (typeof window !== 'undefined') {
+      setHydrated(true);
+    }
   }, []);
 
   const handleLogout = () => {

@@ -63,23 +63,33 @@ export default function TripReview({ id }: any) {
     <DialogContent className='md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
       <div className='space-y-8 px-4 py-8 xl:py-8'>
         <div className='space-y-2'>
-          <h1 className='text-3xl font-semibold tracking-tighter'>
-            {data?.blog?.b_title}
-          </h1>
+          {isFetching ? (
+            <Skeleton className='h-[36px] w-full' />
+          ) : (
+            <h1 className='text-3xl font-semibold tracking-tighter'>
+              {data?.blog?.b_title}
+            </h1>
+          )}
           <div className='flex items-center space-x-2 text-sm font-medium'>
-            {Array.from({ length: 5 }, (_, i) => (
-              <StarIcon
-                key={i}
-                className={`w-4 h-4 ${
-                  i < data?.blog?.b_star
-                    ? 'fill-accent text-yellow-500'
-                    : 'fill-accent stroke-muted-foreground '
-                }`}
-              />
-            ))}
-            <span className='text-gray-500 dark:text-gray-400'>
-              ({data?.blog?.b_star})
-            </span>
+            {isFetching ? (
+              <Skeleton className='h-[20px] w-[200px]' />
+            ) : (
+              <>
+                {Array.from({ length: 5 }, (_, i) => (
+                  <StarIcon
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < data?.blog?.b_star
+                        ? 'fill-accent text-yellow-500'
+                        : 'fill-accent stroke-muted-foreground '
+                    }`}
+                  />
+                ))}
+                <span className='text-gray-500 dark:text-gray-400'>
+                  ({data?.blog?.b_star})
+                </span>
+              </>
+            )}
           </div>
         </div>
         <div className='grid gap-4'>
@@ -93,17 +103,23 @@ export default function TripReview({ id }: any) {
               </Avatar>
             </div>
             <div className='grid gap-0.5'>
-              <div className='font-semibold'>{data?.blog.b_fk_id}</div>
-              <div className='text-gray-500 text-sm dark:text-gray-400'>
-                <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
-                  {formatDate(data?.blog?.b_create_dt)}
-                </p>
-              </div>
+              {isFetching ? (
+                <Skeleton className='h-[40px] w-[300px]' />
+              ) : (
+                <>
+                  <div className='font-semibold'>{data?.blog.b_fk_id}</div>
+                  <div className='text-gray-500 text-sm dark:text-gray-400'>
+                    <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
+                      {formatDate(data?.blog?.b_create_dt)}
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <Separator />
           {isFetching ? (
-            <Skeleton className='h-[400px] w-[500px] rounded-xl' />
+            <Skeleton className='h-[400px] w-full rounded-xl' />
           ) : (
             <Image
               loader={({ src, width, quality }: ImageLoaderProps) =>
@@ -123,25 +139,33 @@ export default function TripReview({ id }: any) {
             }}
             className='w-full mt-5'
           >
-            <CarouselContent>
-              {data?.files?.map((data: any, index: number) => (
-                <CarouselItem
-                  key={index}
-                  className='md:basis-1/3 basis-1/2 lg:basis-1/4'
-                >
-                  <Image
-                    loader={({ src, width, quality }: ImageLoaderProps) =>
-                      imgLoader({ src, width, quality })
-                    }
-                    alt='Restaurant'
-                    className='overflow-hidden rounded-xl object-bottom'
-                    height='200'
-                    src={`http://14.6.54.241:8080/download/${data.url}`}
-                    width='500'
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
+            {isFetching ? (
+              <div className='flex gap-3 justify-center'>
+                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
+                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
+                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
+              </div>
+            ) : (
+              <CarouselContent>
+                {data?.files?.map((data: any, index: number) => (
+                  <CarouselItem
+                    key={index}
+                    className='md:basis-1/3 basis-1/2 lg:basis-1/4'
+                  >
+                    <Image
+                      loader={({ src, width, quality }: ImageLoaderProps) =>
+                        imgLoader({ src, width, quality })
+                      }
+                      alt='Restaurant'
+                      className='overflow-hidden rounded-xl object-bottom'
+                      height='200'
+                      src={`http://14.6.54.241:8080/download/${data.url}`}
+                      width='500'
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            )}
           </Carousel>
 
           <Separator />
@@ -150,38 +174,31 @@ export default function TripReview({ id }: any) {
             <div className='h-[500px] w-full'>
               <Map setMap={setMap} />
               <CourseMarker data={markerInfo} map={map} lat={lat} lng={lng} />
-              {data?.planList.map((list: any, index: any) => (
-                <Button
-                  key={index}
-                  className='m-1 text-sm'
-                  size='sm'
-                  onClick={() => {
-                    setIsDay(index + 1);
-                    setMarkerInfo(list.dayPlanList);
-                  }}
-                  variant={isDay === index + 1 ? 'default' : 'secondary'}
-                >
-                  Day{index + 1}
-                </Button>
-              ))}
+              <div className='flex flex-wrap justify-center'>
+                {data?.planList.map((list: any, index: any) => (
+                  <Button
+                    className='m-1 text-center text-sm key={index}'
+                    size='sm'
+                    onClick={() => {
+                      setIsDay(index + 1);
+                      setMarkerInfo(list.dayPlanList);
+                    }}
+                    variant={isDay === index + 1 ? 'default' : 'secondary'}
+                  >
+                    Day {index + 1}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
           <Separator />
           <div className='grid gap-1'>
             <h2 className='text-lg font-semibold'>여행 일정</h2>
             <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className='w-[100px]'>사진</TableHead>
-                  <TableHead className='w-[140px]'>이름</TableHead>
-                  <TableHead className='w-[150px]'>장소</TableHead>
-                </TableRow>
-              </TableHeader>
               <TableBody>
                 {data?.planList.map((list: any, index: any) => (
                   <Fragment key={list.day}>
                     <Badge className='mt-2 ml-3'>Day {index + 1}</Badge>
-
                     {list?.dayPlanList.length === 0 && (
                       <TableRow>
                         <TableCell colSpan={3}>일정 없음</TableCell>
@@ -189,7 +206,7 @@ export default function TripReview({ id }: any) {
                     )}
                     {list?.dayPlanList.map((item: any, innerIndex: any) => (
                       <TableRow key={innerIndex}>
-                        <TableCell className='w-[150px] '>
+                        <TableCell className='w-[90px] '>
                           <Image
                             loader={({
                               src,

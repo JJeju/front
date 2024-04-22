@@ -121,7 +121,7 @@ const mypageApi = {
     return useQuery({
       queryKey: ['tripReviewDetail', data],
       queryFn: () => this.getTripReviewDetailFn(data),
-      enabled: !!data,
+      enabled: !data,
       staleTime: 50000,
       retry: false
     });

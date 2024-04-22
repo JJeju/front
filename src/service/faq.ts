@@ -31,18 +31,20 @@ const faqApi = {
   },
   // FAQ 상세 조회
   getFaqDetailKey: 'service-center/qa/detail',
-  faqDetailFn: async (data: number) => {
+  faqDetailFn: async (data?: number) => {
     const res = await axiosInstance.get(
       `/api/service-center/qa/detail/${data}`
     );
     return res.data.body;
   },
-  GetFaqDetail: function (data: number) {
+  GetFaqDetail: function (data?: number) {
     return useQuery({
       queryKey: [this.getFaqDetailKey, data],
       queryFn: () => this.faqDetailFn(data),
       refetchOnWindowFocus: false,
-      enabled: !!data
+      enabled: false,
+      // staleTime: 50000,
+      retry: false
     });
   }
 };

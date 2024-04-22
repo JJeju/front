@@ -9,7 +9,7 @@ const CookieStorageBuilder = (cookies: any) => ({
       ...options
     }),
   getCookie: (key: string) => cookies.get(key),
-  removeCookie: (key: string) => cookies.remove(key)
+  removeCookie: (key: string) => cookies.remove(key, { path: '/' })
 });
 
 export const CookieStorage = CookieStorageBuilder(Cookies);

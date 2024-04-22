@@ -80,7 +80,7 @@ export default function NewJourney() {
     }
   };
   return (
-    <div className='grid gap-4 py-4 pr-5'>
+    <div className='grid gap-4 py-4 pr-5 md:w-[380px] w-full'>
       <div className='grid grid-cols-4 items-center gap-4'>
         <Label htmlFor='name' className='text-right'>
           여정이름
@@ -88,7 +88,6 @@ export default function NewJourney() {
         <Input
           id='name'
           name='tr_title'
-          defaultValue=''
           className='col-span-3'
           value={tripValue.tr_title}
           onChange={onChange}

@@ -13,10 +13,7 @@ export default function Journey({ isTab }: { isTab?: string }) {
     <DialogContent className='w-full md:w-auto h-full md:h-auto '>
       <DialogTitle className='font-semibold'>J E J U</DialogTitle>
       <div className='flex justify-center'>
-        <Tabs
-          defaultValue={isTab === 'save' ? 'savedjourney' : 'account'}
-          className='w-[390px]'
-        >
+        <Tabs defaultValue={isTab === 'save' ? 'savedjourney' : 'account'}>
           <TabsList className='grid w-full grid-cols-2 mt-8 '>
             <TabsTrigger value='newjourney'>새 여정</TabsTrigger>
             <TabsTrigger value={'savedjourney'}>여정 불러오기</TabsTrigger>

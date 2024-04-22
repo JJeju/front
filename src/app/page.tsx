@@ -15,7 +15,7 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel';
 import { Badge } from '@/components/ui/badge';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
@@ -42,6 +42,8 @@ import { imgLoader } from '@/utility/utils/imgLoader';
 import MainLoading from '@/components/loading/MainLoading';
 import FaqDetail from '@/components/faq/FaqDetail';
 import { ReviewRs } from '@/type/home';
+import Sport from '@/components/product/Sport';
+import MainReview from '@/components/loading/MainReview';
 
 export default function Home() {
   const router = useRouter();
@@ -68,7 +70,7 @@ export default function Home() {
       case '식당':
         return <Restaurant pkValue={productValue.pk} />;
       case '레저':
-        return <Restaurant pkValue={productValue.pk} />;
+        return <Sport pkValue={productValue.pk} />;
       case '관광지':
         return <Spot pkValue={productValue.pk} />;
       default:
@@ -163,7 +165,7 @@ export default function Home() {
                               }
                               src={`http://14.6.54.241:8080/download/${data.c_img}`}
                               alt='Image'
-                              className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 max-h-[200px] md:max-h-[200px] md:min-h-[200px] min-h-[150px] '
+                              className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 max-h-[150px] md:max-h-[200px] md:min-h-[200px] min-h-[150px]'
                               layout='responsive'
                               width={200}
                               height={250}
@@ -248,7 +250,7 @@ export default function Home() {
                                     : `http://14.6.54.241:8080/download/${data.s_img}`
                                 }
                                 alt='Image'
-                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 max-h-[200px] md:max-h-[200px]  md:min-h-[200px] min-h-[150px] '
+                                className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 max-h-[150px] md:max-h-[200px]  md:min-h-[200px] min-h-[150px] '
                                 layout='responsive'
                                 width={200}
                                 height={250}
@@ -306,57 +308,63 @@ export default function Home() {
           </Badge>
         </div>
         <div className=' grid md:grid-cols-3 grid-cols-1 gap-3'>
-          {ReviewData?.map((item: ReviewRs, index: number) => (
-            <Dialog key={index}>
-              <DialogTrigger>
-                <motion.div
-                  onClick={() => setIsId(item.b_pk_num)}
-                  key={index}
-                  className=''
-                  whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
-                >
-                  <Card className='min-w-[220px]'>
-                    <CardHeader className='flex items-start pb-4'>
-                      <div className='flex items-center gap-4 mr-auto'>
-                        <Avatar className='w-12 h-12'>
-                          <AvatarImage
-                            alt='Avatar'
-                            src={'/56692-O8P89L-432.jpg'}
-                          />
-                        </Avatar>
-                        <div className='flex flex-col w-full'>
-                          <h3 className='md:text-base text-sm text-left font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis md:w-[130px] lg:w-[230px] w-[240px]'>
-                            {item.b_title}
-                          </h3>
-                          <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>
-                            {item.b_fk_id}
+          {reviewisLoading ? (
+            <MainReview />
+          ) : (
+            <>
+              {ReviewData?.map((item: ReviewRs, index: number) => (
+                <Dialog key={index}>
+                  <DialogTrigger>
+                    <motion.div
+                      onClick={() => setIsId(item.b_pk_num)}
+                      key={index}
+                      className=''
+                      whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
+                    >
+                      <Card className='min-w-[220px]'>
+                        <CardHeader className='flex items-start pb-4'>
+                          <div className='flex items-center gap-4 mr-auto'>
+                            <Avatar className='w-12 h-12'>
+                              <AvatarImage
+                                alt='Avatar'
+                                src={'/56692-O8P89L-432.jpg'}
+                              />
+                            </Avatar>
+                            <div className='flex flex-col w-full'>
+                              <h3 className='md:text-base text-sm text-left font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis md:w-[130px] lg:w-[230px] w-[240px]'>
+                                {item.b_title}
+                              </h3>
+                              <p className='text-xs text-gray-500 dark:text-gray-400 text-start'>
+                                {item.b_fk_id}
+                              </p>
+                            </div>
+                          </div>
+                          <div className='flex items-center space-x-1 pt-2  text-sm'>
+                            {Array.from({ length: 5 }, (_, i) => (
+                              <StarIcon
+                                key={i}
+                                className={`w-4 h-4 ${
+                                  i < item?.b_star
+                                    ? 'fill-accent text-yellow-500'
+                                    : 'fill-accent stroke-muted-foreground '
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <p className='text-sm text-gray-500 dark:text-gray-400 px-6 pb-5 text-start'>
+                            {item.b_contents}
                           </p>
-                        </div>
-                      </div>
-                      <div className='flex items-center space-x-1 pt-2  text-sm'>
-                        {Array.from({ length: 5 }, (_, i) => (
-                          <StarIcon
-                            key={i}
-                            className={`w-4 h-4 ${
-                              i < item?.b_star
-                                ? 'fill-accent text-yellow-500'
-                                : 'fill-accent stroke-muted-foreground '
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className='text-sm text-gray-500 dark:text-gray-400 px-6 pb-5 text-start'>
-                        {item.b_contents}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </DialogTrigger>
-              <TripReview id={isId} />
-            </Dialog>
-          ))}
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </DialogTrigger>
+                  {isId != 0 && <TripReview id={isId} />}
+                </Dialog>
+              ))}
+            </>
+          )}
         </div>
         <div className='space-y-2'>
           <div className='md:mt-24 mt-20 text-2xl md:text-3xl font-bold'>
@@ -372,9 +380,9 @@ export default function Home() {
         </div>
         <div className=' grid md:grid-cols-2 grid-cols-1 gap-3 mb-20'>
           {NoticeData?.map((data: any, index: number) => (
-            <>
+            <Fragment key={index}>
               <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                   <motion.div
                     key={index}
                     onClick={() => setIsFaqId(data.n_pk_num)}
@@ -399,9 +407,9 @@ export default function Home() {
                     </Card>
                   </motion.div>
                 </DialogTrigger>
-                <FaqDetail id={isFaqId} />
+                {isFaqId != 0 && <FaqDetail id={isFaqId} />}
               </Dialog>
-            </>
+            </Fragment>
           ))}
         </div>
       </div>

@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export default function Restaurant({ pkValue }: any) {
+export default function Sport({ pkValue }: any) {
   const { data, refetch, isFetching } = tripApi.GetProductDetail(pkValue);
   const [map, setMap] = useState(null);
 
@@ -30,20 +30,12 @@ export default function Restaurant({ pkValue }: any) {
 
     script.onload = () => {
       if (!window.Kakao.isInitialized()) {
-        console.log('sdfsdf>>');
         window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT); // Kakao.init()을 호출합니다.
       }
     };
   }, []);
 
-  useEffect(() => {
-    if (!data) {
-      refetch();
-    }
-  }, [pkValue]);
-
   const handleShareKakao = (lat?: number, lon?: number) => {
-    console.log('>>>', lat, lon);
     window.Kakao.Share?.sendDefault({
       objectType: 'location',
       address: `${data?.company.c_addr}`,
@@ -75,6 +67,12 @@ export default function Restaurant({ pkValue }: any) {
     });
   };
 
+  useEffect(() => {
+    if (!data) {
+      refetch();
+    }
+  }, [pkValue]);
+
   return (
     <DialogContent className=' md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
       <div className='max-w-5xl mx-auto space-y-8 px-4 py-8 xl:py-8'>
@@ -88,7 +86,7 @@ export default function Restaurant({ pkValue }: any) {
           )}
           <div className='flex items-center space-x-2 text-sm font-medium'>
             {isFetching ? (
-              <Skeleton className='h-[20px] md:w-[200px] w-full' />
+              <Skeleton className='h-[20px] w-[200px]' />
             ) : (
               <>
                 <StarIcon className='w-4 h-4 fill-accent' />
@@ -114,7 +112,7 @@ export default function Restaurant({ pkValue }: any) {
             <div className='grid gap-0.5'>
               <div className='text-gray-500 text-sm dark:text-gray-400'>
                 {isFetching ? (
-                  <Skeleton className='h-[40px] md:w-[300px] w-full' />
+                  <Skeleton className='h-[40px] w-[300px]' />
                 ) : (
                   <>
                     <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
@@ -130,7 +128,7 @@ export default function Restaurant({ pkValue }: any) {
           </div>
           <Separator />
           {isFetching ? (
-            <Skeleton className='h-[400px] w-full rounded-xl' />
+            <Skeleton className='h-[400px] w-[500px] rounded-xl' />
           ) : (
             <Image
               loader={({ src, width, quality }: ImageLoaderProps) =>
@@ -219,6 +217,7 @@ export default function Restaurant({ pkValue }: any) {
     </DialogContent>
   );
 }
+
 export function KakaoIcon() {
   return (
     <svg

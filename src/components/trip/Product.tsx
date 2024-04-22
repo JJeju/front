@@ -110,21 +110,24 @@ export default function Product({ data, handlerCategory }: any) {
         >
           {data?.map((item: any, index: number) => (
             <Card className='flex gap-2 items-center w-auto' key={index}>
-              <div className='relative  md:w-[180px] w-[170px] h-[150px]'>
+              <div className=''>
                 <Image
                   loader={({ src, width, quality }: ImageLoaderProps) =>
                     imgLoader({ src, width, quality })
                   }
                   src={`http://14.6.54.241:8080/download/${item.fileData.url}`}
                   alt='사진 없음'
-                  className='p-2 rounded-lg shadow-2xl'
-                  layout='fill'
+                  className='p-2 rounded-lg shadow-2xl max-h-[150px] md:max-h-[150px] w-[260px] md:w-[200px]  min-h-[150px]'
+                  width={250}
+                  height={250}
                   objectFit='cover'
+                  layout='responsive'
+                  objectPosition='center'
                 />
               </div>
               <div className='flex flex-col mt-5 mb-2 mx-2 gap-1  h-full w-[200px] lg:w-[250px] md:w-[250px] '>
                 <div className='flex flex-col items-start'>
-                  <div className='text-left md:text-xl text-lg font-bold  whitespace-nowrap overflow-hidden overflow-ellipsis w-[200px] lg:w-[250px] md:w-[250px]'>
+                  <div className='text-left md:text-lg text-base font-bold  whitespace-nowrap overflow-hidden overflow-ellipsis w-[200px] lg:w-[250px] md:w-[250px]'>
                     {item.c_name}
                   </div>
                   <div className='pt-1'>

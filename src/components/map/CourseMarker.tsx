@@ -87,10 +87,10 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
         marker.setMap(map);
         markers.push(marker);
 
-        const content = `<div class="max-w-48 w-36  shadow-lg bg-white rounded-2xl">
-          <img class="w-full h-28 rounded-2xl" src=http://14.6.54.241:8080/download/${store.tp_fk_company_info.c_img} alt="상품 이미지">
-          <div class="px-2 py-4">
-            <div class="font-bold text-sm mb-2 whitespace-normal overflow-auto text-black">${store.tp_fk_company_info.c_name}</div>
+        const content = `<div class="max-w-36 w-28  shadow-lg bg-white rounded-2xl">
+          <img class="w-full h-20 rounded-2xl" src=http://14.6.54.241:8080/download/${store.tp_fk_company_info.c_img} alt="상품 이미지">
+          <div class="px-2 py-2">
+            <div class="font-bold text-sm mb-1 whitespace-normal overflow-auto text-black">${store.tp_fk_company_info.c_name}</div>
             <p class="text-gray-700 text-xs whitespace-normal overflow-auto">
             ${store.tp_fk_company_info.c_addr}
             </p>
@@ -135,18 +135,13 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
     loadKakaMarkers();
   }, [map, loadKakaMarkers]);
 
-  // function deleteClickLine() {
-  //   clickline.setMap(null);
-  //   clickline = null;
-  // }
-
   useEffect(() => {
     // 기존에 그렸던 선이 있다면 지도에서 제거
     if (clickline) {
       clickline.setMap(null);
       setClickline(null);
     }
-    console.log('distanceOverlay>>>', distanceOverlay);
+
     if (distanceOverlay.length > 0) {
       distanceOverlay.map((di: any) => {
         di.setMap(null);
@@ -203,14 +198,6 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
           strokeOpacity: 1,
           strokeStyle: 'solid'
         });
-
-        var carTimes = calculateTravelTime(line.road);
-
-        let distance = line.road.map(
-          (data: { distance: any }) => data.distance
-        );
-
-        console.log('>>', distance);
 
         line.road.map((data: any, index: number) => {
           let content = getTimeHTML(data.distance, data.duration);
@@ -335,10 +322,14 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
     // 계산한 자동차 이동 시간이 60분보다 크면 시간으로 표시합니다
 
     carHour =
-      '<span class="number font-bold text-[#ee6152]">' + hours + '</span>시간 ';
+      '<span class="number font-bold text-[#ee6152] text-xs">' +
+      hours +
+      '</span>시간 ';
 
     carMin =
-      '<span class="number font-bold text-[#ee6152]">' + minutes + '</span>분 ';
+      '<span class="number font-bold text-[#ee6152] text-xs">' +
+      minutes +
+      '</span>분 ';
 
     // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
     const walkTime = (distanceKm / 4) * 60; // 걷는 시간 (분)
@@ -351,32 +342,44 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
     const bicycleMin = Math.floor(bicycleTime % 60); // 분
 
     // 거리와 도보 시간, 자전거 시간, 자동차 시간을 가지고 HTML Content를 만들어 리턴합니다
-    let content = '<ul class="shadow-lg bg-white rounded-2xl p-2">';
+    let content =
+      '<ul class="shadow-lg bg-white text-black rounded-2xl p-2 text-xs">';
     content += '    <li>';
     content +=
-      '        <span class="label">총거리 : </span><span class="number font-bold text-[#ee6152]">' +
+      '        <span class="label  text-xs">총거리 : </span><span class="number font-bold text-xs text-[#ee6152]">' +
       distanceKm.toFixed(2) + // 소수점 두 자리까지 표시
       '</span>km';
     content += '    </li>';
     content += '    <li>';
+    if (walkHour > 0) {
+      content +=
+        '<span class="label text-xs">도보 : </span><span class="number font-bold text-xs text-[#ee6152]">' +
+        walkHour +
+        '</span>시간 ';
+    }
     content +=
-      '        <span class="label">도보 : </span><span class="number font-bold text-[#ee6152]">' +
-      walkHour +
-      '</span>시간 <span class="number font-bold text-[#ee6152]">' +
+      '<span class="number font-bold text-[#ee6152] text-xs">' +
       walkMin +
       '</span>분';
     content += '    </li>';
     content += '    <li>';
+    content += '        <span class="label text-xs">자전거 : </span>';
+    if (bicycleHour > 0) {
+      content +=
+        '<span class="number font-bold text-xs text-[#ee6152]">' +
+        bicycleHour +
+        '</span>시간 ';
+    }
     content +=
-      '        <span class="label">자전거 : </span><span class="number font-bold text-[#ee6152]">' +
-      bicycleHour +
-      '</span>시간 <span class="number font-bold text-[#ee6152]">' +
+      '<span class="number font-bold text-[#ee6152] text-xs">' +
       bicycleMin +
       '</span>분';
     content += '    </li>';
     content += '    <li>';
     content +=
-      '        <span class="label">자동차 : </span>' + carHour + carMin;
+      '        <span class="label text-xs">자동차 : </span>' +
+      (hours === 0 ? '' : String(carHour)) +
+      carMin;
     content += '    </li>';
     content += '</ul>';
 
