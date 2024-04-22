@@ -177,6 +177,7 @@ export default function TripReview({ id }: any) {
               <div className='flex flex-wrap justify-center'>
                 {data?.planList.map((list: any, index: any) => (
                   <Button
+                    key={index}
                     className='m-1 text-center text-sm key={index}'
                     size='sm'
                     onClick={() => {

@@ -6,7 +6,7 @@ export default function MainReview() {
   return (
     <>
       {Array.from({ length: 3 }).map((_, index) => (
-        <Card className='w-full'>
+        <Card className='w-full' key={index}>
           <CardHeader className='flex items-start pb-4'>
             <div className='flex items-center gap-4 mr-auto'>
               <Skeleton className='w-12 h-12'>
