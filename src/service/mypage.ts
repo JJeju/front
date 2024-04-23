@@ -123,6 +123,7 @@ const mypageApi = {
       queryFn: () => this.getTripReviewDetailFn(data),
       enabled: !data,
       staleTime: 50000,
+      gcTime: 0,
       retry: false
     });
   }
