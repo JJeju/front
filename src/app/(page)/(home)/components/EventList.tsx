@@ -68,8 +68,7 @@ export default function EventProduct({ data }: any) {
                     </CardContent>
                     <div className='flex flex-col gap-1 items-start px-3 md:px-5  bg-opacity-80 h-36'>
                       <div className='flex gap-1'>
-                        <Badge>BEST</Badge>
-
+                        <Badge variant='destructive'>BEST</Badge>
                         <Badge variant={'outline'}>
                           {data.e_pk_enum ? '이벤트' : '관광지'}
                         </Badge>

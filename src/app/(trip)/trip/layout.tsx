@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
-import { Inter as FontSans } from 'next/font/google';
 
 import useUserIdStore from '@/stores/auth';
 import dynamic from 'next/dynamic';

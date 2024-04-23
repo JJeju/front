@@ -74,7 +74,7 @@ export default async function Home() {
       <Suspense fallback={<MainLoading />}>
         <EventList data={dehydratedState.queries[1].state.data} />
       </Suspense>
-      <div className='w-full grid items-start  gap-4 md:gap-8'>
+      <div className='w-full grid items-start md:gap-8 mb-12'>
         <div className='space-y-2'>
           <div className='md:mt-24 mt-20  text-2xl md:text-3xl font-bold'>
             여행 후기

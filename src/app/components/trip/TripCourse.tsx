@@ -43,7 +43,6 @@ export default function TripCourse() {
   const [items, setItems] = useState([]);
   const [currentItem, setCurrentItem] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
-  console.log('>>', items);
 
   useEffect(() => {
     if (courseData)
@@ -87,7 +86,6 @@ export default function TripCourse() {
   );
 
   const handleReorder = (newValue: any) => {
-    console.log('newValue>>', newValue);
     // setItems(newValue);
     setCurrentItem(newValue);
     // const updatedItems = items.map(group => {
@@ -236,9 +234,6 @@ export default function TripCourse() {
                   <TableRow key={innerIndex}>
                     <TableCell className='w-[10px]'>
                       <Image
-                        loader={({ src, width, quality }: ImageLoaderProps) =>
-                          imgLoader({ src, width, quality })
-                        }
                         alt='Tour image'
                         className='rounded-md min-w-[84px] min-h-[84px] '
                         src={`http://14.6.54.241:8080/download/${item.tp_fk_company_info.c_img}`}

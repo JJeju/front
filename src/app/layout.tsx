@@ -2,10 +2,13 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import '@/app/globals.css';
-import { fontSans } from './(page)/layout';
 import ReactQueryProvider from './ReactQueryProvider';
+import { Noto_Sans_KR } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const notoSansKr = Noto_Sans_KR({
+  weight: ['500'],
+  subsets: ['latin']
+});
 
 export const metadata: Metadata = {
   title: 'JEJU 제주여행 여행계획',
@@ -18,7 +21,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <ReactQueryProvider>
-      <html lang='ko' suppressHydrationWarning>
+      <html lang='en' suppressHydrationWarning>
         <head>
           <link rel='icon' href='/favicon.ico' sizes='any' />
           <meta
@@ -27,7 +30,7 @@ export default function RootLayout({ children }: Props) {
             content='ca-pub-9925174283422185'
           />
           <meta
-            name='JEJU 제주여행 여행계획'
+            name='JEJU'
             content='제주 여행 코스를 짤 수 있는 사이트 입니다.'
           />
           {/* <link
@@ -43,12 +46,7 @@ export default function RootLayout({ children }: Props) {
           sizes='<generated>'
         /> */}
         </head>
-        <body
-          className={cn(
-            'bg-background font-sans antialiased',
-            fontSans.variable
-          )}
-        >
+        <body className={cn('bg-background font-sans antialiased', notoSansKr)}>
           {children}
           {/* <ReactQueryDevtools
             initialIsOpen={process.env.NEXT_PUBLIC_MODE === 'local'}
