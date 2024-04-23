@@ -48,8 +48,8 @@ export default async function Home() {
           <Image
             src={'/56692-O8P89L-432.jpg'}
             alt='Image'
-            className='object-cover rounded-lg shadow-2xl'
-            width={300}
+            className=' rounded-lg shadow-2xl'
+            width={330}
             height={200}
           />
           <div className='md:text-3xl font-bold flex flex-col md:p-6 px-3 gap-3 '>
