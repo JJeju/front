@@ -1,6 +1,5 @@
 import axiosInstance from '../utility/axiosInterceptor';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 import { COOKIE_ACCESS_TOKEN, COOKIE_REFRESH_TOKEN } from '../config/constants';
 import { BestRs, EventRs, ReviewRs } from '../type/home';
 import { cache } from 'react';
@@ -21,7 +20,7 @@ const mainApi = {
   },
   GetMainProduct: function () {
     return useQuery({
-      queryKey: [this.getmainproductKey],
+      queryKey: ['main', 'best'],
       queryFn: () => this.mainproductFn(),
       select: data => {
         const res = [...data.leisure, ...data.lodgment, ...data.restaurant];

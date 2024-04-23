@@ -1,18 +1,21 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  output: 'export',
+  // output: 'export',
   swcMinify: true,
-  trailingSlash: true
+  trailingSlash: true,
 
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/:path*',
-  //       destination: 'http://14.6.54.241:8081/:path*'
-  //     }
-  //   ];
-  // }
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '14.6.54.241',
+        port: '8080',
+        pathname: '/download/**'
+      }
+    ]
+  },
+  unoptimized: true
 };
 
 module.exports = nextConfig;
