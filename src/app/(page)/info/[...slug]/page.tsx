@@ -1,10 +1,9 @@
 import Home from '@/app/(page)/page';
 
-export default function page({ children }: { children: React.ReactNode }) {
+export default function page() {
   return (
     <>
       <Home />
-      {children}
     </>
   );
 }

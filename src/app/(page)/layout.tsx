@@ -5,6 +5,7 @@ import { Toaster } from '@/app/components/ui/toaster';
 import { ThemeProvider } from '@/app/components/theme-provider';
 import Hydration from '../hydration';
 import Navbar from '@/app/components/nav/Navbar';
+import ScrollToTop from './(home)/components/ScrollToTop';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -32,6 +33,8 @@ export default function RootLayout({
         disableTransitionOnChange
       >
         <Navbar />
+        <ScrollToTop />
+
         {children}
         {modal}
         <Footer />
