@@ -17,6 +17,7 @@ export default function Page({ params }: { params: { slug: any } }) {
   const handlerComponent = () => {
     switch (decodeURIComponent(params.slug[1])) {
       case '숙박':
+        console.log('>>>>', params.slug[0]);
         return <AccommodationInfo pkValue={params.slug[0]} />;
       case '식당':
         return <RestaurantInfo pkValue={params.slug[0]} />;

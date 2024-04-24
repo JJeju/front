@@ -114,7 +114,6 @@ export default function Restaurant({ pkValue }: any) {
           <div className='flex items-center gap-4'>
             <div className='w-12 h-12 flex items-center justify-center'>
               <Avatar className='w-10 h-10 border'>
-                <AvatarImage alt='@username' src='/placeholder-user.jpg' />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </div>
