@@ -118,17 +118,14 @@ export default function TripReview({ id }: any) {
           </div>
           <Separator />
           {isFetching ? (
-            <Skeleton className='h-[400px] w-full rounded-xl' />
+            <Skeleton className='md:h-[400px] h-[300px] w-full rounded-xl' />
           ) : (
             <Image
-              loader={({ src, width, quality }: ImageLoaderProps) =>
-                imgLoader({ src, width, quality })
-              }
               alt='Restaurant'
               className='overflow-hidden rounded-xl object-bottom'
               height='200'
               src={`http://14.6.54.241:8080/download/${data?.mainFile.url}`}
-              width='500'
+              width='450'
             />
           )}
           <Separator />
@@ -152,9 +149,6 @@ export default function TripReview({ id }: any) {
                     className='md:basis-1/3 basis-1/2 lg:basis-1/4'
                   >
                     <Image
-                      loader={({ src, width, quality }: ImageLoaderProps) =>
-                        imgLoader({ src, width, quality })
-                      }
                       alt='Restaurant'
                       className='overflow-hidden rounded-xl object-bottom'
                       height='200'
@@ -208,13 +202,6 @@ export default function TripReview({ id }: any) {
                       <TableRow key={innerIndex}>
                         <TableCell className='w-[90px] '>
                           <Image
-                            loader={({
-                              src,
-                              width,
-                              quality
-                            }: ImageLoaderProps) =>
-                              imgLoader({ src, width, quality })
-                            }
                             alt='Tour image'
                             className='rounded-md min-w-[64px] min-h-[64px]'
                             src={`http://14.6.54.241:8080/download/${item.tp_fk_company_info.c_img}`}

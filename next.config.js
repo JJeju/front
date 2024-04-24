@@ -5,7 +5,7 @@ const nextConfig = {
   // output: 'export',
   swcMinify: true,
   trailingSlash: true,
-
+  unoptimized: true,
   images: {
     remotePatterns: [
       {
@@ -16,7 +16,20 @@ const nextConfig = {
       }
     ]
   },
-  unoptimized: true
+  async redirects() {
+    return [
+      {
+        source: '/trip',
+        destination: '/',
+        permanent: true
+      },
+      {
+        source: '/mypage',
+        destination: '/',
+        permanent: true
+      }
+    ];
+  }
 };
 
 module.exports = nextConfig;
