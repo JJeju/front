@@ -64,7 +64,7 @@ export default function Spot({ pkValue }: any) {
                     <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
                       <Phone size={15} /> {data?.company.c_phone}
                     </p>
-                    <p className='text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1'>
+                    <p className='text-sm text-gray-500 dark:text-gray-400 flex  gap-1'>
                       <MapPin size={15} /> {data?.company.c_addr}
                     </p>
                   </>
@@ -74,17 +74,14 @@ export default function Spot({ pkValue }: any) {
           </div>
           <Separator />
           {isFetching ? (
-            <Skeleton className='h-[400px] w-[500px] rounded-xl' />
+            <Skeleton className='md:h-[400px] h-[300px] w-full rounded-xl' />
           ) : (
             <Image
-              loader={({ src, width, quality }: ImageLoaderProps) =>
-                imgLoader({ src, width, quality })
-              }
               alt='Restaurant'
               className='overflow-hidden rounded-xl object-bottom'
               height='200'
               src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
-              width='500'
+              width='450'
             />
           )}
           <Separator />

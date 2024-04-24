@@ -12,7 +12,6 @@ import {
   SheetTrigger
 } from '@/app/components/ui/sheet';
 import { Button, buttonVariants } from '@/app/components/ui/button';
-
 import { cn } from '@/lib/utils';
 import { AiOutlineAlignRight } from 'react-icons/ai';
 import { useTheme } from 'next-themes';
@@ -40,7 +39,6 @@ import useUserIdStore from '@/stores/auth';
 import { useIsLoggedIn } from '@/utility/hooks/useIsLogin';
 import { ToastAction } from '@/app/components/ui/toast';
 import { useToast } from '@/app/components/ui/use-toast';
-import { useStore } from 'zustand';
 import { useRouter } from 'next/navigation';
 
 const logincomponents: { title: string; href: string }[] = [
@@ -270,7 +268,7 @@ export default function Navbar({ getIsLogin }: any) {
                   ) : (
                     <Link
                       className='hover:text-amber-400'
-                      href=''
+                      href='#'
                       onClick={() => {
                         toast({
                           title: '로그인이 필요합니다.',
@@ -286,13 +284,17 @@ export default function Navbar({ getIsLogin }: any) {
                   )}
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
-                  <Link href='/notice' className='hover:text-amber-400'>
+                  <Link href='/notice' replace className='hover:text-amber-400'>
                     공지사항
                   </Link>
                 </li>
                 {isLogin ? (
                   <li className='border-b-2 p-3 w-full text-center'>
-                    <Link href='/travelreview' className='hover:text-amber-400'>
+                    <Link
+                      href='/travelreview'
+                      replace
+                      className='hover:text-amber-400'
+                    >
                       여행 리뷰
                     </Link>
                   </li>
@@ -300,7 +302,7 @@ export default function Navbar({ getIsLogin }: any) {
                   <li className='border-b-2 p-3 w-full text-center'>
                     <Link
                       className='hover:text-amber-400'
-                      href=''
+                      href='#'
                       onClick={() => {
                         toast({
                           title: '로그인이 필요합니다.',
@@ -316,19 +318,23 @@ export default function Navbar({ getIsLogin }: any) {
                   </li>
                 )}
                 <li className='border-b-2  p-3 w-full text-center'>
-                  <Link href='/faq' className='hover:text-amber-400'>
+                  <Link href='/faq' replace className='hover:text-amber-400'>
                     사업장 전환하기
                   </Link>
                 </li>
                 <li className='border-b-2 p-3 w-full text-center'>
                   {isLogin ? (
-                    <Link href='/business' className='hover:text-amber-400'>
+                    <Link
+                      href='/business'
+                      replace
+                      className='hover:text-amber-400'
+                    >
                       사업장 전환하기
                     </Link>
                   ) : (
                     <Link
                       className='hover:text-amber-400'
-                      href=''
+                      href='#'
                       onClick={() => {
                         toast({
                           title: '로그인이 필요합니다.',
@@ -371,11 +377,13 @@ const ListItem = React.forwardRef<
   React.ElementRef<'a'>,
   React.ComponentPropsWithoutRef<'a'>
 >(({ className, title, children, ...props }, ref) => {
+  const href = props.href || '#';
+
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
-          href={props?.href as string}
+          href={href}
           ref={ref}
           className={cn(
             'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
