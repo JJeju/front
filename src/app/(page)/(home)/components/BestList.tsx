@@ -80,17 +80,15 @@ export default function BestProduct({ data }: BestProductProps) {
                     </CardContent>
                     <div className='flex flex-col gap-1 items-start px-3 md:px-5 bg-opacity-80 h-36'>
                       <div className='flex gap-1'>
-                        <Badge>BEST</Badge>
+                        <Badge variant='destructive'>BEST</Badge>
                         <Badge variant='outline'>{data.c_category}</Badge>
                       </div>
                       <div className='text-left w-full text-base font-bold whitespace-nowrap overflow-hidden overflow-ellipsis'>
                         {data.c_name}
                       </div>
-                      <div className='flex items-center w-full'>
+                      <div className='flex  w-full'>
                         <MapPin size={15} />
-                        <div className=' text-sm whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                          {data.c_addr}
-                        </div>
+                        <div className=' text-sm '>{data.c_addr}</div>
                       </div>
                     </div>
                   </Card>

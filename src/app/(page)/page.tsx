@@ -48,8 +48,8 @@ export default async function Home() {
           <Image
             src={'/56692-O8P89L-432.jpg'}
             alt='Image'
-            className='object-cover rounded-lg shadow-2xl'
-            width={300}
+            className=' rounded-lg shadow-2xl'
+            width={330}
             height={200}
           />
           <div className='md:text-3xl font-bold flex flex-col md:p-6 px-3 gap-3 '>
@@ -74,7 +74,7 @@ export default async function Home() {
       <Suspense fallback={<MainLoading />}>
         <EventList data={dehydratedState.queries[1].state.data} />
       </Suspense>
-      <div className='w-full grid items-start  gap-4 md:gap-8'>
+      <div className='w-full grid items-start md:gap-8 mb-12'>
         <div className='space-y-2'>
           <div className='md:mt-24 mt-20  text-2xl md:text-3xl font-bold'>
             여행 후기
