@@ -11,7 +11,7 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: 'JEJU 제주여행 여행계획',
+  title: 'JEJU | 제주여행 | 여행계획',
   description: '제주 여행 코스를 짤 수 있는 사이트 입니다.'
 };
 
@@ -24,15 +24,30 @@ export default function RootLayout({ children }: Props) {
       <html lang='en' suppressHydrationWarning>
         <head>
           <link rel='icon' href='/favicon.ico' sizes='any' />
+          <title>제주 여행 코스 - JEJU 제주여행 여행계획</title>
           <meta
-            charSet='UTF-8'
             name='google-adsense-account'
             content='ca-pub-9925174283422185'
           />
           <meta
             name='JEJU'
-            content='제주 여행 코스를 짤 수 있는 사이트 입니다.'
+            content='제주도 여행 코스를 짤 수 있는 사이트 입니다.'
           />
+          <meta
+            name='description'
+            content='제주 여행 코스를 짜고 여행을 계획할 수 있는 사이트입니다. 제주도의 다양한 관광명소와 여행 정보를 제공합니다.'
+          />
+          <meta
+            property='og:title'
+            content='제주 여행 코스 - JEJU 제주여행 여행계획'
+          />
+          <meta
+            property='og:description'
+            content='제주 여행 코스를 짜고 여행을 계획할 수 있는 사이트입니다. 제주도의 다양한 관광명소와 여행 정보를 제공합니다.'
+          />
+          <meta property='og:image' content='/56692-O8P89L-432.jpg' />
+          <meta property='og:url' content='http://jjeju.site' />
+
           {/* <link
           rel='icon'
           href='/icon?<generated>'
