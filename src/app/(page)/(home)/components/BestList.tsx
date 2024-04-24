@@ -12,8 +12,7 @@ import { motion } from 'framer-motion';
 import { Badge } from '@/app/components/ui/badge';
 import { MapPin } from 'lucide-react';
 import { Suspense, useState } from 'react';
-import Image, { ImageLoaderProps } from 'next/image';
-import mainApi from '@/service/home';
+import Image from 'next/image';
 import MainLoading from '@/app/components/loading/MainLoading';
 import { useRouter } from 'next/navigation';
 interface BestProductProps {
