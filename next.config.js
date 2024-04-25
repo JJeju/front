@@ -2,6 +2,9 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  swcMinify: true,
+  trailingSlash: true,
+  unoptimized: true,
   images: {
     remotePatterns: [
       {

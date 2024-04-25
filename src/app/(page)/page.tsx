@@ -70,14 +70,14 @@ export default async function Home() {
       </div>
       <HydrationBoundary state={dehydratedState}>
         <Suspense fallback={<MainLoading />}>
-          <BestList data={dehydratedState.queries[0].state.data} />
+          <BestList data={dehydratedState.queries[0]?.state.data} />
         </Suspense>
       </HydrationBoundary>
       <div className='mt-24 text-2xl md:text-3xl font-bold'>
         지금 인기있는 관광지
       </div>
       <Suspense fallback={<MainLoading />}>
-        <EventList data={dehydratedState.queries[1].state.data} />
+        <EventList data={dehydratedState.queries[1]?.state.data} />
       </Suspense>
       <div className='w-full grid items-start md:gap-8 mb-12'>
         <div className='space-y-2'>
@@ -85,7 +85,7 @@ export default async function Home() {
             여행 후기
           </div>
           <Suspense fallback={<MainReview />}>
-            <TripCourseList data={dehydratedState.queries[2].state.data} />
+            <TripCourseList data={dehydratedState.queries[2]?.state.data} />
           </Suspense>
         </div>
 
@@ -94,7 +94,7 @@ export default async function Home() {
             공지사항
           </div>
           <Suspense fallback={<MainReview />}>
-            <FaqList data={dehydratedState.queries[3].state.data} />
+            <FaqList data={dehydratedState.queries[3]?.state.data} />
           </Suspense>
         </div>
       </div>
