@@ -44,11 +44,11 @@ export default async function Home() {
   return (
     <main className='flex flex-col px-3 justify-between md:px-20 '>
       <div className='grid w-full place-items-center bg-cover bg-center  md:text-3xl text-base gap-5'>
-        <div className='z-0 flex flex-col md:items-center md:justify-center gap-4 p-1 md:flex-row-reverse'>
+        <div className='z-0 mt-4 flex flex-col md:items-center md:justify-center gap-4 p-1 md:flex-row-reverse'>
           <Image
-            src={'/56692-O8P89L-432.jpg'}
+            src={'/main.png'}
             alt='Image'
-            className=' rounded-lg shadow-2xl'
+            className='rounded-lg shadow-2xl '
             width={330}
             height={200}
           />
@@ -60,7 +60,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className='mt-24 text-2xl md:text-3xl font-bold'>
+      <div className='mt-28 text-2xl md:text-3xl font-bold'>
         지금 인기있는 상품
       </div>
       <HydrationBoundary state={dehydratedState}>

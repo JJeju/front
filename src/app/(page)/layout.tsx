@@ -29,7 +29,6 @@ export default function RootLayout({
       >
         <Navbar />
         <ScrollToTop />
-
         {children}
         {modal}
         <Footer />

@@ -1,17 +1,15 @@
 'use client';
 import { JSX, SVGProps } from 'react';
-import { Button } from '../app/components/ui/button';
+import Link from 'next/link';
 
 export default function Error({
-  error,
-  reset
+  error
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
 }) {
   return (
     <div className='flex flex-col items-center justify-center min-h-[100dvh] bg-gray-100 dark:bg-gray-900 p-4'>
-      <div className='max-w-md text-center space-y-4'>
+      <div className='max-w-lg text-center space-y-4'>
         <div className='flex items-center justify-center'>
           <AlertTriangleIcon className='w-12 h-12 text-red-500' />
         </div>
@@ -19,16 +17,15 @@ export default function Error({
           죄송합니다! 문제가 발생했습니다.
         </h1>
         <p className='text-gray-600 dark:text-gray-400'>
-          죄송합니다만, 예기치 않은 오류가 발생했습니다. 나중에 다시 시도하거나
-          문제가 지속되는 경우 지원팀에 문의하십시오.
+          존재하지 않는 페이지입니다. 다시 시도하거나 홈으로 돌아가세요.
         </p>
         <div>
-          <Button
+          <Link
             className='inline-flex items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow-sm transition-colors hover:bg-gray-900/90 focus:outline-none focus:ring-2 focus:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus:ring-gray-300'
-            onClick={() => reset()}
+            href={'/'}
           >
             홈으로 돌아가기
-          </Button>
+          </Link>
         </div>
       </div>
     </div>

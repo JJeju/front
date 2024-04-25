@@ -95,7 +95,6 @@ export default function TripReview({ id }: any) {
           <div className='flex items-center gap-4'>
             <div className='w-12 h-12 flex items-center justify-center'>
               <Avatar className='w-10 h-10 border'>
-                <AvatarImage alt='@username' src='/placeholder-user.jpg' />
                 <AvatarFallback>
                   {data?.blog.b_fk_id.slice(0, 2)}
                 </AvatarFallback>
