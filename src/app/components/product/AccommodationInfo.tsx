@@ -167,7 +167,7 @@ export default function Accommodation({ pkValue }: any) {
           ) : (
             <Image
               alt='Restaurant'
-              className='overflow-hidden rounded-xl object-bottom'
+              className='rounded-xl justify-self-center  '
               height='200'
               src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
               width='450'
@@ -283,38 +283,7 @@ export default function Accommodation({ pkValue }: any) {
               </form>
             </div>
           </div>
-          <div className='grid gap-4'>
-            <h3 className='text-xl font-semibold'>객실 선택하기</h3>
-            <div className='grid grid-cols-1 gap-4'>
-              {Array.from({ length: 2 }).map((_, index) => (
-                <Card className='' key={index}>
-                  <Image
-                    loader={({ src, width, quality }: ImageLoaderProps) =>
-                      imgLoader({ src, width, quality })
-                    }
-                    alt='Room 1'
-                    className='object-cover rounded-lg'
-                    height={400}
-                    src={'/56692-O8P89L-432.jpg'}
-                    style={{
-                      aspectRatio: '600/400',
-                      objectFit: 'cover'
-                    }}
-                    width={600}
-                  />
-                  <div className='flex gap-2 p-3  w-full justify-between'>
-                    <div className='text-xl'>방 이름</div>
-                    <div className='flex gap-2 '>
-                      <div className='text-gray-500 dark:text-gray-400 text-lg font-bold py-1 '>
-                        ₩350,000
-                      </div>
-                      <Button size='sm'>담기</Button>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
+
           <div className='grid gap-3'>
             <div className='flex items-center gap-2'>
               <h3 className='text-xl font-semibold'>위치보기</h3>
@@ -322,7 +291,7 @@ export default function Accommodation({ pkValue }: any) {
                 onClick={() =>
                   handleShareKakao(data?.company.c_lat, data?.company.c_lon)
                 }
-                className='hover:bg-yellow-300 bg-gray-100 '
+                className='w-10 h-10 flex items-center justify-center p-2 rounded-full hover:bg-yellow-300 bg-gray-100'
               >
                 <KakaoIcon />
               </Button>

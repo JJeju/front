@@ -77,7 +77,7 @@ export default function Event({ pkValue }: any) {
           ) : (
             <Image
               alt='Restaurant'
-              className='overflow-hidden rounded-xl object-bottom'
+              className=' rounded-xl justify-self-center'
               height='200'
               src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
               width='450'
