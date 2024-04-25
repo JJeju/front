@@ -2,10 +2,6 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  // output: 'export',
-  swcMinify: true,
-  trailingSlash: true,
-  unoptimized: true,
   images: {
     remotePatterns: [
       {
@@ -33,10 +29,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-// {
-//   source: '/trip',
-//   destination: '/',
-// },
-//   ];
-// }
