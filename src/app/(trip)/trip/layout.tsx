@@ -19,8 +19,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const getIsLogin = useUserIdStore.getState().isLogin;
-
   return (
     <div className='h-screen w-screen overflow-hidden'>
       <Navbar />
