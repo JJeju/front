@@ -140,7 +140,7 @@ export default function Restaurant({ pkValue }: any) {
           ) : (
             <Image
               alt='Restaurant'
-              className='overflow-hidden rounded-xl object-bottom'
+              className='justify-self-center rounded-xl '
               height='200'
               src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
               width='450'
@@ -178,7 +178,7 @@ export default function Restaurant({ pkValue }: any) {
               onClick={() =>
                 handleShareKakao(data?.company.c_lat, data?.company.c_lon)
               }
-              className='hover:bg-yellow-300 bg-gray-100 '
+              className='w-10 h-10 flex items-center justify-center p-2 rounded-full hover:bg-yellow-300 bg-gray-100'
             >
               <KakaoIcon />
             </Button>
