@@ -4,11 +4,11 @@ import mainApi from '@/service/home';
 import { imgLoader } from '@/utility/utils/imgLoader';
 import MainLoading from '@/app/components/loading/MainLoading';
 import MainReview from '@/app/components/loading/MainReview';
-import BestList from './(home)/components/BestList';
-import EventList from './(home)/components/EventList';
-import TripCourseList from './(home)/components/TripCourseList';
-import FaqList from './(home)/components/FaqList';
-import MainButton from './(home)/components/MainButton';
+import BestList from './components/BestList';
+import EventList from './components/EventList';
+import TripCourseList from './components/TripCourseList';
+import FaqList from './components/FaqList';
+import MainButton from './components/MainButton';
 import {
   dehydrate,
   HydrationBoundary,

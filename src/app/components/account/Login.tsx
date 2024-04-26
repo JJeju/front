@@ -88,7 +88,6 @@ export default function Login() {
         </Label>
         <Input
           id='name'
-          defaultValue=''
           className='col-span-3'
           value={form.username}
           onChange={onChange}
@@ -102,7 +101,6 @@ export default function Login() {
         </Label>
         <Input
           id='password'
-          defaultValue=''
           className='col-span-3'
           value={form.password}
           onChange={onChange}

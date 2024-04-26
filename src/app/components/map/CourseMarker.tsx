@@ -1,11 +1,5 @@
-import {
-  Dispatch,
-  SetStateAction,
-  use,
-  useCallback,
-  useEffect,
-  useState
-} from 'react';
+'use client';
+import { useCallback, useEffect, useState } from 'react';
 import { useToast } from '../ui/use-toast';
 import { KakaoDirectionsApi, KakaoWaypointApi } from '@/service/kakao';
 
@@ -239,7 +233,7 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
       const avgLng =
         lngs.reduce((acc: any, lng: any) => acc + lng, 0) / lngs.length;
 
-      map.setCenter(new window.kakao.maps.LatLng(avgLat, avgLng));
+      map?.setCenter(new window.kakao.maps.LatLng(avgLat, avgLng));
     } else if (map && data?.length <= 0) {
       noData();
     }
@@ -286,28 +280,6 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
       // 에러를 호출한 쪽으로 전파하거나 다른 처리를 수행할 수 있습니다.
       throw error;
     }
-  };
-
-  const calculateTravelTime = (list: any) => {
-    let totalTravelTimeSeconds = 0;
-
-    list.forEach((road: any) => {
-      // 각 도로별로 차로 소요 시간을 계산하여 총 여행 시간에 더합니다
-      road.roads.forEach((road: any) => {
-        // 도로 길이와 교통 정보 속도를 기반으로 차로 소요 시간을 계산합니다
-        const roadLength = road.distance;
-        const trafficSpeedKmh = road.traffic_speed;
-        const trafficSpeedMs = trafficSpeedKmh * (1000 / 3600); // km/h를 m/s로 변환
-        const travelTimeSeconds = roadLength / trafficSpeedMs;
-
-        totalTravelTimeSeconds += travelTimeSeconds;
-      });
-
-      // 총 여행 시간을 시간과 분으로 변환합니다
-    });
-    const hours = Math.floor(totalTravelTimeSeconds / 3600);
-    const minutes = Math.floor((totalTravelTimeSeconds % 3600) / 60);
-    return { hours, minutes };
   };
 
   const getTimeHTML = (distance: number, carTimes: any) => {

@@ -1,18 +1,10 @@
+'use client';
 import { Button } from '@/app/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/app/components/ui/dialog';
+import { DialogContent } from '@/app/components/ui/dialog';
 
 import { Separator } from '../ui/separator';
 import Image, { ImageLoaderProps } from 'next/image';
 import { ChevronRightIcon, StarIcon, ChevronLeftIcon } from 'lucide-react';
-import { DollarSign } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import Map from '../map/Map';
 import {
@@ -24,7 +16,6 @@ import {
   TableHeader,
   TableRow
 } from '../ui/table';
-import { imgLoader } from '@/utility/utils/imgLoader';
 import mypageApi from '@/service/mypage';
 import { formatDate } from '@/utility/hooks/comnHook';
 import { Fragment, useEffect, useLayoutEffect, useState } from 'react';
@@ -49,14 +40,6 @@ export default function TripReview({ id }: any) {
       refetch();
     }
   }, [id]);
-
-  useEffect(() => {
-    return () => {
-      setIsDay(0);
-      setMarkerInfo(null);
-      setMap(null);
-    };
-  }, []);
 
   return (
     <DialogContent className='md:w-[1000px] w-full md:h-[90%] h-full overflow-scroll'>
@@ -136,9 +119,9 @@ export default function TripReview({ id }: any) {
           >
             {isFetching ? (
               <div className='flex gap-3 justify-center'>
-                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
-                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
-                <Skeleton className='h-[110px] w-[154px] rounded-xl ' />
+                <Skeleton className='h-[110px] md:w-[154px] w-[90px] rounded-xl ' />
+                <Skeleton className='h-[110px] md:w-[154px] w-[90px] rounded-xl ' />
+                <Skeleton className='h-[110px] md:w-[154px] w-[90px] rounded-xl ' />
               </div>
             ) : (
               <CarouselContent>

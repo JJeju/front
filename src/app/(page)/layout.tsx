@@ -4,7 +4,7 @@ import { Toaster } from '@/app/components/ui/toaster';
 import { ThemeProvider } from '@/app/components/theme-provider';
 import Hydration from '../hydration';
 import Navbar from '@/app/components/nav/Navbar';
-import ScrollToTop from './(home)/components/ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',

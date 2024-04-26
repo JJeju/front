@@ -38,6 +38,7 @@ export default function SavedJourney() {
   const { toast } = useToast();
   const handleSubmit = (id: number) => {
     setCreateTravelPK(id);
+    console.log('<<<<');
     router.replace('/trip');
   };
   const handleDelete = (id: number) => {

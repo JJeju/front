@@ -11,21 +11,21 @@ const nextConfig = {
         pathname: '/download/**'
       }
     ]
-  },
-  async redirects() {
-    return [
-      {
-        source: '/trip',
-        destination: '/',
-        permanent: true
-      },
-      {
-        source: '/mypage',
-        destination: '/',
-        permanent: true
-      }
-    ];
   }
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/trip',
+  //       destination: '/',
+  //       permanent: false
+  //     },
+  //     {
+  //       source: '/mypage',
+  //       destination: '/',
+  //       permanent: true
+  //     }
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;

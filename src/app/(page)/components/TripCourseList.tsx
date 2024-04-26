@@ -31,10 +31,9 @@ export default function TripCourseList({ data }: TripCourseProps) {
         {data?.map((item: ReviewRs, index: number) => (
           <motion.div
             onClick={() => {
-              router.push(`/reviewInfo/${item.b_pk_num}`);
+              router.push(`/rinfo/${item.b_pk_num}`);
             }}
             key={index}
-            className=''
             whileTap={{ scale: 0.9 }} // 클릭하는 동안 요소의 크기를 90%로 줄입니다.
           >
             <Card className='min-w-[220px]'>

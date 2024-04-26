@@ -75,7 +75,8 @@ const components: { title: string; href?: string; toast?: boolean }[] = [
   },
   {
     title: '마이페이지',
-    toast: true
+    toast: true,
+    href: '#'
   },
   {
     title: '공지사항',
@@ -87,15 +88,17 @@ const components: { title: string; href?: string; toast?: boolean }[] = [
   },
   {
     title: '사업장 전환하기',
-    toast: true
+    toast: true,
+    href: '#'
   },
   {
     title: '여행 리뷰',
-    toast: true
+    toast: true,
+    href: '#'
   }
 ];
 
-export default function Navbar({ getIsLogin }: any) {
+export default function Navbar() {
   const { setTheme } = useTheme();
   const isLogin = useUserIdStore(state => state.isLogin);
   const setIsLogin = useUserIdStore(state => state.setIsLogin);
@@ -107,6 +110,7 @@ export default function Navbar({ getIsLogin }: any) {
 
   const router = useRouter();
 
+  console.log('>>', isLogin);
   useEffect(() => {
     // 모바일인지 pc인지 검사하는 코드
 
@@ -119,8 +123,6 @@ export default function Navbar({ getIsLogin }: any) {
     mutate();
     setIsLogin(false);
     router.replace('/');
-
-    // clearUserIdStorage();
   };
 
   return (
