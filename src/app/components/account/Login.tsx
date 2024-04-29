@@ -19,7 +19,7 @@ export default function Login() {
   const isLoggedIn = useIsLoggedIn();
   const { toast } = useToast();
 
-  const { isLogin, setIsLogin } = useUserIdStore();
+  const { isLogin, login } = useUserIdStore();
 
   const router = useRouter();
 
@@ -59,7 +59,7 @@ export default function Login() {
             COOKIE_REFRESH_TOKEN,
             data.token.refreshToken
           );
-          setIsLogin(true);
+          login(true);
           dialogClose();
           return (
             <>

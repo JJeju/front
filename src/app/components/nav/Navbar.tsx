@@ -100,8 +100,7 @@ const components: { title: string; href?: string; toast?: boolean }[] = [
 
 export default function Navbar() {
   const { setTheme } = useTheme();
-  const isLogin = useUserIdStore(state => state.isLogin);
-  const setIsLogin = useUserIdStore(state => state.setIsLogin);
+  const { isLogin, logout } = useUserIdStore(state => state);
   const isLoggedIn = useIsLoggedIn();
   const mutateLogout = authApi.GetLogout();
   const { isError, error, mutate } = mutateLogout;
@@ -110,9 +109,9 @@ export default function Navbar() {
 
   const router = useRouter();
 
-  console.log('>>', isLogin);
   useEffect(() => {
     // 모바일인지 pc인지 검사하는 코드
+    console.log('>>', isLoggedIn);
 
     if (typeof window !== 'undefined') {
       setHydrated(true);
@@ -121,7 +120,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     mutate();
-    setIsLogin(false);
+    logout(false);
     router.replace('/');
   };
 
@@ -131,7 +130,7 @@ export default function Navbar() {
         <Link href='/' replace className='text-3xl font-semibold md:text-3xl'>
           J E J U
         </Link>
-        <div className='flex ju00stify-end items-center gap-3'>
+        <div className='flex justify-end items-center gap-3'>
           <NavigationMenu className='hidden md:block'>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -203,7 +202,7 @@ export default function Navbar() {
                   편리하게 여행코스를 관리할 수 있습니다.
                 </SheetDescription>
               </SheetHeader>
-              {isLogin && isLoggedIn ? (
+              {isLoggedIn ? (
                 <Button
                   size='lg'
                   className='w-full my-4'
@@ -357,7 +356,7 @@ export default function Navbar() {
               </SheetFooter>
             </SheetContent>
           </Sheet>
-          {isLogin && isLoggedIn ? (
+          {isLoggedIn ? (
             <Button className='hidden md:block' onClick={() => handleLogout()}>
               로그아웃
             </Button>
