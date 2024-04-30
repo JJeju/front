@@ -82,7 +82,7 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
         markers.push(marker);
 
         const content = `<div class="max-w-36 w-28  shadow-lg bg-white rounded-2xl">
-          <img class="w-full h-20 rounded-2xl" src=http://14.6.54.241:8080/download/${store.tp_fk_company_info.c_img} alt="상품 이미지">
+          <img class="w-full h-20 rounded-2xl" src=http://jjeju.site/download/${store.tp_fk_company_info.c_img} alt="상품 이미지">
           <div class="px-2 py-2">
             <div class="font-bold text-sm mb-1 whitespace-normal overflow-auto text-black">${store.tp_fk_company_info.c_name}</div>
             <p class="text-gray-700 text-xs whitespace-normal overflow-auto">

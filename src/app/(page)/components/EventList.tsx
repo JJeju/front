@@ -56,8 +56,8 @@ export default function EventProduct({ data }: any) {
                         <Image
                           src={
                             data.e_img
-                              ? `http://14.6.54.241:8080/download/${data.e_img}`
-                              : `http://14.6.54.241:8080/download/${data.s_img}`
+                              ? `http://jjeju.site/download/${data.e_img}`
+                              : `http://jjeju.site/download/${data.s_img}`
                           }
                           alt='Image'
                           className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 max-h-[150px] md:max-h-[200px] md:min-h-[200px] min-h-[150px]'

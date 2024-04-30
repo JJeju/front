@@ -47,7 +47,7 @@ export default function RootLayout({ children }: Props) {
             property='og:description'
             content='제주 여행 코스를 짜고 여행을 계획할 수 있는 사이트입니다. 제주도의 다양한 관광명소와 여행 정보를 제공합니다.'
           />
-          <meta property='og:image' content='/56692-O8P89L-432.jpg' />
+          <meta property='og:image' content='/main.png' />
           <meta property='og:url' content='http://jjeju.site' />
 
           {/* <link

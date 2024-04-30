@@ -52,7 +52,7 @@ export default function Restaurant({ pkValue }: any) {
       content: {
         title: `${data?.company.c_name}`,
         description: `${data?.company.c_addr}`,
-        imageUrl: `http://14.6.54.241:8080/download/${data?.company.fileData.url}`,
+        imageUrl: `http://jjeju.site/download/${data?.company.fileData.url}`,
         link: {
           mobileWebUrl: `http://jjeju.site`,
           webUrl: `http://jjeju.site`
@@ -142,7 +142,7 @@ export default function Restaurant({ pkValue }: any) {
               alt='Restaurant'
               className='justify-self-center rounded-xl '
               height='200'
-              src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
+              src={`http://jjeju.site/download/${data?.company.fileData.url}`}
               width='450'
             />
           )}

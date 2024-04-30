@@ -69,7 +69,7 @@ export default function BestProduct({ data }: BestProductProps) {
                     <CardContent className='flex justify-center p-3 '>
                       <div className='w-full'>
                         <Image
-                          src={`http://14.6.54.241:8080/download/${data.c_img}`}
+                          src={`http://jjeju.site/download/${data.c_img}`}
                           alt='Image'
                           className='rounded-lg shadow-2xl transform group-hover:scale-105 transition-transform duration-500 max-h-[150px] md:max-h-[200px] md:min-h-[200px] min-h-[150px]'
                           width={320}

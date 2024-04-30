@@ -238,7 +238,7 @@ export default function TripCourse() {
                       <Image
                         alt='Tour image'
                         className='rounded-md min-w-[84px] min-h-[84px] '
-                        src={`http://14.6.54.241:8080/download/${item.tp_fk_company_info.c_img}`}
+                        src={`http://jjeju.site/download/${item.tp_fk_company_info.c_img}`}
                         height={84}
                         width={84}
                       />
