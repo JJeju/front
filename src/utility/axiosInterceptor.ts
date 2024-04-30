@@ -51,6 +51,7 @@ axiosInstance.interceptors.response.use(
           refresh_token: refreshToken
         });
 
+        console.log('>>>', res);
         // 토큰 갱신 성공
         if (res.status === 200) {
           const newAccessToken = res.data.access_token;
@@ -59,13 +60,14 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(error.config);
         }
       } catch (refreshError) {
+        console.log('>>>', refreshError);
         // 토큰 갱신 실패 혹은 다른 에러 처리
         // 토큰 갱신 실패로 인한 로그인 페이지로 이동
         const router = useRouter();
-        const { setIsLogin } = useUserIdStore();
+        const { logout } = useUserIdStore();
         CookieStorage.removeCookie(COOKIE_ACCESS_TOKEN);
         CookieStorage.removeCookie(COOKIE_REFRESH_TOKEN);
-        setIsLogin(false);
+        logout(false);
         redirect('/');
         console.error('토큰 갱신 실패:', refreshError);
       }

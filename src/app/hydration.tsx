@@ -1,10 +1,11 @@
-'use client'; // (a)
+'use client';
 
 import * as React from 'react';
 import useUserIdStore from '@/stores/auth';
+import { useEffect } from 'react';
 
 const Hydration = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     useUserIdStore.persist.rehydrate();
   }, []); // (b)
 

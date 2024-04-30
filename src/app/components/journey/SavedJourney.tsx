@@ -1,23 +1,9 @@
 'use client';
 
 import { Button } from '@/app/components/ui/button';
-import { DialogContent, DialogTitle } from '@/app/components/ui/dialog';
 import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger
-} from '@/app/components/ui/tabs';
-import DatePicker from '../ui/datepicker';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '../ui/select';
+import { Select, SelectTrigger, SelectValue } from '../ui/select';
 import { useRouter } from 'next/navigation';
 import { Card } from '../ui/card';
 import { ScrollArea } from '../ui/scroll-area';

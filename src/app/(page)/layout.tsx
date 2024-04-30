@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import Footer from '@/app/components/nav/Footer';
-import { Toaster } from '@/app/components/ui/toaster';
-import { ThemeProvider } from '@/app/components/theme-provider';
-import Hydration from '../hydration';
+
 import Navbar from '@/app/components/nav/Navbar';
-import ScrollToTop from './(home)/components/ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',
@@ -19,21 +17,12 @@ export default function RootLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <div>
-      <Hydration />
-      <ThemeProvider
-        attribute='class'
-        defaultTheme='system'
-        enableSystem
-        disableTransitionOnChange
-      >
-        <Navbar />
-        <ScrollToTop />
-        {children}
-        {modal}
-        <Footer />
-        <Toaster />
-      </ThemeProvider>
-    </div>
+    <>
+      <Navbar />
+      <ScrollToTop />
+      {children}
+      {modal}
+      <Footer />
+    </>
   );
 }

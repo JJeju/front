@@ -75,7 +75,8 @@ const components: { title: string; href?: string; toast?: boolean }[] = [
   },
   {
     title: '마이페이지',
-    toast: true
+    toast: true,
+    href: '#'
   },
   {
     title: '공지사항',
@@ -87,40 +88,36 @@ const components: { title: string; href?: string; toast?: boolean }[] = [
   },
   {
     title: '사업장 전환하기',
-    toast: true
+    toast: true,
+    href: '#'
   },
   {
     title: '여행 리뷰',
-    toast: true
+    toast: true,
+    href: '#'
   }
 ];
 
-export default function Navbar({ getIsLogin }: any) {
+export default function Navbar() {
   const { setTheme } = useTheme();
   const isLogin = useUserIdStore(state => state.isLogin);
-  const setIsLogin = useUserIdStore(state => state.setIsLogin);
+  const logout = useUserIdStore(state => state.logout);
   const isLoggedIn = useIsLoggedIn();
   const mutateLogout = authApi.GetLogout();
   const { isError, error, mutate } = mutateLogout;
   const { toast } = useToast();
-  const [hydrated, setHydrated] = useState(false);
+  const [hydrated, setHydrated] = useState<boolean>(false);
 
   const router = useRouter();
 
   useEffect(() => {
-    // 모바일인지 pc인지 검사하는 코드
-
-    if (typeof window !== 'undefined') {
-      setHydrated(true);
-    }
+    setHydrated(true);
   }, []);
 
   const handleLogout = () => {
     mutate();
-    setIsLogin(false);
+    logout(false);
     router.replace('/');
-
-    // clearUserIdStorage();
   };
 
   return (
@@ -129,7 +126,7 @@ export default function Navbar({ getIsLogin }: any) {
         <Link href='/' replace className='text-3xl font-semibold md:text-3xl'>
           J E J U
         </Link>
-        <div className='flex ju00stify-end items-center gap-3'>
+        <div className='flex justify-end items-center gap-3'>
           <NavigationMenu className='hidden md:block'>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -201,7 +198,7 @@ export default function Navbar({ getIsLogin }: any) {
                   편리하게 여행코스를 관리할 수 있습니다.
                 </SheetDescription>
               </SheetHeader>
-              {isLogin && isLoggedIn ? (
+              {isLogin ? (
                 <Button
                   size='lg'
                   className='w-full my-4'
@@ -355,7 +352,7 @@ export default function Navbar({ getIsLogin }: any) {
               </SheetFooter>
             </SheetContent>
           </Sheet>
-          {isLogin && isLoggedIn ? (
+          {isLogin ? (
             <Button className='hidden md:block' onClick={() => handleLogout()}>
               로그아웃
             </Button>

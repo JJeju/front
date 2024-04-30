@@ -6,14 +6,16 @@ export type State = {
 };
 
 export type Actions = {
-  setIsLogin: (isLogin: boolean) => void;
+  login: (isLogin: boolean) => void;
+  logout: (isLogin: boolean) => void;
 };
 
 const useUserIdStore = create<Actions & State>()(
   persist(
     (set, get) => ({
       isLogin: false,
-      setIsLogin: (newData: boolean) => set({ isLogin: newData })
+      login: () => set({ isLogin: true }),
+      logout: () => set({ isLogin: false })
     }),
     {
       name: 'userLogin'

@@ -6,15 +6,19 @@
 //   // Assume a "Cookie:nextjs=fast" header to be present on the incoming request
 //   // Getting cookies from the request using the `RequestCookies` API
 //   let cookie = request.cookies.get(COOKIE_ACCESS_TOKEN);
-//   console.log(cookie); // => { name: 'nextjs', value: 'fast', Path: '/' }
+//   console.log('cookie', cookie); // => { name: 'nextjs', value: 'fast', Path: '/' }
 //   const allCookies = request.cookies.getAll();
 //   console.log(allCookies); // => [{ name: 'nextjs', value: 'fast' }]
 
-//   request.cookies.has('nextjs'); // => true
-//   request.cookies.delete('nextjs');
-//   request.cookies.has('nextjs'); // => false
+//   request.cookies.has(COOKIE_ACCESS_TOKEN); // => true
+//   request.cookies.delete('jeju_accs');
+//   request.cookies.has('jeju_accs'); // => false
 
-//   // Setting cookies on the response using the `ResponseCookies` API
+//   if (request.nextUrl.pathname.startsWith('/mypage')) {
+//     return NextResponse.rewrite(new URL('/about-2', request.url));
+//   }
+
+// Setting cookies on the response using the `ResponseCookies` API
 //   const response = NextResponse.next();
 //   response.cookies.set('vercel', 'fast');
 //   response.cookies.set({

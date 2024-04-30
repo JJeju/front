@@ -29,7 +29,7 @@ import { formatDate } from '@/utility/hooks/comnHook';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { Skeleton } from '../ui/skeleton';
 import { Badge } from '../ui/badge';
-
+import { Calendar, Calendar as CalendarIcon } from 'lucide-react';
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
   const { data: courseData, isLoading } = tripApi.GetTravelCourse(1);
@@ -220,8 +220,10 @@ export default function TripCourse() {
           <TableBody className='p-0'>
             {items.map((list: any, index: any) => (
               <Fragment key={list.day}>
-                <Badge className='w-[140px] flex justify-center mt-3 '>
-                  Day {index + 1} - {list.day}
+                <Badge className='w-[140px] flex justify-center items-center mt-3 font-bold'>
+                  Day {index + 1}
+                  <Calendar size={15} className='pl-1 ' />
+                  {list.day}
                 </Badge>
                 {list?.dayPlanList.length === 0 && (
                   <TableRow>

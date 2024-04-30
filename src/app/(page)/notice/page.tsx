@@ -18,11 +18,10 @@ import { formatDate } from '@/utility/hooks/comnHook';
 import useUserIdStore from '@/stores/auth';
 import FaqDetail from '@/app/components/faq/FaqDetail';
 import { Dialog, DialogTrigger } from '@/app/components/ui/dialog';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { NoticeRs } from '@/type/notice';
 export default function Notice() {
   const router = useRouter();
-  const { isLogin, setIsLogin } = useUserIdStore();
   const [isFaqId, setIsFaqId] = useState(0);
 
   const { data: NoticeData, isFetching: noticeFetching } =
@@ -42,7 +41,7 @@ export default function Notice() {
       </div>
       <div className=' grid md:grid-cols-2 grid-cols-1 gap-3'>
         {NoticeData?.map((item: NoticeRs, index: number) => (
-          <>
+          <Fragment key={index}>
             <Dialog>
               <DialogTrigger>
                 <motion.div
@@ -72,7 +71,7 @@ export default function Notice() {
               </DialogTrigger>
               <FaqDetail id={isFaqId} />
             </Dialog>
-          </>
+          </Fragment>
         ))}
       </div>
     </div>

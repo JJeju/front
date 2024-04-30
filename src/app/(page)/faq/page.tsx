@@ -17,12 +17,12 @@ import { ChevronLeftIcon } from 'lucide-react';
 import faqApi from '@/service/faq';
 import useUserIdStore from '@/stores/auth';
 import FaqDetail from '@/app/components/faq/FaqDetail';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 export default function Faq() {
   const { data } = faqApi.GetFaq();
   const { data: myData } = faqApi.GetMyFaq();
-  const { isLogin, setIsLogin } = useUserIdStore();
+  const { isLogin } = useUserIdStore();
 
   const [isId, setIsId] = useState(0);
   return (
@@ -103,7 +103,7 @@ export default function Faq() {
         </p>
         <div className='pt-4 grid md:grid-cols-2 grid-cols-1 gap-3'>
           {data?.map((item, index) => (
-            <>
+            <Fragment key={index}>
               <Dialog>
                 <DialogTrigger>
                   <motion.div
@@ -134,7 +134,7 @@ export default function Faq() {
                 </DialogTrigger>
                 <FaqDetail id={isId} />
               </Dialog>
-            </>
+            </Fragment>
           ))}
         </div>
       </div>

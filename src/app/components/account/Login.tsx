@@ -19,7 +19,7 @@ export default function Login() {
   const isLoggedIn = useIsLoggedIn();
   const { toast } = useToast();
 
-  const { isLogin, setIsLogin } = useUserIdStore();
+  const { isLogin, login } = useUserIdStore();
 
   const router = useRouter();
 
@@ -59,7 +59,7 @@ export default function Login() {
             COOKIE_REFRESH_TOKEN,
             data.token.refreshToken
           );
-          setIsLogin(true);
+          login(true);
           dialogClose();
           return (
             <>
@@ -88,7 +88,6 @@ export default function Login() {
         </Label>
         <Input
           id='name'
-          defaultValue=''
           className='col-span-3'
           value={form.username}
           onChange={onChange}
@@ -102,7 +101,6 @@ export default function Login() {
         </Label>
         <Input
           id='password'
-          defaultValue=''
           className='col-span-3'
           value={form.password}
           onChange={onChange}

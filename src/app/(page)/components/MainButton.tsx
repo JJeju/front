@@ -7,7 +7,7 @@ import { ToastAction } from '@/app/components/ui/toast';
 import { Button } from '@/app/components/ui/button';
 
 export default function MainButton() {
-  const { isLogin, setIsLogin } = useUserIdStore();
+  const { isLogin } = useUserIdStore();
   const { toast } = useToast();
 
   return (

@@ -11,7 +11,7 @@ import Restaurant from '../product/RestaurantInfo';
 import Map from '../map/Map';
 import tripApi from '@/service/trip';
 import { imgLoader } from '@/utility/utils/imgLoader';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { MapPin } from 'lucide-react';
 
 const items = [
@@ -84,7 +84,7 @@ export default function Product({ data, handlerCategory }: any) {
         </div>
         <div className='flex space-x-2  justify-center items-center  my-3'>
           {items.map((item, index) => (
-            <>
+            <Fragment key={index}>
               <Checkbox
                 id={item.id}
                 className='md:w-6 md:h-6 w-5 h-5'
@@ -102,7 +102,7 @@ export default function Product({ data, handlerCategory }: any) {
               >
                 {item.label}
               </label>
-            </>
+            </Fragment>
           ))}
         </div>
         <ScrollArea
