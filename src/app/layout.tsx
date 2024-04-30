@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 type Props = {
   children: React.ReactNode;
 };
+
 export default function RootLayout({ children }: Props) {
   return (
     <ReactQueryProvider>
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: Props) {
             property='og:title'
             content='제주 여행 코스 - JEJU 제주여행 여행계획'
           />
-          <meta property='og:image' content='http://jjeju.site/main.png' />
+          <meta property='og:image' content='/main.png' />
           <meta
             property='og:description'
             content='제주 여행 코스를 짜고 여행을 계획할 수 있는 사이트입니다. 제주도의 다양한 관광명소와 여행 정보를 제공합니다.'
@@ -59,22 +60,9 @@ export default function RootLayout({ children }: Props) {
             name='twitter:description'
             content='제주 여행 코스를 짜고 여행을 계획할 수 있는 사이트입니다. 제주도의 다양한 관광명소와 여행 정보를 제공합니다.'
           />
-          <meta name='twitter:image' content='http://jjeju.site/main.png' />
+          <meta name='twitter:image' content='/main.png' />
 
           <meta property='al:web:url' content='http://jjeju.site' />
-
-          {/* <link
-          rel='icon'
-          href='/icon?<generated>'
-          type='image/<generated>'
-          sizes='<generated>'
-        />
-        <link
-          rel='apple-touch-icon'
-          href='/apple-icon?<generated>'
-          type='image/<generated>'
-          sizes='<generated>'
-        /> */}
         </head>
         <body className={cn('bg-background font-sans antialiased', notoSansKr)}>
           <Hydration />
