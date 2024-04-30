@@ -7,9 +7,9 @@ import {
   useState
 } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import Accommodation from '../product/AccommodationInfo';
+import Accommodation from '../detail/AccommodationInfo';
 import { Dialog, DialogTrigger } from '../ui/dialog';
-import Restaurant from '../product/RestaurantInfo';
+import Restaurant from '../detail/RestaurantInfo';
 
 interface MarkerProps {
   map: any;

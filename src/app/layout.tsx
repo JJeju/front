@@ -49,7 +49,10 @@ export default function RootLayout({ children }: Props) {
           />
           <meta property='og:image' content='/main.png' />
           <meta property='og:url' content='http://jjeju.site' />
-
+          <meta
+            name='google-site-verification'
+            content='t7k90RyFLJRCBeCvhXQ1wiD6_mFnh-MmyPfp6hynDZ4'
+          />
           {/* <link
           rel='icon'
           href='/icon?<generated>'

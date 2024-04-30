@@ -83,7 +83,7 @@ export default function EventProduct({ data }: any) {
                           {data.e_addr ?? data.s_addr}
                         </div>
                       </div>
-                      <div className=' text-sm h-[60px] overflow-hidden overflow-ellipsis'>
+                      <div className=' text-sm h-[60px] overflow-hidden overflow-ellipsis font-extrabold'>
                         {data.e_info ?? data.s_info}
                       </div>
                     </div>

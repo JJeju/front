@@ -32,7 +32,8 @@ import { Badge } from '../ui/badge';
 import { Calendar, Calendar as CalendarIcon } from 'lucide-react';
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
-  const { data: courseData, isLoading } = tripApi.GetTravelCourse(1);
+  const { data: courseData, isLoading } =
+    tripApi.GetTravelCourse(createTravelPK);
   const [form, setForm] = useState({
     tr_title: '',
     tr_relationship: '',
