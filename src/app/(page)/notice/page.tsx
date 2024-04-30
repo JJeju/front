@@ -22,7 +22,6 @@ import { Fragment, useState } from 'react';
 import { NoticeRs } from '@/type/notice';
 export default function Notice() {
   const router = useRouter();
-  const { isLogin, setIsLogin } = useUserIdStore();
   const [isFaqId, setIsFaqId] = useState(0);
 
   const { data: NoticeData, isFetching: noticeFetching } =

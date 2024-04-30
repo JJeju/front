@@ -234,27 +234,9 @@ export default function Accommodation({ pkValue }: any) {
             <div className='border p-4 rounded-lg'>
               <form>
                 <div className='grid gap-4 sm:grid-cols-2 sm:gap-8'>
-                  <div className='grid gap-2'>
-                    <Label className='text-sm' htmlFor='name-1'>
-                      예약자 성함
-                    </Label>
-                    <Input id='name-1' required />
-                  </div>
-                  <div className='grid gap-2'>
-                    <Label className='text-sm' htmlFor='phone-1'>
-                      전화번호
-                    </Label>
-                    <Input id='phone-1' required type='tel' />
-                  </div>
-                  <div className='grid gap-2'>
-                    <Label className='text-sm' htmlFor='phone-1'>
-                      이메일
-                    </Label>
-                    <Input id='phone-1' required type='tel' />
-                  </div>
                   <div className='grid gap-2 '>
                     <Label className='text-sm' htmlFor='email-1'>
-                      차량 여부
+                      여정 선택
                     </Label>
                     <Select>
                       <SelectTrigger className=''>
@@ -277,7 +259,7 @@ export default function Accommodation({ pkValue }: any) {
                 </div>
                 <div className='relative h-14'>
                   <Button className='absolute right-0 bottom-0'>
-                    객실 보기
+                    추가하기
                   </Button>
                 </div>
               </form>

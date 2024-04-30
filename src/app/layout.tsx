@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Toaster } from '@/app/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import '@/app/globals.css';
 import ReactQueryProvider from './ReactQueryProvider';
 import { Noto_Sans_KR } from 'next/font/google';
-
+import Hydration from './hydration';
+import { ThemeProvider } from '@/app/components/theme-provider';
 const notoSansKr = Noto_Sans_KR({
   weight: ['500'],
   subsets: ['latin']
@@ -62,10 +64,19 @@ export default function RootLayout({ children }: Props) {
         /> */}
         </head>
         <body className={cn('bg-background font-sans antialiased', notoSansKr)}>
-          {children}
+          <Hydration />
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
           {/* <ReactQueryDevtools
             initialIsOpen={process.env.NEXT_PUBLIC_MODE === 'local'}
           /> */}
+          <Toaster />
         </body>
       </html>
     </ReactQueryProvider>

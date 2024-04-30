@@ -17,7 +17,7 @@ import {
   TableRow
 } from '../ui/table';
 import mypageApi from '@/service/mypage';
-import { formatDate } from '@/utility/hooks/comnHook';
+import { formatDate, numberWithCommas } from '@/utility/hooks/comnHook';
 import { Fragment, useEffect, useLayoutEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 import { Skeleton } from '../ui/skeleton';
@@ -104,7 +104,7 @@ export default function TripReview({ id }: any) {
           ) : (
             <Image
               alt='Restaurant'
-              className='overflow-hidden rounded-xl object-bottom'
+              className=' rounded-xl justify-self-center'
               height='200'
               src={`http://14.6.54.241:8080/download/${data?.mainFile.url}`}
               width='450'
@@ -205,7 +205,8 @@ export default function TripReview({ id }: any) {
             </Table>
           </div>
           <h2 className='text-lg font-semibold px-1 text-red-500 border-b-2 border-red-500 pb-1'>
-            총 비용 : ₩{data?.blog?.b_cost}
+            총 비용 : ₩
+            {data?.blog?.b_cost ? numberWithCommas(data?.blog?.b_cost) : null}
           </h2>
           <div className='grid gap-2'>
             <div className='grid gap-1'>

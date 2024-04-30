@@ -10,7 +10,6 @@ export function useIsLoggedIn() {
     // 쿠키에서 토큰 값을 가져와서 로그인 상태를 확인
     const token = CookieStorage.getCookie('jeju_accs');
 
-    console.log('>>>', token);
     if (token) {
       setIsLoggedIn(true);
     } else {

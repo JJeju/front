@@ -22,7 +22,7 @@ import { Fragment, useState } from 'react';
 export default function Faq() {
   const { data } = faqApi.GetFaq();
   const { data: myData } = faqApi.GetMyFaq();
-  const { isLogin, setIsLogin } = useUserIdStore();
+  const { isLogin } = useUserIdStore();
 
   const [isId, setIsId] = useState(0);
   return (
