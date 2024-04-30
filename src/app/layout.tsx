@@ -25,6 +25,10 @@ export default function RootLayout({ children }: Props) {
     <ReactQueryProvider>
       <html lang='en' suppressHydrationWarning>
         <head>
+          <meta
+            name='google-site-verification'
+            content='t7k90RyFLJRCBeCvhXQ1wiD6_mFnh-MmyPfp6hynDZ4'
+          />
           <link rel='icon' href='/favicon.ico' sizes='any' />
           <title>제주 여행 코스 - JEJU 제주여행 여행계획</title>
           <meta
@@ -49,10 +53,7 @@ export default function RootLayout({ children }: Props) {
           />
           <meta property='og:image' content='/main.png' />
           <meta property='og:url' content='http://jjeju.site' />
-          <meta
-            name='google-site-verification'
-            content='t7k90RyFLJRCBeCvhXQ1wiD6_mFnh-MmyPfp6hynDZ4'
-          />
+
           {/* <link
           rel='icon'
           href='/icon?<generated>'
