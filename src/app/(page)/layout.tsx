@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Footer from '@/app/components/nav/Footer';
 
 import Navbar from '@/app/components/nav/Navbar';
-import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from '../components/ScrollToTop';
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',

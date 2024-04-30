@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
 
-import useUserIdStore from '@/stores/auth';
-import dynamic from 'next/dynamic';
 import Navbar from '@/app/components/nav/Navbar';
 
 export const metadata: Metadata = {
@@ -10,19 +8,19 @@ export const metadata: Metadata = {
   description: '제주 여행 코스 짜기'
 };
 
-// const Navbar = dynamic(() => import('@/components/nav/Navbar'), {
-//   ssr: false
-// });
-
 export default function RootLayout({
-  children
-}: {
+  children,
+  modal
+}: //
+{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <div className='h-screen w-screen overflow-hidden'>
       <Navbar />
       {children}
+      {modal}
     </div>
   );
 }

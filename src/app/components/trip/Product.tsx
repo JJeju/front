@@ -6,11 +6,9 @@ import { ScrollArea } from '@/app/components/ui/scroll-area';
 import { Checkbox } from '@/app/components/ui/checkbox';
 import Image, { ImageLoaderProps } from 'next/image';
 import { Dialog, DialogTrigger } from '../ui/dialog';
-import Accommodation from '../product/AccommodationInfo';
-import Restaurant from '../product/RestaurantInfo';
-import Map from '../map/Map';
-import tripApi from '@/service/trip';
-import { imgLoader } from '@/utility/utils/imgLoader';
+import Accommodation from '@/app/components/detail/AccommodationInfo';
+import Restaurant from '@/app/components/detail/RestaurantInfo';
+import SpotInfo from '@/app/components/detail/SpotInfo';
 import { Fragment, useState } from 'react';
 import { MapPin } from 'lucide-react';
 
@@ -63,7 +61,7 @@ export default function Product({ data, handlerCategory }: any) {
       case '식당':
         return <Restaurant pkValue={pkValue.pk} />;
       case '레저':
-        return <Restaurant pkValue={pkValue.pk} />;
+        return <SpotInfo pkValue={pkValue.pk} />;
       default:
     }
   };

@@ -35,7 +35,7 @@ export default function Trip() {
   const [map, setMap] = useState(null);
   const [currentStore, setCurrentStore] = useState(null);
 
-  const { data } = tripApi.GetTrip(category);
+  const { data, isFetching } = tripApi.GetTrip(category);
 
   useEffect(() => {}, [category]);
 
@@ -58,7 +58,11 @@ export default function Trip() {
             <TabsTrigger value='poket'>장바구니</TabsTrigger>
           </TabsList>
           <TabsContent value='ProductList'>
-            <Product data={data} handlerCategory={handlerCategory} />
+            <Product
+              data={data}
+              handlerCategory={handlerCategory}
+              isFetching={isFetching}
+            />
           </TabsContent>
           <TabsContent value='tripcourse'>
             <div className=' overflow-scroll  h-[85vh]'>
@@ -108,6 +112,7 @@ export default function Trip() {
                         <Product
                           data={data}
                           handlerCategory={handlerCategory}
+                          isFetching={isFetching}
                         />
                       </div>
                     </TabsContent>
