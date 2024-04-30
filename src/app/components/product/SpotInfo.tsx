@@ -79,7 +79,7 @@ export default function Spot({ pkValue }: any) {
               alt='Restaurant'
               className=' rounded-xl justify-self-center'
               height='200'
-              src={`http://14.6.54.241:8080/download/${data?.company.fileData.url}`}
+              src={`http://jjeju.site/download/${data?.company.fileData.url}`}
               width='450'
             />
           )}

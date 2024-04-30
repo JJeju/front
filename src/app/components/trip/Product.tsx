@@ -113,7 +113,7 @@ export default function Product({ data, handlerCategory }: any) {
             <Card className='flex gap-2 items-center w-auto' key={index}>
               <div className=''>
                 <Image
-                  src={`http://14.6.54.241:8080/download/${item.fileData.url}`}
+                  src={`http://jjeju.site/download/${item.fileData.url}`}
                   alt='사진 없음'
                   className='p-2 rounded-lg shadow-2xl max-h-[150px] md:max-h-[150px]  min-w-[110px] md:w-[200px] min-h-[150px]'
                   width={200}

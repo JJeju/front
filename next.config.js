@@ -9,8 +9,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '14.6.54.241',
-        port: '8080',
+        hostname: 'jjeju.site',
+        port: '',
         pathname: '/download/**'
       }
     ]

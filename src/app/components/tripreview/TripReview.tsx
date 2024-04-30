@@ -106,7 +106,7 @@ export default function TripReview({ id }: any) {
               alt='Restaurant'
               className=' rounded-xl justify-self-center'
               height='200'
-              src={`http://14.6.54.241:8080/download/${data?.mainFile.url}`}
+              src={`http://jjeju.site/download/${data?.mainFile.url}`}
               width='450'
             />
           )}
@@ -134,7 +134,7 @@ export default function TripReview({ id }: any) {
                       alt='Restaurant'
                       className='overflow-hidden rounded-xl object-bottom'
                       height='200'
-                      src={`http://14.6.54.241:8080/download/${data.url}`}
+                      src={`http://jjeju.site/download/${data.url}`}
                       width='500'
                     />
                   </CarouselItem>
@@ -186,7 +186,7 @@ export default function TripReview({ id }: any) {
                           <Image
                             alt='Tour image'
                             className='rounded-md min-w-[64px] min-h-[64px]'
-                            src={`http://14.6.54.241:8080/download/${item.tp_fk_company_info.c_img}`}
+                            src={`http://jjeju.site/download/${item.tp_fk_company_info.c_img}`}
                             height={64}
                             width={64}
                           />

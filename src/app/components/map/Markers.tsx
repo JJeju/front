@@ -81,7 +81,7 @@ export default function Markers({
 
         var img = document.createElement('img');
         img.className = 'w-full h-28 rounded-2xl';
-        img.src = 'http://14.6.54.241:8080/download/' + store.fileData.url;
+        img.src = 'http://jjeju.site/download/' + store.fileData.url;
         img.alt = '상품 이미지';
         maxDiv.appendChild(img);
 
