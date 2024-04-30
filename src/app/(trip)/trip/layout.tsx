@@ -9,18 +9,15 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-  modal
+  children
 }: //
 {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }) {
   return (
     <div className='h-screen w-screen overflow-hidden'>
       <Navbar />
       {children}
-      {modal}
     </div>
   );
 }
