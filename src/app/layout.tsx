@@ -7,6 +7,8 @@ import ReactQueryProvider from './ReactQueryProvider';
 import { Noto_Sans_KR } from 'next/font/google';
 import Hydration from './hydration';
 import { ThemeProvider } from '@/app/components/theme-provider';
+import Head from 'next/head';
+
 const notoSansKr = Noto_Sans_KR({
   weight: ['500'],
   subsets: ['latin']
@@ -24,7 +26,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <ReactQueryProvider>
       <html lang='en' suppressHydrationWarning>
-        <head>
+        <Head>
           <meta
             name='google-site-verification'
             content='t7k90RyFLJRCBeCvhXQ1wiD6_mFnh-MmyPfp6hynDZ4'
@@ -66,7 +68,7 @@ export default function RootLayout({ children }: Props) {
           type='image/<generated>'
           sizes='<generated>'
         /> */}
-        </head>
+        </Head>
         <body className={cn('bg-background font-sans antialiased', notoSansKr)}>
           <Hydration />
           <ThemeProvider
