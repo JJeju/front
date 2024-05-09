@@ -18,18 +18,6 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <head>
-        <meta
-          property='og:description'
-          content='제주 여행 코스를 짜고 여행을 계획할 수 있는 사이트입니다. 제주도의 다양한 관광명소와 여행 정보를 제공합니다.'
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:image' content='http://jjeju.site/main.png' />
-        <meta property='og:site_name' content='JEJU' />
-        <meta property='og:locale' content='ko_KR' />
-        <meta property='og:image:width' content='1200' />
-        <meta property='og:image:height' content='630' />
-      </head>
       <Navbar />
       <ScrollToTop />
       {children}

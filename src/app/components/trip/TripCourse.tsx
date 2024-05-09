@@ -20,16 +20,17 @@ import {
 import { Label } from '../ui/label';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import Image, { ImageLoaderProps } from 'next/image';
+import Image from 'next/image';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
-import { imgLoader } from '@/utility/utils/imgLoader';
 import tripApi from '@/service/trip';
 import tripStore from '@/stores/trip';
 import { formatDate } from '@/utility/hooks/comnHook';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Skeleton } from '../ui/skeleton';
 import { Badge } from '../ui/badge';
-import { Calendar, Calendar as CalendarIcon } from 'lucide-react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 export default function TripCourse() {
   const createTravelPK = tripStore(state => state.createTravelPK);
   const { data: courseData, isLoading } =
@@ -41,72 +42,22 @@ export default function TripCourse() {
     tr_out: ''
   });
 
-  const [items, setItems] = useState([]);
+  const [TripData, setTripData] = useState([]);
   const [currentItem, setCurrentItem] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     if (courseData)
       // setItems(courseData.planList.dayPlanList.Flat());
-      setItems(courseData.planList);
+      setTripData(courseData.planList);
     setCurrentItem(
       courseData?.planList.flatMap((list: any) => list.dayPlanList)
     );
   }, [courseData]);
 
-  const onDragEnd = useCallback(
-    (result: any) => {
-      const { destination, source, draggableId, type } = result;
-      if (!destination) return;
-      if (
-        destination.droppableId === source.droppableId &&
-        source.index === destination.index
-      )
-        return;
-
-      const newItems = [...items];
-      const startListIndex = Number(source.droppableId);
-      const finishListIndex = Number(destination.droppableId);
-      const startList: any = newItems[startListIndex];
-      const finishList: any = newItems[finishListIndex];
-      const draggedItem = startList.dayPlanList[source.index];
-
-      // Moving within the same list
-      if (startListIndex === finishListIndex) {
-        startList.dayPlanList.splice(source.index, 1);
-        startList.dayPlanList.splice(destination.index, 0, draggedItem);
-      } else {
-        // Moving to a different list
-        startList.dayPlanList.splice(source.index, 1);
-        finishList.dayPlanList.splice(destination.index, 0, draggedItem);
-      }
-
-      setItems(newItems);
-    },
-    [items]
-  );
-
-  const handleReorder = (newValue: any) => {
-    // setItems(newValue);
-    setCurrentItem(newValue);
-    // const updatedItems = items.map(group => {
-    //   return group.map(item => {
-    //     const newItem = newOrder.find(
-    //       (newOrderItem: { id: any }) => newOrderItem.id === item.id
-    //     );
-    // console.log('newOrder>>', newOrder);
-    // setItems(newOrder);
-    // };
-    // });
-  };
-
   const onChange = (e: any) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
-  };
-
-  const handleUpdate = () => {
-    setIsDisabled(true);
   };
 
   const handleDateChange = (newDateRange: any) => {
@@ -219,12 +170,10 @@ export default function TripCourse() {
         <h2 className='text-xl font-semibold mt-3 text-left'>여행 일정</h2>
         <Table>
           <TableBody className='p-0'>
-            {items.map((list: any, index: any) => (
+            {TripData.map((list: any, index: any) => (
               <Fragment key={list.day}>
                 <Badge className='w-[140px] flex justify-center items-center mt-3 font-bold'>
-                  Day {index + 1}
-                  <Calendar size={15} className='pl-1 ' />
-                  {list.day}
+                  Day {index + 1} {list.day}
                 </Badge>
                 {list?.dayPlanList.length === 0 && (
                   <TableRow>
@@ -251,11 +200,7 @@ export default function TripCourse() {
                       {item.tp_fk_company_info.c_addr}
                     </TableCell>
                     <TableCell className='text-right'>
-                      <Button
-                        variant='destructive'
-                        size='sm'
-                        // onClick={() => onRemove(item)}
-                      >
+                      <Button variant='destructive' size='sm'>
                         삭제
                       </Button>
                     </TableCell>

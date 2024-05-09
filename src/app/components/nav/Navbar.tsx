@@ -110,10 +110,6 @@ export default function Navbar() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
   const handleLogout = () => {
     mutate();
     logout(false);

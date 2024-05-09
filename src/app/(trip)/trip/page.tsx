@@ -11,12 +11,8 @@ import Product from '@/app/components/trip/Product';
 import TripCourse from '@/app/components/trip/TripCourse';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger
 } from '@/app/components/ui/drawer';
 import Map from '@/app/components/map/Map';
@@ -36,8 +32,6 @@ export default function Trip() {
   const [currentStore, setCurrentStore] = useState(null);
 
   const { data, isFetching } = tripApi.GetTrip(category);
-
-  useEffect(() => {}, [category]);
 
   const handlerCategory = (newCategory: string) => {
     setCategory(newCategory);
