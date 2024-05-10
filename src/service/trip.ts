@@ -1,7 +1,8 @@
 import { TravelCreateRq, TravelCreateRs } from '@/type/journey';
 import axiosInstance from '../utility/axiosInterceptor';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getTripRs, getTripDetailRs } from '@/type/trip';
+import { getTripRs, getTripDetailRs, TripCourseRs } from '@/type/trip';
+import { promises } from 'dns';
 
 const tripApi = {
   // 여행 상품 조회
@@ -66,7 +67,7 @@ const tripApi = {
     });
   },
   // 여행 코스 조회
-  getTravelCourseFn: async (data: number) => {
+  getTravelCourseFn: async (data: number): Promise<TripCourseRs> => {
     const res = await axiosInstance.get(`/api/travel/plan/select/${data}`);
     return res.data.body;
   },

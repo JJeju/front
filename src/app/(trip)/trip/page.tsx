@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   Tabs,
@@ -8,7 +8,7 @@ import {
   TabsTrigger
 } from '@/app/components/ui/tabs';
 import Product from '@/app/components/trip/Product';
-import TripCourse from '@/app/components/trip/TripCourse';
+import TripCourse, { ItripType } from '@/app/components/trip/TripCourse';
 import {
   Drawer,
   DrawerContent,
@@ -22,16 +22,31 @@ import tripStore from '@/stores/trip';
 import tripApi from '@/service/trip';
 import Markers from '@/app/components/map/Markers';
 import { getTripRs } from '@/type/trip';
+import CourseMarker from '@/app/components/map/CourseMarker';
+import { Button } from '@/app/components/ui/button';
 
 export default function Trip() {
-  const [tripList, setTripList] = useState<getTripRs[]>([]);
   const [category, setCategory] = useState<string>('');
   const { createTravelPK } = tripStore();
   const [tabValue, setTabValue] = useState('ProductList');
   const [map, setMap] = useState(null);
   const [currentStore, setCurrentStore] = useState(null);
+  // day 버튼
+  const [isDay, setIsDay] = useState(0);
+  // 여정 정보
+  const [markerInfo, setMarkerInfo] = useState<any>(null);
 
   const { data, isFetching } = tripApi.GetTrip(category);
+
+  const { data: courseData, isLoading } =
+    tripApi.GetTravelCourse(createTravelPK);
+
+  useEffect(() => {
+    if (tabValue === 'tripcourse') {
+      setMarkerInfo(null);
+      setIsDay(0);
+    }
+  }, [tabValue]);
 
   const handlerCategory = (newCategory: string) => {
     setCategory(newCategory);
@@ -60,7 +75,7 @@ export default function Trip() {
           </TabsContent>
           <TabsContent value='tripcourse'>
             <div className=' overflow-scroll  h-[85vh]'>
-              <TripCourse />
+              <TripCourse courseData={courseData} isLoading={isLoading} />
             </div>
           </TabsContent>
           <TabsContent value='poket'>
@@ -71,13 +86,38 @@ export default function Trip() {
       <div className=' h-full md:w-2/3  w-full'>
         <div className=' border md:h-full h-full'>
           <Map setMap={setMap} data={data} />
-          <Markers
-            data={data}
-            map={map}
-            setCurrentStore={setCurrentStore}
-            currentStore={currentStore}
-            category={category}
-          />
+          {tabValue === 'ProductList' && (
+            <Markers
+              data={data}
+              map={map}
+              setCurrentStore={setCurrentStore}
+              currentStore={currentStore}
+              category={category}
+            />
+          )}
+          {tabValue === 'tripcourse' && (
+            <>
+              <CourseMarker data={markerInfo} map={map} />
+              <div className='fixed top-20 mx-2 rounded-md shadow-md z-20 bg-slate-200'>
+                <div className='flex flex-wrap justify-center'>
+                  {courseData?.planList?.map((list: any, index: any) => (
+                    <Button
+                      key={index}
+                      className='m-1 text-center text-sm'
+                      size='sm'
+                      onClick={() => {
+                        setIsDay(index + 1);
+                        setMarkerInfo(list.dayPlanList);
+                      }}
+                      variant={isDay === index + 1 ? 'default' : 'secondary'}
+                    >
+                      Day {index + 1}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
           <div className='md:hidden block'>
             <Drawer>
               <DrawerTrigger className='absolute bottom-5 right-5 overflow-auto z-10'>
@@ -112,7 +152,10 @@ export default function Trip() {
                     </TabsContent>
                     <TabsContent value='tripcourse'>
                       <div className='h-[500px] overflow-scroll'>
-                        <TripCourse />
+                        <TripCourse
+                          courseData={courseData}
+                          isLoading={isLoading}
+                        />
                       </div>
                     </TabsContent>
                     <TabsContent value='poket'>

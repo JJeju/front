@@ -21,7 +21,9 @@ const nextConfig = {
      * - favicon.ico (favicon file)
      */
     '/((?!api|_next/static|_next/image|favicon.ico).*)'
-  ]
+  ],
+  reactStrictMode: true
+
   // async redirects() {
   //   return [
   //     {

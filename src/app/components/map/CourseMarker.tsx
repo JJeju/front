@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useToast } from '../ui/use-toast';
 import { KakaoDirectionsApi, KakaoWaypointApi } from '@/service/kakao';
 
@@ -33,8 +33,6 @@ interface kakaoProps {
   road_details: boolean;
 }
 export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
-  const [open, setOpen] = useState(false);
-
   // 마커
   const [markers, setMarkers] = useState<any>([]);
 
@@ -51,6 +49,60 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
   const [distanceOverlay, setDistanceOverlay] = useState<any | null>([]);
 
   const { toast } = useToast();
+
+  useEffect(() => {
+    // 로그 및 클린업 로직은 컴포넌트가 실제로 언마운트될 때만 호출되도록 최적화
+    return () => {
+      // 마커 초기화
+      markers.forEach((marker: { setMap: (arg0: null) => any }) =>
+        marker.setMap(null)
+      );
+      if (clickline) {
+        clickline.setMap(null); // 선을 지도에서 제거
+        console.log('Line removed from map:', clickline);
+        setClickline(null); // 상태를 null로 설정
+      }
+      if (distanceOverlay.length > 0) {
+        distanceOverlay.forEach((overlay: any) => {
+          overlay.setMap(null); // 각 거리 오버레이를 지도에서 제거
+          console.log('Overlay removed from map:', overlay);
+        });
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // 데이터가 있을 때만 실행
+    markers.forEach((marker: any) => {
+      marker.setMap(null);
+    });
+
+    if (data?.length > 0) {
+      const lats = data?.map((coord: any) => coord.tp_fk_company_info?.c_lat); // 위도
+      const lngs = data?.map((coord: any) => coord.tp_fk_company_info?.c_lon); // 경도
+
+      // 경도와 위도의 평균 값을 계산합니다.
+      const avgLat =
+        lats.reduce((acc: any, lat: any) => acc + lat, 0) / lats.length;
+      const avgLng =
+        lngs.reduce((acc: any, lng: any) => acc + lng, 0) / lngs.length;
+
+      map?.setCenter(new window.kakao.maps.LatLng(avgLat, avgLng));
+    } else if (map && data?.length <= 0) {
+      noData();
+    }
+
+    setMarkerPositions(
+      data?.map(
+        (store: any) =>
+          new window.kakao.maps.LatLng(
+            store.tp_fk_company_info?.c_lat,
+            store.tp_fk_company_info?.c_lon
+          )
+      )
+    );
+    loadKakaMarkers();
+  }, [data]);
 
   const loadKakaMarkers = useCallback(() => {
     if (map) {
@@ -117,13 +169,12 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
           }
 
           setCurrentCustomOverlay(customOverlay);
-          setOpen(true);
         });
       });
 
       // clickLine.setMap(null);
     }
-  }, [map, data, currentCustomOverlay]);
+  }, [data, currentCustomOverlay, map]);
 
   useEffect(() => {
     loadKakaMarkers();
@@ -144,7 +195,6 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
     }
 
     // 새로운 선 그리기
-
     if (markerPositions?.length > 1) {
       const origin = {
         x: markerPositions[0].La,
@@ -181,75 +231,46 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
         road_details: false
       };
 
-      const fetchAndDrawLine = async () => {
-        const line = await fetchData(params);
-
-        const newClickline = new window.kakao.maps.Polyline({
-          map: map,
-          path: line.line,
-          strokeWeight: 3,
-          strokeColor: '#db4040',
-          strokeOpacity: 1,
-          strokeStyle: 'solid'
-        });
-
-        line.road.map((data: any, index: number) => {
-          let content = getTimeHTML(data.distance, data.duration);
-
-          const newDistance = new window.kakao.maps.CustomOverlay({
-            map: map, // 커스텀오버레이를 표시할 지도입니다
-            content: content, // 커스텀오버레이에 표시할 내용입니다
-            position: markerPositions[index + 1], // 커스텀오버레이를 표시할 위치입니다.
-            xAnchor: 0,
-            yAnchor: 0,
-            zIndex: 1
-          });
-
-          setDistanceOverlay((prevDistanceOverlay: any) => [
-            ...prevDistanceOverlay,
-            newDistance
-          ]);
-        });
-
-        // 새로 그린 선을 상태로 저장
-        setClickline(newClickline);
-      };
-      fetchAndDrawLine();
+      fetchAndDrawLine(params);
     }
-  }, [markerPositions, map]);
+  }, [markerPositions]);
 
-  useEffect(() => {
-    markers.forEach((marker: any) => {
-      marker.setMap(null);
+  // 선 데이터 가져오기
+  const fetchAndDrawLine = async (params: any) => {
+    const line = await fetchData(params);
+
+    const newClickline = new window.kakao.maps.Polyline({
+      map: map,
+      path: line.line,
+      strokeWeight: 3,
+      strokeColor: '#db4040',
+      strokeOpacity: 1,
+      strokeStyle: 'solid'
     });
 
-    if (data?.length > 0) {
-      const lats = data?.map((coord: any) => coord.tp_fk_company_info?.c_lat); // 위도
-      const lngs = data?.map((coord: any) => coord.tp_fk_company_info?.c_lon); // 경도
+    line.road.map((data: any, index: number) => {
+      let content = getTimeHTML(data.distance, data.duration);
 
-      // 경도와 위도의 평균 값을 계산합니다.
-      const avgLat =
-        lats.reduce((acc: any, lat: any) => acc + lat, 0) / lats.length;
-      const avgLng =
-        lngs.reduce((acc: any, lng: any) => acc + lng, 0) / lngs.length;
+      const newDistance = new window.kakao.maps.CustomOverlay({
+        map: map, // 커스텀오버레이를 표시할 지도입니다
+        content: content, // 커스텀오버레이에 표시할 내용입니다
+        position: markerPositions[index + 1], // 커스텀오버레이를 표시할 위치입니다.
+        xAnchor: 0,
+        yAnchor: 0,
+        zIndex: 1
+      });
 
-      map?.setCenter(new window.kakao.maps.LatLng(avgLat, avgLng));
-    } else if (map && data?.length <= 0) {
-      noData();
-    }
+      setDistanceOverlay((prevDistanceOverlay: any) => [
+        ...prevDistanceOverlay,
+        newDistance
+      ]);
+    });
 
-    setMarkerPositions(
-      data?.map(
-        (store: any) =>
-          new window.kakao.maps.LatLng(
-            store.tp_fk_company_info?.c_lat,
-            store.tp_fk_company_info?.c_lon
-          )
-      )
-    );
-    loadKakaMarkers();
-  }, [data]);
+    // 새로 그린 선을 상태로 저장
+    setClickline(newClickline);
+  };
 
+  // 카카오 API 호출
   const fetchData = async (params: any) => {
     try {
       const data: any =
@@ -282,6 +303,7 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
     }
   };
 
+  // 거리와 시간을 계산하여 HTML Content를 만들어 리턴합니다
   const getTimeHTML = (distance: number, carTimes: any) => {
     // 거리를 미터에서 킬로미터로 변환합니다
     const distanceKm = distance / 1000;

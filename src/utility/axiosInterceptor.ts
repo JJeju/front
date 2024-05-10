@@ -47,7 +47,7 @@ axiosInstance.interceptors.response.use(
       try {
         // 토큰 갱신 요청
         const refreshToken = CookieStorage.getCookie(COOKIE_REFRESH_TOKEN);
-        const res = await axios.post(`${API_URL}/member/refresh_token`, {
+        const res = await axiosInstance.post(`/api/member/refresh_token`, {
           refresh_token: refreshToken
         });
 
