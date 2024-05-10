@@ -30,10 +30,10 @@ export default function RootLayout({ children }: Props) {
       <ReactQueryProvider>
         <html lang='en' suppressHydrationWarning>
           <head>
-            {/* <meta
-            name='google-site-verification'
-            content='t7k90RyFLJRCBeCvhXQ1wiD6_mFnh-MmyPfp6hynDZ4'
-          /> */}
+            <meta
+              name='google-site-verification'
+              content='t7k90RyFLJRCBeCvhXQ1wiD6_mFnh-MmyPfp6hynDZ4'
+            />
             <link rel='icon' href='/favicon.ico' sizes='any' />
             <meta property='og:url' content='http://jjeju.site' />
             <meta
