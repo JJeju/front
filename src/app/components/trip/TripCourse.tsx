@@ -1,14 +1,6 @@
 'use client';
 import { Button } from '../ui/button';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '../ui/table';
+import { Table, TableBody, TableCell, TableRow } from '../ui/table';
 import { Input } from '../ui/input';
 import {
   Select,
@@ -18,22 +10,55 @@ import {
   SelectValue
 } from '../ui/select';
 import { Label } from '../ui/label';
-import { Reorder, useDragControls } from 'framer-motion';
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import Image, { ImageLoaderProps } from 'next/image';
+import Image from 'next/image';
 import { DatePickerWithRange } from '../ui/datepickerwithrange';
-import { imgLoader } from '@/utility/utils/imgLoader';
 import tripApi from '@/service/trip';
 import tripStore from '@/stores/trip';
 import { formatDate } from '@/utility/hooks/comnHook';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Skeleton } from '../ui/skeleton';
 import { Badge } from '../ui/badge';
-import { Calendar, Calendar as CalendarIcon } from 'lucide-react';
-export default function TripCourse() {
-  const createTravelPK = tripStore(state => state.createTravelPK);
-  const { data: courseData, isLoading } =
-    tripApi.GetTravelCourse(createTravelPK);
+import { TripCourseRs } from '@/type/trip';
+
+export interface ItripType {
+  dayPlanList: [
+    {
+      tp_pk_num: number;
+      tp_fk_tnum: number;
+      tp_fk_company_info: {
+        c_pk_num: number;
+        c_cnum: string;
+        c_fk_id: string;
+        c_name: string;
+        c_phone: string;
+        c_category: string;
+        c_addr: string;
+        c_condition: string;
+        c_check: string;
+        c_img: string;
+        c_type: string;
+        c_lat: number;
+        c_lon: number;
+        c_file_group_no: number;
+      };
+      tp_item_category: string;
+      tp_plan_start_date_time: string;
+      tp_plan_end_date_time: string;
+      tp_rm: string;
+      create_dt: string;
+      update_dt: string;
+    }
+  ];
+  day: string;
+}
+export default function TripCourse({
+  courseData,
+  isLoading
+}: {
+  courseData?: TripCourseRs;
+  isLoading: boolean;
+}) {
   const [form, setForm] = useState({
     tr_title: '',
     tr_relationship: '',
@@ -41,72 +66,16 @@ export default function TripCourse() {
     tr_out: ''
   });
 
-  const [items, setItems] = useState([]);
-  const [currentItem, setCurrentItem] = useState([]);
+  const [TripData, setTripData] = useState<ItripType[]>([]);
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    if (courseData)
-      // setItems(courseData.planList.dayPlanList.Flat());
-      setItems(courseData.planList);
-    setCurrentItem(
-      courseData?.planList.flatMap((list: any) => list.dayPlanList)
-    );
+    if (courseData) setTripData(courseData.planList);
   }, [courseData]);
-
-  const onDragEnd = useCallback(
-    (result: any) => {
-      const { destination, source, draggableId, type } = result;
-      if (!destination) return;
-      if (
-        destination.droppableId === source.droppableId &&
-        source.index === destination.index
-      )
-        return;
-
-      const newItems = [...items];
-      const startListIndex = Number(source.droppableId);
-      const finishListIndex = Number(destination.droppableId);
-      const startList: any = newItems[startListIndex];
-      const finishList: any = newItems[finishListIndex];
-      const draggedItem = startList.dayPlanList[source.index];
-
-      // Moving within the same list
-      if (startListIndex === finishListIndex) {
-        startList.dayPlanList.splice(source.index, 1);
-        startList.dayPlanList.splice(destination.index, 0, draggedItem);
-      } else {
-        // Moving to a different list
-        startList.dayPlanList.splice(source.index, 1);
-        finishList.dayPlanList.splice(destination.index, 0, draggedItem);
-      }
-
-      setItems(newItems);
-    },
-    [items]
-  );
-
-  const handleReorder = (newValue: any) => {
-    // setItems(newValue);
-    setCurrentItem(newValue);
-    // const updatedItems = items.map(group => {
-    //   return group.map(item => {
-    //     const newItem = newOrder.find(
-    //       (newOrderItem: { id: any }) => newOrderItem.id === item.id
-    //     );
-    // console.log('newOrder>>', newOrder);
-    // setItems(newOrder);
-    // };
-    // });
-  };
 
   const onChange = (e: any) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
-  };
-
-  const handleUpdate = () => {
-    setIsDisabled(true);
   };
 
   const handleDateChange = (newDateRange: any) => {
@@ -115,6 +84,46 @@ export default function TripCourse() {
       tr_in: formatDate(newDateRange.from),
       tr_out: formatDate(newDateRange.to)
     });
+  };
+
+  const onDragEnd = (result: any, TripData: any, setTripData: any) => {
+    console.log('result>>', result);
+    console.log('TripData>>', TripData);
+    if (!result.destination) return;
+    const { source, destination } = result;
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = TripData[source.droppableId];
+
+      const destColumn = TripData[destination.droppableId];
+      const sourceItems = [...sourceColumn.dayPlanList];
+      const destItems = [...destColumn.dayPlanList];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+      setTripData({
+        ...TripData,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems
+        }
+      });
+    } else {
+      const column = TripData[source.droppableId];
+      console.log('sourceColumn>>', column);
+      const copiedItems = [...column.dayPlanList];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      setTripData({
+        ...TripData,
+        [source.droppableId]: {
+          ...column,
+          items: copiedItems
+        }
+      });
+    }
   };
 
   return (
@@ -161,7 +170,7 @@ export default function TripCourse() {
                   <Select
                     value={
                       isDisabled
-                        ? courseData.travelroute?.tr_relationship
+                        ? courseData?.travelroute?.tr_relationship
                         : form.tr_relationship
                     }
                     onValueChange={value => {
@@ -194,8 +203,8 @@ export default function TripCourse() {
                     className='w-full'
                     disabled={isDisabled}
                     onDateChange={handleDateChange}
-                    start={courseData.travelroute?.tr_in}
-                    end={courseData.travelroute?.tr_out}
+                    start={courseData?.travelroute?.tr_in}
+                    end={courseData?.travelroute?.tr_out}
                   />
                 </div>
               </div>
@@ -217,54 +226,86 @@ export default function TripCourse() {
       </div>
       <div className='h-[440px]'>
         <h2 className='text-xl font-semibold mt-3 text-left'>여행 일정</h2>
-        <Table>
-          <TableBody className='p-0'>
-            {items.map((list: any, index: any) => (
-              <Fragment key={list.day}>
-                <Badge className='w-[140px] flex justify-center items-center mt-3 font-bold'>
-                  Day {index + 1}
-                  <Calendar size={15} className='pl-1 ' />
-                  {list.day}
-                </Badge>
-                {list?.dayPlanList.length === 0 && (
-                  <TableRow>
-                    <TableCell colSpan={3} className='text-left'>
-                      일정 없음
-                    </TableCell>
-                  </TableRow>
-                )}
-                {list.dayPlanList.map((item: any, innerIndex: any) => (
-                  <TableRow key={innerIndex}>
-                    <TableCell className='w-[10px]'>
-                      <Image
-                        alt='Tour image'
-                        className='rounded-md min-w-[84px] min-h-[84px] '
-                        src={`http://jjeju.site/download/${item.tp_fk_company_info.c_img}`}
-                        height={84}
-                        width={84}
-                      />
-                    </TableCell>
-                    <TableCell className=' text-overflow-ellipsis w-[150px] text-xs font-bold text-left'>
-                      {item.tp_fk_company_info.c_name}
-                    </TableCell>
-                    <TableCell className=' text-overflow-ellipsis w-[200px] text-xs text-left'>
-                      {item.tp_fk_company_info.c_addr}
-                    </TableCell>
-                    <TableCell className='text-right'>
-                      <Button
-                        variant='destructive'
-                        size='sm'
-                        // onClick={() => onRemove(item)}
-                      >
-                        삭제
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </Fragment>
-            ))}
-          </TableBody>
-        </Table>
+        <DragDropContext
+          onDragEnd={result => {
+            onDragEnd(result, TripData, setTripData);
+          }}
+        >
+          <Table>
+            <TableBody className='p-0'>
+              {Object.entries(TripData).map(
+                ([columnId, column]: [string, any], index: any) => {
+                  return (
+                    <Droppable key={columnId} droppableId={column.day}>
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                        >
+                          <Fragment key={column.day}>
+                            <Badge className='w-[140px] flex justify-center items-center mt-3 font-bold'>
+                              Day {index + 1} {column.day}
+                            </Badge>
+                            {column?.dayPlanList.length === 0 && (
+                              <TableRow>
+                                <TableCell colSpan={3} className='text-left'>
+                                  일정 없음
+                                </TableCell>
+                              </TableRow>
+                            )}
+                            {column.dayPlanList.map(
+                              (item: any, innerIndex: any) => (
+                                <TableRow key={innerIndex}>
+                                  <Draggable
+                                    key={item.tp_pk_num}
+                                    draggableId={item.tp_pk_num.toString()}
+                                    index={innerIndex}
+                                  >
+                                    {provided => (
+                                      <div
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                      >
+                                        <TableCell className='w-[10px]'>
+                                          <Image
+                                            alt='Tour image'
+                                            className='rounded-md min-w-[84px] min-h-[84px] '
+                                            src={`http://jjeju.site/download/${item.tp_fk_company_info.c_img}`}
+                                            height={84}
+                                            width={84}
+                                          />
+                                        </TableCell>
+                                        <TableCell className=' text-overflow-ellipsis w-[150px] text-xs font-bold text-left'>
+                                          {item.tp_fk_company_info.c_name}
+                                        </TableCell>
+                                        <TableCell className=' text-overflow-ellipsis w-[200px] text-xs text-left'>
+                                          {item.tp_fk_company_info.c_addr}
+                                        </TableCell>
+                                        <TableCell className='text-right'>
+                                          <Button
+                                            variant='destructive'
+                                            size='sm'
+                                          >
+                                            삭제
+                                          </Button>
+                                        </TableCell>
+                                      </div>
+                                    )}
+                                  </Draggable>
+                                </TableRow>
+                              )
+                            )}
+                          </Fragment>
+                        </div>
+                      )}
+                    </Droppable>
+                  );
+                }
+              )}
+            </TableBody>
+          </Table>
+        </DragDropContext>
       </div>
     </div>
   );

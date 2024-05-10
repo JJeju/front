@@ -18,13 +18,7 @@ interface MarkerProps {
   currentStore: any;
   category?: string;
 }
-export default function Markers({
-  map,
-  data,
-  setCurrentStore,
-  currentStore,
-  category
-}: MarkerProps) {
+export default function Markers({ map, data, setCurrentStore }: MarkerProps) {
   const [open, setOpen] = useState(false);
 
   const [markers, setMarkers] = useState<any>([]);
@@ -42,6 +36,11 @@ export default function Markers({
     if (!isMobileDevice()) {
       setIsWindow(true);
     }
+    return () => {
+      markers.forEach((marker: any) => {
+        marker.setMap(null);
+      });
+    };
   }, []);
 
   // 마커 로드
