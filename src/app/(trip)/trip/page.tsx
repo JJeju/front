@@ -42,10 +42,8 @@ export default function Trip() {
     tripApi.GetTravelCourse(createTravelPK);
 
   useEffect(() => {
-    if (tabValue === 'tripcourse') {
-      setMarkerInfo(null);
-      setIsDay(0);
-    }
+    setMarkerInfo(null);
+    setIsDay(0);
   }, [tabValue]);
 
   const handlerCategory = (newCategory: string) => {

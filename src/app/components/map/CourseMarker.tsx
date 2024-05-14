@@ -51,25 +51,28 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
   const { toast } = useToast();
 
   useEffect(() => {
-    // 로그 및 클린업 로직은 컴포넌트가 실제로 언마운트될 때만 호출되도록 최적화
     return () => {
-      // 마커 초기화
       markers.forEach((marker: { setMap: (arg0: null) => any }) =>
         marker.setMap(null)
       );
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    return () => {
       if (clickline) {
         clickline.setMap(null); // 선을 지도에서 제거
-        console.log('Line removed from map:', clickline);
-        setClickline(null); // 상태를 null로 설정
+        setClickline(null);
       }
       if (distanceOverlay.length > 0) {
         distanceOverlay.forEach((overlay: any) => {
           overlay.setMap(null); // 각 거리 오버레이를 지도에서 제거
-          console.log('Overlay removed from map:', overlay);
         });
       }
+      // 마커 초기화
     };
-  }, []);
+  }, [clickline, distanceOverlay]);
 
   useEffect(() => {
     // 데이터가 있을 때만 실행
@@ -102,6 +105,7 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
       )
     );
     loadKakaMarkers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const loadKakaMarkers = useCallback(() => {
@@ -171,10 +175,8 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
           setCurrentCustomOverlay(customOverlay);
         });
       });
-
-      // clickLine.setMap(null);
     }
-  }, [data, currentCustomOverlay, map]);
+  }, [map, data, markers, currentCustomOverlay]);
 
   useEffect(() => {
     loadKakaMarkers();
@@ -232,7 +234,9 @@ export default function CourseMarker({ map, data, lat, lng }: MarkerProps) {
       };
 
       fetchAndDrawLine(params);
+      setMarkerPositions([]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [markerPositions]);
 
   // 선 데이터 가져오기

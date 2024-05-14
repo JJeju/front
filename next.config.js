@@ -25,7 +25,7 @@ const nextConfig = {
      */
     '/((?!api|_next/static|_next/image|favicon.ico).*)'
   ],
-  reactStrictMode: true
+  reactStrictMode: false
 
   // async redirects() {
   //   return [
