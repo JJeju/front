@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "build/types/**/*.ts"
+    "build/types/**/*.ts",
+    "src/mocks/browser.js"
   ],
   "exclude": ["node_modules"]
 }

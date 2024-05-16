@@ -9,6 +9,7 @@ import Hydration from './hydration';
 import { ThemeProvider } from '@/app/components/theme-provider';
 import Head from 'next/head';
 import { StrictMode } from 'react';
+import { MswComponent } from './components/MswComponents';
 
 const notoSansKr = Noto_Sans_KR({
   weight: ['500'],
@@ -65,6 +66,8 @@ export default function RootLayout({ children }: Props) {
         </head>
         <body className={cn('bg-background font-sans antialiased', notoSansKr)}>
           <Hydration />
+          <MswComponent />
+
           <ThemeProvider
             attribute='class'
             defaultTheme='system'

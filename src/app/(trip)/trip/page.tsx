@@ -24,6 +24,8 @@ import Markers from '@/app/components/map/Markers';
 import { getTripRs } from '@/type/trip';
 import CourseMarker from '@/app/components/map/CourseMarker';
 import { Button } from '@/app/components/ui/button';
+import axios from 'axios';
+import { env } from 'process';
 
 export default function Trip() {
   const [category, setCategory] = useState<string>('');

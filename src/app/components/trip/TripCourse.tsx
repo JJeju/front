@@ -20,10 +20,12 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Skeleton } from '../ui/skeleton';
 import { Badge } from '../ui/badge';
 import { TripCourseRs } from '@/type/trip';
+import axios from 'axios';
 
 export interface ItripType {
   dayPlanList: [
     {
+      pk: any;
       tp_pk_num: number;
       tp_fk_tnum: number;
       tp_fk_company_info: {
@@ -70,8 +72,13 @@ export default function TripCourse({
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    if (courseData) setTripData(courseData.planList);
-  }, [courseData]);
+    async function fetchData() {
+      const res = await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/abc');
+      setTripData(res.data.res as any);
+      console.log('>>', res.data.res);
+    }
+    fetchData();
+  }, []);
 
   const onChange = (e: any) => {
     const { name, value } = e.target;
@@ -90,37 +97,42 @@ export default function TripCourse({
     console.log('result>>', result);
     console.log('TripData>>', TripData);
     if (!result.destination) return;
-    const { source, destination } = result;
-    if (source.droppableId !== destination.droppableId) {
-      const sourceColumn = TripData[source.droppableId];
 
-      const destColumn = TripData[destination.droppableId];
-      const sourceItems = [...sourceColumn.dayPlanList];
-      const destItems = [...destColumn.dayPlanList];
-      const [removed] = sourceItems.splice(source.index, 1);
+    const { source, destination } = result;
+
+    // Columns involved in the drag operation
+    const sourceColumn = TripData[source.droppableId];
+    const destColumn = TripData[destination.droppableId];
+
+    // Lists of items in each column
+    const sourceItems = [...sourceColumn.dayPlanList];
+    const destItems = [...destColumn.dayPlanList];
+
+    // Item being moved
+    const [removed] = sourceItems.splice(source.index, 1);
+
+    // If moving to a different column
+    if (source.droppableId !== destination.droppableId) {
       destItems.splice(destination.index, 0, removed);
       setTripData({
         ...TripData,
         [source.droppableId]: {
           ...sourceColumn,
-          items: sourceItems
+          dayPlanList: sourceItems // Update the source column
         },
         [destination.droppableId]: {
           ...destColumn,
-          items: destItems
+          dayPlanList: destItems // Update the destination column
         }
       });
     } else {
-      const column = TripData[source.droppableId];
-      console.log('sourceColumn>>', column);
-      const copiedItems = [...column.dayPlanList];
-      const [removed] = copiedItems.splice(source.index, 1);
-      copiedItems.splice(destination.index, 0, removed);
+      // If moving within the same column
+      sourceItems.splice(destination.index, 0, removed);
       setTripData({
         ...TripData,
         [source.droppableId]: {
-          ...column,
-          items: copiedItems
+          ...sourceColumn,
+          dayPlanList: sourceItems // Update the source column
         }
       });
     }
@@ -233,76 +245,66 @@ export default function TripCourse({
         >
           <Table>
             <TableBody className='p-0'>
-              {Object.entries(TripData).map(
-                ([columnId, column]: [string, any], index: any) => {
-                  return (
-                    <Droppable key={columnId} droppableId={column.day}>
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.droppableProps}
-                        >
-                          <Fragment key={column.day}>
-                            <Badge className='w-[140px] flex justify-center items-center mt-3 font-bold'>
-                              Day {index + 1} {column.day}
-                            </Badge>
-                            {column?.dayPlanList.length === 0 && (
-                              <TableRow>
-                                <TableCell colSpan={3} className='text-left'>
-                                  일정 없음
+              {Object.entries(TripData).map(([columnId, column], index) => (
+                <Droppable
+                  key={index.toString()}
+                  droppableId={index.toString()}
+                >
+                  {(provided, snapshot) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      <Fragment key={column.day}>
+                        <Badge className='w-[140px] flex justify-center items-center mt-3 font-bold'>
+                          Day {index + 1} {column.day}
+                        </Badge>
+                        {column.dayPlanList.length <= 0 && (
+                          <TableRow>
+                            <TableCell colSpan={3} className='text-left'>
+                              일정 없음
+                            </TableCell>
+                          </TableRow>
+                        )}
+                        {column.dayPlanList.map((item, innerIndex) => (
+                          <Draggable
+                            key={item.pk.toString()}
+                            draggableId={item.pk.toString()}
+                            index={innerIndex}
+                          >
+                            {provided => (
+                              <TableRow
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <TableCell className='w-[10px]'>
+                                  <Image
+                                    alt='Tour image'
+                                    className='rounded-md min-w-[84px] min-h-[84px] '
+                                    src={`http://jjeju.site/download/${item.tp_fk_company_info.c_img}`}
+                                    height={84}
+                                    width={84}
+                                  />
+                                </TableCell>
+                                <TableCell className=' text-overflow-ellipsis w-[150px] text-xs font-bold text-left'>
+                                  {item.tp_fk_company_info.c_name}
+                                </TableCell>
+                                <TableCell className=' text-overflow-ellipsis w-[200px] text-xs text-left'>
+                                  {item.tp_fk_company_info.c_addr}
+                                </TableCell>
+                                <TableCell className='text-right'>
+                                  <Button variant='destructive' size='sm'>
+                                    삭제
+                                  </Button>
                                 </TableCell>
                               </TableRow>
                             )}
-                            {column.dayPlanList.map(
-                              (item: any, innerIndex: any) => (
-                                <TableRow key={innerIndex}>
-                                  <Draggable
-                                    key={item.tp_pk_num}
-                                    draggableId={item.tp_pk_num.toString()}
-                                    index={innerIndex}
-                                  >
-                                    {provided => (
-                                      <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                      >
-                                        <TableCell className='w-[10px]'>
-                                          <Image
-                                            alt='Tour image'
-                                            className='rounded-md min-w-[84px] min-h-[84px] '
-                                            src={`http://jjeju.site/download/${item.tp_fk_company_info.c_img}`}
-                                            height={84}
-                                            width={84}
-                                          />
-                                        </TableCell>
-                                        <TableCell className=' text-overflow-ellipsis w-[150px] text-xs font-bold text-left'>
-                                          {item.tp_fk_company_info.c_name}
-                                        </TableCell>
-                                        <TableCell className=' text-overflow-ellipsis w-[200px] text-xs text-left'>
-                                          {item.tp_fk_company_info.c_addr}
-                                        </TableCell>
-                                        <TableCell className='text-right'>
-                                          <Button
-                                            variant='destructive'
-                                            size='sm'
-                                          >
-                                            삭제
-                                          </Button>
-                                        </TableCell>
-                                      </div>
-                                    )}
-                                  </Draggable>
-                                </TableRow>
-                              )
-                            )}
-                          </Fragment>
-                        </div>
-                      )}
-                    </Droppable>
-                  );
-                }
-              )}
+                          </Draggable>
+                        ))}
+                      </Fragment>
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              ))}
             </TableBody>
           </Table>
         </DragDropContext>

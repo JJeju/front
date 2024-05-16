@@ -25,8 +25,7 @@ const nextConfig = {
      */
     '/((?!api|_next/static|_next/image|favicon.ico).*)'
   ],
-  reactStrictMode: false
-
+  reactStrictMode: false,
   // async redirects() {
   //   return [
   //     {
@@ -41,6 +40,18 @@ const nextConfig = {
   //     }
   //   ];
   // },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Setting `resolve.alias` to `false` will tell webpack to ignore a module.
+      // `msw/node` is a server-only module that exports methods not available in
+      // the `browser`.
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'msw/node': false
+      };
+    }
+    return config;
+  }
 };
 
 module.exports = nextConfig;
