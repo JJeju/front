@@ -3,9 +3,16 @@
 제주도의 모든 여행코스를 한눈에 보고,
 나만의 여행코스를 짤 수 있는 여행 플랫폼입니다
 
+## 🕸️ **모바일**
 <img src="https://github.com/JJeju/front/assets/101758604/71a07c31-92e0-4002-8039-ec8756878396" alt="모바일 화면 기능 설명" width="300"/>
 <img src="https://github.com/JJeju/front/assets/101758604/e52732e0-bdcf-4fea-8f59-013f6dd76cf5" alt="모바일 화면 기능 설명" width="300"/>
 <img src="https://github.com/JJeju/front/assets/101758604/a2a51749-859e-4b24-857c-8732bd8155b7" alt="모바일 화면 기능 설명" width="300"/>
+
+## 🕸️ **PC**
+<img width="1494" alt="스크린샷 2024-06-04 오후 2 43 02" src="https://github.com/JJeju/front/assets/101758604/c038d395-f82d-48ba-8864-939f6de0331c">
+<img width="1494" alt="스크린샷 2024-06-04 오후 2 43 02" src="https://github.com/JJeju/front/assets/101758604/a377adae-7100-468f-a92c-be116a6f1c5f">
+<img width="1494" alt="스크린샷 2024-06-04 오후 2 43 02" src="https://github.com/JJeju/front/assets/101758604/bf50ee4a-dfc8-415f-9ea5-e243252c098a">
+
 
 
 ## 🕸️ **WEB DEV**
