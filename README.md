@@ -20,8 +20,11 @@
 ### 여행코스 공유 (카카오톡)
 - 여행 코스를 카카오톡을 통해 친구나 가족과 쉽게 공유할 수 있습니다.
 
-### 여행장소 공유 (카카오톡)
-- 특정 여행 장소를 카카오톡으로 공유하여 다른 사람들과 정보 교류가 가능합니다.
+### 여행코스 공유 (카카오톡)
+- 여행 코스를 카카오톡을 통해 친구나 가족과 쉽게 공유할 수 있습니다.
+
+### 다크모드 지원
+- 다크모드,라이트모드 지원
 
 ### 상품 담기
 - 여행 중 필요한 상품들을 내 여행지로 담아 관리할 수 있습니다.
@@ -54,6 +57,9 @@
 - 모달창이 열릴 때 Next.js의 Parallel Routes와 Intercepting Routes를 활용하여 URL이 동적으로 변경됩니다.
 - UX 경험 향상을 고려하여 모바일일때 모달창인 경우 제스처가 먹지 않아 도입하였습니다.
 
+### Next.js App route 적용
+- App route 폴더 구조 적용
+
 ### 메인 페이지 Next.js SSR 적용
 - 메인 페이지에 Next.js의 서버사이드 렌더링(SSR)을 적용하여 초기 로딩 속도를 개선하였습니다.
 - SEO 강화
@@ -61,6 +67,56 @@
 ### MSW 적용으로 미리 데이터 확인 작업
 - MSW(Mock Service Worker)를 적용하여 API 호출을 미리 시뮬레이션하고 데이터 확인 작업을 수행합니다.
 
+
+## 🕸️ **파일 구조**
+📦src  
+ ┣ 📂app  
+ ┃ ┣ 📂(page)  
+ ┃ ┃ ┣ 📂@modal  
+ ┃ ┃ ┃ ┣ 📂(.)info  
+ ┃ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┃ ┃ ┣ 📂(.)rinfo  
+ ┃ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┃ ┃ ┗ 📜default.tsx  
+ ┃ ┃ ┣ 📂faq  
+ ┃ ┃ ┣ 📂info  
+ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx  
+ ┃ ┃ ┣ 📂mypage  
+ ┃ ┃ ┣ 📂notice  
+ ┃ ┃ ┣ 📂rinfo  
+ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┃ ┣ 📂travelreview  
+ ┃ ┃ ┣ 📜layout.tsx  
+ ┃ ┃ ┗ 📜page.tsx  
+ ┃ ┣ 📂(trip)  
+ ┃ ┃ ┗ 📂trip  
+ ┃ ┃ ┃ ┣ 📂info  
+ ┃ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┣ 📂api  
+ ┃ ┣ 📂components  
+ ┃ ┃ ┣ 📂Skeleton  
+ ┃ ┃ ┣ 📂account  
+ ┃ ┃ ┣ 📂detail  
+ ┃ ┃ ┣ 📂faq  
+ ┃ ┃ ┣ 📂journey  
+ ┃ ┃ ┣ 📂loading  
+ ┃ ┃ ┣ 📂map  
+ ┃ ┃ ┣ 📂mypage  
+ ┃ ┃ ┣ 📂nav  
+ ┃ ┃ ┣ 📂product  
+ ┃ ┃ ┣ 📂trip  
+ ┃ ┃ ┣ 📂tripreview  
+ ┃ ┃ ┣ 📂ui  
+ ┣ 📂config  
+ ┣ 📂lib  
+ ┣ 📂mocks  
+ ┣ 📂service  
+ ┣ 📂stores  
+ ┣ 📂type  
+ ┗ 📂utility  
+ ┃ ┣ 📂hooks  
+ ┃ ┣ 📂utils  
 
 
 ## 🕸️ **WEB DEV**
@@ -100,8 +156,6 @@
 ## ☁️ **CLOUDS**
 
 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white 'Vercel')][repo]
-
-
 
 
 [medium]: https://medium.com/
