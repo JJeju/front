@@ -142,8 +142,12 @@
 [![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white 'Figma')][repo]
 
 ## ⚙️ **BACKEND DEV**
-[![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white "Java")][repo]
 
+![SpringBoot](https://img.shields.io/badge/SpringBoot-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white 'SpringBoot')
+![SpringSecurity](https://img.shields.io/badge/spring_security-%236DB33F.svg?style=for-the-badge&logo=SpringSecurity&logoColor=white 'SpringSecurity')
+![SpringRestDocs](https://img.shields.io/badge/spring_rest_docs-E40046.svg?style=for-the-badge&logo=Asciidoctor&logoColor=white 'SpringSecurity')
+![Mybatis](https://img.shields.io/badge/MyBatis-E6162D?style=for-the-badge&logo=SinaWeibo&logoColor=white 'SpringSecurity')
+![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white 'SpringSecurity')
 
 ## 📅 **DATABASES**
 
