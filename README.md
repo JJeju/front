@@ -13,7 +13,11 @@
 <img width="1494" alt="스크린샷 2024-06-04 오후 2 43 02" src="https://github.com/JJeju/front/assets/101758604/a377adae-7100-468f-a92c-be116a6f1c5f">
 <img width="1494" alt="스크린샷 2024-06-04 오후 2 43 02" src="https://github.com/JJeju/front/assets/101758604/bf50ee4a-dfc8-415f-9ea5-e243252c098a">
 
+<img src="https://private-user-images.githubusercontent.com/101758604/338067382-36cc5ae6-0413-4c78-a396-93bc83421ae2.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTc5OTk3NzcsIm5iZiI6MTcxNzk5OTQ3NywicGF0aCI6Ii8xMDE3NTg2MDQvMzM4MDY3MzgyLTM2Y2M1YWU2LTA0MTMtNGM3OC1hMzk2LTkzYmM4MzQyMWFlMi5naWY_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNjEwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDYxMFQwNjA0MzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iNmNkNWQ4YjkzMTMzNGJhNDlmYTBhMzNiYmJkNzFiOGIzY2VkM2M5ODcyM2QxYTEwMDA0MTg4NGViNDQ4MWMwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.iCn_FpgG88QxSS7YZr9-SWKYjQJC8FgpEuGBKMpGcp8">
+
+
 ## 🕸️ **기능 설명**
+
 ### 로그인/로그아웃
 - 사용자 계정 관리를 통해 개인화된 여행 코스를 저장하고 접근할 수 있습니다.
 
