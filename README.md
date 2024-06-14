@@ -1,56 +1,150 @@
-<img src="https://rishavanand.github.io/static/images/greetings.gif" width="3000" />
+# 제주제주
 
-<br />
+제주도의 모든 여행코스를 한눈에 보고,
+나만의 여행코스를 짤 수 있는 여행 플랫폼입니다
 
-**I am a self-taught Full-stack web/mobile developer from India.**
-<br/><br/>I enjoy taking up complex problems and turning them into simple and beautiful interface designs.
-<br/><br/>I also love the logic and structure of coding and always strive to write elegant and efficient code, whether it be HTML, CSS, or JavaScript.
+## 🕸️ **모바일**
+<img src="https://github.com/JJeju/front/assets/101758604/71a07c31-92e0-4002-8039-ec8756878396" alt="모바일 화면 기능 설명" width="200"/>
+<img src="https://github.com/JJeju/front/assets/101758604/e52732e0-bdcf-4fea-8f59-013f6dd76cf5" alt="모바일 화면 기능 설명" width="200"/>
+<img src="https://github.com/JJeju/front/assets/101758604/a2a51749-859e-4b24-857c-8732bd8155b7" alt="모바일 화면 기능 설명" width="200"/>
 
-<!-- <br />**I have 5+ Years of experience in full-stack web-dev.**-->
+## 🕸️ **PC**
 
-<!-- <img src="https://github-readme-stats.vercel.app/api/?username=hicodersofficial&show_icons=true" alt="git stats"> -->
-<br />
 
-## Fun Fact 🎈:
+<details>
+  <summary>다크모드</summary>
+ <img src="https://private-user-images.githubusercontent.com/101758604/338067382-36cc5ae6-0413-4c78-a396-93bc83421ae2.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTgxODY2NDQsIm5iZiI6MTcxODE4NjM0NCwicGF0aCI6Ii8xMDE3NTg2MDQvMzM4MDY3MzgyLTM2Y2M1YWU2LTA0MTMtNGM3OC1hMzk2LTkzYmM4MzQyMWFlMi5naWY_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNjEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDYxMlQwOTU5MDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1hZDQyMzRiNzU5OTBlZWQ1MjA0NzFkNjllNGFiZTM2ZmQ2MDJiYjU0M2UzN2U4NDlhYWQxNmUxYmM1M2UxZjAxJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.-lGTTobLRleTWnrf4TEYCntGgx4o1pnB4fdVoTOfrs4">
+</details>
 
-<!-- <img align="left" height="150" src="https://raw.githubusercontent.com/hicodersofficial/images/main/giphy%20(2).gif" style="margin-right: 2rem;"> -->
-<img align="left" height="150" src="https://user-images.githubusercontent.com/69384657/179312151-fdabe3af-823f-41ab-a6d4-17a72af4e9e8.png" alt="octocat" style="margin-right: 2rem;" />
+<details>
+  <summary>업체</summary>
+<img src="https://private-user-images.githubusercontent.com/101758604/338084194-2584fd0b-50e4-4deb-8e82-dbca9129fc45.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTgxODY2NDQsIm5iZiI6MTcxODE4NjM0NCwicGF0aCI6Ii8xMDE3NTg2MDQvMzM4MDg0MTk0LTI1ODRmZDBiLTUwZTQtNGRlYi04ZTgyLWRiY2E5MTI5ZmM0NS5naWY_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNjEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDYxMlQwOTU5MDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT00YTU3NzVkYjU0NTk2NzBhMGYxY2U3YmI4MDY2MTZmNjBiYjhjYTU4MWM1ZTRkMjY5MTNlYmM3YTI2MzM4ZmMyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.GDllkn_LWMPsHPnBBtrXwRuAtMOFB19DriSSvsbczLs">
+</details>
 
-• 🔭 I’m currently working on <b>something cool!</b> <br/>
-• 👯 I’m looking to collaborate on <b>cool project.</b><br/>
-• 💬 Ask me about <b>Full Stack</b>.<br/>
-</span>
+<details>
+  <summary>여행코스후기</summary>
+<img width="1494" alt="스크린샷 2024-06-04 오후 2 43 02" src="https://github.com/JJeju/front/assets/101758604/a377adae-7100-468f-a92c-be116a6f1c5f">
+</details>
 
-<br />
-<br />
+<details>
+  <summary>여행 일정 변경</summary>
+<img src="https://private-user-images.githubusercontent.com/101758604/338083432-a4411394-6432-4074-8b5f-1df428d8dc1e.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTgxODY2NDQsIm5iZiI6MTcxODE4NjM0NCwicGF0aCI6Ii8xMDE3NTg2MDQvMzM4MDgzNDMyLWE0NDExMzk0LTY0MzItNDA3NC04YjVmLTFkZjQyOGQ4ZGMxZS5naWY_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNjEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDYxMlQwOTU5MDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iZjQ0ZTNkZGZiZjgyMjdmNmM2ZTQ0MjI4M2QyNmI0OTgwMDE2YTU1MGVmOTliNWFmNGFiYzM2NGI3MzE3YmFmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.cf9PLiyEj9p9o0LbykQNI68CyvkRMwySewkneBg-vaE">
+</details>
 
-<!-- ## 🏆 **GITHUB TROPHY**
+<details>
+  <summary>여행 지도</summary>
+<img src="https://private-user-images.githubusercontent.com/101758604/338081417-7ef5e5bc-217c-4fb1-9a94-5dd058f51389.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTgxODY2NDQsIm5iZiI6MTcxODE4NjM0NCwicGF0aCI6Ii8xMDE3NTg2MDQvMzM4MDgxNDE3LTdlZjVlNWJjLTIxN2MtNGZiMS05YTk0LTVkZDA1OGY1MTM4OS5naWY_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNjEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDYxMlQwOTU5MDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT00Zjg5OWY0MTAwZTZhZWUzMWI3ODU3NjI1MWIwYmRhZWJkOWE1MDk0MTUwOGQxMTVkYjQyZDMxOTQ3MzA1Y2YyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.GTSmla7KJ4n3bcdsAL85mLGId3umwK8tSJfIxRw1_A8">
+</details>
 
-![](https://github-profile-trophy.vercel.app/?username=codingstella&theme=onedark&rank=S,SS,SSS,A,AA,AAA,SECRET)
 
-<a href="http://www.github.com/codingstella"><img src="https://activity-graph.herokuapp.com/graph?username=codingstella&bg_color=1c1917&color=ffffff&line=0891b2&point=ffffff&area_color=1c1917&area=true&hide_border=true&custom_title=GitHub%20Commits%20Graph" alt="GitHub Commits Graph" /></a>
 
-<br /> -->
+## 🕸️ **기능 설명**
 
-<!-- <a href="mailto:codingstella@gmail.com">
-    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" title="Gmail"  alt="Gmail"/>
-</a> -->
-<!-- <a href="https://www.github.com/codingstella">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" title="GitHub"  alt="GitHub"/>
-</a> -->
-<!-- <a href="https://twitter.com/codingstellaa">
-    <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" title="Twitter"  alt="Twitter"/>
-</a> -->
-<a href="https://www.facebook.com/profile.php?=100087370156118"> 
-    <img src="https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white" title="Facebook"  alt="Facebook"/>
-</a>
-<!--<a  href="https://www.linkedin.com/company/hi-coders/">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" title="LinkedIn"  alt="LinkedIn"/>
-</a>-->
-<a href="https://codepen.io/codingstella"> 
-    <img src="https://img.shields.io/badge/Codepen-000000?style=for-the-badge&logo=codepen&logoColor=white" title="Codepen"  alt="Codepen"/>
-</a>
-<br />
+### 로그인/로그아웃
+- 사용자 계정 관리를 통해 개인화된 여행 코스를 저장하고 접근할 수 있습니다.
+
+### 여행코스 공유 (카카오톡)
+- 여행 코스를 카카오톡을 통해 친구나 가족과 쉽게 공유할 수 있습니다.
+
+### 여행코스 공유 (카카오톡)
+- 여행 코스를 카카오톡을 통해 친구나 가족과 쉽게 공유할 수 있습니다.
+
+### 다크모드 지원
+- 다크모드,라이트모드 지원
+
+### 상품 담기
+- 여행 중 필요한 상품들을 내 여행지로 담아 관리할 수 있습니다.
+
+### 여행 코스 스크롤 이동으로 짜기 가능
+- 스크롤 이동을 통해 편리하게 여행 코스를 구성할 수 있습니다.
+
+### 여행 장소들 마커 정보 확인
+- 지도에 표시된 마커를 클릭하여 해당 여행 장소의 정보를 확인할 수 있습니다.
+
+### 마이페이지
+- 개인 정보 관리, 예약 내역 조회, 나의 여행 코스 관리 등의 기능을 제공합니다.
+
+### 공지사항
+- 플랫폼 관련 공지사항을 통해 최신 소식을 확인할 수 있습니다.
+
+### 문의하기
+- 플랫폼 사용 중 궁금한 점이나 문제를 문의할 수 있는 채널을 제공합니다.
+
+### 여행후기
+- 여행을 다녀온 후 후기를 작성하고 다른 사용자의 후기를 확인할 수 있습니다.
+
+### 카카오지도와 길찾기 API 활용하여 여행코스 거리 시간 계산 기능
+- 카카오지도와 길찾기 API를 사용하여 여행 코스의 거리와 예상 시간을 계산할 수 있습니다.
+
+### 웹앱 반응형 디자인
+- 모바일, 태블릿, 데스크탑 등 다양한 디바이스에서 최적화된 화면을 제공합니다.
+
+### 모달창 뜨면 Next.js Parallel Routes, Intercepting Routes 기술 도입하여 주소 바뀌는 기능
+- 모달창이 열릴 때 Next.js의 Parallel Routes와 Intercepting Routes를 활용하여 URL이 동적으로 변경됩니다.
+- UX 경험 향상을 고려하여 모바일일때 모달창인 경우 제스처가 먹지 않아 도입하였습니다.
+
+### Next.js App route 적용
+- App route 폴더 구조 적용
+
+### 메인 페이지 Next.js SSR 적용
+- 메인 페이지에 Next.js의 서버사이드 렌더링(SSR)을 적용하여 초기 로딩 속도를 개선하였습니다.
+- SEO 강화
+
+### MSW 적용으로 미리 데이터 확인 작업
+- MSW(Mock Service Worker)를 적용하여 API 호출을 미리 시뮬레이션하고 데이터 확인 작업을 수행합니다.
+
+
+## 🕸️ **파일 구조**
+```bash
+📦src  
+ ┣ 📂app  
+ ┃ ┣ 📂(page)  
+ ┃ ┃ ┣ 📂@modal  
+ ┃ ┃ ┃ ┣ 📂(.)info  
+ ┃ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┃ ┃ ┣ 📂(.)rinfo  
+ ┃ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┃ ┃ ┗ 📜default.tsx  
+ ┃ ┃ ┣ 📂faq  
+ ┃ ┃ ┣ 📂info  
+ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx  
+ ┃ ┃ ┣ 📂mypage  
+ ┃ ┃ ┣ 📂notice  
+ ┃ ┃ ┣ 📂rinfo  
+ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┃ ┣ 📂travelreview  
+ ┃ ┃ ┣ 📜layout.tsx  
+ ┃ ┃ ┗ 📜page.tsx  
+ ┃ ┣ 📂(trip)  
+ ┃ ┃ ┗ 📂trip  
+ ┃ ┃ ┃ ┣ 📂info  
+ ┃ ┃ ┃ ┃ ┗ 📂[...slug]  
+ ┃ ┣ 📂api  
+ ┃ ┣ 📂components  
+ ┃ ┃ ┣ 📂Skeleton  
+ ┃ ┃ ┣ 📂account  
+ ┃ ┃ ┣ 📂detail  
+ ┃ ┃ ┣ 📂faq  
+ ┃ ┃ ┣ 📂journey  
+ ┃ ┃ ┣ 📂loading  
+ ┃ ┃ ┣ 📂map  
+ ┃ ┃ ┣ 📂mypage  
+ ┃ ┃ ┣ 📂nav  
+ ┃ ┃ ┣ 📂product  
+ ┃ ┃ ┣ 📂trip  
+ ┃ ┃ ┣ 📂tripreview  
+ ┃ ┃ ┣ 📂ui  
+ ┣ 📂config  
+ ┣ 📂lib  
+ ┣ 📂mocks  
+ ┣ 📂service  
+ ┣ 📂stores  
+ ┣ 📂type  
+ ┗ 📂utility  
+ ┃ ┣ 📂hooks  
+ ┃ ┣ 📂utils  
+```
 
 ## 🕸️ **WEB DEV**
 
@@ -58,137 +152,42 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white 'CSS')][repo]
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black 'JavaScript')][repo]
 [![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white 'Typescript')][repo]
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB 'React')][repo]
 [![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white 'Next.js')][repo]
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white 'Bootstrap')][repo]
-[![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white 'SASS')][repo]
-[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white 'PHP')][repo]
-[![JQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white 'JQuery')][repo]
-[![Material UI](https://img.shields.io/badge/Material--UI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white 'Material UI')][repo]
-[![Socket.io-client](https://img.shields.io/badge/Socket.io--client-black?style=for-the-badge&logo=socket.io&badgeColor=**010101** 'Socket.io-client')][repo]
-
-<!-- [![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)][repo] -->
-<!-- [![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white "Angular")][repo] -->
-<!-- [![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white "Styled-Components")][repo] -->
-<!-- [![](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white "React Router")][repo] -->
-<!-- [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white "Tailwind")][repo] -->
-<!-- [![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black "Webpack")][repo] -->
-<!-- [![Three.js](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white "Three.js")][repo] -->
-
-## 📱 **MOBILE DEV**
-
-[![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white 'Flutter')][repo]
-[![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB 'React Native')][repo]
-
-<!-- [![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white "Android")][repo] -->
-<!-- [![Swift](https://img.shields.io/badge/swift-F54A2A?style=for-the-badge&logo=swift&logoColor=white)][repo] -->
+ [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white "Tailwind")][repo]
+ [![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)][repo]
+[![TanStack Query](https://img.shields.io/badge/TanStack%20Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)](https://tanstack.com/query/latest)
+[![Zustand](https://img.shields.io/badge/Zustand-%232C8EBB.svg?style=for-the-badge&logo=zustand&logoColor=white)](https://zustand.surge.sh/)
+[![MSW](https://img.shields.io/badge/MSW-%23E0234E.svg?style=for-the-badge&logo=javascript&logoColor=white)](https://mswjs.io/)
 
 ## 🍧 **DESIGN TOOLS**
 
 [![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white 'Figma')][repo]
-[![Adobe XD](https://img.shields.io/badge/Adobe%20XD-470137?style=for-the-badge&logo=Adobe%20XD&logoColor=#FF61F6 'XD')][repo]
-[![Adobe Photoshop](https://img.shields.io/badge/adobe%20photoshop-%2331A8FF.svg?style=for-the-badge&logo=adobe%20photoshop&logoColor=white)][repo]
 
 ## ⚙️ **BACKEND DEV**
 
-[![](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white 'Nodejs')][repo]
-[![Express js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge 'Express js')][repo]
-[![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101 'Socket.io')][repo]
-[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white 'PHP')][repo]
-[![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase 'Firebase')][repo]
-[![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54 'Python')][repo]
-[![](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)][repo]
-
-<!-- [![Go](https://img.shields.io/badge/go-%2300ADD8.svg?style=for-the-badge&logo=go&logoColor=white "GO Lang")][repo] -->
+![SpringBoot](https://img.shields.io/badge/SpringBoot-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white 'SpringBoot')
+![SpringSecurity](https://img.shields.io/badge/spring_security-%236DB33F.svg?style=for-the-badge&logo=SpringSecurity&logoColor=white 'SpringSecurity')
+![SpringRestDocs](https://img.shields.io/badge/spring_rest_docs-E40046.svg?style=for-the-badge&logo=Asciidoctor&logoColor=white 'SpringSecurity')
+![Mybatis](https://img.shields.io/badge/MyBatis-E6162D?style=for-the-badge&logo=SinaWeibo&logoColor=white 'SpringSecurity')
+![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white 'SpringSecurity')
 
 ## 📅 **DATABASES**
 
-[![Mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white 'Mongodb')][repo]
-[![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white 'Redis')][repo]
 [![MySql](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white 'MySql')][repo]
-[![SQLLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white 'SQLLite')][repo]
 
-<!-- [![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white "Postgresql")][repo] -->
-
-## 🎯 **PROGRAMMING LANGUAGES**
-
-[![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white 'Dart')][repo]
-[![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white 'C++')][repo]
-[![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white 'C#')][repo]
-
-<!-- [![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white "Java")][repo] -->
 
 ## 🛠️ **DEVOPS TOOLS**
 
 [![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white 'Git')][repo]
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white 'GitHub')][repo]
-[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)][repo]
-[![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=for-the-badge&logo=apache&logoColor=white 'Apache')][repo]
-[![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white 'Nginx')][repo]
-[![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white 'Npm')][repo]
-[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white 'Postman')][repo]
-[![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE 'Insomnia')][repo]
-[![Shell Scripts](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)][repo]
-[![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black 'Linux')][repo]
+[![Yarn](https://img.shields.io/badge/Yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)](https://yarnpkg.com/)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
-<!-- [![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white "Gradle")][repo] -->
 
 ## ☁️ **CLOUDS**
 
-[![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white 'Google Cloud')][repo]
-[![AWS](https://img.shields.io/badge/Amazon-_AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white 'AWS')][repo]
-[![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white 'Heroku')][repo]
-[![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7 'Netlify')][repo]
 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white 'Vercel')][repo]
-[![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase 'Firebase')][repo]
 
-## 📄 **CODE EDITOR & IDES**
-
-[![Visual Studio Code](https://img.shields.io/badge/VS%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white 'Visual Studio Code')][repo]
-[![Visual Studio Code](https://img.shields.io/badge/VS%20Code%20Insider-24bfa5.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white 'Visual Studio Code')][repo]
-[![Sublime Text](https://img.shields.io/badge/sublime_text-%23575757.svg?style=for-the-badge&logo=sublime-text&logoColor=important 'Sublime Text')][repo]
-[![Vim](https://img.shields.io/badge/VIM-%2311AB00.svg?style=for-the-badge&logo=vim&logoColor=white)][repo]
-[![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white)][repo]
-[![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)][repo]
-
-<!-- [![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white "Visual Studio")][repo] -->
-<!-- [![Xcode](https://img.shields.io/badge/Xcode-007ACC?style=for-the-badge&logo=Xcode&logoColor=white)][repo] -->
-
-<!-- ## 🌐 **BROWSERS**
-
-[![Google Chrome](https://img.shields.io/badge/Google%20Chrome-317cee?style=for-the-badge&logo=GoogleChrome&logoColor=white)][repo]
-[![Brave](https://img.shields.io/badge/Brave-FB542B?style=for-the-badge&logo=Brave&logoColor=white "Brave")][repo]
-![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white)
-![Edge](https://img.shields.io/badge/Edge-0078D7?style=for-the-badge&logo=Microsoft-edge&logoColor=white) -->
-
-<!-- ![Safari](https://img.shields.io/badge/Safari-000000?style=for-the-badge&logo=Safari&logoColor=white) -->
-
-<!-- ## ⭕ **OPERATING SYSTEMS**
-
-![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
-![Kali](https://img.shields.io/badge/Kali-268BEE?style=for-the-badge&logo=kalilinux&logoColor=white)
-![Cent OS](https://img.shields.io/badge/cent%20os-002260?style=for-the-badge&logo=centos&logoColor=F0F0F0)
-![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white) -->
-
-<!-- ![Mac OS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0) -->
-<!-- ![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white) -->
-
-## ☃️ **MY LEARNING RESOURCES**
-
-[![Stack Overflow](https://img.shields.io/badge/-Stackoverflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white)][sof]
-[![Medium](https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white)][medium]
-[![MDN Web Docs](https://img.shields.io/badge/MDN_Web_Docs-black?style=for-the-badge&logo=mdnwebdocs&logoColor=white)][mdn]
-
-<!--[![](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)][youtube]-->
-
-[![DigitalOcean](https://img.shields.io/badge/DO_Community-%230167ff.svg?style=for-the-badge&logo=digitalOcean&logoColor=white)][doc]
-[![FreeCodeCamp](https://img.shields.io/badge/Freecodecamp-%23123.svg?&style=for-the-badge&logo=freecodecamp&logoColor=green)][fcc]
-[![GeeksForGeeks](https://img.shields.io/badge/GeeksforGeeks-gray?style=for-the-badge&logo=geeksforgeeks&logoColor=35914c)][gog]
-[![Udemy](https://img.shields.io/badge/Udemy-A435F0?style=for-the-badge&logo=Udemy&logoColor=white)][udemy]
-[![Quora](https://img.shields.io/badge/Quora-%23B92B27.svg?style=for-the-badge&logo=Quora&logoColor=white)][quora]
-[![Google](https://img.shields.io/badge/google-4285F4?style=for-the-badge&logo=google&logoColor=white)][google]
-[![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)][github]
 
 [medium]: https://medium.com/
 [github]: https://github.com/
