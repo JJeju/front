@@ -6,6 +6,8 @@ import { createMiddleware } from '@mswjs/http-middleware';
 const app = express();
 const port = 9090;
 
+// 모바일인지 pc인지 확인 하는
+
 app.use(
   cors({
     origin: 'http://localhost:3000',
